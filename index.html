@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Studio Singulier — Création de sites web à Casablanca</title>
-<meta name="description" content="Studio Singulier conçoit des sites web modernes, rapides et pensés pour être trouvés. Design, référencement local et indépendance totale pour votre activité, depuis Casablanca.">
+<title>Studio Singulier — Sites web, boutiques Shopify & agents IA à Casablanca</title>
+<meta name="description" content="Studio Singulier conçoit des sites internet haut de gamme, des boutiques Shopify et des agents IA qui répondent à vos clients 24h/24. Création de site, e-commerce et automatisation d'entreprise à Casablanca, Maroc.">
 
-<meta property="og:title" content="Studio Singulier — Des sites qui donnent une vraie place à votre activité">
-<meta property="og:description" content="Agence web à Casablanca. Sites vitrines modernes, visibilité locale, propriété totale de vos actifs numériques.">
+<meta property="og:title" content="Studio Singulier — Des sites intelligents, des agents IA qui travaillent pour vous">
+<meta property="og:description" content="Sites web, boutiques Shopify et agents IA de support client. Une seule agence, à Casablanca, pour votre présence digitale et son automatisation.">
 <meta property="og:type" content="website">
 
 <script type="application/ld+json">
@@ -16,7 +16,7 @@
   "@type": "ProfessionalService",
   "name": "Studio Singulier",
   "image": "",
-  "description": "Agence de création de sites web à Casablanca, spécialisée en design, référencement local et visibilité en ligne.",
+  "description": "Agence à Casablanca spécialisée en création de sites internet, boutiques Shopify, agents IA de support client et automatisation d'entreprise.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Belvédère",
@@ -26,7 +26,8 @@
   "telephone": "+212635485491",
   "email": "yayababafofana14700@gmail.com",
   "foundingDate": "2026",
-  "areaServed": "Maroc"
+  "areaServed": "Maroc",
+  "keywords": "création site internet Casablanca, création boutique Shopify Maroc, agent IA Maroc, automatisation entreprise Maroc, IA pour e-commerce, support client IA, Shopify Maroc"
 }
 </script>
 
@@ -410,6 +411,69 @@
   footer{border-top:1px solid var(--line); padding:44px 0;}
   .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
   .footer-inner p{font-size:13.5px; color:var(--ink-faint);}
+  .footer-links{display:flex; gap:22px; align-items:center;}
+  .footer-links a{font-size:13.5px; color:var(--ink-dim); transition:color .2s ease;}
+  .footer-links a:hover{color:var(--cyan);}
+
+  /* ---------- pourquoi l'ia ---------- */
+  .aiwhy-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:48px;}
+  .aiwhy-card{border:1px solid var(--line); border-radius:14px; padding:28px;}
+  .aiwhy-card.before{background:var(--surface);}
+  .aiwhy-card.after{
+    background:linear-gradient(180deg, rgba(47,224,209,0.07), transparent);
+    border-color:rgba(47,224,209,0.3);
+  }
+  .aiwhy-tag{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-faint); margin-bottom:14px; display:block;}
+  .aiwhy-card.after .aiwhy-tag{color:var(--cyan);}
+  .aiwhy-card p{font-family:'Space Grotesk',sans-serif; font-size:19px; line-height:1.4; color:var(--ink);}
+  .aiwhy-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .aiwhy-stat{text-align:center; padding:28px 20px; border:1px solid var(--line); border-radius:14px; background:var(--surface);}
+  .aiwhy-stat .num{font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:600; color:var(--cyan);}
+  .aiwhy-stat .label{font-size:13.5px; color:var(--ink-dim); margin-top:8px;}
+
+  /* ---------- chatbot demo ---------- */
+  .demo-wrap{max-width:640px; margin:0 auto;}
+  .chat-window{
+    border:1px solid var(--line-strong); border-radius:14px; overflow:hidden;
+    background:var(--surface); box-shadow:0 40px 90px -30px rgba(0,0,0,0.55);
+  }
+  .chat-head{
+    display:flex; align-items:center; gap:10px; padding:14px 18px;
+    border-bottom:1px solid var(--line); background:var(--surface-2);
+  }
+  .chat-head .live{width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 3px rgba(47,224,209,0.18);}
+  .chat-head span{font-size:13.5px; color:var(--ink-dim);}
+  .chat-head strong{color:var(--ink); font-family:'Space Grotesk',sans-serif; font-weight:600;}
+  .chat-body{height:340px; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:82%; padding:11px 15px; border-radius:12px; font-size:14px; line-height:1.55;}
+  .msg.bot{background:var(--surface-2); border:1px solid var(--line); align-self:flex-start; border-bottom-left-radius:3px;}
+  .msg.user{background:var(--cyan); color:#04140F; align-self:flex-end; border-bottom-right-radius:3px;}
+  .chat-suggestions{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 16px;}
+  .chat-chip{
+    font-size:12.5px; border:1px solid var(--line-strong); padding:7px 13px; border-radius:999px;
+    cursor:pointer; color:var(--ink-dim); background:none; font-family:'Inter',sans-serif; transition:.2s ease;
+  }
+  .chat-chip:hover{border-color:var(--cyan); color:var(--cyan);}
+  .chat-input-row{display:flex; gap:10px; padding:14px 18px; border-top:1px solid var(--line);}
+  .chat-input-row input{
+    flex:1; background:var(--bg); border:1px solid var(--line-strong); border-radius:8px;
+    padding:12px 14px; color:var(--ink); font-family:'Inter',sans-serif; font-size:14px;
+  }
+  .chat-input-row input:focus{border-color:var(--cyan); outline:none;}
+  .chat-input-row button{
+    background:var(--cyan); color:#04140F; border:none; border-radius:8px; padding:0 18px;
+    font-weight:500; cursor:pointer; font-size:14px;
+  }
+  .demo-note{text-align:center; margin-top:18px; font-size:13px; color:var(--ink-faint);}
+
+  /* ---------- cas d'usage ---------- */
+  .usecase-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .ucard{border:1px solid var(--line); border-radius:14px; padding:26px; background:var(--surface);}
+  .ucard .aiwhy-tag{margin-bottom:12px;}
+  .ucard h3{font-size:17px; margin-bottom:18px;}
+  .uflow{display:flex; flex-direction:column; gap:11px;}
+  .uflow-step{display:flex; gap:9px; font-size:13.3px; color:var(--ink-dim); line-height:1.5;}
+  .uflow-step .k{color:var(--cyan); font-family:'IBM Plex Mono',monospace; flex-shrink:0; font-size:11.5px; padding-top:2px;}
 
   /* ---------- responsive ---------- */
   @media (max-width:920px){
@@ -424,11 +488,15 @@
     .contact-grid{grid-template-columns:1fr; gap:44px;}
     .field-row{grid-template-columns:1fr;}
     .hero-meta{flex-wrap:wrap; gap:20px;}
+    .aiwhy-grid{grid-template-columns:1fr;}
+    .aiwhy-stats{grid-template-columns:1fr;}
+    .usecase-grid{grid-template-columns:1fr;}
   }
   @media (max-width:600px){
     .pillars{grid-template-columns:1fr;}
     .section{padding:76px 0;}
     .hero{padding:130px 0 56px;}
+    .chat-body{height:300px;}
   }
 
   .mobile-menu{
@@ -453,10 +521,11 @@
     <nav class="nav-links">
       <a href="#hero">Accueil</a>
       <a href="#services">Services</a>
+      <a href="#demo">Agent IA</a>
       <a href="#apropos">À propos</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn-primary" style="display:none" id="navCta">Parler de mon projet</a>
+    <a href="#contact" class="btn btn-primary" style="display:none" id="navCta">Réserver un appel</a>
     <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu">
       <span></span><span></span><span></span>
     </button>
@@ -470,9 +539,10 @@
   </div>
   <a href="#hero">Accueil</a>
   <a href="#services">Services</a>
+  <a href="#demo">Agent IA</a>
   <a href="#apropos">À propos</a>
   <a href="#contact">Contact</a>
-  <a href="#contact" class="btn btn-primary" style="margin-top:28px; justify-content:center;">Parler de mon projet</a>
+  <a href="#contact" class="btn btn-primary" style="margin-top:28px; justify-content:center;">Réserver un appel</a>
 </div>
 
 <main id="top">
@@ -483,16 +553,16 @@
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="dot"></span>Studio Singulier — Casablanca, 2026</div>
-      <h1>Votre activité. <span class="accent">Votre place</span> sur le web.</h1>
-      <p class="lead">Nous concevons des sites qui combinent design, clarté et visibilité — pour que votre activité soit trouvée, comprise et contactée. Pas seulement jolie à regarder.</p>
+      <h1>Des sites web intelligents. Des agents IA qui <span class="accent">travaillent pour vous</span> 24h/24.</h1>
+      <p class="lead">Nous créons des sites internet modernes et intégrons des agents IA capables de répondre à vos clients, qualifier vos prospects et automatiser votre support — sans que vous ayez à y penser.</p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn btn-primary">Créer mon site</a>
-        <a href="#apropos" class="btn btn-ghost">Voir notre approche</a>
+        <a href="#contact" class="btn btn-primary">Réserver un appel gratuit</a>
+        <a href="#demo" class="btn btn-ghost">Voir une démonstration</a>
       </div>
       <div class="hero-meta">
         <div><strong>Casablanca</strong>Belvédère, Maroc</div>
-        <div><strong>Web &amp; SEO local</strong>Design + technique</div>
-        <div><strong>Propriété totale</strong>Domaine &amp; actifs pour vous</div>
+        <div><strong>Sites &amp; Shopify</strong>Design + technique</div>
+        <div><strong>Agents IA</strong>Support &amp; automatisation</div>
       </div>
     </div>
     <div class="reveal" id="mockWrap">
@@ -501,16 +571,28 @@
           <span class="c"></span><span class="c"></span><span class="c"></span>
           <span class="url mono">votre-activite.com</span>
         </div>
-        <div class="mock-body">
-          <div class="skel" style="width:40%; --d:0s"></div>
-          <div class="skel" style="width:85%; --d:.2s"></div>
-          <div class="mock-block"></div>
-          <div class="mock-row">
-            <div class="skel" style="height:44px; --d:.4s"></div>
-            <div class="skel" style="height:44px; --d:.6s"></div>
-            <div class="skel" style="height:44px; --d:.8s"></div>
+        <div class="mock-body" style="gap:16px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:15px;">🧑‍💼</div>
+            <div class="skel" style="width:55%; height:8px;"></div>
           </div>
-          <div class="skel" style="width:60%; --d:.3s"></div>
+          <div style="display:flex; justify-content:center;">
+            <div class="mono" style="color:var(--ink-faint); font-size:11px;">↓</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg, var(--cyan), var(--violet));display:flex;align-items:center;justify-content:center;font-size:15px; flex-shrink:0;">🤖</div>
+            <div style="flex:1;">
+              <div class="skel" style="width:70%; height:7px; margin-bottom:6px;"></div>
+              <div class="skel" style="width:45%; height:7px;"></div>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:center;">
+            <div class="mono" style="color:var(--ink-faint); font-size:11px;">↓</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:15px;">✅</div>
+            <div class="skel" style="width:40%; height:8px;"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -536,33 +618,172 @@
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow"><span class="dot"></span>Ce que nous faisons</div>
-      <h2>Cinq métiers, un seul objectif : vous rendre visible.</h2>
+      <h2>Un site qui vous représente. Une IA qui travaille pour vous.</h2>
     </div>
     <div class="services-grid">
       <div class="service">
         <span class="num mono">01</span>
-        <h3>Création de site web</h3>
-        <p>Sites vitrines modernes, rapides et pensés d'abord pour le mobile.</p>
+        <h3>Création de sites vitrines</h3>
+        <p>Sites internet haut de gamme, rapides et pensés d'abord pour le mobile.</p>
       </div>
       <div class="service">
         <span class="num mono">02</span>
-        <h3>Design &amp; identité digitale</h3>
-        <p>Une interface cohérente avec l'image et le positionnement de votre activité.</p>
+        <h3>Création de boutiques Shopify</h3>
+        <p>Boutiques e-commerce prêtes à vendre, structurées pour convertir.</p>
       </div>
       <div class="service">
         <span class="num mono">03</span>
-        <h3>SEO &amp; visibilité locale</h3>
-        <p>Structure optimisée pour les moteurs de recherche et votre zone d'activité.</p>
+        <h3>Agent IA de support client</h3>
+        <p>Répond à vos clients automatiquement, à toute heure, sans file d'attente.</p>
       </div>
       <div class="service">
         <span class="num mono">04</span>
-        <h3>Google &amp; présence en ligne</h3>
-        <p>Mise en cohérence de votre site avec Google Search et Google Maps.</p>
+        <h3>Agent IA commercial</h3>
+        <p>Qualifie vos prospects et les guide vers une prise de rendez-vous.</p>
       </div>
       <div class="service">
         <span class="num mono">05</span>
+        <h3>Automatisation d'entreprise</h3>
+        <p>On connecte vos outils pour réduire les tâches répétitives au quotidien.</p>
+      </div>
+      <div class="service">
+        <span class="num mono">06</span>
         <h3>Maintenance &amp; évolution</h3>
-        <p>Votre site évolue avec vous, à mesure que votre activité grandit.</p>
+        <p>Site et agents IA évoluent avec vous, à mesure que votre activité grandit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== POURQUOI L'IA ========== -->
+<section class="section border-top reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Pourquoi intégrer une IA</div>
+      <h2>Le même travail. Beaucoup moins de temps perdu.</h2>
+    </div>
+    <div class="aiwhy-grid">
+      <div class="aiwhy-card before">
+        <span class="aiwhy-tag mono">Avant</span>
+        <p>Le dirigeant répond lui-même à 80 messages, souvent le soir, souvent en retard.</p>
+      </div>
+      <div class="aiwhy-card after">
+        <span class="aiwhy-tag mono">Après</span>
+        <p>L'agent IA répond automatiquement, qualifie la demande et transmet ce qui compte vraiment.</p>
+      </div>
+    </div>
+    <div class="aiwhy-stats">
+      <div class="aiwhy-stat">
+        <div class="num">80%</div>
+        <div class="label">des demandes automatisées</div>
+      </div>
+      <div class="aiwhy-stat">
+        <div class="num">&lt;5s</div>
+        <div class="label">temps de réponse moyen</div>
+      </div>
+      <div class="aiwhy-stat">
+        <div class="num">24/7</div>
+        <div class="label">disponibilité, sans exception</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DEMO CHATBOT ========== -->
+<section class="section border-top reveal" id="demo">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 48px; text-align:center;">
+      <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Démonstration</div>
+      <h2>Essayez notre Agent IA.</h2>
+      <p>Posez une question sur les prix, Shopify, les délais ou la prise de rendez-vous — comme le ferait un vrai client.</p>
+    </div>
+    <div class="demo-wrap">
+      <div class="chat-window">
+        <div class="chat-head">
+          <span class="live"></span>
+          <span><strong>Agent Studio Singulier</strong> — en ligne</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="msg bot">Bonjour 👋 Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs.</div>
+        </div>
+        <div class="chat-suggestions">
+          <button class="chat-chip" data-q="prix">Vos prix ?</button>
+          <button class="chat-chip" data-q="shopify">Vous faites Shopify ?</button>
+          <button class="chat-chip" data-q="delais">Quels délais ?</button>
+          <button class="chat-chip" data-q="rdv">Prendre rendez-vous</button>
+        </div>
+        <form class="chat-input-row" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Écrivez votre question…" autocomplete="off">
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
+      <p class="demo-note">Démonstration du type de réponses que peut donner un agent IA — pas un modèle connecté en direct.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CAS D'USAGE ========== -->
+<section class="section border-top reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Cas d'usage</div>
+      <h2>Ce qu'un agent IA change, concrètement.</h2>
+      <p>Des exemples illustratifs pour montrer le principe — pas des réalisations clients.</p>
+    </div>
+    <div class="usecase-grid">
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Boutique Shopify</span>
+        <h3>Questions produits &amp; commandes</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Des clients qui abandonnent faute de réponse rapide.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA répond sur le statut, la taille, la livraison.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Moins d'abandons, plus de commandes finalisées.</div>
+        </div>
+      </div>
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Restaurant</span>
+        <h3>Réservations &amp; horaires</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Le téléphone sonne pendant le coup de feu du service.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA prend les réservations directement en ligne.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Moins d'interruptions, plus de tables remplies.</div>
+        </div>
+      </div>
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Immobilier</span>
+        <h3>Qualification de prospects</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Beaucoup de contacts, peu réellement qualifiés.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA pose les bonnes questions avant transfert.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Le temps de l'agence va aux dossiers sérieux.</div>
+        </div>
+      </div>
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Cabinet médical</span>
+        <h3>Prise de rendez-vous</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Le secrétariat saturé aux heures d'affluence.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA gère les demandes de rendez-vous courantes.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Le personnel se concentre sur les cas prioritaires.</div>
+        </div>
+      </div>
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Coaching</span>
+        <h3>Premier contact &amp; suivi</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Des messages qui restent sans réponse plusieurs jours.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA répond immédiatement et propose un créneau.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Moins de prospects perdus par manque de réactivité.</div>
+        </div>
+      </div>
+      <div class="ucard">
+        <span class="aiwhy-tag mono">Salon de beauté</span>
+        <h3>Réservations &amp; rappels</h3>
+        <div class="uflow">
+          <div class="uflow-step"><span class="k">Problème</span>Des rendez-vous pris puis oubliés par la clientèle.</div>
+          <div class="uflow-step"><span class="k">Solution</span>L'agent IA confirme et rappelle avant chaque venue.</div>
+          <div class="uflow-step"><span class="k">Résultat</span>Moins de créneaux perdus, un planning plus stable.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -600,6 +821,43 @@
   </div>
 </section>
 
+<!-- ========== METHOD ========== -->
+<section class="section border-top reveal" id="methode">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span>Notre méthode</div>
+      <h2>Six étapes, du site à l'agent IA.</h2>
+    </div>
+    <div class="method-list">
+      <div class="method-item">
+        <span class="num">01 /06</span>
+        <div><h3>Analyse</h3><p>Votre activité, vos clients, vos points de friction actuels.</p></div>
+      </div>
+      <div class="method-item">
+        <span class="num">02 /06</span>
+        <div><h3>Conception</h3><p>Structure du site et des parcours pensée avant tout design.</p></div>
+      </div>
+      <div class="method-item">
+        <span class="num">03 /06</span>
+        <div><h3>Développement</h3><p>Site ou boutique Shopify, construit rapide et responsive.</p></div>
+      </div>
+      <div class="method-item">
+        <span class="num">04 /06</span>
+        <div><h3>IA</h3><p>L'agent IA est entraîné sur votre activité et vos réponses types.</p></div>
+      </div>
+      <div class="method-item">
+        <span class="num">05 /06</span>
+        <div><h3>Mise en ligne</h3><p>Publication du site et activation de l'agent, en conditions réelles.</p></div>
+      </div>
+      <div class="method-item">
+        <span class="num">06 /06</span>
+        <div><h3>Accompagnement</h3><p>Ajustements et évolution, à mesure que votre activité change.</p></div>
+      </div>
+    </div>
+    <p class="method-note">Pas de réunion inutile à rallonge. On avance étape par étape, avec une idée claire de ce qui se passe ensuite.</p>
+  </div>
+</section>
+
 <!-- ========== LOCAL VISIBILITY ========== -->
 <section class="section border-top reveal">
   <div class="wrap local-wrap">
@@ -621,7 +879,7 @@
 <section class="section border-top reveal" id="apropos">
   <div class="wrap">
     <div class="eyebrow"><span class="dot"></span>À propos</div>
-    <p class="about-text"><strong>Studio Singulier est né d'une conviction simple :</strong> un bon site n'a pas besoin d'en faire trop pour faire la différence. Il doit comprendre votre activité, parler à vos clients, et vous donner les bons outils pour avancer. Basé à Casablanca depuis 2026, on préfère les sites utiles aux effets de mode — et les choix réfléchis aux fonctionnalités ajoutées pour faire joli.</p>
+    <p class="about-text"><strong>Studio Singulier est né d'une conviction simple :</strong> un site ne devrait pas rester statique une fois publié. Il doit comprendre votre activité, parler à vos clients — et, désormais, leur répondre lui-même grâce à un agent IA bien conçu. Basé à Casablanca depuis 2026, on conçoit des sites et des boutiques Shopify, puis on les transforme en outils qui travaillent réellement pour vous.</p>
   </div>
 </section>
 
@@ -661,6 +919,30 @@
         <button class="faq-q">Travaillez-vous uniquement à Casablanca ? <span class="plus mono">+</span></button>
         <div class="faq-a"><p>L'agence est basée à Casablanca, mais on accompagne aussi des projets ailleurs au Maroc et à distance.</p></div>
       </div>
+      <div class="faq-item">
+        <button class="faq-q">Un agent IA remplace-t-il un employé ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Non — il traite les demandes répétitives et vous fait gagner du temps. Les cas qui demandent un vrai jugement humain lui restent transmis.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">L'IA fonctionne-t-elle avec Shopify ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Oui. L'agent IA peut être connecté à votre boutique pour répondre sur les commandes, la livraison et les produits.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Puis-je connecter WhatsApp ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Oui, c'est un des canaux les plus demandés. On en discute selon votre activité et vos volumes de messages.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Puis-je connecter Messenger ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Oui, c'est possible en complément ou à la place de WhatsApp, selon où sont vos clients.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Combien coûte un agent IA ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Ça dépend des canaux connectés et du volume de demandes à traiter. On vous donne un chiffrage clair après un premier échange.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Puis-je automatiser les emails ? <span class="plus mono">+</span></button>
+        <div class="faq-a"><p>Oui — réponses automatiques, relances et tri des demandes peuvent être mis en place selon vos besoins.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -669,10 +951,10 @@
 <section class="final-cta border-top reveal">
   <div class="wrap">
     <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>On en parle ?</div>
-    <h2>Votre projet mérite un site à sa hauteur.</h2>
-    <p>Une activité à faire connaître, une idée à lancer, ou un site qui ne vous ressemble plus ? Parlons-en simplement.</p>
+    <h2>Votre entreprise mérite un site — et un peu de son temps rendu.</h2>
+    <p>Un site à créer, une boutique Shopify à lancer, ou un agent IA à mettre en place ? Parlons-en simplement.</p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary">Parler de mon projet</a>
+      <a href="#contact" class="btn btn-primary">Réserver un appel gratuit</a>
     </div>
   </div>
 </section>
@@ -702,8 +984,10 @@
           <label for="ftype">Type de projet</label>
           <select id="ftype" name="type_de_projet">
             <option>Nouveau site web</option>
+            <option>Boutique Shopify</option>
+            <option>Agent IA de support</option>
+            <option>Automatisation d'entreprise</option>
             <option>Refonte de site existant</option>
-            <option>SEO / visibilité locale</option>
             <option>Autre</option>
           </select>
         </div>
@@ -720,6 +1004,11 @@
 <footer>
   <div class="wrap footer-inner">
     <span class="logo" style="font-size:15px;"><span class="mark"></span>Studio Singulier</span>
+    <div class="footer-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#">Réserver un appel</a>
+    </div>
     <p>© 2026 Studio Singulier — Belvédère, Casablanca, Maroc</p>
   </div>
 </footer>
@@ -758,6 +1047,66 @@
       if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
     });
   });
+
+  // demo chatbot — rule-based, runs entirely in the browser (no external API)
+  (function(){
+    const chatBody = document.getElementById('chatBody');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    if(!chatForm) return;
+
+    const CLOSER = " Souhaitez-vous réserver un appel gratuit ?";
+
+    const answers = {
+      prix: "Le tarif dépend du projet : site seul, boutique Shopify, ou site + agent IA. On vous donne un chiffrage clair après un premier échange, sans surprise ensuite." + CLOSER,
+      shopify: "Oui, on crée des boutiques Shopify complètes — design, fiches produits, paiement — et on peut y connecter un agent IA de support." + CLOSER,
+      site: "Oui, on crée des sites vitrines modernes, rapides et pensés mobile. On peut aussi les transformer en outils intelligents avec un agent IA." + CLOSER,
+      ia: "Un agent IA répond à vos clients automatiquement, qualifie les demandes et peut être connecté à WhatsApp, Messenger ou votre site." + CLOSER,
+      seo: "On structure vos pages et votre contenu pour être bien compris par les moteurs de recherche et cohérent avec votre fiche Google — sans promettre de classement garanti." + CLOSER,
+      maintenance: "Après la mise en ligne, votre site et votre agent IA peuvent évoluer avec vous — contenus, fonctionnalités, ajustements des réponses." + CLOSER,
+      delais: "Ça dépend de la taille du projet — un site simple va plus vite qu'une boutique Shopify avec agent IA connecté. On vous donne une estimation dès le premier échange." + CLOSER,
+      rdv: "Avec plaisir. Le plus simple est de passer par le formulaire de contact plus bas sur cette page, ou de nous écrire directement sur WhatsApp.",
+      default: "Bonne question — je peux vous renseigner sur nos sites, nos boutiques Shopify, nos agents IA, le SEO, la maintenance ou les délais. Sur quoi voulez-vous en savoir plus ?" + CLOSER
+    };
+
+    function matchAnswer(text){
+      const t = text.toLowerCase();
+      if(/prix|tarif|coût|cout|combien/.test(t)) return answers.prix;
+      if(/shopify|boutique|e-?commerce/.test(t)) return answers.shopify;
+      if(/rendez-?vous|rdv|réserv|reserv|appel/.test(t)) return answers.rdv;
+      if(/ia\b|agent|intelligence artificielle|chatbot|automat/.test(t)) return answers.ia;
+      if(/seo|référencement|referencement|google/.test(t)) return answers.seo;
+      if(/maintenance|évolu|evolu|modifier/.test(t)) return answers.maintenance;
+      if(/délai|delai|temps|combien de temps|rapide/.test(t)) return answers.delais;
+      if(/site|vitrine|web/.test(t)) return answers.site;
+      return answers.default;
+    }
+
+    function addMsg(text, who){
+      const div = document.createElement('div');
+      div.className = 'msg ' + who;
+      div.textContent = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function respond(text){
+      addMsg(text, 'user');
+      setTimeout(() => addMsg(matchAnswer(text), 'bot'), 450);
+    }
+
+    chatForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const val = chatInput.value.trim();
+      if(!val) return;
+      respond(val);
+      chatInput.value = '';
+    });
+
+    document.querySelectorAll('.chat-chip').forEach(chip => {
+      chip.addEventListener('click', () => respond(chip.textContent));
+    });
+  })();
 
   // contact form — sends via Web3Forms (https://web3forms.com)
   document.getElementById('contactForm').addEventListener('submit', function(e){
