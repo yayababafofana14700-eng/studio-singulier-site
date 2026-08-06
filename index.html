@@ -37,19 +37,31 @@
 
 <style>
   :root{
-    --bg: #0A0E14;
-    --bg-alt: #0D1220;
-    --surface: #11161F;
-    --surface-2: #161C28;
-    --line: rgba(245,247,250,0.08);
-    --line-strong: rgba(245,247,250,0.14);
-    --ink: #F3F5F8;
-    --ink-dim: #A6B0C0;
-    --ink-faint: #6B7688;
-    --cyan: #2FE0D1;
-    --cyan-dim: #1A8F86;
-    --violet: #8A7CFF;
-    --violet-soft: rgba(138,124,255,0.12);
+    --bg: #F3EBD9;
+    --bg-alt: #EFE4CC;
+    --surface: #FFFCF6;
+    --surface-2: #EDE0C5;
+    --line: rgba(34,25,19,0.08);
+    --line-strong: rgba(34,25,19,0.14);
+    --ink: #221913;
+    --ink-dim: #5B4F42;
+    --ink-faint: #8A7C6B;
+    --cyan: #A35F33;
+    --cyan-dim: #7C4726;
+    --violet: #7C5C34;
+    --violet-soft: rgba(124,92,52,0.12);
+    --glass-bg: rgba(255,250,240,0.55);
+    --glass-border: rgba(34,25,19,0.10);
+    --glow-cyan: 0 0 0 1px rgba(163,95,51,0.25), 0 12px 40px -12px rgba(163,95,51,0.35);
+    --glow-violet: 0 0 0 1px rgba(124,92,52,0.25), 0 12px 40px -12px rgba(124,92,52,0.35);
+    --ease-premium: cubic-bezier(.2,.7,.2,1);
+  }
+
+  .glass{
+    background:var(--glass-bg);
+    backdrop-filter:blur(18px) saturate(150%);
+    -webkit-backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid var(--glass-border);
   }
 
   *{box-sizing:border-box;}
@@ -77,7 +89,7 @@
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
 
-  ::selection{background:var(--cyan); color:#04120F;}
+  ::selection{background:var(--cyan); color:#FFF8EC;}
 
   :focus-visible{
     outline:2px solid var(--cyan);
@@ -95,7 +107,7 @@
   /* ---------- background texture ---------- */
   .grain{
     position:fixed; inset:0; pointer-events:none; z-index:1;
-    opacity:0.035; mix-blend-mode:overlay;
+    opacity:0.025; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -112,7 +124,7 @@
   .dot{
     width:6px; height:6px; border-radius:50%;
     background:var(--cyan);
-    box-shadow:0 0 0 3px rgba(47,224,209,0.15);
+    box-shadow:0 0 0 3px rgba(163,95,51,0.15);
     flex-shrink:0;
   }
 
@@ -123,7 +135,7 @@
     transition:border-color .35s ease, background .35s ease;
   }
   header.scrolled{
-    background:rgba(10,14,20,0.82);
+    background:rgba(243,235,217,0.82);
     backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line);
   }
@@ -146,8 +158,13 @@
     display:flex; align-items:center; gap:34px;
     font-size:14.5px; color:var(--ink-dim);
   }
-  .nav-links a{transition:color .2s ease; position:relative;}
+  .nav-links a{transition:color .2s ease; position:relative; padding-bottom:2px;}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:100%; bottom:-2px; height:1px;
+    background:var(--cyan); transition:right .25s ease;
+  }
   .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{right:0;}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     font-size:14px; font-weight:500;
@@ -155,34 +172,59 @@
     border-radius:8px;
     transition:all .22s ease;
     white-space:nowrap;
+    position:relative; overflow:hidden;
   }
   .btn-primary{
-    background:var(--cyan); color:#04140F;
-    box-shadow:0 0 0 0 rgba(47,224,209,0.4);
+    background:var(--cyan); color:#FFF8EC;
+    box-shadow:0 0 0 0 rgba(163,95,51,0.4);
   }
+  .btn-primary::before{
+    content:''; position:absolute; top:0; left:-60%; width:40%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+    transform:skewX(-20deg); transition:left .55s ease;
+  }
+  .btn-primary:hover::before{left:130%;}
   .btn-primary:hover{
-    box-shadow:0 6px 24px -6px rgba(47,224,209,0.55);
+    box-shadow:0 6px 28px -6px rgba(163,95,51,0.6);
     transform:translateY(-1px);
   }
   .btn-ghost{
     border:1px solid var(--line-strong);
     color:var(--ink);
   }
-  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan); box-shadow:0 0 0 3px rgba(163,95,51,0.08);}
 
   .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px;}
   .burger span{width:22px; height:1.5px; background:var(--ink); display:block; transition:.25s;}
 
   /* ---------- hero ---------- */
   .hero{
-    padding:168px 0 110px;
+    padding:184px 0 136px;
     position:relative;
     overflow:hidden;
   }
   .hero-glow{
     position:absolute; top:-200px; right:-160px; width:640px; height:640px;
-    background:radial-gradient(circle, rgba(47,224,209,0.16), transparent 68%);
+    background:radial-gradient(circle, rgba(163,95,51,0.16), transparent 68%);
     filter:blur(10px); pointer-events:none;
+    animation:driftA 16s ease-in-out infinite;
+  }
+  .hero-glow-2{
+    position:absolute; bottom:-260px; left:-200px; width:560px; height:560px;
+    background:radial-gradient(circle, rgba(124,92,52,0.14), transparent 70%);
+    filter:blur(10px); pointer-events:none;
+    animation:driftB 20s ease-in-out infinite;
+  }
+  @keyframes driftA{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-30px,30px) scale(1.08);}
+  }
+  @keyframes driftB{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(30px,-20px) scale(1.06);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-glow, .hero-glow-2{animation:none;}
   }
   .hero-grid{
     display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
@@ -211,7 +253,7 @@
     border:1px solid var(--line-strong);
     border-radius:14px;
     overflow:hidden;
-    box-shadow:0 40px 90px -30px rgba(0,0,0,0.6);
+    box-shadow:0 40px 90px -30px rgba(34,25,19,0.22);
     transform:rotate(0.6deg);
   }
   .mock-bar{
@@ -232,7 +274,7 @@
   }
   .skel::after{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(90deg, transparent, rgba(47,224,209,0.14), transparent);
+    background:linear-gradient(90deg, transparent, rgba(163,95,51,0.14), transparent);
     animation:sweep 2.6s ease-in-out infinite;
     animation-delay:var(--d, 0s);
   }
@@ -242,7 +284,7 @@
   }
   .mock-block{
     height:74px; border-radius:8px;
-    background:linear-gradient(135deg, rgba(47,224,209,0.14), rgba(138,124,255,0.10));
+    background:linear-gradient(135deg, rgba(163,95,51,0.14), rgba(124,92,52,0.10));
     border:1px solid var(--line);
     margin-top:6px;
   }
@@ -254,11 +296,42 @@
   }
 
   /* ---------- reveal ---------- */
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal{opacity:0; transform:translateY(18px); filter:blur(6px); transition:opacity .8s ease, transform .8s ease, filter .8s ease;}
+  .reveal.in{filter:blur(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{filter:none;}
+  }
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    overflow:hidden; white-space:nowrap; position:relative;
+  }
+  .ticker::before, .ticker::after{
+    content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none;
+  }
+  .ticker::before{left:0; background:linear-gradient(90deg, var(--bg), transparent);}
+  .ticker::after{right:0; background:linear-gradient(270deg, var(--bg), transparent);}
+  .ticker-track{
+    display:inline-flex; align-items:center; gap:0;
+    animation:tickerScroll 32s linear infinite;
+  }
+  .ticker-track span{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-faint); padding:16px 28px; display:inline-flex; align-items:center; gap:28px;
+  }
+  .ticker-track span::after{content:'•'; color:var(--cyan); margin-left:28px;}
+  @keyframes tickerScroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+  }
   .reveal.in{opacity:1; transform:none;}
 
   /* ---------- section shell ---------- */
-  .section{padding:104px 0;}
+  .section{padding:132px 0;}
   .section-head{max-width:640px; margin-bottom:56px;}
   .section-head h2{font-size:clamp(28px,3vw,38px); line-height:1.16;}
   .section-head p{margin-top:16px; color:var(--ink-dim); font-size:16px; line-height:1.65;}
@@ -282,9 +355,16 @@
 
   /* ---------- services ---------- */
   .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
-  .service{background:var(--bg); padding:34px 28px; transition:background .25s ease;}
-  .service:hover{background:var(--surface);}
-  .service .num{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--cyan); margin-bottom:20px; display:block;}
+  .service{background:var(--bg); padding:34px 28px; transition:background .3s ease, transform .4s var(--ease-premium), box-shadow .3s ease; position:relative; z-index:1;}
+  .service:hover{background:var(--surface); transform:translateY(-4px); box-shadow:var(--glow-cyan); z-index:2;}
+  .service .icon{
+    width:40px; height:40px; border-radius:10px; margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+    background:linear-gradient(135deg, rgba(163,95,51,0.16), rgba(124,92,52,0.12));
+    border:1px solid var(--line-strong); transition:transform .3s ease;
+  }
+  .service:hover .icon{transform:scale(1.08) rotate(-4deg);}
+  .service .num{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--cyan); margin-bottom:12px; display:block;}
   .service h3{font-size:18.5px; margin-bottom:10px;}
   .service p{font-size:14.5px; color:var(--ink-dim); line-height:1.6;}
 
@@ -309,7 +389,11 @@
     padding:30px 0; border-bottom:1px solid var(--line);
     align-items:start;
   }
-  .method-item .num{font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--ink-faint); padding-top:3px;}
+  .method-item .num{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--bg); font-weight:600;
+    width:34px; height:34px; border-radius:50%; background:var(--cyan);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
   .method-item h3{font-size:19px; margin-bottom:8px;}
   .method-item p{color:var(--ink-dim); font-size:15px; max-width:520px; line-height:1.6;}
   .method-note{
@@ -326,8 +410,8 @@
   .pcard-visual{
     height:160px; position:relative;
     background:
-      radial-gradient(circle at 30% 20%, rgba(47,224,209,0.18), transparent 60%),
-      radial-gradient(circle at 80% 80%, rgba(138,124,255,0.16), transparent 55%),
+      radial-gradient(circle at 30% 20%, rgba(163,95,51,0.18), transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(124,92,52,0.16), transparent 55%),
       var(--surface-2);
     display:flex; align-items:center; justify-content:center;
   }
@@ -408,7 +492,13 @@
   .form-note{font-size:13px; color:var(--ink-faint); margin-top:14px;}
 
   /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line); padding:44px 0;}
+  .footer-cta{
+    border-top:1px solid var(--line); background:var(--surface);
+    padding:36px 0; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  }
+  .footer-cta h3{font-size:19px; margin-bottom:6px;}
+  .footer-cta p{font-size:14px; color:var(--ink-dim);}
+  footer{border-top:1px solid var(--line); padding:44px 0; background:#17120E;}
   .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
   .footer-inner p{font-size:13.5px; color:var(--ink-faint);}
   .footer-links{display:flex; gap:22px; align-items:center;}
@@ -420,8 +510,8 @@
   .aiwhy-card{border:1px solid var(--line); border-radius:14px; padding:28px;}
   .aiwhy-card.before{background:var(--surface);}
   .aiwhy-card.after{
-    background:linear-gradient(180deg, rgba(47,224,209,0.07), transparent);
-    border-color:rgba(47,224,209,0.3);
+    background:linear-gradient(180deg, rgba(163,95,51,0.07), transparent);
+    border-color:rgba(163,95,51,0.3);
   }
   .aiwhy-tag{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-faint); margin-bottom:14px; display:block;}
   .aiwhy-card.after .aiwhy-tag{color:var(--cyan);}
@@ -431,40 +521,104 @@
   .aiwhy-stat .num{font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:600; color:var(--cyan);}
   .aiwhy-stat .label{font-size:13.5px; color:var(--ink-dim); margin-top:8px;}
 
+  .ai-caps{display:flex; flex-wrap:wrap; gap:12px; margin-top:36px;}
+  .ai-cap{
+    display:flex; align-items:center; gap:10px; padding:12px 18px;
+    border:1px solid var(--line); border-radius:999px; background:var(--surface);
+    font-size:13.5px; color:var(--ink-dim); transition:.25s ease;
+  }
+  .ai-cap:hover{border-color:var(--cyan); color:var(--ink); box-shadow:var(--glow-cyan); transform:translateY(-2px);}
+  .ai-cap-ic{color:var(--cyan); font-size:14px;}
+
   /* ---------- chatbot demo ---------- */
-  .demo-wrap{max-width:640px; margin:0 auto;}
-  .chat-window{
-    border:1px solid var(--line-strong); border-radius:14px; overflow:hidden;
-    background:var(--surface); box-shadow:0 40px 90px -30px rgba(0,0,0,0.55);
+  .demo-note{text-align:center; margin-top:18px; font-size:13px; color:var(--ink-faint);}
+
+  /* ---------- floating AI widget ---------- */
+  .ai-launcher{
+    position:fixed; bottom:24px; right:24px; z-index:300;
+    width:58px; height:58px; border-radius:18px;
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; border:none;
+    box-shadow:0 14px 34px -10px rgba(163,95,51,0.5);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
   }
-  .chat-head{
-    display:flex; align-items:center; gap:10px; padding:14px 18px;
-    border-bottom:1px solid var(--line); background:var(--surface-2);
+  .ai-launcher:hover{transform:scale(1.07) translateY(-2px); box-shadow:0 18px 42px -8px rgba(163,95,51,0.65); transition:transform .4s var(--ease-premium), box-shadow .3s ease;}
+  .ai-launcher svg{width:24px; height:24px; transition:transform .3s ease;}
+  .ai-launcher .ic-close{display:none;}
+  .ai-launcher.open .ic-chat{display:none;}
+  .ai-launcher.open .ic-close{display:block;}
+  .ai-launcher .dot-badge{
+    position:absolute; top:-3px; right:-3px; width:12px; height:12px; border-radius:50%;
+    background:#FF5D6C; border:2px solid var(--bg);
   }
-  .chat-head .live{width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 3px rgba(47,224,209,0.18);}
-  .chat-head span{font-size:13.5px; color:var(--ink-dim);}
-  .chat-head strong{color:var(--ink); font-family:'Space Grotesk',sans-serif; font-weight:600;}
-  .chat-body{height:340px; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px;}
-  .msg{max-width:82%; padding:11px 15px; border-radius:12px; font-size:14px; line-height:1.55;}
+
+  .ai-panel{
+    position:fixed; bottom:96px; right:24px; z-index:299;
+    width:368px; max-width:calc(100vw - 32px); height:min(560px, 72vh);
+    border-radius:20px; overflow:hidden;
+    display:flex; flex-direction:column;
+    background:var(--glass-bg);
+    backdrop-filter:blur(22px) saturate(160%);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);
+    border:1px solid var(--glass-border);
+    box-shadow:0 40px 90px -20px rgba(34,25,19,0.22);
+    transform-origin:bottom right;
+    transform:scale(.92) translateY(16px);
+    opacity:0; pointer-events:none;
+    transition:transform .45s var(--ease-premium), opacity .3s ease;
+  }
+  .ai-panel.open{transform:scale(1) translateY(0); opacity:1; pointer-events:auto;}
+
+  .ai-panel-head{
+    display:flex; align-items:center; gap:12px; padding:16px 18px;
+    border-bottom:1px solid var(--line); background:rgba(255,255,255,0.02);
+  }
+  .ai-panel-avatar{
+    width:36px; height:36px; border-radius:11px; flex-shrink:0;
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  .ai-panel-head strong{display:block; font-family:'Space Grotesk',sans-serif; font-size:14.5px; font-weight:600;}
+  .ai-panel-head .status{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-faint); margin-top:2px;}
+  .ai-panel-head .status .live{width:6px; height:6px; border-radius:50%; background:var(--cyan);}
+
+  .ai-panel-body{flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:84%; padding:11px 15px; border-radius:12px; font-size:13.8px; line-height:1.55; animation:msgIn .25s ease;}
+  @keyframes msgIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
   .msg.bot{background:var(--surface-2); border:1px solid var(--line); align-self:flex-start; border-bottom-left-radius:3px;}
-  .msg.user{background:var(--cyan); color:#04140F; align-self:flex-end; border-bottom-right-radius:3px;}
-  .chat-suggestions{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 16px;}
+  .msg.user{background:var(--cyan); color:#FFF8EC; align-self:flex-end; border-bottom-right-radius:3px;}
+
+  .typing-indicator{
+    align-self:flex-start; display:flex; gap:4px; padding:12px 15px;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:12px; border-bottom-left-radius:3px;
+  }
+  .typing-indicator span{width:6px; height:6px; border-radius:50%; background:var(--ink-faint); animation:typingBounce 1.2s infinite ease-in-out;}
+  .typing-indicator span:nth-child(2){animation-delay:.15s;}
+  .typing-indicator span:nth-child(3){animation-delay:.3s;}
+  @keyframes typingBounce{0%,60%,100%{transform:translateY(0); opacity:.5;} 30%{transform:translateY(-4px); opacity:1;}}
+
+  .ai-panel-suggestions{display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 14px;}
   .chat-chip{
-    font-size:12.5px; border:1px solid var(--line-strong); padding:7px 13px; border-radius:999px;
+    font-size:12px; border:1px solid var(--line-strong); padding:7px 12px; border-radius:999px;
     cursor:pointer; color:var(--ink-dim); background:none; font-family:'Inter',sans-serif; transition:.2s ease;
   }
   .chat-chip:hover{border-color:var(--cyan); color:var(--cyan);}
-  .chat-input-row{display:flex; gap:10px; padding:14px 18px; border-top:1px solid var(--line);}
-  .chat-input-row input{
+  .ai-panel-input{display:flex; gap:8px; padding:14px; border-top:1px solid var(--line);}
+  .ai-panel-input input{
     flex:1; background:var(--bg); border:1px solid var(--line-strong); border-radius:8px;
-    padding:12px 14px; color:var(--ink); font-family:'Inter',sans-serif; font-size:14px;
+    padding:11px 13px; color:var(--ink); font-family:'Inter',sans-serif; font-size:13.8px; min-width:0;
   }
-  .chat-input-row input:focus{border-color:var(--cyan); outline:none;}
-  .chat-input-row button{
-    background:var(--cyan); color:#04140F; border:none; border-radius:8px; padding:0 18px;
-    font-weight:500; cursor:pointer; font-size:14px;
+  .ai-panel-input input:focus{border-color:var(--cyan); outline:none;}
+  .ai-panel-input button{
+    background:var(--cyan); color:#FFF8EC; border:none; border-radius:8px; padding:0 16px;
+    font-weight:500; cursor:pointer; font-size:13.5px; flex-shrink:0;
   }
-  .demo-note{text-align:center; margin-top:18px; font-size:13px; color:var(--ink-faint);}
+
+  @media (max-width:600px){
+    .ai-launcher{bottom:16px; right:16px;}
+    .ai-panel{bottom:84px; right:12px; width:calc(100vw - 24px); height:min(520px, 68vh);}
+  }
 
   /* ---------- cas d'usage ---------- */
   .usecase-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
@@ -521,7 +675,7 @@
     <nav class="nav-links">
       <a href="#hero">Accueil</a>
       <a href="#services">Services</a>
-      <a href="#demo">Agent IA</a>
+      <a href="#ia">Agent IA</a>
       <a href="#apropos">À propos</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -539,7 +693,7 @@
   </div>
   <a href="#hero">Accueil</a>
   <a href="#services">Services</a>
-  <a href="#demo">Agent IA</a>
+  <a href="#ia">Agent IA</a>
   <a href="#apropos">À propos</a>
   <a href="#contact">Contact</a>
   <a href="#contact" class="btn btn-primary" style="margin-top:28px; justify-content:center;">Réserver un appel</a>
@@ -550,6 +704,7 @@
 <!-- ========== HERO ========== -->
 <section class="hero" id="hero">
   <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow"><span class="dot"></span>Studio Singulier — Casablanca, 2026</div>
@@ -557,7 +712,7 @@
       <p class="lead">Nous créons des sites internet modernes et intégrons des agents IA capables de répondre à vos clients, qualifier vos prospects et automatiser votre support — sans que vous ayez à y penser.</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary">Réserver un appel gratuit</a>
-        <a href="#demo" class="btn btn-ghost">Voir une démonstration</a>
+        <a href="#ia" class="btn btn-ghost">Voir une démonstration</a>
       </div>
       <div class="hero-meta">
         <div><strong>Casablanca</strong>Belvédère, Maroc</div>
@@ -599,6 +754,13 @@
   </div>
 </section>
 
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Sites vitrines</span><span>Boutiques Shopify</span><span>Agents IA support</span><span>Agents IA commercial</span><span>Automatisation</span><span>Maintenance &amp; évolution</span>
+    <span>Sites vitrines</span><span>Boutiques Shopify</span><span>Agents IA support</span><span>Agents IA commercial</span><span>Automatisation</span><span>Maintenance &amp; évolution</span>
+  </div>
+</div>
+
 <!-- ========== PROBLEM ========== -->
 <section class="section border-top reveal">
   <div class="wrap">
@@ -622,31 +784,37 @@
     </div>
     <div class="services-grid">
       <div class="service">
+        <div class="icon">◆</div>
         <span class="num mono">01</span>
         <h3>Création de sites vitrines</h3>
         <p>Sites internet haut de gamme, rapides et pensés d'abord pour le mobile.</p>
       </div>
       <div class="service">
+        <div class="icon">▤</div>
         <span class="num mono">02</span>
         <h3>Création de boutiques Shopify</h3>
         <p>Boutiques e-commerce prêtes à vendre, structurées pour convertir.</p>
       </div>
       <div class="service">
+        <div class="icon">◈</div>
         <span class="num mono">03</span>
         <h3>Agent IA de support client</h3>
         <p>Répond à vos clients automatiquement, à toute heure, sans file d'attente.</p>
       </div>
       <div class="service">
+        <div class="icon">◎</div>
         <span class="num mono">04</span>
         <h3>Agent IA commercial</h3>
         <p>Qualifie vos prospects et les guide vers une prise de rendez-vous.</p>
       </div>
       <div class="service">
+        <div class="icon">⟲</div>
         <span class="num mono">05</span>
         <h3>Automatisation d'entreprise</h3>
         <p>On connecte vos outils pour réduire les tâches répétitives au quotidien.</p>
       </div>
       <div class="service">
+        <div class="icon">✦</div>
         <span class="num mono">06</span>
         <h3>Maintenance &amp; évolution</h3>
         <p>Site et agents IA évoluent avec vous, à mesure que votre activité grandit.</p>
@@ -656,7 +824,7 @@
 </section>
 
 <!-- ========== POURQUOI L'IA ========== -->
-<section class="section border-top reveal">
+<section class="section border-top reveal" id="ia">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow"><span class="dot"></span>Pourquoi intégrer une IA</div>
@@ -674,51 +842,28 @@
     </div>
     <div class="aiwhy-stats">
       <div class="aiwhy-stat">
-        <div class="num">80%</div>
+        <div class="num" data-count="80" data-suffix="%">0%</div>
         <div class="label">des demandes automatisées</div>
       </div>
       <div class="aiwhy-stat">
-        <div class="num">&lt;5s</div>
+        <div class="num" data-count="5" data-prefix="&lt;" data-suffix="s">&lt;0s</div>
         <div class="label">temps de réponse moyen</div>
       </div>
       <div class="aiwhy-stat">
-        <div class="num">24/7</div>
+        <div class="num" data-static="24/7">24/7</div>
         <div class="label">disponibilité, sans exception</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ========== DEMO CHATBOT ========== -->
-<section class="section border-top reveal" id="demo">
-  <div class="wrap">
-    <div class="section-head" style="margin:0 auto 48px; text-align:center;">
-      <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Démonstration</div>
-      <h2>Essayez notre Agent IA.</h2>
-      <p>Posez une question sur les prix, Shopify, les délais ou la prise de rendez-vous — comme le ferait un vrai client.</p>
+    <div class="ai-caps">
+      <div class="ai-cap"><div class="ai-cap-ic">◈</div><span>Support client</span></div>
+      <div class="ai-cap"><div class="ai-cap-ic">◎</div><span>Vente &amp; qualification</span></div>
+      <div class="ai-cap"><div class="ai-cap-ic">⟲</div><span>Automatisation</span></div>
+      <div class="ai-cap"><div class="ai-cap-ic">✓</div><span>Qualification de leads</span></div>
+      <div class="ai-cap"><div class="ai-cap-ic">▤</div><span>Prise de rendez-vous</span></div>
+      <div class="ai-cap"><div class="ai-cap-ic">✦</div><span>Disponible 24h/24</span></div>
     </div>
-    <div class="demo-wrap">
-      <div class="chat-window">
-        <div class="chat-head">
-          <span class="live"></span>
-          <span><strong>Agent Studio Singulier</strong> — en ligne</span>
-        </div>
-        <div class="chat-body" id="chatBody">
-          <div class="msg bot">Bonjour 👋 Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs.</div>
-        </div>
-        <div class="chat-suggestions">
-          <button class="chat-chip" data-q="prix">Vos prix ?</button>
-          <button class="chat-chip" data-q="shopify">Vous faites Shopify ?</button>
-          <button class="chat-chip" data-q="delais">Quels délais ?</button>
-          <button class="chat-chip" data-q="rdv">Prendre rendez-vous</button>
-        </div>
-        <form class="chat-input-row" id="chatForm">
-          <input type="text" id="chatInput" placeholder="Écrivez votre question…" autocomplete="off">
-          <button type="submit">Envoyer</button>
-        </form>
-      </div>
-      <p class="demo-note">Démonstration du type de réponses que peut donner un agent IA — pas un modèle connecté en direct.</p>
-    </div>
+    <p class="demo-note" style="margin-top:28px;">Envie de voir un agent IA en action ? Ouvrez l'assistant en bas à droite de l'écran.</p>
   </div>
 </section>
 
@@ -830,27 +975,27 @@
     </div>
     <div class="method-list">
       <div class="method-item">
-        <span class="num">01 /06</span>
+        <span class="num">1</span>
         <div><h3>Analyse</h3><p>Votre activité, vos clients, vos points de friction actuels.</p></div>
       </div>
       <div class="method-item">
-        <span class="num">02 /06</span>
+        <span class="num">2</span>
         <div><h3>Conception</h3><p>Structure du site et des parcours pensée avant tout design.</p></div>
       </div>
       <div class="method-item">
-        <span class="num">03 /06</span>
+        <span class="num">3</span>
         <div><h3>Développement</h3><p>Site ou boutique Shopify, construit rapide et responsive.</p></div>
       </div>
       <div class="method-item">
-        <span class="num">04 /06</span>
+        <span class="num">4</span>
         <div><h3>IA</h3><p>L'agent IA est entraîné sur votre activité et vos réponses types.</p></div>
       </div>
       <div class="method-item">
-        <span class="num">05 /06</span>
+        <span class="num">5</span>
         <div><h3>Mise en ligne</h3><p>Publication du site et activation de l'agent, en conditions réelles.</p></div>
       </div>
       <div class="method-item">
-        <span class="num">06 /06</span>
+        <span class="num">6</span>
         <div><h3>Accompagnement</h3><p>Ajustements et évolution, à mesure que votre activité change.</p></div>
       </div>
     </div>
@@ -1001,6 +1146,16 @@
 
 </main>
 
+<div class="footer-cta">
+  <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+    <div>
+      <h3>Une question avant de se lancer ?</h3>
+      <p>Écrivez-nous, on répond rapidement, sans jargon.</p>
+    </div>
+    <a href="#contact" class="btn btn-primary">Nous écrire</a>
+  </div>
+</div>
+
 <footer>
   <div class="wrap footer-inner">
     <span class="logo" style="font-size:15px;"><span class="mark"></span>Studio Singulier</span>
@@ -1013,7 +1168,38 @@
   </div>
 </footer>
 
+<!-- ========== FLOATING AI WIDGET ========== -->
+<button class="ai-launcher" id="aiLauncher" aria-label="Ouvrir l'assistant IA">
+  <svg class="ic-chat" viewBox="0 0 24 24" fill="none" stroke="#FFF8EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="#FFF8EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <span class="dot-badge"></span>
+</button>
+
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-panel-head">
+    <div class="ai-panel-avatar">🤖</div>
+    <div>
+      <strong>Agent Studio Singulier</strong>
+      <div class="status"><span class="live"></span>En ligne</div>
+    </div>
+  </div>
+  <div class="ai-panel-body" id="aiBody">
+    <div class="msg bot">Bonjour 👋 Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs — ou dites-moi si vous voulez réserver un appel.</div>
+  </div>
+  <div class="ai-panel-suggestions">
+    <button class="chat-chip" data-q="Vos prix ?">Vos prix ?</button>
+    <button class="chat-chip" data-q="Vous faites Shopify ?">Shopify ?</button>
+    <button class="chat-chip" data-q="Quels délais ?">Délais ?</button>
+    <button class="chat-chip" data-q="Je veux réserver un appel">Réserver un appel</button>
+  </div>
+  <form class="ai-panel-input" id="aiForm">
+    <input type="text" id="aiInput" placeholder="Écrivez votre question…" autocomplete="off">
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
 <script>
+
   // header scroll state
   const header = document.getElementById('siteHeader');
   const navCta = document.getElementById('navCta');
@@ -1048,13 +1234,16 @@
     });
   });
 
-  // demo chatbot — rule-based, runs entirely in the browser (no external API)
+  // floating AI widget — rule-based Q&A + a real lead-capture flow (submits via Web3Forms)
   (function(){
-    const chatBody = document.getElementById('chatBody');
-    const chatForm = document.getElementById('chatForm');
-    const chatInput = document.getElementById('chatInput');
-    if(!chatForm) return;
+    const launcher = document.getElementById('aiLauncher');
+    const panel = document.getElementById('aiPanel');
+    const body = document.getElementById('aiBody');
+    const form = document.getElementById('aiForm');
+    const input = document.getElementById('aiInput');
+    if(!launcher || !form) return;
 
+    const WEB3FORMS_KEY = '032471fb-ba5f-437e-9023-bffd8f52ab76';
     const CLOSER = " Souhaitez-vous réserver un appel gratuit ?";
 
     const answers = {
@@ -1065,7 +1254,6 @@
       seo: "On structure vos pages et votre contenu pour être bien compris par les moteurs de recherche et cohérent avec votre fiche Google — sans promettre de classement garanti." + CLOSER,
       maintenance: "Après la mise en ligne, votre site et votre agent IA peuvent évoluer avec vous — contenus, fonctionnalités, ajustements des réponses." + CLOSER,
       delais: "Ça dépend de la taille du projet — un site simple va plus vite qu'une boutique Shopify avec agent IA connecté. On vous donne une estimation dès le premier échange." + CLOSER,
-      rdv: "Avec plaisir. Le plus simple est de passer par le formulaire de contact plus bas sur cette page, ou de nous écrire directement sur WhatsApp.",
       default: "Bonne question — je peux vous renseigner sur nos sites, nos boutiques Shopify, nos agents IA, le SEO, la maintenance ou les délais. Sur quoi voulez-vous en savoir plus ?" + CLOSER
     };
 
@@ -1073,7 +1261,6 @@
       const t = text.toLowerCase();
       if(/prix|tarif|coût|cout|combien/.test(t)) return answers.prix;
       if(/shopify|boutique|e-?commerce/.test(t)) return answers.shopify;
-      if(/rendez-?vous|rdv|réserv|reserv|appel/.test(t)) return answers.rdv;
       if(/ia\b|agent|intelligence artificielle|chatbot|automat/.test(t)) return answers.ia;
       if(/seo|référencement|referencement|google/.test(t)) return answers.seo;
       if(/maintenance|évolu|evolu|modifier/.test(t)) return answers.maintenance;
@@ -1086,26 +1273,149 @@
       const div = document.createElement('div');
       div.className = 'msg ' + who;
       div.textContent = text;
-      chatBody.appendChild(div);
-      chatBody.scrollTop = chatBody.scrollHeight;
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      return div;
+    }
+
+    function showTyping(){
+      const t = document.createElement('div');
+      t.className = 'typing-indicator';
+      t.id = 'typingNow';
+      t.innerHTML = '<span></span><span></span><span></span>';
+      body.appendChild(t);
+      body.scrollTop = body.scrollHeight;
+      return t;
+    }
+    function hideTyping(){
+      const t = document.getElementById('typingNow');
+      if(t) t.remove();
+    }
+
+    // simple lead-capture state machine, triggered when the user wants to book a call
+    let flow = null; // null | 'name' | 'email' | 'phone'
+    const lead = { name:'', email:'', phone:'' };
+
+    function botSay(text, delay){
+      showTyping();
+      setTimeout(() => { hideTyping(); addMsg(text, 'bot'); }, delay || 550);
+    }
+
+    function startBookingFlow(){
+      flow = 'name';
+      botSay("Avec plaisir. Comment vous appelez-vous ?");
+    }
+
+    async function submitLead(){
+      botSay("Merci " + lead.name + " — j'envoie votre demande à l'équipe, un instant…");
+      if(!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('COLLE_') === 0){
+        setTimeout(() => addMsg("Formulaire pas encore activé — écrivez-nous directement sur WhatsApp en attendant.", 'bot'), 900);
+        return;
+      }
+      try{
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: 'Nouveau lead — Assistant IA du site',
+            from_name: 'Studio Singulier — Assistant IA',
+            name: lead.name,
+            email: lead.email,
+            phone: lead.phone,
+            message: 'Demande de rappel via l\'assistant IA flottant du site.'
+          })
+        });
+        const data = await res.json();
+        setTimeout(() => {
+          if(data.success){
+            addMsg("C'est envoyé ✅ On vous recontacte très vite sur " + lead.email + ".", 'bot');
+          } else {
+            addMsg("Un souci est survenu à l'envoi — écrivez-nous directement sur WhatsApp pour ne pas perdre de temps.", 'bot');
+          }
+        }, 900);
+      } catch(err){
+        setTimeout(() => addMsg("Connexion impossible — écrivez-nous directement sur WhatsApp pour ne pas perdre de temps.", 'bot'), 900);
+      }
+    }
+
+    function handleFlowStep(text){
+      if(flow === 'name'){
+        lead.name = text.trim();
+        flow = 'email';
+        botSay("Merci " + lead.name + ". Quel est votre email ?");
+        return true;
+      }
+      if(flow === 'email'){
+        lead.email = text.trim();
+        flow = 'phone';
+        botSay("Et un numéro de téléphone pour vous joindre plus vite ?");
+        return true;
+      }
+      if(flow === 'phone'){
+        lead.phone = text.trim();
+        flow = null;
+        submitLead();
+        return true;
+      }
+      return false;
     }
 
     function respond(text){
       addMsg(text, 'user');
-      setTimeout(() => addMsg(matchAnswer(text), 'bot'), 450);
+      if(handleFlowStep(text)) return;
+      if(/rendez-?vous|rdv|réserv|reserv|appel gratuit|book/.test(text.toLowerCase())){
+        showTyping();
+        setTimeout(() => { hideTyping(); startBookingFlow(); }, 550);
+        return;
+      }
+      showTyping();
+      setTimeout(() => { hideTyping(); addMsg(matchAnswer(text), 'bot'); }, 600);
     }
 
-    chatForm.addEventListener('submit', function(e){
+    form.addEventListener('submit', function(e){
       e.preventDefault();
-      const val = chatInput.value.trim();
+      const val = input.value.trim();
       if(!val) return;
       respond(val);
-      chatInput.value = '';
+      input.value = '';
     });
 
     document.querySelectorAll('.chat-chip').forEach(chip => {
-      chip.addEventListener('click', () => respond(chip.textContent));
+      chip.addEventListener('click', () => respond(chip.dataset.q || chip.textContent));
     });
+
+    launcher.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      launcher.classList.toggle('open', isOpen);
+      if(isOpen) input.focus();
+    });
+  })();
+
+  // animated count-up for AI stats, triggered once visible
+  (function(){
+    const stats = document.querySelectorAll('.aiwhy-stat .num[data-count]');
+    if(!stats.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 900;
+        const start = performance.now();
+        function tick(now){
+          const p = Math.min((now - start) / duration, 1);
+          const val = Math.round(target * (1 - Math.pow(1 - p, 3)));
+          el.textContent = prefix + val + suffix;
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    stats.forEach(el => io.observe(el));
   })();
 
   // contact form — sends via Web3Forms (https://web3forms.com)
@@ -1136,7 +1446,7 @@
       if(data.success){
         form.reset();
         status.textContent = "Message envoyé — on revient vers vous très vite.";
-        status.style.color = '#2FE0D1';
+        status.style.color = '#A35F33';
       } else {
         status.textContent = "Un problème est survenu. Vous pouvez aussi écrire directement à yayababafofana14700@gmail.com.";
         status.style.color = '#F0A860';
