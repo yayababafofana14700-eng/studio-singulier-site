@@ -1,0 +1,1449 @@
+/* Studio Singulier — blocs de section : hero, services, cas d'usage, methode, FAQ, contact
+   Extrait du fichier unique le 13/08/2026 lors du passage en
+   architecture multi-pages. Chargé par les 6 pages du site. */
+
+   HERO — image pleine largeur, texte en bas à gauche
+   Un seul moment : filet, titre, sous-titre, deux CTA. Rien d'autre.
+   ========================================================================= */
+/* Le hero n'est plus une photo plein cadre avec du texte posé dessus, mais
+   une composition en deux colonnes : la parole à gauche, la vidéo à droite.
+   Conséquence directe : le texte repose désormais sur le fond de page et
+   non sur une image. Les couleurs qui avaient été relevées pour tenir sur
+   le voile photographique (#C9CBCE) redeviennent donc les tokens normaux,
+   déjà calibrés pour les aplats — plus de valeur en dur ici. */
+.hero{
+  position:relative;
+  min-height:100dvh;                  /* jamais 100vh : la barre iOS saute */
+  display:flex; align-items:center;
+  padding:calc(72px + var(--r-block)) 0 var(--r-block);
+  overflow:hidden;
+}
+.hero .wrap{position:relative; width:100%;}
+
+/* Asymétrie assumée : la vidéo prend un peu plus de place que le texte.
+   `minmax(0, …)` sur les deux colonnes, sinon un enfant large (la vidéo)
+   impose sa taille minimale et fait déborder la grille. */
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0, .92fr) minmax(0, 1.08fr);
+  align-items:center;
+  gap:clamp(40px, 5vw, 88px);
+}
+
+.hero-copy{max-width:min(100%, 560px);}
+.hero h1{
+  font-size:var(--t-h1);
+  margin-bottom:28px;
+}
+.hero h1 .accent{color:var(--signal);}
+.hero-lead{
+  max-width:42ch;
+  margin-bottom:38px;
+  color:var(--fg-dim);
+}
+.hero-ctas{display:flex; flex-wrap:wrap; gap:14px;}
+
+/* ---------- Colonne vidéo ---------- */
+/* Le cadre garde le ratio natif 16/9 du fichier : aucun recadrage, aucune
+   déformation, le sujet reste entier. `object-fit:cover` n'est mis que par
+   sécurité si le conteneur devait un jour être contraint autrement. */
+.hero-video{
+  position:relative;
+  border-radius:var(--r-media);       /* 6px, le même rayon que tous les médias du site */
+  overflow:hidden;
+  background:var(--bg-2);             /* évite le flash blanc avant décodage */
+  aspect-ratio:16/9;
+}
+.hero-video video{
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+/* Un voile très léger, du même vermillon que la marque, pour que la vidéo
+   appartienne à la page au lieu d'y être posée. Volontairement faible :
+   la consigne est de ne pas dénaturer l'image. */
+.hero-video::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:linear-gradient(140deg, rgba(240,74,38,.08), rgba(14,15,17,0) 55%);
+}
+/* Filet de la même famille que les autres médias, posé au-dessus du flux
+   pour que le bord reste net sur un fond sombre. */
+.hero-video::before{
+  content:'';
+  position:absolute; inset:0;
+  z-index:1;
+  pointer-events:none;
+  border:1px solid var(--rule);
+  border-radius:inherit;
+}
+
+
+
+/* ---------- bandeau défilant : une seule marquee sur toute la page ---------- */
+.ticker{
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  overflow:hidden;
+  padding:20px 0;
+  background:var(--bg-2);
+}
+.ticker-track{
+  display:flex; align-items:center;
+  gap:56px;
+  width:max-content;
+  will-change:transform;
+}
+.ticker-track span{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  white-space:nowrap;
+  display:inline-flex; align-items:center; gap:56px;
+}
+.ticker-track span::after{
+  content:"";
+  width:5px; height:5px;
+  background:var(--signal);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+/* =========================================================================
+   CONSTAT — énoncé centré, beaucoup de vide
+   ========================================================================= */
+.statement{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  font-size:var(--t-h1);
+  line-height:1.14;
+  letter-spacing:-.03em;
+  text-align:center;
+  max-width:19ch;
+  margin:0 auto;
+  text-wrap:balance;
+}
+.statement em{font-style:normal; color:var(--signal);}
+.friction{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:0;
+  margin-top:var(--r-block);
+  border-top:1px solid var(--rule);
+}
+.friction li{
+  flex:1 1 200px;
+  padding:26px 22px;
+  border-bottom:1px solid var(--rule);
+  border-right:1px solid var(--rule);
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  display:flex; flex-direction:column; gap:12px;
+}
+.friction li:last-child{border-right:none;}
+.friction li i{
+  font-family:'JetBrains Mono',monospace;
+  font-style:normal;
+  font-size:var(--t-micro);
+  letter-spacing:.12em;
+  color:var(--signal);
+}
+.friction-note{
+  margin:38px auto 0;
+  max-width:58ch;
+  text-align:center;
+  font-size:var(--t-s);
+  color:var(--fg-faint);
+}
+
+
+/* =========================================================================
+   SERVICES — index de lignes pleine largeur
+   Un seul filet sous chaque ligne, jamais dessus ET dessous.
+   ========================================================================= */
+.section-head{max-width:20ch; margin-bottom:var(--r-block);}
+.section-head.wide{max-width:26ch;}
+.section-head p{
+  margin-top:20px;
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  max-width:52ch;
+}
+
+
+/* CTA de carte : lien souligné, jamais une pastille. Le libellé reste
+   strictement identique partout, une seule intention de contact sur la page. */
+.svc-cta{
+  display:inline-flex; align-items:center; gap:9px;
+  margin-top:18px;
+  font-size:var(--t-xs);
+  font-weight:700;
+  color:var(--fg);
+  border-bottom:1px solid var(--rule-signal);
+  padding-bottom:4px;
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.svc-cta:hover{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
+.svc-cta .arrow{transition:transform .35s var(--ease-out);}
+.svc-cta:hover .arrow{transform:translateX(4px);}
+
+/* =========================================================================
+   AGENT IA — diptyque en aplats + bande de chiffres
+   ========================================================================= */
+.compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--rule);
+  border-radius:var(--r-media);
+  overflow:hidden;
+}
+.compare-col{
+  padding:var(--r-item);
+  display:flex; flex-direction:column; gap:18px;
+  min-height:230px;
+}
+.compare-col.before{background:var(--bg-2);}
+.compare-col.after{background:var(--signal);}
+.compare-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.compare-col.before .compare-tag{color:var(--fg-faint);}
+.compare-col.before p{font-size:var(--t-lead); color:var(--fg-dim); line-height:1.5;}
+.compare-col.after .compare-tag{color:rgba(11,12,13,.85);}
+.compare-col.after p{
+  font-size:var(--t-lead);
+  color:#17140F;                      /* 5,12:1 sur le vermillon */
+  line-height:1.5;
+  font-weight:500;
+}
+
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  margin-top:var(--r-block);
+  border-top:1px solid var(--rule);
+}
+.metric{
+  padding:36px 24px 0 0;
+  border-right:1px solid var(--rule);
+}
+.metric:last-child{border-right:none; padding-right:0;}
+.metric .v{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  /* EXCEPTION ASSUMÉE à l'échelle typographique.
+     Un chiffre tabulaire animé au compteur est un objet graphique, pas du
+     texte : sa taille est celle du bloc de trois colonnes qu'il remplit, pas
+     un niveau de titre. --t-h1 (max 72px) coïnciderait au sommet mais
+     démarrerait 2px plus haut à 375px, où les trois métriques passent en
+     colonne et n'ont plus la même contrainte de largeur. */
+  font-size:clamp(38px,5.4vw,72px);
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--fg);
+  font-variant-numeric:tabular-nums;
+}
+.metric .k{
+  margin-top:14px;
+  font-size:var(--t-xs);
+  color:var(--fg-dim);
+  max-width:22ch;
+}
+
+
+.caps{
+  display:flex; flex-wrap:wrap;
+  gap:0;
+  margin-top:var(--r-block);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.caps span{
+  flex:1 1 auto;
+  padding:16px 22px 16px 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  white-space:nowrap;
+}
+.demo-hint{
+  margin-top:34px;
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+}
+.demo-hint button{
+  background:none; border:none;
+  padding:0;
+  color:var(--signal-ink);
+  font-weight:700;
+  cursor:pointer;
+  border-bottom:1px solid var(--rule-signal);
+  transition:border-color .3s var(--ease);
+}
+.demo-hint button:hover{border-bottom-color:var(--signal-ink);}
+
+/* =========================================================================
+   CAS D'USAGE — rail horizontal, cartes sans conteneur
+   ========================================================================= */
+.rail-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:32px;
+  margin-bottom:var(--r-block);
+}
+.rail-nav{display:flex; gap:10px; flex-shrink:0;}
+.rail-btn{
+  width:44px; height:44px;
+  border-radius:50%;
+  border:1px solid var(--rule-strong);
+  background:none;
+  color:var(--fg-dim);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:var(--t-body);
+  transition:border-color .3s var(--ease), color .3s var(--ease), background .3s var(--ease);
+}
+.rail-btn:hover{border-color:var(--signal-ink); color:var(--signal-ink); background:var(--signal-wash);}
+
+/* ---------- fenêtre de la piste ----------
+   État par défaut, celui qui sert sans JS, sur mobile et sous mouvement
+   réduit : défilement tactile natif avec points d'accroche. C'est le repli,
+   il doit fonctionner seul.
+   L'état .is-pinned n'est posé par le script QUE lorsque le panoramique
+   piloté au scroll est réellement actif. */
+.hpan-viewport{
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  scroll-snap-type:x mandatory;
+  margin:0 calc(var(--gutter) * -1);
+  padding:0 var(--gutter);
+  /* Le snapport part du bord de la boîte de padding. Sans ce scroll-padding,
+     les points d'accroche sont décalés d'une gouttière par rapport au pas
+     des flèches : chaque clic dérive de 51px et les cartes ne retombent
+     jamais alignées sur la marge. */
+  scroll-padding-left:var(--gutter);
+}
+.hpan-viewport::-webkit-scrollbar{display:none;}
+.hpan.is-pinned .hpan-viewport{
+  overflow:hidden;
+  scroll-snap-type:none;
+}
+
+/* ---------- mise en page en mode épinglé ----------
+   Pendant l'épinglage, toute la section doit tenir dans la hauteur d'écran :
+   titre, cartes ET indicateur. Sinon la barre de progression se retrouve
+   sous le pli, invisible au moment précis où elle sert. On resserre donc
+   les marges verticales et on comprime la carte. Le script refuse
+   l'épinglage si, malgré ça, la section dépasse encore l'écran. */
+.hpan.is-pinned{
+  min-height:100dvh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding-top:clamp(70px, 9.5vh, 108px);
+  padding-bottom:clamp(20px, 3vh, 40px);
+}
+.hpan.is-pinned .rail-head{margin-bottom:clamp(20px, 2.8vh, 36px);}
+/* L'en-tête est le vrai poste de dépense : à 4.3vw sur 26ch, le titre part
+   sur quatre lignes et mange 410px. On l'élargit et on le rétrécit pour le
+   ramener à deux lignes. */
+.hpan.is-pinned .rail-head .section-head{max-width:36ch;}
+.hpan.is-pinned .rail-head h2{font-size:var(--t-h3);}
+.hpan.is-pinned .rail-head .eyebrow{margin-bottom:13px;}
+.hpan.is-pinned .rail-head .section-head p{margin-top:10px; font-size:var(--t-xs);}
+.hpan.is-pinned .rail-item .rail-media{aspect-ratio:16/9; margin-bottom:15px;}
+.hpan.is-pinned .rail-item .sector{margin-bottom:9px;}
+.hpan.is-pinned .rail-item h3{font-size:var(--t-body); margin-bottom:9px;}
+.hpan.is-pinned .rail-item > p{font-size:var(--t-xs);}
+.hpan.is-pinned .uflow{gap:6px;}
+.hpan.is-pinned .uflow-step span:last-child{font-size:var(--t-xs);}
+.hpan.is-pinned .svc-cta{margin-top:11px;}
+.hpan.is-pinned .hpan-foot{margin-top:clamp(16px, 2.2vh, 28px);}
+.hpan-track{
+  display:flex; gap:26px;
+  width:max-content;
+  padding-bottom:4px;
+}
+.hpan.is-pinned .hpan-track{will-change:transform;}
+
+/* pied : barre de progression + compteur, pour qu'on sache qu'il reste
+   des cartes et combien */
+.hpan-foot{
+  display:flex; align-items:center; gap:22px;
+  margin-top:var(--r-item);
+}
+.hpan-bar{
+  flex:1;
+  height:2px;
+  background:var(--rule);
+  border-radius:var(--r-pill);
+  overflow:hidden;
+}
+.hpan-bar i{
+  display:block; height:100%; width:22%;
+  background:var(--signal-ink);
+  border-radius:var(--r-pill);
+  transform-origin:left;
+}
+.hpan-count{
+  flex-shrink:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  color:var(--fg-dim);
+  font-variant-numeric:tabular-nums;
+}
+.hpan-count b{color:var(--fg); font-weight:500;}
+
+.rail-item{
+  width:clamp(268px, 30vw, 336px);
+  scroll-snap-align:start;
+  flex-shrink:0;
+}
+.rail-item .rail-media{
+  aspect-ratio:4/3;
+  margin-bottom:22px;
+}
+.rail-item:hover .rail-media img{transform:scale(1.045); filter:grayscale(.42) contrast(1.1) brightness(.66);}
+.rail-item .sector{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal-ink);
+  margin-bottom:12px;
+}
+.rail-item h3{margin-bottom:14px;}
+/* corps des cartes de prestations */
+.rail-item > p{
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  line-height:1.55;
+}
+.uflow{display:flex; flex-direction:column; gap:14px;}
+.uflow-step{
+  display:flex; flex-direction:column; gap:4px;
+  padding-left:14px;
+  border-left:2px solid var(--rule-signal);
+}
+.uflow-step .k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+.uflow-step span:last-child{font-size:var(--t-s); color:var(--fg-dim); line-height:1.5;}
+
+/* Sous mouvement réduit, le panoramique piloté au scroll n'est jamais
+   instancié : la piste reste une liste défilable au doigt, et les cartes
+   ne bougent pas toutes seules. */
+
+
+/* =========================================================================
+   PRINCIPES — index étroit collant + blocs empilés
+   ========================================================================= */
+.sticky-split{
+  display:grid;
+  grid-template-columns:minmax(180px, .8fr) minmax(0, 2.2fr);
+  gap:var(--r-block);
+  align-items:start;
+}
+.sticky-index{position:sticky; top:118px;}
+.sticky-index h2{margin-bottom:34px;}
+.sticky-index ol{display:flex; flex-direction:column; gap:2px;}
+.sticky-index li{
+  display:flex; align-items:center; gap:12px;
+  padding:9px 0;
+  font-size:var(--t-s);
+  color:var(--fg-faint);
+  transition:color .35s var(--ease);
+}
+.sticky-index li i{
+  font-family:'JetBrains Mono',monospace;
+  font-style:normal;
+  font-size:var(--t-micro);
+  letter-spacing:.1em;
+  width:20px;
+  flex-shrink:0;
+}
+.sticky-index li::before{
+  content:"";
+  width:8px; height:8px;
+  background:var(--signal-ink);
+  opacity:0;
+  transform:scale(.4);
+  transition:opacity .35s var(--ease), transform .35s var(--ease-out);
+  flex-shrink:0;
+}
+.sticky-index li.on{color:var(--fg);}
+.sticky-index li.on::before{opacity:1; transform:scale(1);}
+
+.principles{display:flex; flex-direction:column;}
+.principle{
+  padding:var(--r-block) 0;
+  border-bottom:1px solid var(--rule);
+}
+.principle:first-child{padding-top:0;}
+.principle:last-child{border-bottom:none; padding-bottom:0;}
+.principle h3{
+  font-size:var(--t-h2);
+  letter-spacing:-.03em;
+  margin-bottom:16px;
+}
+.principle p{
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  max-width:52ch;
+}
+/* Numéro de principe. Ajouté le 13/08/2026 avec l'architecture multi-pages :
+   la version single-page listait les principes sans numéro. Même traitement
+   que .cat-num et .sl-num, pour que les trois index de la page se répondent. */
+.principle .pn{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--signal-ink);
+  margin-bottom:14px;
+}
+
+
+/* =========================================================================
+   MÉTHODE — rail horizontal à progression
+   ========================================================================= */
+.method-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(180px, 22vw, 280px);
+  gap:var(--r-block);
+  align-items:stretch;
+}
+.method-media{aspect-ratio:3/4; min-height:100%;}
+
+
+.timeline{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:20px;
+  padding-top:34px;
+}
+.timeline::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height:1px;
+  background:var(--rule);
+}
+.timeline-fill{
+  position:absolute; top:0; left:0;
+  height:1px;
+  width:0;
+  background:var(--signal-ink);
+  transform-origin:left;
+}
+.step{position:relative; padding-top:22px;}
+.step::before{
+  content:"";
+  position:absolute; top:-4.5px; left:0;
+  width:9px; height:9px;
+  border-radius:50%;
+  background:var(--bg);
+  border:1.5px solid var(--fg-faint);
+  transition:background .4s var(--ease), border-color .4s var(--ease);
+}
+.step.lit::before{background:var(--signal-ink); border-color:var(--signal-ink);}
+.step .sn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.12em;
+  color:var(--signal-ink);
+  margin-bottom:12px;
+}
+.step h3{font-size:var(--t-h3); margin-bottom:10px;}
+.step p{font-size:var(--t-xs); color:var(--fg-dim); line-height:1.55;}
+
+
+
+
+.method-note{
+  margin-top:var(--r-block);
+  font-size:var(--t-s);
+  color:var(--fg-faint);
+  max-width:60ch;
+}
+
+/* =========================================================================
+   VISIBILITÉ LOCALE — 2/3 visuel, 1/3 légende
+   ========================================================================= */
+.local{
+  display:grid;
+  grid-template-columns:minmax(0, 1.7fr) minmax(0, 1fr);
+  gap:var(--r-block);
+  align-items:center;
+}
+.local-copy h2{font-size:var(--t-h2);}
+.local-copy .lead{margin-top:22px; max-width:38ch;}
+
+
+.serp{
+  position:relative;
+  border:1px solid var(--rule);
+  border-radius:var(--r-media);
+  background:var(--bg-2);
+  overflow:hidden;
+}
+.serp::before{                        /* trame de rue, très basse opacité */
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size:64px 64px;
+  opacity:.5;
+  pointer-events:none;
+}
+.serp-bar{
+  position:relative;
+  display:flex; align-items:center; gap:12px;
+  padding:16px 22px;
+  border-bottom:1px solid var(--rule);
+  background:var(--bg-3);
+}
+.serp-bar .mag{color:var(--fg-faint); font-size:var(--t-s);}
+.serp-bar .q{
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0;
+}
+.serp-body{position:relative; padding:var(--s-5);}
+.serp-result{
+  padding-bottom:20px;
+  border-bottom:1px solid var(--rule);
+}
+.serp-result .url{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  color:var(--fg-faint);
+  margin-bottom:8px;
+}
+.serp-result .ttl{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  font-size:var(--t-h3);
+  color:var(--fg);
+  letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.serp-result .snip{font-size:var(--t-xs); color:var(--fg-dim); max-width:52ch; line-height:1.55;}
+.serp-meta{
+  padding:16px 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  border-bottom:1px solid var(--rule);
+}
+.serp-meta b{color:var(--signal-ink); font-weight:500;}
+.serp-checks{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px 26px;
+  padding-top:20px;
+}
+.serp-check{display:flex; align-items:flex-start; gap:11px; font-size:var(--t-xs); color:var(--fg-dim);}
+.serp-check svg{
+  flex-shrink:0;
+  margin-top:5px;
+  fill:none;
+  stroke:var(--signal-ink);
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+
+/* =========================================================================
+   À PROPOS — bande éditoriale + texte, filigrane du monogramme (une fois)
+   ========================================================================= */
+.about{position:relative; overflow:hidden;}
+.about-band{
+  height:clamp(180px, 26vw, 320px);
+  margin-bottom:var(--r-block);
+}
+.about-mark{
+  position:absolute;
+  right:-6vw; bottom:-14vw;
+  width:min(52vw, 620px);
+  color:var(--signal-ink);
+  opacity:.045;                       /* le comp le mettait trop fort : illisible */
+  pointer-events:none;
+}
+.about-text{
+  position:relative;
+  max-width:46ch;
+  margin:0 auto;
+  text-align:center;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  font-size:var(--t-h2);
+  line-height:1.34;
+  letter-spacing:-.024em;
+  color:var(--fg);
+}
+.about-text .rw{opacity:.24; transition:opacity .3s var(--ease);}
+.about-sign{
+  position:relative;
+  margin-top:36px;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+/* .svc-cta est inline-flex (aligné à gauche par défaut) ; la section
+   « à propos » est centrée de bout en bout, donc on le recentre ici
+   uniquement, sans toucher au composant partagé. */
+.about .svc-cta{position:relative; display:flex; width:fit-content; margin:32px auto 0;}
+
+/* =========================================================================
+   FAQ — accordéon
+   ========================================================================= */
+.faq{border-top:1px solid var(--rule);}
+.faq-item{border-bottom:1px solid var(--rule);}
+.faq-q{
+  width:100%;
+  display:flex; align-items:center; gap:20px;
+  padding:24px 4px;
+  background:none; border:none;
+  text-align:left;
+  cursor:pointer;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  font-size:var(--t-h3);
+  letter-spacing:-.018em;
+  color:var(--fg);
+  transition:color .3s var(--ease);
+}
+.faq-q:hover{color:var(--signal-ink);}
+.faq-q .qn{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:400;
+  font-size:var(--t-micro);
+  letter-spacing:.1em;
+  color:var(--signal-ink);
+  flex-shrink:0;
+  width:24px;
+}
+.faq-q span:nth-child(2){flex:1;}
+.faq-q .plus{
+  flex-shrink:0;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:400;
+  font-size:var(--t-lead);
+  color:var(--fg-faint);
+  transition:transform .4s var(--ease-out), color .3s var(--ease);
+}
+.faq-item.open .plus{transform:rotate(45deg); color:var(--signal-ink);}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .45s var(--ease-out);
+}
+.faq-a p{
+  padding:0 44px 26px;
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  max-width:70ch;
+}
+
+
+/* =========================================================================
+
+   CONTACT
+   ========================================================================= */
+.contact{
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr);
+  gap:var(--r-block);
+  align-items:start;
+}
+.contact-info h3{
+  font-size:var(--t-h2);
+  letter-spacing:-.03em;
+  margin-bottom:14px;
+}
+.addr{color:var(--fg-dim); font-size:var(--t-s); margin-bottom:34px;}
+.contact-lines{display:flex; flex-direction:column;}
+.contact-line{
+  display:flex; align-items:center; gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--rule);
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  transition:color .3s var(--ease);
+  word-break:break-word;
+}
+.contact-line:first-child{border-top:1px solid var(--rule);}
+.contact-line:hover{color:var(--fg);}
+.contact-line .ic{
+  color:var(--signal);
+  flex-shrink:0;
+  display:flex;
+}
+.contact-avail{
+  margin-top:28px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+
+form{display:flex; flex-direction:column; gap:22px;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+.field{display:flex; flex-direction:column; gap:8px;}
+.field label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--fg-dim);            /* 7,4:1 */
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:13px 2px;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--rule-strong);
+  border-radius:0;
+  color:var(--fg);
+  font-family:'Satoshi',sans-serif;
+  font-size:var(--t-s);
+  transition:border-color .3s var(--ease);
+}
+.field textarea{resize:vertical; min-height:120px;}
+.field select{
+  appearance:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23A0A2A6' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 4px center;
+  padding-right:26px;
+}
+.field select option{background:var(--bg-2); color:var(--fg);}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  outline:none;
+  border-bottom-color:var(--signal);
+}
+/* Le soulignement seul (1,83:1 au repos → 5,14:1 en focus) ne suffit pas
+   comme unique indicateur de focus clavier : trop fin, sur un champ à fond
+   transparent. Le formulaire reste toujours en moitié nuit → --signal
+   directement, pas --signal-ink. Limité à :focus-visible pour ne pas faire
+   apparaître l'anneau au clic souris, où le changement de soulignement
+   suffisait déjà. */
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:4px;
+}
+.field input::placeholder,
+.field textarea::placeholder{color:var(--fg-faint);}
+.form-note{
+  font-size:var(--t-xs);
+  color:var(--fg-dim);
+  min-height:1.5em;
+}
+.form-note.is-error{color:#FF8367;}   /* 7,3:1 sur --bg */
+.form-note.is-ok{color:var(--signal);}
+
+
+
+
+/* =========================================================================
+   BANDE DE PIED + PIED DE PAGE
+   ========================================================================= */
+.foot-band{
+  border-top:1px solid var(--rule);
+  background:var(--bg-2);
+  padding:var(--r-block) 0;
+}
+.foot-band .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:32px; flex-wrap:wrap;
+}
+.foot-band h3{font-size:var(--t-h3); margin-bottom:8px;}
+.foot-band p{font-size:var(--t-s); color:var(--fg-dim);}
+
+footer{
+  border-top:1px solid var(--rule);
+  padding:44px 0;
+}
+.foot-grid{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:26px; flex-wrap:wrap;
+}
+.foot-links{display:flex; gap:26px; font-size:var(--t-s); color:var(--fg-dim);}
+.foot-links a{transition:color .3s var(--ease);}
+.foot-links a:hover{color:var(--signal);}
+.foot-copy{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.09em;
+  color:var(--fg-faint);
+  width:100%;
+  padding-top:26px;
+  border-top:1px solid var(--rule);
+}
+
+/* =========================================================================
+
+/* =========================================================================
+   ARCHITECTURE MULTI-PAGES — composants ajoutés le 13/08/2026
+   Cartes de catégorie, étapes condensées, grille de réalisations,
+   navigation de pied de page. Tous en tokens : rien en dur.
+   ========================================================================= */
+
+/* CTA de fin de section : plus fort qu'un .svc-cta, moins qu'un CTA de hero. */
+.sec-cta{margin-top:var(--r-block);}
+
+/* ---------- Cartes de catégorie (homepage → pages de service) ---------- */
+.cat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(272px, 1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+}
+/* Gouttière de 1px : les filets naissent du fond de la grille, jamais
+   d'une bordure par carte — sinon les traits doublent à la jonction. */
+.cat-card{
+  display:flex; flex-direction:column;
+  gap:12px;
+  padding:var(--r-item);
+  background:var(--bg);
+  transition:background .35s var(--ease);
+}
+.cat-card:hover{background:var(--bg-2);}
+.cat-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--signal-ink);
+}
+.cat-card h3{margin:0;}
+.cat-card > p{
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  line-height:1.55;
+  flex-grow:1;
+}
+.cat-go{
+  display:inline-flex; align-items:center; gap:9px;
+  margin-top:4px;
+  font-size:var(--t-xs);
+  font-weight:700;
+  color:var(--fg);
+  border-bottom:1px solid var(--rule-signal);
+  padding-bottom:4px;
+  align-self:flex-start;
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.cat-card:hover .cat-go{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
+.cat-card:hover .cat-go .arrow{transform:translateX(4px);}
+.cat-go .arrow{transition:transform .35s var(--ease-out);}
+
+/* ---------- Étapes condensées (homepage → page Méthode) ---------- */
+.steps-lite{
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(196px, 1fr));
+  gap:var(--r-item);
+}
+.steps-lite li{
+  padding-top:var(--s-3);
+  border-top:1px solid var(--rule-strong);
+}
+.sl-num{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--signal-ink);
+  margin-bottom:12px;
+}
+.steps-lite h3{font-size:var(--t-h3); margin:0 0 8px;}
+.steps-lite p{font-size:var(--t-s); color:var(--fg-dim); line-height:1.55;}
+
+/* ---------- Réalisations ---------- */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(288px, 1fr));
+  gap:var(--r-item);
+}
+.work-card .work-media{
+  aspect-ratio:4/3;
+  margin-bottom:18px;
+  background:var(--bg-2);
+}
+/* Gabarit non rempli : hachures discrètes + libellé, pour qu'on voie tout
+   de suite que la case attend un vrai projet et non que l'image a échoué. */
+.work-card[data-placeholder] .work-media{
+  border:1px dashed var(--rule-strong);
+  background:
+    repeating-linear-gradient(135deg,
+      transparent 0 11px,
+      var(--signal-wash) 11px 22px);
+  display:grid; place-items:center;
+}
+.work-card[data-placeholder] .work-media::after{
+  content:'Emplacement projet';
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+.work-sector{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal-ink);
+  margin-bottom:10px;
+}
+.work-card h3{margin:0 0 8px;}
+.work-type{font-size:var(--t-xs); color:var(--fg-faint);}
+.work-note{
+  margin-top:var(--r-block);
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+}
+.work-note a{color:var(--fg); border-bottom:1px solid var(--rule-signal); padding-bottom:2px;}
+.work-note a:hover{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
+
+/* ---------- Navigation de pied de page ---------- */
+.foot-nav{display:flex; flex-wrap:wrap; gap:var(--s-3) var(--s-4);}
+.foot-nav a{
+  font-size:var(--t-xs);
+  color:var(--fg-dim);
+  transition:color .3s var(--ease);
+}
+.foot-nav a:hover{color:var(--fg);}
+
+/* Lien de nav de la page courante : repère discret, pas un bouton. */
+.nav-links a[aria-current="page"]{color:var(--fg);}
+.nav-links a[aria-current="page"]::after{transform:scaleX(1);}
+
+
+/* =========================================================================
+   PRESTATIONS — 4 panneaux fixes sur fond photo qui change
+   Reproduction du principe observé sur la vidéo de référence : les quatre
+   colonnes ne bougent jamais, seul le fond et l'accentuation changent.
+   ========================================================================= */
+.services-panels{
+  position:relative;
+  isolation:isolate;                  /* les calques de fond restent dans la section */
+  min-height:clamp(520px, 68vh, 760px);
+  display:flex; flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  background:var(--bg);               /* fond de repli si aucune image ne charge */
+}
+
+/* ---------- Calques de fond ---------- */
+.sp-bg, .sp-veil{position:absolute; inset:0; z-index:-1;}
+.sp-bg-layer{
+  position:absolute; inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  /* Fondu long : la consigne demande des transitions lentes et premium.
+     Pas de scale, pas de glissement — seulement l'opacité. */
+  transition:opacity 1.1s cubic-bezier(.4,0,.2,1);
+}
+.sp-bg-layer.is-on{opacity:1;}
+
+/* Voile de lisibilité. Plus dense en bas, là où vivent les titres ; plus
+   léger en haut, pour qu'on devine la photo. Mesuré pour que le texte
+   secondaire reste au-dessus de 4,5:1 sur les images les plus claires. */
+.sp-veil{
+  background:
+    linear-gradient(to top,
+      rgba(14,15,17,.94) 0%,
+      rgba(14,15,17,.86) 26%,
+      rgba(14,15,17,.62) 58%,
+      rgba(14,15,17,.52) 100%),
+    linear-gradient(100deg, rgba(240,74,38,.10), rgba(14,15,17,0) 60%);
+}
+
+/* ---------- En-tête de section ---------- */
+.sp-head{
+  position:relative;
+  padding:calc(var(--r-block) + 16px) var(--gutter) 0;
+  margin:0 auto;
+}
+.sp-head .eyebrow{color:#C9CBCE;}
+.sp-head h2{
+  font-size:var(--t-h2);
+  max-width:18ch;
+  margin-top:14px;
+}
+
+/* ---------- Les 4 panneaux ---------- */
+.sp-list{
+  position:relative;
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  align-items:stretch;
+  margin-top:auto;
+}
+.sp-item{
+  position:relative;
+  /* Le séparateur vertical : un filet fin, pleine hauteur, jamais deux
+     traits collés — d'où le :first-child qui porte aussi son bord gauche. */
+  border-left:1px solid rgba(237,232,220,.14);
+  transition:background .5s var(--ease);
+}
+.sp-item:last-child{border-right:1px solid rgba(237,232,220,.14);}
+
+/* Assombrissement des panneaux inactifs. C'est ce qui fait ressortir le
+   panneau courant sans jamais changer la largeur des colonnes. */
+.sp-item::before{
+  content:'';
+  position:absolute; inset:0;
+  background:rgba(14,15,17,.42);
+  opacity:1;
+  transition:opacity .6s var(--ease);
+  pointer-events:none;
+}
+.sp-item.is-on::before{opacity:0;}
+
+.sp-link{
+  position:relative;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+  min-height:clamp(300px, 42vh, 430px);
+  padding:var(--s-4) var(--s-4) var(--r-item);
+  color:var(--fg);
+}
+
+/* ---------- Numéro, en haut ---------- */
+.sp-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(19px, 1.6vw, 25px);
+  color:rgba(237,232,220,.34);
+  opacity:0;
+  transform:translateY(-6px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease), color .55s var(--ease);
+}
+.sp-item.is-on .sp-num{
+  opacity:1;
+  transform:none;
+  color:rgba(237,232,220,.62);
+}
+
+/* ---------- Texte, en bas ---------- */
+.sp-body{display:block;}
+.sp-title{
+  display:block;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:var(--t-h3);
+  line-height:1.16;
+  letter-spacing:-.02em;
+  margin-bottom:10px;
+  transition:transform .5s var(--ease);
+}
+.sp-desc{
+  display:block;
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:#C4C6C9;                      /* 8,9:1 sur le bas du voile */
+  max-width:30ch;
+}
+/* Le CTA existe toujours dans le DOM — donc lisible au lecteur d'écran et
+   atteignable au clavier — mais ne se révèle qu'au panneau actif. */
+.sp-cta{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:16px;
+  font-size:var(--t-xs);
+  font-weight:700;
+  color:var(--fg);
+  border-bottom:1px solid rgba(240,74,38,.55);
+  padding-bottom:4px;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .5s var(--ease), transform .5s var(--ease);
+}
+.sp-item.is-on .sp-cta{opacity:1; transform:none;}
+.sp-item.is-on .sp-title{transform:translateY(-4px);}
+.sp-link:hover .sp-cta .arrow{transform:translateX(4px);}
+.sp-cta .arrow{transition:transform .35s var(--ease-out);}
+
+/* Focus clavier : l'anneau doit se voir sur une photo, pas seulement sur
+   un aplat. On double le trait d'un décalage sombre. */
+.sp-link:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:-6px;
+}
+
+/* Mouvement réduit : plus de fondu long, plus de déplacement. Le composant
+   reste entièrement lisible et navigable, il cesse simplement de bouger.
+   Le JS coupe en plus la boucle automatique. */
+@media (prefers-reduced-motion: reduce){
+  .sp-bg-layer{transition:opacity .01s;}
+  .sp-num, .sp-title, .sp-cta, .sp-item::before{transition:none;}
+  .sp-num, .sp-cta{opacity:1; transform:none;}
+}
+
+
+/* =========================================================================
+   L'AGENCE — écran partagé : texte à gauche, image à droite
+   L'image touche le bord droit de l'écran et se fond vers la gauche.
+   Elle est donc posée en calque absolu, pas dans le flux : un <img> dans
+   la grille serait borné par --wrap et laisserait une marge à droite.
+   ========================================================================= */
+.agence-split{
+  position:relative;
+  overflow:hidden;
+  /* Le texte doit pouvoir respirer verticalement à côté d'une image pleine
+     hauteur, sinon la colonne gauche paraît flotter dans le vide. */
+  display:flex; align-items:center;
+  min-height:clamp(520px, 64vh, 720px);
+}
+.agence-media{
+  position:absolute;
+  top:0; right:0; bottom:0;
+  width:58%;
+  z-index:0;
+}
+.agence-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+/* Double fondu. Le premier efface le bord gauche pour que l'image naisse du
+   fond au lieu d'être collée dessus ; le second adoucit le haut et le bas,
+   sinon la coupe franche trahit le rectangle. */
+.agence-media::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(to right,
+      var(--bg) 0%,
+      rgba(14,15,17,.92) 12%,
+      rgba(14,15,17,.45) 34%,
+      rgba(14,15,17,.06) 62%,
+      rgba(14,15,17,0) 100%),
+    linear-gradient(to bottom,
+      rgba(14,15,17,.55) 0%,
+      rgba(14,15,17,0) 22%,
+      rgba(14,15,17,0) 78%,
+      rgba(14,15,17,.55) 100%);
+}
+.agence-inner{
+  position:relative;
+  z-index:1;
+  width:100%;
+}
+/* 42 % de la largeur : la colonne de texte ne doit jamais chevaucher la
+   partie lisible de l'image. La valeur suit la capture de référence. */
+.agence-inner .section-head{
+  max-width:min(100%, 42%);
+  margin-bottom:var(--s-5);
+}
+.agence-inner .section-head p{max-width:38ch;}
+
+
+/* =========================================================================
+   DÉPLIANT SERVICES — panneau sous la barre de navigation
+   Inspiré du menu observé sur la référence : ouverture au survol, fond
+   sombre, items éteints dont un seul s'allume. Élargi ici en grille
+   éditoriale, avec numéros et descriptions.
+   ========================================================================= */
+
+/* Le déclencheur est un <button> et non un <a> : il n'emmène nulle part, il
+   ouvre. Un lien qui n'a pas de destination ment au clavier et au lecteur
+   d'écran. On lui redonne l'apparence exacte des autres liens de nav. */
+.nav-svc{
+  font:inherit;
+  background:none; border:0; padding:0;
+  cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+  position:relative;
+  color:var(--fg-dim);
+  transition:color .3s var(--ease);
+}
+.nav-svc:hover,
+.nav-svc[aria-expanded="true"]{color:var(--fg);}
+.nav-svc-chev{
+  width:6px; height:6px;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);
+  transition:transform .35s var(--ease);
+}
+.nav-svc[aria-expanded="true"] .nav-svc-chev{transform:translateY(1px) rotate(225deg);}
+
+/* ---------- Le panneau ---------- */
+.mega{
+  position:fixed;
+  top:72px;                            /* exactement sous la barre de 72px */
+  left:0; right:0;
+  z-index:calc(var(--z-header) - 1);
+  background:rgba(14,15,17,.97);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--rule);
+  /* clip-path plutôt que height:0 : la hauteur reste calculée, donc le
+     contenu ne se réagence pas pendant l'ouverture. On dévoile, on ne
+     redimensionne pas. */
+  clip-path:inset(0 0 100% 0);
+  opacity:0;
+  pointer-events:none;
+  transition:clip-path .42s var(--ease-out), opacity .28s var(--ease);
+}
+.mega.is-open{
+  clip-path:inset(0 0 0 0);
+  opacity:1;
+  pointer-events:auto;
+}
+.mega[hidden]{display:none;}
+
+.mega-inner{padding:var(--s-6) var(--gutter) var(--r-block);}
+.mega-eyebrow{margin-bottom:var(--s-5);}
+
+.mega-list{
+  list-style:none; margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+}
+.mega-item{background:var(--bg);}
+
+.mega-link{
+  display:grid;
+  grid-template-areas:
+    "num  go"
+    "titre titre"
+    "desc desc";
+  grid-template-columns:1fr auto;
+  gap:10px 12px;
+  align-content:start;
+  height:100%;
+  padding:var(--s-4);
+  transition:background .35s var(--ease);
+}
+.mega-link:hover,
+.mega-link:focus-visible{background:var(--bg-2);}
+.mega-link:focus-visible{outline:2px solid var(--signal); outline-offset:-4px;}
+
+.mega-num{
+  grid-area:num;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--fg-faint);
+  transition:color .35s var(--ease);
+}
+.mega-link:hover .mega-num,
+.mega-link:focus-visible .mega-num{color:var(--signal);}
+
+.mega-title{
+  grid-area:titre;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:var(--t-h3);
+  line-height:1.15;
+  letter-spacing:-.02em;
+  color:var(--fg);
+  transition:transform .35s var(--ease-out);
+}
+.mega-link:hover .mega-title,
+.mega-link:focus-visible .mega-title{transform:translateX(4px);}
+
+.mega-desc{
+  grid-area:desc;
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg-dim);
+  max-width:34ch;
+}
+
+/* La flèche n'apparaît qu'au survol : au repos, cinq flèches alignées
+   feraient du bruit sans rien dire. */
+.mega-go{
+  grid-area:go;
+  align-self:start;
+  color:var(--signal);
+  opacity:0;
+  transform:translateX(-5px);
+  transition:opacity .3s var(--ease), transform .3s var(--ease-out);
+}
+.mega-link:hover .mega-go,
+.mega-link:focus-visible .mega-go{opacity:1; transform:none;}
+
+/* Apparition décalée des cinq prestations. Le retard est porté par une
+   variable posée en CSS, pas en JS : rien à recalculer à l'ouverture. */
+.mega-item{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .4s var(--ease), transform .4s var(--ease-out);
+}
+.mega.is-open .mega-item{opacity:1; transform:none;}
+.mega.is-open .mega-item:nth-child(1){transition-delay:.06s;}
+.mega.is-open .mega-item:nth-child(2){transition-delay:.11s;}
+.mega.is-open .mega-item:nth-child(3){transition-delay:.16s;}
+.mega.is-open .mega-item:nth-child(4){transition-delay:.21s;}
+.mega.is-open .mega-item:nth-child(5){transition-delay:.26s;}
+
+/* Voile sur le reste de la page : il assombrit sans masquer, et surtout il
+   sert de zone de fermeture au clic. */
+.mega-voile{
+  position:fixed; inset:0;
+  z-index:calc(var(--z-header) - 2);
+  background:rgba(14,15,17,.55);
+  opacity:0; pointer-events:none;
+  transition:opacity .35s var(--ease);
+}
+.mega-voile.is-open{opacity:1; pointer-events:auto;}
+
+@media (prefers-reduced-motion: reduce){
+  .mega, .mega-item, .mega-go, .mega-title, .mega-num, .nav-svc-chev{
+    transition:none !important;
+  }
+  .mega.is-open .mega-item{transition-delay:0s !important;}
+}
+
+
+/* Pendant l'épinglage, GSAP enveloppe la section dans un `.pin-spacer` en
+   display:flex. La chaîne de tailles minimales qui en résulte poussait le
+   .wrap du rail à 1280px dans une fenêtre de 1009, soit 271px de débordement
+   horizontal (mesuré à 1024x768). `min-width:0` seul n'y suffit pas : la
+   contrainte vient du conteneur, pas de l'enfant.
+   On verrouille donc la section elle-même. `clip` et non `hidden` : `hidden`
+   créerait un conteneur de défilement, ce qui casserait l'épinglage et
+   ajouterait la barre qu'on cherche justement à supprimer. */
+.hpan{overflow-x:clip;}
+.hpan > .wrap{min-width:0; max-width:min(var(--wrap), 100%);}

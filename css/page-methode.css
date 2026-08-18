@@ -1,0 +1,113 @@
+/* Studio Singulier — styles propres à methode.html
+   Chargé après style.css, pages.css et responsive.css.
+   Ne redéfinit jamais une règle de ces fichiers : n'ajoute que ce qui manque. */
+
+/* =========================================================================
+   FRISE — 5 étapes, pas 6
+   .timeline vient de pages.css avec repeat(6, 1fr) pour la largeur bureau
+   (au-delà des points de rupture 900px / 560px déjà gérés par
+   responsive.css). Cinq étapes s'y répartissent mal en 6 colonnes : la
+   correction ne s'applique donc que sur la plage où cette règle bureau est
+   seule en jeu, pour ne jamais entrer en conflit avec les ruptures mobiles.
+   ========================================================================= */
+@media (min-width: 901px){
+  .timeline{grid-template-columns:repeat(5, 1fr);}
+}
+
+/* =========================================================================
+   NUMÉROS DES PRINCIPES — .pn n'a pas de règle dans pages.css (le composant
+   compte sur le style du texte environnant). On lui donne ici le même
+   traitement que .sl-num / .cat-num : mono, discret, teinte de marque
+   toujours via --signal-ink, correcte aussi bien en nuit qu'en jour. */
+.principle .pn{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.16em;
+  color:var(--signal-ink);
+  margin-bottom:14px;
+}
+
+/* =========================================================================
+   DÉTAIL DES ÉTAPES — liste pleine largeur, une étape par bloc.
+   Repris du rythme de .principles (bordures horizontales, pas de carte)
+   pour rester dans le même vocabulaire visuel, avec un supplément :
+   trois faits courts par étape (fournir / recevoir / valider).
+   ========================================================================= */
+.method-detail{
+  display:flex;
+  flex-direction:column;
+}
+.method-step{
+  padding:var(--r-block) 0;
+  border-bottom:1px solid var(--rule);
+}
+.method-step:first-child{padding-top:0;}
+.method-step:last-child{border-bottom:none; padding-bottom:0;}
+
+.ms-head{
+  display:flex;
+  align-items:baseline;
+  gap:18px;
+  margin-bottom:16px;
+}
+.ms-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-xs);
+  letter-spacing:.14em;
+  color:var(--signal-ink);
+  flex-shrink:0;
+}
+.ms-head h3{font-size:var(--t-h2); letter-spacing:-.03em;}
+
+.ms-intro{
+  max-width:62ch;
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  line-height:1.6;
+  margin-bottom:var(--s-5);
+}
+
+.ms-facts{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:var(--s-5) var(--s-4);
+}
+.ms-fact dt{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+  margin-bottom:9px;
+}
+.ms-fact dd{
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+  line-height:1.55;
+}
+
+@media (max-width: 780px){
+  .ms-facts{grid-template-columns:1fr;}
+}
+@media (max-width: 520px){
+  .ms-head{flex-direction:column; gap:6px;}
+}
+
+/* =========================================================================
+   APRÈS LA MISE EN LIGNE — .uflow vient de pages.css pensé pour une carte
+   étroite (.rail-item) ; ici il tient toute la largeur du wrap, deux
+   colonnes au-delà de 640px pour ne pas laisser une longue colonne unique
+   sur un écran large.
+   ========================================================================= */
+.method-after{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--s-5) var(--s-5);
+  max-width:920px;
+  margin-bottom:var(--r-block);
+}
+.method-after .uflow-step{padding-left:16px;}
+@media (max-width: 640px){
+  .method-after{grid-template-columns:1fr;}
+}

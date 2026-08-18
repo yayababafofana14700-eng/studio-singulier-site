@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos — Studio Singulier, agence digitale à Casablanca</title>
+<meta name="description" content="Studio Singulier est une agence digitale basée à Casablanca, fondée en 2026. Qui nous sommes, notre vision d'un site qui répond à vos clients, et notre façon de travailler.">
+<link rel="canonical" href="https://singulier.apexwebstudio.studio/a-propos.html">
+
+<meta property="og:title" content="À propos — Studio Singulier">
+<meta property="og:description" content="Une agence digitale à Casablanca, fondée en 2026. Qui nous sommes, notre vision, et notre façon de travailler — sans références inventées.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://singulier.apexwebstudio.studio/a-propos.html">
+<meta property="og:site_name" content="Studio Singulier">
+<!-- URL absolue obligatoire : les crawlers (WhatsApp, Facebook, LinkedIn)
+     ignorent un chemin relatif et l'aperçu repart vide. -->
+<meta property="og:image" content="https://singulier.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Studio Singulier, agence digitale à Casablanca">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="À propos — Studio Singulier">
+<meta name="twitter:description" content="Une agence digitale à Casablanca, fondée en 2026. Qui nous sommes, notre vision, et notre façon de travailler.">
+<meta name="twitter:image" content="https://singulier.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta name="theme-color" content="#0E0F11">
+<meta name="color-scheme" content="dark light">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230E0F11'/%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51'/%3E%3Cpath d='M12 12H19.6'/%3E%3C/g%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "À propos de Studio Singulier",
+  "url": "https://singulier.apexwebstudio.studio/a-propos.html",
+  "description": "Studio Singulier est une agence digitale à Casablanca, fondée en 2026 : qui nous sommes, notre vision et notre façon de travailler.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Studio Singulier",
+    "url": "https://singulier.apexwebstudio.studio/",
+    "foundingDate": "2026",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Belvédère",
+      "addressLocality": "Casablanca",
+      "addressCountry": "MA"
+    },
+    "telephone": "+212635485491",
+    "email": "yayababafofana14700@gmail.com",
+    "areaServed": "Maroc"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css?v=20260817c">
+<link rel="stylesheet" href="css/pages.css?v=20260817c">
+<link rel="stylesheet" href="css/responsive.css?v=20260817c">
+<link rel="stylesheet" href="css/page-a-propos.css?v=20260817c">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===================== EN-TÊTE ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <button type="button" class="nav-svc" id="navServices"
+              aria-expanded="false" aria-controls="megaServices" aria-haspopup="true">
+        Services <span class="nav-svc-chev" aria-hidden="true"></span>
+      </button>
+      <a href="agents-ia.html">Agents IA</a>
+      <a href="methode.html">Méthode</a>
+      <a href="a-propos.html" aria-current="page">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="contact.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== DÉPLIANT SERVICES ===================== -->
+<!-- Hors du <header> volontairement : celui-ci fait 72px avec
+     align-items:center, un panneau à l'intérieur serait écrasé par cette
+     hauteur. Ici il se déploie librement juste sous la barre. -->
+<div class="mega" id="megaServices" role="region" aria-label="Nos services" hidden>
+  <div class="wrap mega-inner">
+    <p class="eyebrow mega-eyebrow">Nos prestations</p>
+    <ul class="mega-list">
+      <li class="mega-item">
+        <a class="mega-link" href="sites-web.html">
+          <span class="mega-num" aria-hidden="true">01</span>
+          <span class="mega-title">Sites web &amp; solutions digitales</span>
+          <span class="mega-desc">Sites vitrine rapides, pensés mobile d'abord, structurés pour être trouvés sur Google.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="reseaux-sociaux.html">
+          <span class="mega-num" aria-hidden="true">02</span>
+          <span class="mega-title">Réseaux sociaux &amp; contenu</span>
+          <span class="mega-desc">Ligne éditoriale, création de visuels et de textes, publication régulière.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="ecommerce-shopify.html">
+          <span class="mega-num" aria-hidden="true">03</span>
+          <span class="mega-title">E-commerce &amp; Shopify</span>
+          <span class="mega-desc">Fiches produits, paiement, livraison, et un panier qui va jusqu'au bout.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="visibilite-locale.html">
+          <span class="mega-num" aria-hidden="true">04</span>
+          <span class="mega-title">Visibilité locale</span>
+          <span class="mega-desc">Fiche Google Business, cartes de visite NFC et supports imprimés.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="automatisation.html">
+          <span class="mega-num" aria-hidden="true">05</span>
+          <span class="mega-title">Automatisation</span>
+          <span class="mega-desc">Scénarios reliant formulaire, agent IA, fiche client, email et WhatsApp.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-top">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <button class="mm-close" id="closeMenu">Fermer</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html"><i>01</i>Accueil</a>
+    <a href="sites-web.html"><i>02</i>Services</a>
+    <a href="agents-ia.html"><i>03</i>Agents IA</a>
+    <a href="methode.html"><i>04</i>Méthode</a>
+    <a href="a-propos.html"><i>05</i>À propos</a>
+    <a href="contact.html"><i>06</i>Contact</a>
+  </nav>
+  <div class="mm-foot">
+    <a href="contact.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===================== OUVERTURE ===================== -->
+<section class="section reveal" aria-labelledby="ap-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">À propos</p>
+      <h1 data-split id="ap-title">Une agence jeune, franche sur ce qu'elle sait faire.</h1>
+      <p class="lead">Studio Singulier est une agence digitale basée à Casablanca, ouverte en 2026. Nous n'avons pas dix ans d'historique ni un mur de logos à montrer. Nous avons une méthode claire, et nous préférons l'expliquer plutôt que de la maquiller.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUI NOUS SOMMES ===================== -->
+<section class="section rule-top reveal on-paper" aria-labelledby="qs-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Qui nous sommes</p>
+      <h2 data-split id="qs-title">Une équipe qui prend votre présence en ligne du début à la fin.</h2>
+    </div>
+    <div class="copy">
+      <p>Nous construisons des sites, nous tenons des comptes de réseaux sociaux, nous créons du contenu, nous ouvrons des boutiques Shopify, et nous installons des agents IA qui répondent à vos clients. Le tout dans la même équipe, pas dans cinq contrats séparés à recouper vous-même.</p>
+      <p>Nous sommes une jeune agence : fondée à Casablanca en 2026, nous n'avons pas encore de références clients à publier. Nous préférons vous le dire plutôt que d'inventer une histoire. Un prospect qui découvre un mensonge ne nous fait plus confiance sur le reste — et il aurait raison.</p>
+      <p>Nos premiers projets sont en cours. Ils rejoignent <a href="index.html#realisations">la page Réalisations</a> au fur et à mesure, avec le nom du client et ce qui a été livré — pas des mises en scène.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTRE VISION ===================== -->
+<section class="section rule-top reveal about" aria-labelledby="aboutText">
+  <div class="wrap">
+
+    <!-- GABARIT — bande portrait ou équipe, non fournie.
+         Aucune photo ni nom de fondateur n'a été communiqué : ce bloc reste
+         masqué. Quand une photo existe : retirer l'attribut hidden, poser
+         une image dans .about-band (traitement duotone via .ph, format
+         WebP, ratio large type 1600x420), avec un alt qui décrit la scène
+         réelle — jamais « photo de l'équipe ». Ne jamais publier de
+         portrait sans l'accord explicite des personnes visibles. -->
+    <div class="about-band" hidden></div>
+
+    <p class="eyebrow">Notre vision</p>
+    <svg class="about-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+      <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+      <path d="M12 12H19.6"/>
+    </svg>
+    <h2 class="about-text" id="aboutText">Un site ne devrait pas rester statique une fois publié. Il doit comprendre votre activité, parler à vos clients, et désormais leur répondre lui-même.</h2>
+    <p class="about-sign">Studio Singulier — Casablanca, 2026</p>
+    <a href="agents-ia.html" class="svc-cta">Voir comment nos agents IA le font <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ===================== NOTRE APPROCHE ===================== -->
+<section class="section rule-top reveal on-paper" aria-labelledby="apr-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Notre approche</p>
+      <h2 data-split id="apr-title">Ce qui change concrètement, pas ce qu'on promet à l'oral.</h2>
+      <p>Toutes les agences disent qu'elles sont à l'écoute. Voici ce que ça veut dire chez nous, en pratique.</p>
+    </div>
+
+    <div class="approach-grid">
+      <article class="approach-item">
+        <span class="ap-num" aria-hidden="true">01</span>
+        <div>
+          <h3>Un scope écrit avant de commencer</h3>
+          <p>Vous savez ce qui sera livré, dans quel ordre, et ce qui n'est pas inclus. Rien ne s'ajoute en cours de route sans qu'on vous prévienne.</p>
+        </div>
+      </article>
+      <article class="approach-item">
+        <span class="ap-num" aria-hidden="true">02</span>
+        <div>
+          <h3>Vous voyez le site avant qu'il soit fini</h3>
+          <p>Pas de dévoilement le jour de la mise en ligne. Vous validez chaque étape, du premier gabarit à la publication.</p>
+        </div>
+      </article>
+      <article class="approach-item">
+        <span class="ap-num" aria-hidden="true">03</span>
+        <div>
+          <h3>On regarde ce qui se passe après le lancement</h3>
+          <p>La mise en ligne n'est pas la fin du travail. On observe ce qui fonctionne réellement et on corrige ce qui ne convertit pas.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOS VALEURS ===================== -->
+<section class="section rule-top reveal" aria-labelledby="val-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Nos valeurs</p>
+      <h2 data-split id="val-title">Quatre principes qui ne bougent pas, quel que soit le projet.</h2>
+      <p>Ils ne changent pas en fonction du client ou de la taille du budget.</p>
+    </div>
+
+    <div class="principles">
+      <article class="principle">
+        <span class="pn" aria-hidden="true">01</span>
+        <h3>Vous restez propriétaire</h3>
+        <p>Nom de domaine, contenus, comptes réseaux, base de données : tout est enregistré à votre nom, pas au nôtre. Si vous partez, vous partez avec tout. C'est écrit dans le devis, pas seulement promis à l'oral.</p>
+      </article>
+      <article class="principle">
+        <span class="pn" aria-hidden="true">02</span>
+        <h3>Pas de promesse de classement</h3>
+        <p>On structure votre site pour qu'il soit compris par Google : balises, vitesse, contenu clair. Mais personne ne contrôle l'algorithme de Google, et personne ne peut garantir une première page. Méfiez-vous de qui vous le promet.</p>
+      </article>
+      <article class="principle">
+        <span class="pn" aria-hidden="true">03</span>
+        <h3>Mobile d'abord</h3>
+        <p>La majorité de vos visiteurs arrivent depuis un téléphone, dans la rue ou entre deux tâches. Le site est pensé pour cet écran-là en premier, pas comme une version réduite d'un site pensé pour un grand écran.</p>
+      </article>
+      <article class="principle">
+        <span class="pn" aria-hidden="true">04</span>
+        <h3>Un devis clair, avant</h3>
+        <p>Vous recevez un prix et la liste de ce qu'il couvre avant qu'on commence. Aucune ligne ne s'ajoute en cours de route ni à la livraison. Si le besoin change, on en parle avant, pas sur la facture.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTRE DIFFÉRENCE ===================== -->
+<section class="section rule-top reveal on-paper" aria-labelledby="dif-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Notre différence</p>
+      <h2 data-split id="dif-title">Pourquoi une seule agence, plutôt que trois prestataires.</h2>
+      <p>Un site sans les réseaux qui l'alimentent, ou un agent IA qui ne sait rien de vos services, ça ne tient pas longtemps. Ce qui manque, ce n'est pas plus de prestataires : c'est une équipe qui tient l'ensemble.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-col before">
+        <p class="compare-tag">Trois prestataires</p>
+        <p>Le développeur ne parle pas au community manager. L'agent IA, s'il existe, ne connaît ni votre site ni votre ton. Vous recoupez tout vous-même.</p>
+      </div>
+      <div class="compare-col after">
+        <p class="compare-tag">Une agence</p>
+        <p>Le site, les contenus, la fiche Google et l'agent IA sont construits ensemble, par la même équipe, avec la même compréhension de votre activité.</p>
+      </div>
+    </div>
+
+    <a href="sites-web.html" class="btn btn-ghost sec-cta">Voir toutes nos prestations <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ===================== NOTRE MÉTHODE (RENVOI) ===================== -->
+<section class="section rule-top reveal" aria-labelledby="met-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Notre méthode</p>
+      <h2 data-split id="met-title">Comment un projet avance, étape par étape.</h2>
+      <p>Découverte, stratégie, création, déploiement, optimisation : cinq étapes, toujours dans le même ordre, jamais de mise en ligne surprise.</p>
+    </div>
+    <a href="methode.html" class="svc-cta">Le détail de notre méthode <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="final" aria-labelledby="cta-title">
+  <div class="wrap">
+    <h2 id="cta-title">Vous voulez savoir si on est faits pour travailler ensemble ?</h2>
+    <div class="final-ctas">
+      <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
+      <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+    </div>
+    <p class="final-meta">
+      <span>Réponse sous 24h</span>
+      <span aria-hidden="true">·</span>
+      <span>Devis gratuit</span>
+      <span aria-hidden="true">·</span>
+      <span id="casaClock">Casablanca · l'agent répond</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<div class="foot-band">
+  <div class="wrap">
+    <div>
+      <h3>Une question avant de se lancer ?</h3>
+      <p>Écrivez-nous, on répond rapidement, sans jargon.</p>
+    </div>
+    <a href="contact.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <nav class="foot-nav" aria-label="Navigation de pied de page">
+      <a href="sites-web.html">Services</a>
+      <a href="agents-ia.html">Agents IA</a>
+      <a href="methode.html">Méthode</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="foot-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:yayababafofana14700@gmail.com">Email</a>
+    </div>
+    <p class="foot-copy" id="footCopy">© 2026 Studio Singulier, Belvédère, Casablanca, Maroc</p>
+  </div>
+</footer>
+
+<!-- ===================== WIDGET IA FLOTTANT ===================== -->
+<button class="ai-launcher" id="aiLauncher" aria-label="Ouvrir l'assistant IA" aria-expanded="false" aria-controls="aiPanel">
+  <svg class="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <span class="badge" aria-hidden="true"></span>
+</button>
+
+<div class="ai-panel" id="aiPanel" role="dialog" aria-label="Assistant IA Studio Singulier">
+  <div class="ai-head">
+    <div class="ai-avatar" aria-hidden="true">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 14h.01M15 14h.01"/></svg>
+    </div>
+    <div>
+      <strong>Agent Studio Singulier</strong>
+      <div class="status"><span class="live" aria-hidden="true"></span>En ligne</div>
+    </div>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div class="msg bot">Bonjour. Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
+  </div>
+  <div class="ai-suggestions">
+    <button class="chat-chip" data-q="Vos prix ?">Vos prix ?</button>
+    <button class="chat-chip" data-q="Vous faites Shopify ?">Shopify ?</button>
+    <button class="chat-chip" data-q="Quels délais ?">Délais ?</button>
+    <button class="chat-chip" data-q="Je veux réserver un appel">Réserver un appel</button>
+  </div>
+  <form class="ai-input" id="aiForm">
+    <input type="text" id="aiInput" placeholder="Écrivez votre question…" autocomplete="off" aria-label="Votre question" maxlength="500">
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+<!-- ===================== LIBS ===================== -->
+<!-- SRI : empreintes vérifiées le 12/08/2026 contre les octets réellement servis.
+     Si un CDN est compromis ou détourné, le navigateur refuse d'exécuter le script
+     plutôt que de le laisser réécrire la clé du formulaire et détourner les leads.
+     La page se replie proprement en statique sans ces trois bibliothèques. -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"
+        integrity="sha256-C/F005uavDBKPVAatkV1h+dW0HvYJPhopTJLXPFRJbA="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous"></script>
+
+<script src="js/animations.js?v=20260817c" defer></script>
+<script src="js/main.js?v=20260817c" defer></script>
+</body>
+</html>

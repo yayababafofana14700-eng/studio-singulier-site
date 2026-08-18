@@ -1,0 +1,701 @@
+/* Studio Singulier — socle : tokens, base, en-tete, boutons, widget IA, animations
+   Extrait du fichier unique le 13/08/2026 lors du passage en
+   architecture multi-pages. Chargé par les 6 pages du site. */
+
+/* =========================================================================
+   STUDIO SINGULIER
+   Direction : graphite / os / vermillon. Thème sombre verrouillé au niveau
+   de la page : la marque tient dans le contraste, pas dans la couleur de
+   fond. Aucune section ne s'inverse.
+   Photographies : étalonnées en duotone graphite pour entrer dans le monde
+   de marque, quelle que soit la source.
+   ========================================================================= */
+
+:root{
+  color-scheme: dark;
+
+  /* — surfaces —
+     Les noms disent le RÔLE, pas la couleur : --bg reste le fond quelle que
+     soit sa clarté. C'est ce qui permet à la moitié jour de réutiliser le
+     même vocabulaire sans qu'un « --ink » vaille un crème.
+
+     Élévation élargie : le pas --bg → --bg-2 passait de 1,07:1 à 1,13:1, et
+     --bg → --bg-3 de 1,20:1 à 1,31:1. En dessous, toute la hiérarchie de
+     surface (panneaux, champs, survols) s'aplatit sur un Android milieu de
+     gamme en plein soleil. */
+  --bg:        #0E0F11;   /* fond de page */
+  --bg-2:      #1A1D21;   /* surface élevée */
+  --bg-3:      #252930;   /* survol, champs */
+
+  /* — encre —
+     Les deux tons de retrait remontent PARCE QUE --bg-3 s'éclaircit : à
+     l'ancienne valeur, --fg-faint tombait à 4,38:1 sur le nouveau --bg-3,
+     sous la barre AA. Or ce ton porte du vrai texte (labels de cas d'usage,
+     méta du SERP, notes, signature, copyright). */
+  --fg:       #EDE8DC;   /* 15,7:1 sur --bg · 11,9:1 sur --bg-3 */
+  --fg-dim:   #A3A6AB;   /*  7,9:1 sur --bg ·  6,0:1 sur --bg-3 */
+  --fg-faint: #93969C;   /*  6,5:1 sur --bg ·  4,9:1 sur --bg-3 */
+
+  /* — accent unique —
+     --signal est l'accent, --signal-ink son autorisation d'écrire.
+     En APLAT, --signal est identique sur les deux moitiés.
+     En TEXTE ou en TRAIT, il ne tient que sur la nuit (5,2:1 sur --bg) ;
+     sur le crème il tombe à 3,2:1, sous AA. Tout ce qui écrit ou trace sur
+     du papier passe donc par --signal-ink, qui vaut --signal côté nuit et
+     #A8331A côté jour (5,8:1 sur --bg). Une seule variable, deux moitiés,
+     aucune troisième teinte à maintenir. */
+  --signal:      #F04A26;   /* 5,2:1 sur --bg : passe AA en texte courant */
+  --signal-ink:  var(--signal);
+  --signal-dim:  #C13A1D;
+  --signal-wash: rgba(240,74,38,.09);
+
+  /* — filets — */
+  --rule:        rgba(237,232,220,.11);
+  /* --rule-strong sert exclusivement à border des composants d'interface
+     réels (.btn-ghost, .rail-btn, soulignement de .field, .chat-chip,
+     .ai-input input) : SC 1.4.11 (3:1) s'applique. À .22 elle ne donnait
+     que 1,81:1 sur --bg, 1,60:1 sur --bg-2 — vérifié en calculant la
+     luminance relative WCAG des deux couleurs. .42 tient 3,56:1 / 3,14:1 /
+     3,36:1 sur --bg / --bg-2 / --bg-3, la plus faible surface où ces
+     composants apparaissent. (Le panneau .ai-panel, qui utilisait la même
+     variable, est un conteneur décoratif et non un contrôle : il est passé
+     sur --rule, voir son usage plus bas.) */
+  --rule-strong: rgba(237,232,220,.42);
+  --rule-signal: rgba(240,74,38,.34);
+
+  /* — langage de forme, verrouillé —
+     boutons : pastille pleine (999px) · images et panneaux : 6px
+     champs : 0 avec soulignement · monogramme : cercle */
+  --r-pill:  999px;
+  --r-media: 6px;
+
+  --ease:     cubic-bezier(.2,.7,.2,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+
+  /* — échelle typographique : 8 pas, aucun autre corps —
+     Le fichier portait 12 tailles fixes distinctes entre 11 et 19px et une
+     trentaine de clamp() tous différents : une palette, pas une échelle.
+     Tout usage retombe désormais sur l'un de ces huit pas.
+     Deux exceptions documentées à leur point d'usage, parce que ce sont des
+     objets graphiques et non du texte : .metric .v (chiffres tabulaires) et
+     .mobile-menu nav a (échelle plein écran). */
+  --t-micro: 11.5px;                      /* mono : eyebrow, méta, compteurs, labels, copyright */
+  --t-xs:    13.5px;                      /* notes, légendes de carte, .form-note */
+  --t-s:     15px;                        /* corps de carte, listes, liens de nav, .friction */
+  --t-body:  16.5px;                      /* corps courant, .principle p, .faq-a p */
+  --t-lead:  clamp(17px, 1.2vw, 19.5px);  /* .lead, .compare-col p */
+  --t-h3:    clamp(19px, 1.5vw, 23px);    /* h3, .serp-result .ttl */
+  --t-h2:    clamp(29px, 4.2vw, 56px);    /* h2 */
+  --t-h1:    clamp(40px, 5.6vw, 72px);    /* h1, .final h2, .statement */
+
+  /* — échelle d'espacement : base 4px —
+     --s-* : pas fixes, à l'intérieur d'un composant.
+     --r-* : rythmes fluides, entre les composants. */
+  --s-1: 8px;
+  --s-2: 12px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 32px;
+  --s-6: 48px;
+
+  --r-section: clamp(88px, 11vw, 176px);  /* respiration de section, inchangée : elle est juste */
+  --r-block:   clamp(48px,  6vw,  80px);  /* entre deux blocs d'une même section */
+  --r-item:    clamp(28px, 3.4vw,  44px); /* entre deux items d'un même bloc */
+
+  --wrap:      1280px;
+  --gutter:    clamp(20px, 4vw, 56px);
+
+  /* échelle z documentée, pas de z-index arbitraire ailleurs */
+  --z-grain:   5;
+  --z-header:  40;
+  --z-widget:  60;
+  --z-menu:    80;
+}
+
+/* =========================================================================
+   MOITIÉ JOUR
+   Le corps du document — celui qu'on lit au soleil, sur un téléphone, dans
+   un taxi — passe sur papier. Les extrémités (hero, constat, CTA final,
+   contact, pied) restent en nuit : elles portent l'image de marque, pas la
+   lecture longue.
+
+   Rien de plus qu'une redéfinition de tokens : aucun sélecteur du site n'a
+   à savoir sur quelle moitié il se trouve. C'est tout l'intérêt d'avoir
+   renommé --ink/--bone en --bg/--fg d'abord.
+   ========================================================================= */
+.on-paper{
+  /* Obligatoire, et pas cosmétique : sans lui le <select> du formulaire, la
+     barre de défilement et le remplissage automatique du navigateur restent
+     rendus en sombre par l'UA, posés sur du crème. */
+  color-scheme: light;
+
+  --bg:#F4EFE4; --bg-2:#EBE4D4; --bg-3:#DFD7C4;
+  --fg:#17140F;                 /* 16,0:1 sur --bg · 12,8:1 sur --bg-3 */
+  --fg-dim:#4A423A;             /*  8,6:1 sur --bg ·  6,9:1 sur --bg-3 */
+  --fg-faint:#635A4D;           /*  5,9:1 sur --bg ·  4,7:1 sur --bg-3 */
+
+  /* L'accent en écriture : #F04A26 ne donne que 3,2:1 sur le crème.
+     #A8331A donne 5,8:1 sur --bg et tient encore 4,7:1 sur --bg-3. */
+  --signal-ink:#A8331A;
+
+  --rule:rgba(23,20,15,.13);
+  /* Même raisonnement que la moitié nuit : 1,76:1 mesuré sur --bg à .26,
+     sous les 3:1 requis pour .rail-btn (seul usage de --rule-strong côté
+     jour). .50 tient 3,36:1 sur --bg. */
+  --rule-strong:rgba(23,20,15,.50);
+  --rule-signal:rgba(168,51,26,.30);
+  --signal-wash:rgba(168,51,26,.07);
+
+  background:var(--bg);
+  color:var(--fg);
+}
+/* Encre sur aplat vermillon, côté jour : 5,00:1 au lieu de 5,33:1 côté
+   nuit. L'aplat, lui, ne bouge pas d'une moitié à l'autre. */
+.on-paper .btn-primary{color:#17140F;}
+.on-paper ::selection{background:var(--signal); color:#17140F;}
+
+*{box-sizing:border-box;}
+html.lenis{height:auto;}
+html{scroll-behavior:auto; -webkit-text-size-adjust:100%;}
+html:not(.lenis){scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Satoshi',system-ui,-apple-system,sans-serif;
+  font-size:var(--t-body);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4,.display{
+  font-family:'Cabinet Grotesk','Satoshi',system-ui,sans-serif;
+  font-weight:800;
+  color:var(--fg);
+  margin:0;
+  text-wrap:balance;
+}
+p{margin:0;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+button{font:inherit; color:inherit;}
+ul,ol{margin:0; padding:0; list-style:none;}
+
+.mono{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  letter-spacing:.04em;
+}
+
+::selection{background:var(--signal); color:#0B0C0D;}
+
+:focus-visible{
+  outline:2px solid var(--signal-ink);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ---------- échelle typographique ---------- */
+h1{
+  font-size:var(--t-h1);
+  line-height:.95;
+  letter-spacing:-.038em;
+}
+h2{
+  font-size:var(--t-h2);
+  line-height:1.02;
+  letter-spacing:-.032em;
+}
+h3{
+  font-size:var(--t-h3);
+  line-height:1.25;
+  letter-spacing:-.018em;
+  font-weight:700;
+}
+
+.lead{
+  font-size:var(--t-lead);
+  line-height:1.62;
+  color:var(--fg-dim);
+  max-width:62ch;
+}
+
+/* ---------- coquille ---------- */
+.wrap{
+  max-width:var(--wrap);
+  margin:0 auto;
+  padding:0 var(--gutter);
+}
+section{position:relative;}
+.section{padding:var(--r-section) 0;}
+.rule-top{border-top:1px solid var(--rule);}
+
+/* ---------- grain : calque fixe, jamais sur un conteneur qui défile ----------
+   Le grain est UN calque fixe pour toute la page : il ne peut pas être opacifié
+   par section. Sur crème, .05 ne fait pas « pellicule », il fait sale — le bruit
+   sombre se lit comme de la poussière au lieu de se fondre. On le descend donc
+   à .03 quand la moitié jour occupe le centre de l'écran (classe posée par le
+   script, voir « MOITIÉ JOUR À L'ÉCRAN »). La transition évite que la bascule
+   se voie comme un clignotement au passage d'une frontière. */
+.grain{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:var(--z-grain);
+  opacity:.05;
+  transition:opacity .45s var(--ease);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- eyebrow : rationné à 4 sur la page entière ---------- */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  margin-bottom:26px;
+}
+.eyebrow::before{
+  content:"";
+  width:26px; height:1px;
+  background:var(--signal-ink);
+}
+
+/* ---------- traitement photographique ----------
+   Toute image du site passe par .ph : désaturation, assombrissement et
+   voile duotone graphite/vermillon. C'est ce qui fait tenir ensemble des
+   photos d'origines différentes dans un seul monde de marque. */
+.ph{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--r-media);
+  background:var(--bg-2);
+}
+.ph img{
+  width:100%; height:100%;
+  object-fit:cover;
+  /* Étalonnage léger : les photos sont déjà tournées froides et sombres.
+     Le réglage lourd d'avant (brightness .6) servait à rattraper des
+     photos d'origine quelconque, il écraserait celles-ci en aplat noir. */
+  filter:grayscale(.22) contrast(1.04) brightness(.94);
+  transition:transform 1s var(--ease-out), filter .6s var(--ease);
+}
+.ph::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to top, rgba(16,17,19,.42) 0%, rgba(16,17,19,0) 48%),
+    linear-gradient(120deg, rgba(240,74,38,.10), rgba(16,17,19,0) 62%);
+  pointer-events:none;
+}
+
+/* ---------- boutons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px;
+  white-space:nowrap;                 /* aucun libellé de CTA ne passe à la ligne */
+  padding:15px 28px;
+  border-radius:var(--r-pill);
+  border:1px solid transparent;
+  font-family:'Satoshi',sans-serif;
+  font-size:var(--t-s);
+  font-weight:700;
+  letter-spacing:-.01em;
+  cursor:pointer;
+  transition:background .3s var(--ease), border-color .3s var(--ease),
+             color .3s var(--ease), transform .1s var(--ease);
+  will-change:transform;
+}
+.btn .arrow{
+  display:inline-block;
+  transition:transform .35s var(--ease-out);
+}
+.btn:hover .arrow{transform:translateX(4px);}
+.btn:active{transform:scale(.975);}
+
+.btn-primary{
+  background:var(--signal);
+  color:#0B0C0D;                      /* 5,12:1 sur le vermillon */
+}
+.btn-primary:hover{background:#FF5C39;}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--fg);
+  border-color:var(--rule-strong);
+}
+.btn-ghost:hover{
+  border-color:var(--fg);
+  background:rgba(237,232,220,.05);
+}
+
+.btn-block{width:100%;}
+
+/* ---------- en-tête ---------- */
+.site-header{
+  position:fixed; top:0; left:0; right:0;
+  z-index:var(--z-header);
+  height:72px;                        /* plafond 80px, une seule ligne */
+  display:flex; align-items:center;
+  transition:background .4s var(--ease), border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  background:rgba(16,17,19,.78);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom-color:var(--rule);
+}
+
+.nav-inner{
+  width:100%;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:32px;
+}
+.logo{
+  display:inline-flex; align-items:center; gap:11px;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  font-size:var(--t-body);
+  letter-spacing:-.02em;
+  color:var(--fg);
+  flex-shrink:0;
+}
+.logo svg{width:22px; height:22px; color:var(--signal);}
+.nav-links{
+  display:flex; align-items:center; gap:30px;
+  font-size:var(--t-s);
+  color:var(--fg-dim);
+}
+.nav-links a{
+  position:relative;
+  padding:4px 0;
+  transition:color .3s var(--ease);
+}
+.nav-links a::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-2px;
+  height:1px;
+  background:var(--signal);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s var(--ease-out);
+}
+.nav-links a:hover{color:var(--fg);}
+.nav-links a:hover::after,
+.nav-links a.is-current::after{transform:scaleX(1);}
+.nav-links a.is-current{color:var(--fg);}
+.nav-cta{padding:11px 22px; font-size:var(--t-xs);}
+
+.burger{
+  display:none;
+  width:44px; height:44px;
+  background:none; border:none;
+  cursor:pointer;
+  flex-direction:column; align-items:flex-end; justify-content:center;
+  gap:6px;
+}
+.burger span{
+  display:block; height:1.5px; width:22px;
+  background:var(--fg);
+  transition:transform .3s var(--ease), width .3s var(--ease);
+}
+.burger span:nth-child(2){width:15px;}
+
+
+
+/* ---------- menu mobile ---------- */
+.mobile-menu{
+  position:fixed; inset:0;
+  z-index:var(--z-menu);
+  background:var(--bg);
+  padding:28px var(--gutter) 40px;
+  display:flex; flex-direction:column;
+  transform:translateY(-100%);
+  visibility:hidden;
+  transition:transform .5s var(--ease-out), visibility .5s;
+}
+.mobile-menu.open{transform:translateY(0); visibility:visible;}
+.mm-top{
+  display:flex; align-items:center; justify-content:space-between;
+  height:44px;
+  margin-bottom:48px;
+}
+.mm-close{
+  background:none; border:none;
+  font-size:var(--t-xs);
+  color:var(--fg-dim);
+  cursor:pointer;
+  padding:8px 0;
+}
+.mobile-menu nav{display:flex; flex-direction:column; flex:1;}
+.mobile-menu nav a{
+  display:flex; align-items:baseline; gap:18px;
+  padding:20px 0;
+  border-bottom:1px solid var(--rule);
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  /* EXCEPTION ASSUMÉE à l'échelle typographique.
+     Ce n'est pas du texte courant mais une échelle plein écran : six entrées
+     qui doivent remplir la hauteur du menu quelle que soit la largeur. Le
+     coefficient 7vw n'a d'équivalent dans aucun des huit pas, et --t-h1 la
+     ferait déborder sur deux lignes en dessous de 380px. */
+  font-size:clamp(26px,7vw,36px);
+  letter-spacing:-.03em;
+}
+.mobile-menu nav a i{
+  font-family:'JetBrains Mono',monospace;
+  font-style:normal;
+  font-size:var(--t-micro);
+  color:var(--signal);
+}
+.mm-foot{padding-top:32px;}
+
+/* =========================================================================
+
+   CTA FINAL — champ plein, typographie seule, pas d'image
+   ========================================================================= */
+.final{
+  /* EXCEPTION ASSUMÉE à l'échelle d'espacement (--r-section = 88→176px).
+     Le CTA final est le seul endroit de la page où le vide EST le message :
+     il doit respirer plus que toute autre section pour que la décision se
+     détache. Écart délibéré, unique, et documenté ici pour qu'il ne soit pas
+     « corrigé » plus tard par méprise. */
+  padding:clamp(96px,13vw,190px) 0;
+  border-top:1px solid var(--rule);
+  background:
+    radial-gradient(120% 90% at 50% 108%, rgba(240,74,38,.13), transparent 62%),
+    var(--bg-2);
+  text-align:center;
+}
+.final h2{
+  max-width:17ch;
+  margin:0 auto 26px;
+  font-size:var(--t-h1);
+}
+.final p{
+  max-width:50ch;
+  margin:0 auto 40px;
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+}
+.final-ctas{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:14px;
+  margin-bottom:44px;
+}
+.final-meta{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:14px 40px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+.final-meta b{color:var(--fg-dim); font-weight:500;}
+.final-meta time{color:var(--fg-dim); font-variant-numeric:tabular-nums;}
+
+
+/* =========================================================================
+
+   WIDGET IA FLOTTANT
+   ========================================================================= */
+.ai-launcher{
+  position:fixed;
+  right:var(--s-4);
+  bottom:var(--s-4);
+  z-index:var(--z-widget);
+  width:56px; height:56px;
+  border-radius:50%;
+  border:none;
+  background:var(--signal);
+  color:#0B0C0D;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 14px 40px -12px rgba(240,74,38,.55);
+  transition:transform .35s var(--ease-out), background .3s var(--ease),
+             box-shadow .45s var(--ease);
+}
+/* Une ombre vermillon sur fond graphite se lit comme une lueur. La même ombre
+   sur crème vire au boueux : le vermillon dilué dans un fond chaud donne un
+   halo brun qui salit l'aplat. Sur la moitié jour, on repasse en ombre neutre
+   sombre — c'est une ombre, pas un effet de marque. */
+html.paper-view .ai-launcher{box-shadow:0 14px 40px -12px rgba(23,20,15,.34);}
+html.paper-view .grain{opacity:.03;}
+
+.ai-launcher:hover{transform:scale(1.06);}
+.ai-launcher:active{transform:scale(.96);}
+.ai-launcher svg{width:23px; height:23px; position:absolute; transition:opacity .25s var(--ease), transform .35s var(--ease-out);}
+.ai-launcher .ic-close{opacity:0; transform:rotate(-45deg);}
+.ai-launcher.open .ic-chat{opacity:0; transform:rotate(45deg);}
+.ai-launcher.open .ic-close{opacity:1; transform:rotate(0);}
+.ai-launcher .badge{
+  position:absolute; top:2px; right:2px;
+  width:11px; height:11px;
+  border-radius:50%;
+  background:var(--fg);
+  border:2px solid var(--bg);
+}
+.ai-launcher.open .badge{display:none;}
+
+.ai-panel{
+  position:fixed;
+  right:var(--s-4);
+  bottom:calc(var(--s-4) + 68px);
+  z-index:var(--z-widget);
+  width:min(370px, calc(100vw - 32px));
+  max-height:min(560px, calc(100dvh - 130px));
+  display:flex; flex-direction:column;
+  background:var(--bg-2);
+  /* Bord de conteneur, pas de contrôle : le panneau se distingue déjà par
+     son fond plein, son ombre portée et sa position flottante. SC 1.4.11 ne
+     s'applique qu'aux composants d'interface à opérer ; --rule reste
+     cohérent avec les autres bords de panneau du widget (.ai-head,
+     .msg.bot, .typing-indicator). */
+  border:1px solid var(--rule);
+  border-radius:var(--r-media);
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(14px) scale(.97);
+  visibility:hidden;
+  transition:opacity .3s var(--ease), transform .35s var(--ease-out), visibility .35s;
+  box-shadow:0 30px 70px -24px rgba(0,0,0,.7);
+}
+.ai-panel.open{opacity:1; transform:translateY(0) scale(1); visibility:visible;}
+.ai-head{
+  display:flex; align-items:center; gap:12px;
+  padding:16px 18px;
+  border-bottom:1px solid var(--rule);
+  background:var(--bg-3);
+}
+.ai-avatar{
+  width:34px; height:34px;
+  border-radius:50%;
+  background:var(--signal-wash);
+  border:1px solid var(--rule-signal);
+  color:var(--signal);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.ai-head strong{font-size:var(--t-s); font-weight:700; display:block;}
+.ai-head .status{
+  display:flex; align-items:center; gap:7px;
+  font-size:var(--t-micro);
+  color:var(--fg-dim);
+}
+.live{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--signal);
+  flex-shrink:0;
+}
+.ai-body{
+  flex:1;
+  overflow-y:auto;
+  padding:18px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.msg{
+  max-width:86%;
+  padding:11px 14px;
+  border-radius:var(--r-media);
+  font-size:var(--t-xs);
+  line-height:1.52;
+}
+.msg.bot{
+  align-self:flex-start;
+  background:var(--bg-3);
+  color:var(--fg-dim);
+  border:1px solid var(--rule);
+}
+.msg.user{
+  align-self:flex-end;
+  background:var(--signal);
+  color:#0B0C0D;
+  font-weight:500;
+}
+.typing-indicator{
+  align-self:flex-start;
+  display:flex; gap:5px;
+  padding:13px 14px;
+  background:var(--bg-3);
+  border:1px solid var(--rule);
+  border-radius:var(--r-media);
+}
+.typing-indicator span{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--fg-faint);
+  animation:blip 1.3s infinite;
+}
+.typing-indicator span:nth-child(2){animation-delay:.18s;}
+.typing-indicator span:nth-child(3){animation-delay:.36s;}
+@keyframes blip{
+  0%,60%,100%{opacity:.3; transform:translateY(0);}
+  30%{opacity:1; transform:translateY(-3px);}
+}
+.ai-suggestions{
+  display:flex; flex-wrap:wrap; gap:7px;
+  padding:0 18px 14px;
+}
+.chat-chip{
+  padding:7px 13px;
+  border-radius:var(--r-pill);
+  border:1px solid var(--rule-strong);
+  background:none;
+  color:var(--fg-dim);
+  font-size:var(--t-micro);
+  cursor:pointer;
+  transition:border-color .3s var(--ease), color .3s var(--ease), background .3s var(--ease);
+}
+.chat-chip:hover{border-color:var(--signal); color:var(--signal); background:var(--signal-wash);}
+.ai-input{
+  display:flex; gap:9px;
+  padding:14px 18px;
+  border-top:1px solid var(--rule);
+  background:var(--bg-3);
+}
+.ai-input input{
+  flex:1;
+  padding:10px 13px;
+  background:var(--bg);
+  border:1px solid var(--rule-strong);
+  border-radius:var(--r-pill);
+  color:var(--fg);
+  font-family:'Satoshi',sans-serif;
+  font-size:var(--t-xs);
+}
+.ai-input input::placeholder{color:var(--fg-faint);}
+.ai-input input:focus{outline:none; border-color:var(--signal);}
+.ai-input button{
+  padding:10px 17px;
+  border-radius:var(--r-pill);
+  border:none;
+  background:var(--signal);
+  color:#0B0C0D;
+  font-size:var(--t-xs);
+  font-weight:700;
+  cursor:pointer;
+  transition:background .3s var(--ease);
+}
+.ai-input button:hover{background:#FF5C39;}
+
+/* =========================================================================
+   ANIMATION — masques de mots, révélations
+   Tout est neutralisé sous prefers-reduced-motion.
+   ========================================================================= */
+.split-ready .w{display:inline-block; overflow:hidden; vertical-align:top;}
+.split-ready .wi{display:inline-block; transform:translateY(105%); will-change:transform;}
+
+.hero-copy > *{opacity:0;}
+html:not(.js) .hero-copy > *{opacity:1;}
+
+
+
+/* évite les fantômes de composition pendant un redimensionnement */
+html.is-resizing *{transition:none !important;}

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthode — Studio Singulier | Comment nous travaillons, étape par étape</title>
+<meta name="description" content="Les cinq étapes de notre méthode, à Casablanca : découverte, stratégie, création, déploiement, optimisation. Ce que nous attendons de vous, et ce qui se passe après la mise en ligne.">
+<link rel="canonical" href="https://singulier.apexwebstudio.studio/methode.html">
+
+<meta property="og:title" content="Méthode — Studio Singulier">
+<meta property="og:description" content="Cinq étapes, aucune surprise à la fin : ce qui se passe à chaque étape, ce que nous attendons de vous, et ce qui se passe après la mise en ligne.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://singulier.apexwebstudio.studio/methode.html">
+<meta property="og:site_name" content="Studio Singulier">
+<meta property="og:image" content="https://singulier.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Studio Singulier, agence digitale à Casablanca">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Méthode — Studio Singulier">
+<meta name="twitter:description" content="Les cinq étapes de notre méthode de travail, ce que nous attendons de vous, et ce qui se passe après la mise en ligne.">
+<meta name="twitter:image" content="https://singulier.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta name="theme-color" content="#0E0F11">
+<meta name="color-scheme" content="dark light">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230E0F11'/%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51'/%3E%3Cpath d='M12 12H19.6'/%3E%3C/g%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "La méthode de travail de Studio Singulier",
+  "description": "Les cinq étapes suivies pour chaque projet : découverte, stratégie, création, déploiement, optimisation.",
+  "step": [
+    {"@type":"HowToStep","position":1,"name":"Découverte","text":"Nous comprenons votre activité, vos objectifs et vos clients."},
+    {"@type":"HowToStep","position":2,"name":"Stratégie","text":"Nous définissons la meilleure stratégie digitale pour votre projet."},
+    {"@type":"HowToStep","position":3,"name":"Création","text":"Nous concevons les éléments nécessaires : design, textes, visuels, développement."},
+    {"@type":"HowToStep","position":4,"name":"Déploiement","text":"Nous mettons en ligne les solutions retenues."},
+    {"@type":"HowToStep","position":5,"name":"Optimisation","text":"Nous analysons les résultats et améliorons continuellement, après la mise en ligne."}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css?v=20260817c">
+<link rel="stylesheet" href="css/pages.css?v=20260817c">
+<link rel="stylesheet" href="css/responsive.css?v=20260817c">
+<link rel="stylesheet" href="css/page-methode.css?v=20260817c">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===================== EN-TÊTE ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <button type="button" class="nav-svc" id="navServices"
+              aria-expanded="false" aria-controls="megaServices" aria-haspopup="true">
+        Services <span class="nav-svc-chev" aria-hidden="true"></span>
+      </button>
+      <a href="agents-ia.html">Agents IA</a>
+      <a href="methode.html" aria-current="page">Méthode</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="contact.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== DÉPLIANT SERVICES ===================== -->
+<!-- Hors du <header> volontairement : celui-ci fait 72px avec
+     align-items:center, un panneau à l'intérieur serait écrasé par cette
+     hauteur. Ici il se déploie librement juste sous la barre. -->
+<div class="mega" id="megaServices" role="region" aria-label="Nos services" hidden>
+  <div class="wrap mega-inner">
+    <p class="eyebrow mega-eyebrow">Nos prestations</p>
+    <ul class="mega-list">
+      <li class="mega-item">
+        <a class="mega-link" href="sites-web.html">
+          <span class="mega-num" aria-hidden="true">01</span>
+          <span class="mega-title">Sites web &amp; solutions digitales</span>
+          <span class="mega-desc">Sites vitrine rapides, pensés mobile d'abord, structurés pour être trouvés sur Google.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="reseaux-sociaux.html">
+          <span class="mega-num" aria-hidden="true">02</span>
+          <span class="mega-title">Réseaux sociaux &amp; contenu</span>
+          <span class="mega-desc">Ligne éditoriale, création de visuels et de textes, publication régulière.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="ecommerce-shopify.html">
+          <span class="mega-num" aria-hidden="true">03</span>
+          <span class="mega-title">E-commerce &amp; Shopify</span>
+          <span class="mega-desc">Fiches produits, paiement, livraison, et un panier qui va jusqu'au bout.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="visibilite-locale.html">
+          <span class="mega-num" aria-hidden="true">04</span>
+          <span class="mega-title">Visibilité locale</span>
+          <span class="mega-desc">Fiche Google Business, cartes de visite NFC et supports imprimés.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="mega-item">
+        <a class="mega-link" href="automatisation.html">
+          <span class="mega-num" aria-hidden="true">05</span>
+          <span class="mega-title">Automatisation</span>
+          <span class="mega-desc">Scénarios reliant formulaire, agent IA, fiche client, email et WhatsApp.</span>
+          <span class="mega-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-top">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <button class="mm-close" id="closeMenu">Fermer</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html"><i>01</i>Accueil</a>
+    <a href="sites-web.html"><i>02</i>Services</a>
+    <a href="agents-ia.html"><i>03</i>Agents IA</a>
+    <a href="methode.html"><i>04</i>Méthode</a>
+    <a href="a-propos.html"><i>05</i>À propos</a>
+    <a href="contact.html"><i>06</i>Contact</a>
+  </nav>
+  <div class="mm-foot">
+    <a href="contact.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===================== INTRO ===================== -->
+<section class="section" aria-labelledby="page-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Méthode</p>
+      <h1 data-split id="page-title">Cinq étapes. Vous savez toujours où vous en êtes.</h1>
+      <p class="lead">Un projet digital qui traîne, c'est presque toujours la même cause : personne ne sait qui doit fournir quoi, ni quand. Voici comment nous travaillons — avec, à chaque étape, ce que nous attendons de vous et ce que vous obtenez à la fin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VUE D'ENSEMBLE ===================== -->
+<section class="section rule-top reveal on-paper" aria-labelledby="ov-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Vue d'ensemble</p>
+      <h2 data-split id="ov-title">Les cinq étapes, en un coup d'œil.</h2>
+      <p>Le détail de chacune suit plus bas, avec ce que vous fournissez, ce que vous recevez, et ce que vous validez avant qu'on avance.</p>
+    </div>
+
+    <div class="method-layout">
+      <div>
+        <div class="timeline" id="timeline">
+          <div class="timeline-fill" id="timelineFill" aria-hidden="true"></div>
+          <div class="step">
+            <p class="sn">01 — Découverte</p>
+            <h3>Découverte</h3>
+            <p>Nous comprenons votre activité, vos objectifs et vos clients.</p>
+          </div>
+          <div class="step">
+            <p class="sn">02 — Stratégie</p>
+            <h3>Stratégie</h3>
+            <p>Nous définissons la meilleure stratégie digitale.</p>
+          </div>
+          <div class="step">
+            <p class="sn">03 — Création</p>
+            <h3>Création</h3>
+            <p>Nous concevons les éléments nécessaires.</p>
+          </div>
+          <div class="step">
+            <p class="sn">04 — Déploiement</p>
+            <h3>Déploiement</h3>
+            <p>Nous mettons en ligne les solutions.</p>
+          </div>
+          <div class="step">
+            <p class="sn">05 — Optimisation</p>
+            <h3>Optimisation</h3>
+            <p>Nous analysons les résultats et améliorons continuellement.</p>
+          </div>
+        </div>
+
+        <p class="method-note">La durée de chaque étape dépend du projet : de ce que vous avez déjà, du nombre d'allers-retours sur les contenus, de la complexité du site ou de la boutique. Nous donnons un calendrier réaliste après l'étape Découverte, pas avant — un chiffre annoncé plus tôt serait une promesse en l'air.</p>
+      </div>
+
+      <div class="ph method-media" aria-hidden="true">
+        <img src="assets/methode-mains.webp" width="620" height="850" alt="" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LE DÉTAIL DE CHAQUE ÉTAPE ===================== -->
+<section class="section rule-top reveal" aria-labelledby="dt-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Le détail</p>
+      <h2 data-split id="dt-title">Ce qui se passe, concrètement, à chaque étape.</h2>
+    </div>
+
+    <ol class="method-detail">
+      <li class="method-step">
+        <div class="ms-head">
+          <span class="ms-num" aria-hidden="true">01</span>
+          <h3>Découverte</h3>
+        </div>
+        <p class="ms-intro">Nous prenons le temps de comprendre votre activité avant de proposer quoi que ce soit. Un échange — sur place, par téléphone ou en visio — porte sur vos objectifs, vos clients, ce qui fonctionne déjà et ce qui vous fait perdre du temps aujourd'hui.</p>
+        <dl class="ms-facts">
+          <div class="ms-fact"><dt>Vous fournissez</dt><dd>Ce que vous avez déjà : ancien site, réseaux sociaux, supports imprimés, ou simplement une idée claire de votre activité.</dd></div>
+          <div class="ms-fact"><dt>Vous recevez</dt><dd>Un compte-rendu qui reformule votre projet dans nos mots, pour vérifier qu'on a compris la même chose.</dd></div>
+          <div class="ms-fact"><dt>Vous validez</dt><dd>Le périmètre du projet et le devis correspondant, avant qu'on parle de design ou de code.</dd></div>
+        </dl>
+      </li>
+
+      <li class="method-step">
+        <div class="ms-head">
+          <span class="ms-num" aria-hidden="true">02</span>
+          <h3>Stratégie</h3>
+        </div>
+        <p class="ms-intro">À partir de ce qu'on a compris, nous choisissons ce qui sert vraiment votre objectif — un site, une boutique, une présence sociale, un agent IA, ou une combinaison — et nous écartons ce qui n'apporte rien dans votre cas.</p>
+        <dl class="ms-facts">
+          <div class="ms-fact"><dt>Vous fournissez</dt><dd>Vos priorités, si plusieurs pistes sont possibles : visibilité, ventes en ligne, gain de temps sur le support client.</dd></div>
+          <div class="ms-fact"><dt>Vous recevez</dt><dd>Un plan qui liste les prestations retenues, leur ordre, et pourquoi.</dd></div>
+          <div class="ms-fact"><dt>Vous validez</dt><dd>La stratégie et le calendrier, avant que la production ne commence.</dd></div>
+        </dl>
+      </li>
+
+      <li class="method-step">
+        <div class="ms-head">
+          <span class="ms-num" aria-hidden="true">03</span>
+          <h3>Création</h3>
+        </div>
+        <p class="ms-intro">Design, textes, visuels, structure du site ou de la boutique, développement. Vous voyez le projet avancer par étapes, pas seulement au moment de la livraison.</p>
+        <dl class="ms-facts">
+          <div class="ms-fact"><dt>Vous fournissez</dt><dd>Vos textes si vous les rédigez, vos photos si vous en avez, vos identifiants existants si nécessaire. Nous pouvons aussi rédiger les textes et produire les visuels si vous préférez.</dd></div>
+          <div class="ms-fact"><dt>Vous recevez</dt><dd>Une maquette, puis une version testable, avant la mise en ligne.</dd></div>
+          <div class="ms-fact"><dt>Vous validez</dt><dd>La maquette avant qu'une ligne de code soit écrite, puis chaque version testable avant la suivante.</dd></div>
+        </dl>
+      </li>
+
+      <li class="method-step">
+        <div class="ms-head">
+          <span class="ms-num" aria-hidden="true">04</span>
+          <h3>Déploiement</h3>
+        </div>
+        <p class="ms-intro">Mise en ligne du site ou de la boutique, connexion du nom de domaine, création ou mise à jour de la fiche Google Business, activation de l'agent IA si le projet en comprend un.</p>
+        <dl class="ms-facts">
+          <div class="ms-fact"><dt>Vous fournissez</dt><dd>L'accès à votre nom de domaine et à vos comptes existants — Google Business, réseaux sociaux — s'ils existent déjà.</dd></div>
+          <div class="ms-fact"><dt>Vous recevez</dt><dd>Un site ou une boutique en ligne, accessible publiquement, avec des accès qui vous appartiennent.</dd></div>
+          <div class="ms-fact"><dt>Vous validez</dt><dd>Le fonctionnement en conditions réelles, avant l'annonce officielle si vous en prévoyez une.</dd></div>
+        </dl>
+      </li>
+
+      <li class="method-step">
+        <div class="ms-head">
+          <span class="ms-num" aria-hidden="true">05</span>
+          <h3>Optimisation</h3>
+        </div>
+        <p class="ms-intro">Une fois en ligne, nous regardons ce qui se passe réellement : ce qui est visité, ce qui convertit, ce qui bloque. Nous ajustons ce qui ne fonctionne pas comme prévu.</p>
+        <dl class="ms-facts">
+          <div class="ms-fact"><dt>Vous fournissez</dt><dd>Vos retours sur ce que vous observez de votre côté : appels reçus, messages, ventes.</dd></div>
+          <div class="ms-fact"><dt>Vous recevez</dt><dd>Un point sur ce qui a été corrigé ou ajusté, et pourquoi.</dd></div>
+          <div class="ms-fact"><dt>Vous validez</dt><dd>Les ajustements avant qu'ils soient mis en ligne à leur tour — l'optimisation suit les mêmes règles que la création.</dd></div>
+        </dl>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== CE QUE NOUS ATTENDONS DE VOUS ===================== -->
+<section class="section rule-top reveal on-paper" aria-labelledby="wa-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Ce que nous attendons de vous</p>
+      <h2 data-split id="wa-title">Un projet avance à la vitesse de ses contenus.</h2>
+      <p>La cause la plus fréquente d'un projet qui traîne n'est presque jamais technique. C'est un texte qui n'arrive pas, une photo qui manque, une validation qui attend. Le dire d'emblée, c'est vous rendre service.</p>
+    </div>
+
+    <div class="principles">
+      <article class="principle"><span class="pn" aria-hidden="true">01</span><h3>Des contenus qui arrivent</h3><p>Textes, photos, logo si vous en avez un. Plus ils arrivent tôt, plus la Création avance vite. Nous pouvons aussi les produire si vous préférez ne pas vous en charger.</p></article>
+      <article class="principle"><span class="pn" aria-hidden="true">02</span><h3>Une personne qui valide</h3><p>Un seul interlocuteur qui dit oui ou qui demande une modification. Les allers-retours entre plusieurs décideurs sont ce qui ralentit le plus un projet.</p></article>
+      <article class="principle"><span class="pn" aria-hidden="true">03</span><h3>Des retours rapides</h3><p>Quelques jours pour regarder une maquette ou une version testable suffisent. Un mois d'attente sur une validation décale tout le reste d'autant.</p></article>
+      <article class="principle"><span class="pn" aria-hidden="true">04</span><h3>Les accès nécessaires</h3><p>Nom de domaine existant, réseaux sociaux, fiche Google Business : nous en avons besoin au moment du Déploiement, pas avant.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APRÈS LA MISE EN LIGNE ===================== -->
+<section class="section rule-top reveal" aria-labelledby="al-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Après la mise en ligne</p>
+      <h2 data-split id="al-title">La livraison n'est pas la fin.</h2>
+      <p>Beaucoup de sites d'agence s'arrêtent à la mise en ligne. Pas la méthode que nous suivons : l'étape Optimisation continue après le lancement, tant qu'elle a quelque chose à améliorer.</p>
+    </div>
+
+    <div class="uflow method-after">
+      <div class="uflow-step"><span class="k">Suivi</span><span>Nous regardons comment le site ou la boutique est réellement utilisé, pas seulement comment il a été conçu.</span></div>
+      <div class="uflow-step"><span class="k">Corrections</span><span>Un bouton qui ne réagit pas comme prévu, un formulaire qui bloque sur un téléphone précis : nous corrigeons.</span></div>
+      <div class="uflow-step"><span class="k">Ajustements</span><span>Ce qui ne convertit pas comme espéré est revu — un texte, une mise en page, un parcours de commande.</span></div>
+      <div class="uflow-step"><span class="k">Support</span><span>Vous savez qui contacter si quelque chose change de votre côté : nouveau produit, nouvelle adresse, nouvelle offre.</span></div>
+    </div>
+
+    <a href="contact.html" class="svc-cta">Nous écrire pour en discuter <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="final" aria-labelledby="cta-title">
+  <div class="wrap">
+    <h2 id="cta-title">Vous savez comment nous travaillons. Parlons de votre projet.</h2>
+    <p>La première étape est un échange, pas un engagement. Vous repartez avec un devis clair — ou avec rien du tout si ça ne correspond pas.</p>
+    <div class="final-ctas">
+      <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
+      <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+    </div>
+    <p class="final-meta">
+      <span>Réponse sous 24h</span>
+      <span aria-hidden="true">·</span>
+      <span>Devis gratuit</span>
+      <span aria-hidden="true">·</span>
+      <span id="casaClock">Casablanca · l'agent répond</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<div class="foot-band">
+  <div class="wrap">
+    <div>
+      <h3>Une question avant de se lancer ?</h3>
+      <p>Écrivez-nous, on répond rapidement, sans jargon.</p>
+    </div>
+    <a href="contact.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M19.21 7.5A8.5 8.5 0 1 0 19.21 16.51"/>
+        <path d="M12 12H19.6"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <nav class="foot-nav" aria-label="Navigation de pied de page">
+      <a href="sites-web.html">Services</a>
+      <a href="agents-ia.html">Agents IA</a>
+      <a href="methode.html">Méthode</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="foot-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:yayababafofana14700@gmail.com">Email</a>
+    </div>
+    <p class="foot-copy" id="footCopy">© 2026 Studio Singulier, Belvédère, Casablanca, Maroc</p>
+  </div>
+</footer>
+
+<!-- ===================== WIDGET IA FLOTTANT ===================== -->
+<button class="ai-launcher" id="aiLauncher" aria-label="Ouvrir l'assistant IA" aria-expanded="false" aria-controls="aiPanel">
+  <svg class="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <span class="badge" aria-hidden="true"></span>
+</button>
+
+<div class="ai-panel" id="aiPanel" role="dialog" aria-label="Assistant IA Studio Singulier">
+  <div class="ai-head">
+    <div class="ai-avatar" aria-hidden="true">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 14h.01M15 14h.01"/></svg>
+    </div>
+    <div>
+      <strong>Agent Studio Singulier</strong>
+      <div class="status"><span class="live" aria-hidden="true"></span>En ligne</div>
+    </div>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div class="msg bot">Bonjour. Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
+  </div>
+  <div class="ai-suggestions">
+    <button class="chat-chip" data-q="Vos prix ?">Vos prix ?</button>
+    <button class="chat-chip" data-q="Vous faites Shopify ?">Shopify ?</button>
+    <button class="chat-chip" data-q="Quels délais ?">Délais ?</button>
+    <button class="chat-chip" data-q="Je veux réserver un appel">Réserver un appel</button>
+  </div>
+  <form class="ai-input" id="aiForm">
+    <input type="text" id="aiInput" placeholder="Écrivez votre question…" autocomplete="off" aria-label="Votre question" maxlength="500">
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
+
+<!-- ===================== LIBS ===================== -->
+<!-- SRI : empreintes vérifiées le 12/08/2026 contre les octets réellement servis.
+     Si un CDN est compromis ou détourné, le navigateur refuse d'exécuter le script
+     plutôt que de le laisser réécrire la clé du formulaire et détourner les leads.
+     La page se replie proprement en statique sans ces trois bibliothèques. -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"
+        integrity="sha256-C/F005uavDBKPVAatkV1h+dW0HvYJPhopTJLXPFRJbA="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous"></script>
+
+<script src="js/animations.js?v=20260817c" defer></script>
+<script src="js/main.js?v=20260817c" defer></script>
+</body>
+</html>

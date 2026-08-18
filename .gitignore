@@ -1,0 +1,31 @@
+# Ce dépôt ne doit contenir QUE le site publié.
+# Rien de ce qui suit ne doit jamais y entrer : sur GitHub, un fichier
+# poussé une fois reste dans l'historique même après suppression.
+
+# Outils et configuration locale
+.claude/
+.vscode/
+*.bat
+*.py
+
+# Notes de chantier, audits, archives
+refonte-*/
+archive/
+*.md
+!README.md
+
+# Anciennes versions du site
+index.backup*.html
+_apercu*.html
+
+# Références de travail
+refs/
+.fonts/
+
+# Archives
+*.zip
+
+# Système
+Thumbs.db
+desktop.ini
+.DS_Store

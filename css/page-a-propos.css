@@ -1,0 +1,64 @@
+/* Studio Singulier — styles propres à la page À propos
+   Chargé après style.css, pages.css, responsive.css. Rien en dur : tout
+   passe par les tokens définis dans style.css (couleurs, échelle
+   typographique, espacements). */
+
+/* =========================================================================
+   COLONNE DE LECTURE — texte courant hors .section-head
+   .section-head p est déjà borné à 52ch ; les paragraphes qui suivent une
+   section-head (corps de « Qui nous sommes », « Notre différence »...) ont
+   besoin du même garde-fou de longueur de ligne.
+   ========================================================================= */
+.copy{
+  max-width:60ch;
+  display:flex;
+  flex-direction:column;
+  gap:var(--s-3);
+}
+.copy p{
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+}
+.copy p a{
+  color:var(--fg);
+  border-bottom:1px solid var(--rule-signal);
+  padding-bottom:1px;
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.copy p a:hover{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
+
+/* =========================================================================
+   NOTRE APPROCHE — liste numérotée sobre, deux colonnes (repère + texte)
+   ========================================================================= */
+.approach-grid{
+  display:flex;
+  flex-direction:column;
+  margin-top:var(--r-block);
+}
+.approach-item{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr);
+  gap:var(--s-4);
+  padding:var(--r-item) 0;
+  border-top:1px solid var(--rule);
+}
+.approach-item:first-child{border-top:1px solid var(--rule-strong);}
+.approach-item:last-child{padding-bottom:0;}
+.ap-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  color:var(--signal-ink);
+  padding-top:4px;
+}
+.approach-item h3{margin-bottom:10px;}
+.approach-item p{
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  max-width:56ch;
+}
+
+@media (max-width: 640px){
+  .approach-item{grid-template-columns:1fr;}
+  .ap-num{padding-top:0;}
+}

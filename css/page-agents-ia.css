@@ -1,0 +1,38 @@
+/* Studio Singulier — page Agents IA
+   Styles propres à cette page uniquement. Les composants partagés
+   (compare, metrics, cat-grid, steps-lite, principles, uflow, friction,
+   work-grid, faq...) viennent de pages.css et ne sont pas redéfinis ici :
+   seuls trois compléments, pour des trous que les classes communes ne
+   couvrent pas. Rien en dur : tout passe par les tokens de style.css.
+   ========================================================================= */
+
+/* ---------- intro (h1 + chapô), sans photo de fond ----------
+   Pas de classe partagée pour une colonne de titre pleine largeur qui ne
+   soit pas un h2 de section (.section-head la borne à 20/26ch, pensé pour
+   un titre de bloc, pas pour le h1 de page). .hero-copy existe déjà à la
+   bonne largeur mais couple ses enfants à l'entrée GSAP du hero de
+   l'accueil (opacity:0 tant que #heroTitle etc. ne sont pas trouvés) : la
+   réutiliser ici laisserait l'intro invisible tant que GSAP est chargé.
+   Une classe locale, sans ce couplage. */
+.intro-copy{max-width:min(100%, 920px);}
+
+/* ---------- unité des métriques (24 « h/24 », 3 « canaux »...) ----------
+   pages.css style .metric .v (le chiffre) et .metric .k (la légende),
+   mais aucune règle n'existe pour .metric .u alors que la classe est déjà
+   posée dans le marquage des métriques du site. On la complète ici plutôt
+   que de laisser l'unité hériter du corps de texte par défaut, à côté d'un
+   chiffre de 72px. */
+.metric .u{
+  margin-left:7px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-xs);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+}
+
+/* ---------- second bloc de « Ce qu'un agent IA ne fait pas » ----------
+   Le sous-bloc « comment il apprend / ce que vous gardez » réutilise
+   .principles à la suite de .friction, dans la même section : il lui faut
+   le même rythme vertical que .metrics ou .friction après un bloc voisin. */
+.limites-cadre{margin-top:var(--r-block);}

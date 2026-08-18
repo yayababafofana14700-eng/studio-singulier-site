@@ -1,0 +1,100 @@
+/* Studio Singulier — page Services
+   Composants propres à services.html : les classes communes (.section,
+   .section-head, .cat-grid, .steps-lite, .uflow, .local, .serp, .faq…)
+   viennent de style.css / pages.css et sont réutilisées telles quelles.
+   Ce fichier ne couvre que ce qu'elles ne couvrent pas : le gabarit en six
+   temps d'une famille de prestation (problème → solution → bénéfices →
+   livrables → déroulé → CTA) et l'en-tête illustré de certaines familles. */
+
+/* ---------- étiquette au-dessus d'un bloc de contenu ----------
+   Plus légère qu'un .eyebrow (pas de tiret, marge réduite) : elle repère un
+   temps de l'offre à l'intérieur d'une famille déjà introduite par son
+   propre .eyebrow, sans rejouer la même ponctuation visuelle cinq fois. */
+.svc-tag{
+  display:block;
+  margin-bottom:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal-ink);
+}
+
+/* ---------- diptyque problème / solution, bénéfices / livrables ----------
+   Un filet vertical sépare les deux temps plutôt qu'un fond ou une carte :
+   le langage de forme du site reste le filet, jamais le conteneur. */
+.svc-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--r-item);
+}
+.svc-pair + .svc-pair{margin-top:var(--r-block);}
+.svc-pair-col p{
+  font-size:var(--t-body);
+  color:var(--fg-dim);
+  line-height:1.65;
+  max-width:48ch;
+}
+/* La colonne « solution » répond à la colonne « problème » : même corps,
+   encre pleine plutôt que retrait, pour porter le mouvement vers l'avant. */
+.svc-pair-col.is-solution p{color:var(--fg);}
+.svc-pair-col + .svc-pair-col{
+  padding-left:var(--r-item);
+  border-left:1px solid var(--rule);
+}
+/* Les listes réutilisées (.serp-checks, .uflow) n'ont pas besoin de la
+   largeur de lecture d'un paragraphe : on la relâche dans ce contexte. */
+.svc-pair-col .serp-checks{grid-template-columns:1fr; margin-top:0; padding-top:0;}
+.svc-pair-col .uflow{margin-top:0;}
+
+/* ---------- déroulé ----------
+   Espacement seul : la grille de .steps-lite et la numérotation de .sl-num
+   viennent déjà de pages.css, inchangées. */
+.svc-process{margin-top:var(--r-block);}
+
+/* ---------- CTA de fin de famille ----------
+   .svc-cta porte déjà 18px de marge haute ; dans ce gabarit le rythme entre
+   blocs est tenu par .svc-process + .svc-cta-wrap, donc on neutralise la
+   marge du composant partagé pour ne pas cumuler les deux. */
+.svc-cta-wrap{margin-top:var(--r-block);}
+.svc-cta-wrap .svc-cta{margin-top:0;}
+
+/* ---------- en-tête illustré (sites web, e-commerce, automatisation) ----------
+   Texte à gauche, rendu 3D à droite : le miroir du diptyque .local (visuel
+   à gauche), pour que les cinq familles ne suivent pas toutes le même sens
+   de lecture. */
+.svc-head-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(180px,300px);
+  gap:var(--r-block);
+  align-items:center;
+  margin-bottom:var(--r-block);
+}
+.svc-head-row .eyebrow{margin-bottom:18px;}
+.svc-head-row h2{max-width:16ch;}
+.svc-head-visual{
+  aspect-ratio:1/1;
+  align-self:center;
+}
+
+/* ---------- diptyque visibilité locale (image à gauche, via .local) ----------
+   .local et .serp viennent de pages.css ; on ajoute uniquement l'espace
+   qui suit le diptyque avant les blocs bénéfices / livrés. */
+#visibilite .local{margin-bottom:var(--r-block);}
+
+/* =========================================================================
+   RUPTURES — propres à cette page
+   ========================================================================= */
+@media (max-width: 860px){
+  .svc-pair{grid-template-columns:1fr; gap:var(--s-5);}
+  .svc-pair-col + .svc-pair-col{
+    padding-left:0;
+    padding-top:var(--s-5);
+    border-left:none;
+    border-top:1px solid var(--rule);
+  }
+  .svc-head-row{grid-template-columns:1fr;}
+  .svc-head-visual{order:-1; max-width:220px; margin:0 auto;}
+  .svc-head-row h2{max-width:none;}
+}

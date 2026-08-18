@@ -1,0 +1,239 @@
+/* Studio Singulier — points de rupture — tous les @media du site, regroupes ici
+   Extrait du fichier unique le 13/08/2026 lors du passage en
+   architecture multi-pages. Chargé par les 6 pages du site. */
+
+@media (prefers-reduced-transparency: reduce){
+  .site-header.scrolled{
+    background:var(--bg);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+}
+
+@media (max-width: 940px){
+  .nav-links, .nav-cta{display:none;}
+  .burger{display:flex;}
+}
+
+/* ---------- Hero en deux colonnes : dégradés de rupture ---------- */
+
+/* Tablette : les deux colonnes deviennent trop étroites pour cohabiter — le
+   titre casserait en six lignes et la vidéo n'aurait plus de présence. On
+   empile, texte d'abord (c'est lui qui porte la proposition de valeur), et
+   on libère la hauteur imposée par le 100dvh du desktop. */
+@media (max-width: 1024px){
+  .hero{
+    min-height:0;
+    padding:calc(72px + var(--r-block)) 0 var(--r-block);
+  }
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:clamp(32px, 5vw, 52px);
+  }
+  .hero-copy{max-width:min(100%, 620px);}
+  .hero-lead{max-width:56ch;}
+}
+
+@media (max-width: 720px){
+  .hero-copy{max-width:none;}
+  .hero-lead{max-width:none;}
+  .hero-ctas .btn{flex:1 1 100%;}
+}
+
+/* Mobile : le 16/9 devient une bande de 200px de haut, trop maigre pour
+   qu'on distingue quoi que ce soit. On passe en 4/3, plus haut, et on
+   recadre au centre plutôt que de déformer. */
+@media (max-width: 560px){
+  .hero-video{aspect-ratio:4/3;}
+}
+
+@media (max-width: 640px){
+  .friction li{flex:1 1 100%; border-right:none;}
+}
+
+@media (max-width: 720px){
+  .compare{grid-template-columns:1fr;}
+  .compare-col{min-height:0;}
+}
+
+@media (max-width: 720px){
+  .metrics{grid-template-columns:1fr;}
+  .metric{
+    border-right:none;
+    border-bottom:1px solid var(--rule);
+    padding:26px 0;
+  }
+  .metric:last-child{border-bottom:none;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hpan.is-pinned .hpan-viewport{overflow-x:auto; scroll-snap-type:x mandatory;}
+}
+
+@media (max-width: 860px){
+  .sticky-split{grid-template-columns:1fr;}
+  .sticky-index{position:static;}
+  .sticky-index ol{
+    flex-direction:row; flex-wrap:wrap; gap:8px 24px;
+    padding-top:8px;
+  }
+}
+
+@media (max-width: 900px){
+  .method-layout{grid-template-columns:1fr;}
+  .method-media{aspect-ratio:16/9;}
+}
+
+@media (max-width: 900px){
+  .timeline{grid-template-columns:repeat(3, 1fr); gap:32px 20px;}
+}
+
+@media (max-width: 560px){
+  .timeline{grid-template-columns:1fr; gap:0; padding-top:0; padding-left:24px;}
+  .timeline::before{top:0; bottom:0; left:0; right:auto; width:1px; height:auto;}
+  .timeline-fill{top:0; left:0; width:1px; height:0;}
+  .step{padding:22px 0;}
+  .step::before{top:26px; left:-28.5px;}
+}
+
+@media (max-width: 900px){
+  .local{grid-template-columns:1fr;}
+}
+
+@media (max-width: 620px){
+  .serp-checks{grid-template-columns:1fr;}
+}
+
+@media (max-width: 600px){
+  .faq-a p{padding:0 0 24px 44px;}
+}
+
+@media (max-width: 560px){
+  .final-ctas .btn{flex:1 1 100%;}
+}
+
+@media (max-width: 860px){
+  .contact{grid-template-columns:1fr;}
+}
+
+@media (max-width: 560px){
+  .field-row{grid-template-columns:1fr;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto !important;}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .split-ready .wi{transform:none !important;}
+  .hero-copy > *{opacity:1 !important;}
+  .about-text .rw{opacity:1 !important;}
+  .ticker-track{transform:none !important;}
+  .ph img{transition:none;}
+}
+
+/* --- Architecture multi-pages : ruptures des composants ajoutés --- */
+@media (max-width: 900px){
+  .foot-nav{width:100%;}
+}
+@media (max-width: 640px){
+  .cat-grid{grid-template-columns:1fr;}
+  .steps-lite{grid-template-columns:1fr 1fr; gap:var(--s-4);}
+  .work-grid{grid-template-columns:1fr;}
+}
+@media (max-width: 420px){
+  .steps-lite{grid-template-columns:1fr;}
+}
+
+
+/* ---------- Prestations : 4 panneaux ---------- */
+
+/* Tablette : quatre colonnes deviennent illisibles bien avant le mobile.
+   On passe à deux, en gardant le fond photo et le principe d'accentuation. */
+@media (max-width: 1024px){
+  .services-panels{min-height:0;}
+  .sp-list{grid-template-columns:repeat(2, 1fr);}
+  .sp-item:nth-child(-n+2){border-bottom:1px solid rgba(237,232,220,.14);}
+  .sp-item:last-child{border-right:none;}
+  /* Deux rangées au lieu d'une : la hauteur des panneaux doit être divisée,
+     sinon la section atteint 99vh et occupe tout l'écran à elle seule
+     (mesuré à 1024x768 avant correction). */
+  .sp-link{min-height:clamp(170px, 22vh, 220px);}
+  .sp-head{padding-top:var(--r-block);}
+}
+
+/* Mobile : on empile. Les panneaux ne sont plus des colonnes mais des bandes
+   pleine largeur, assez hautes pour qu'on lise sans plisser les yeux. Le
+   fond photo reste, l'accentuation reste, seule la disposition change. */
+@media (max-width: 680px){
+  .sp-list{grid-template-columns:1fr;}
+  .sp-item{
+    border-left:none;
+    border-right:none !important;
+    border-top:1px solid rgba(237,232,220,.14);
+  }
+  .sp-item:nth-child(-n+2){border-bottom:none;}
+  .sp-link{
+    min-height:0;
+    padding:var(--s-4) var(--gutter);
+    gap:var(--s-3);
+  }
+  .sp-desc{max-width:44ch;}
+  /* Sur mobile il n'y a pas de survol : les quatre CTA et numéros restent
+     visibles en permanence plutôt que de dépendre d'un état actif que
+     l'utilisateur ne peut pas déclencher au doigt sans cliquer. */
+  .sp-num, .sp-cta{opacity:1; transform:none;}
+  .sp-item::before{opacity:.28;}
+  .sp-item.is-on::before{opacity:0;}
+  .sp-head h2{max-width:none;}
+}
+
+
+/* ---------- L'agence : écran partagé ---------- */
+
+/* En dessous de 1024 px, 42 % de largeur pour le texte donne une colonne de
+   quatre mots par ligne. On repasse en pile : le texte d'abord, l'image
+   dessous en bandeau — elle garde sa présence sans écraser la lecture. */
+@media (max-width: 1024px){
+  .agence-split{
+    display:block;
+    min-height:0;
+    padding-bottom:0;
+  }
+  .agence-media{
+    position:relative;
+    width:100%;
+    height:clamp(260px, 42vw, 420px);
+    margin-top:var(--r-block);
+  }
+  /* Le fondu tourne d'un quart : il vient du haut, plus de la gauche, pour
+     raccorder l'image au bloc de texte qui la précède maintenant. */
+  .agence-media::after{
+    background:
+      linear-gradient(to bottom,
+        var(--bg) 0%,
+        rgba(14,15,17,.72) 14%,
+        rgba(14,15,17,.16) 44%,
+        rgba(14,15,17,0) 100%);
+  }
+  .agence-inner .section-head{max-width:min(100%, 34ch);}
+  .agence-inner .section-head p{max-width:52ch;}
+}
+
+@media (max-width: 560px){
+  .agence-media{height:clamp(210px, 54vw, 300px);}
+}
+
+
+/* ---------- Dépliant services ---------- */
+@media (max-width: 1180px){
+  .mega-list{grid-template-columns:repeat(2, 1fr);}
+}
+/* Sous 940px la barre de navigation disparaît au profit du menu plein
+   écran : le déclencheur du dépliant n'existe plus, le panneau non plus.
+   Les 5 prestations restent atteignables par « Services » du menu mobile. */
+@media (max-width: 940px){
+  .mega, .mega-voile{display:none !important;}
+}
