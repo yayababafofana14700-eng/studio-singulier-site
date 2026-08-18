@@ -237,3 +237,22 @@
 @media (max-width: 940px){
   .mega, .mega-voile{display:none !important;}
 }
+
+
+/* ---------- Menu mobile sur écran court ---------- */
+/* Mesuré sur un 360x640 : la barre d'URL de Chrome laisse ~560px, dont le
+   nav ne récupère que 316 après l'en-tête, le pied et les marges. À 70px
+   l'entrée, quatre tenaient — les deux dernières pages étaient hors champ,
+   et il fallait deviner qu'on pouvait faire défiler pour les atteindre.
+   On resserre donc les marges et l'échelle plein écran, qui n'a de sens que
+   s'il reste de la hauteur à remplir. Les six entrées tiennent alors sans
+   défilement ; il ne redevient nécessaire qu'une fois le repli ouvert. */
+@media (max-height: 720px){
+  .mobile-menu{padding:18px var(--gutter) 20px;}
+  .mm-top{margin-bottom:18px;}
+  .mm-foot{padding-top:20px;}
+  .mobile-menu nav a{padding:13px 0; font-size:clamp(21px,5.6vw,28px);}
+  .mm-svc{padding:13px 0; font-size:clamp(21px,5.6vw,28px);}
+  .mobile-menu nav .mm-sub a{padding:11px 0 11px 30px;}
+  .mm-sub.is-open{max-height:400px;}
+}

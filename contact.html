@@ -62,10 +62,10 @@
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css?v=20260818a">
-<link rel="stylesheet" href="css/pages.css?v=20260818a">
-<link rel="stylesheet" href="css/responsive.css?v=20260818a">
-<link rel="stylesheet" href="css/page-contact.css?v=20260818a">
+<link rel="stylesheet" href="css/style.css?v=20260818d">
+<link rel="stylesheet" href="css/pages.css?v=20260818d">
+<link rel="stylesheet" href="css/responsive.css?v=20260818d">
+<link rel="stylesheet" href="css/page-contact.css?v=20260818d">
 </head>
 <body>
 
@@ -151,7 +151,15 @@
   </div>
 </div>
 
-<div class="mobile-menu" id="mobileMenu">
+<!-- data-lenis-prevent : Lenis écoute les touchmove sur window et, dès qu'il
+     est arrêté, appelle preventDefault() sur chacun. Cela verrouille bien la
+     page — c'est l'effet voulu à l'ouverture du menu — mais cela tuait aussi
+     le défilement interne de ce panneau : sur un écran court, les dernières
+     entrées devenaient inatteignables au doigt.
+     Lenis teste cet attribut sur toute la chaîne d'ancêtres de l'événement,
+     et avant son verrou : posé ici, il rend au navigateur les gestes faits
+     n'importe où dans le menu, y compris dans le <nav> défilant. -->
+<div class="mobile-menu" id="mobileMenu" data-lenis-prevent>
   <div class="mm-top">
     <span class="logo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
@@ -365,7 +373,7 @@
         integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
         crossorigin="anonymous"></script>
 
-<script src="js/animations.js?v=20260818a" defer></script>
-<script src="js/main.js?v=20260818a" defer></script>
+<script src="js/animations.js?v=20260818d" defer></script>
+<script src="js/main.js?v=20260818d" defer></script>
 </body>
 </html>

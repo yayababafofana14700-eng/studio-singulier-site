@@ -436,7 +436,19 @@ section{position:relative;}
    entrées principales dépliées dépassent la hauteur d'écran. `min-height:0`
    est indispensable — sans lui, un enfant flex refuse de rétrécir sous sa
    taille de contenu et `overflow-y` ne s'applique jamais. */
-.mobile-menu nav{display:flex; flex-direction:column; flex:1; min-height:0; overflow-y:auto;}
+/* `min-height:0` est indispensable : un enfant flex refuse par défaut de
+   descendre sous la taille de son contenu, et `overflow-y` n'aurait jamais
+   pris effet. `overscroll-behavior:contain` empêche le geste, arrivé en bas
+   de la liste, de se propager à la page derrière le menu.
+   Le défilement tactile réclame en plus `data-lenis-prevent` sur le panneau
+   dans le HTML — voir le commentaire là-bas. */
+.mobile-menu nav{
+  display:flex; flex-direction:column; flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
 .mobile-menu nav a{
   display:flex; align-items:baseline; gap:18px;
   padding:20px 0;

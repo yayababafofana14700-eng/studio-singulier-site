@@ -699,6 +699,29 @@
       void sous.offsetHeight;
       sous.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
+
+      /* Sur un écran court, déplier pousse la fin de la liste hors champ : on
+         voyait s'ouvrir deux prestations sur cinq, sans rien qui indique que
+         les trois autres existent plus bas. On amène donc le bas du repli
+         dans le champ une fois l'animation finie — avant, la hauteur mesurée
+         serait encore celle du repli fermé. */
+      minuteur = setTimeout(function(){
+        if(!deplie) return;
+        var zone = sous.parentElement;
+        /* On mesure sur `scrollHeight`, la hauteur déployée, et non sur le
+           rectangle courant : celui-ci vaut ce que l'animation a parcouru.
+           Si la transition est escamotée — mouvement réduit, onglet en
+           arrière-plan — le rectangle vaudrait encore zéro et le débordement
+           serait calculé négatif, donc ignoré. */
+        var basDeploye = sous.getBoundingClientRect().top + sous.scrollHeight;
+        var debord = basDeploye - zone.getBoundingClientRect().bottom;
+        if(debord > 0){
+          zone.scrollBy({
+            top: debord + 8,
+            behavior: (window.SS && SS.prefersReduced) ? 'auto' : 'smooth'
+          });
+        }
+      }, 460);
     }
 
     btn.addEventListener('click', function(){ deplie ? replier() : deplier(); });
