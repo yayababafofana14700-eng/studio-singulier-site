@@ -659,4 +659,65 @@
                                : mqMobile.addListener.bind(mqMobile))(function(){ fermer(); });
   })();
 
+
+  /* =======================================================================
+     21. REPLI SERVICES DU MENU MOBILE
+     Sous 940px la barre du haut disparaît, et le dépliant Services avec elle.
+     Le survol n'existe pas au doigt : ce repli est le seul accès aux cinq
+     pages de prestation sur téléphone.
+     ======================================================================= */
+  (function(){
+    var btn  = document.getElementById('mmServices');
+    var sous = document.getElementById('mmSousServices');
+    if(!btn || !sous) return;
+
+    var deplie = false;
+    var minuteur = null;
+
+    function replier(){
+      clearTimeout(minuteur);
+      if(!deplie) return;
+      deplie = false;
+      sous.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      /* On attend la fin du repli avant de remettre `hidden`. Sans ce délai
+         la liste disparaîtrait d'un coup ; sans `hidden` du tout, ses cinq
+         liens resteraient atteignables au clavier derrière un `max-height:0`
+         (SC 2.4.3), car `overflow:hidden` masque sans retirer du parcours. */
+      minuteur = setTimeout(function(){ if(!deplie) sous.hidden = true; }, 440);
+    }
+
+    function deplier(){
+      clearTimeout(minuteur);
+      if(deplie) return;
+      deplie = true;
+      sous.hidden = false;
+      /* Même raison qu'au dépliant du haut : il faut un état de départ
+         calculé avant de poser la classe, sinon le navigateur fusionne les
+         deux et la transition ne démarre pas. Une lecture de géométrie est
+         synchrone, contrairement à requestAnimationFrame. */
+      void sous.offsetHeight;
+      sous.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    btn.addEventListener('click', function(){ deplie ? replier() : deplier(); });
+
+    /* Le menu plein écran se referme de trois façons : le bouton Fermer, le
+       choix d'un lien, et Échap. Dans les trois cas on replie, pour que la
+       prochaine ouverture reparte d'un menu au repos. */
+    var fermeture = document.getElementById('closeMenu');
+    if(fermeture) fermeture.addEventListener('click', replier);
+
+    var menu = document.getElementById('mobileMenu');
+    if(menu){
+      menu.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', replier);
+      });
+    }
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') replier();
+    });
+  })();
+
 })();

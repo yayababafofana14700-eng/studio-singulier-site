@@ -432,7 +432,11 @@ section{position:relative;}
   cursor:pointer;
   padding:8px 0;
 }
-.mobile-menu nav{display:flex; flex-direction:column; flex:1;}
+/* Le repli Services ajoute cinq entrées : sur un téléphone court, les six
+   entrées principales dépliées dépassent la hauteur d'écran. `min-height:0`
+   est indispensable — sans lui, un enfant flex refuse de rétrécir sous sa
+   taille de contenu et `overflow-y` ne s'applique jamais. */
+.mobile-menu nav{display:flex; flex-direction:column; flex:1; min-height:0; overflow-y:auto;}
 .mobile-menu nav a{
   display:flex; align-items:baseline; gap:18px;
   padding:20px 0;
@@ -454,6 +458,63 @@ section{position:relative;}
   color:var(--signal);
 }
 .mm-foot{padding-top:32px;}
+
+/* ---------- repli Services du menu mobile ----------
+   Sous 940px la barre du haut cède la place au burger, et le dépliant
+   Services est mis hors jeu (responsive.css). « Services » y était un lien
+   unique vers sites-web.html : les quatre autres pages de prestation
+   n'avaient alors plus aucun chemin d'accès au doigt. D'où ce repli.
+   C'est un <button> et non un <a> : il ne mène nulle part, et le
+   gestionnaire qui referme le menu au clic ne vise que les <a>. */
+.mm-svc{
+  display:flex; align-items:baseline; gap:18px;
+  width:100%; padding:20px 0;
+  border:none; border-bottom:1px solid var(--rule);
+  background:none; color:inherit; text-align:left; cursor:pointer;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:700;
+  /* Même exception d'échelle que .mobile-menu nav a, pour que le bouton
+     s'aligne exactement sur les entrées voisines. */
+  font-size:clamp(26px,7vw,36px);
+  letter-spacing:-.03em;
+}
+.mm-svc i{
+  font-family:'JetBrains Mono',monospace;
+  font-style:normal;
+  font-size:var(--t-micro);
+  color:var(--signal);
+}
+.mm-chev{
+  margin-left:auto; align-self:center;
+  width:10px; height:10px;
+  border-right:2px solid var(--fg-dim);
+  border-bottom:2px solid var(--fg-dim);
+  transform:rotate(45deg) translateY(-3px);
+  transition:transform .34s var(--ease-out);
+}
+.mm-svc[aria-expanded="true"] .mm-chev{transform:rotate(225deg) translateY(-3px);}
+
+.mm-sub{
+  list-style:none; margin:0; padding:0;
+  max-height:0; overflow:hidden;
+  transition:max-height .42s var(--ease-out);
+  /* La liste est un enfant de <nav>, qui est un flex en colonne. Sans
+     `flex:none`, elle hérite de flex-shrink:1 et se ferait comprimer par le
+     partage de hauteur au lieu de déclencher le défilement du nav. */
+  flex:none;
+}
+/* Valeur haute volontaire : elle sert de plafond au dépliement, pas de
+   mesure. Le contenu fait environ 300px ; la marge évite qu'un rendu plus
+   grand (police système, titre sur deux lignes) ne soit tronqué. */
+.mm-sub.is-open{max-height:520px;}
+.mobile-menu nav .mm-sub a{
+  padding:15px 0 15px 34px;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:var(--t-body);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--fg-dim);
+}
 
 /* =========================================================================
 
