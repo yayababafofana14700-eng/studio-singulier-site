@@ -70,6 +70,48 @@
   .hpan.is-pinned .hpan-viewport{overflow-x:auto; scroll-snap-type:x mandatory;}
 }
 
+/* ---------- Panoramique épinglé sur téléphone ----------
+   Le panoramique s'active désormais au doigt comme à la molette. Sa seule
+   condition reste que toute la section — titre, carte, indicateur — tienne
+   dans la hauteur d'écran : sinon le script refuse d'épingler et rend la
+   piste au défilement tactile.
+   Mesuré sur un 360x560 : 608px pour 562 disponibles, l'épinglage était
+   refusé de 48px. On resserre donc chaque poste, sans rien retirer — le
+   chapeau et les six descriptions restent en place, seulement plus compacts.
+   Borné à 899px de large pour que le bureau ne change en rien. */
+@media (max-width: 899px){
+  .hpan.is-pinned{padding-bottom:clamp(12px, 1.8vh, 24px);}
+  .hpan.is-pinned .rail-head{margin-bottom:12px;}
+  /* max-width:36ch servait à ramener le titre à deux lignes sur un large
+     écran. Sous 360px de contenu utile, la largeur ne vient plus de là mais
+     de la gouttière : la contrainte est inopérante, la taille fait tout. */
+  .hpan.is-pinned .rail-head .section-head{max-width:none;}
+  /* .section-head porte 48px de marge basse, héritée du gabarit commun des
+     titres de section. Ici elle fait double emploi : .rail-head fournit déjà
+     l'écart qui la sépare des cartes. C'était le plus gros poste perdu de la
+     section — plus que l'image, plus que le titre. */
+  .hpan.is-pinned .rail-head .section-head{margin-bottom:0;}
+  .hpan.is-pinned .rail-head h2{font-size:var(--t-body);}
+  .hpan.is-pinned .rail-head .eyebrow{margin-bottom:8px;}
+  .hpan.is-pinned .rail-head .section-head p{margin-top:8px; font-size:12.5px; line-height:1.45;}
+  /* 16/9 au lieu de 4/3 était déjà le resserrement du mode épinglé ; 2/1
+     poursuit le même geste. L'image est en object-fit:cover, elle est donc
+     recadrée, jamais déformée. */
+  .hpan.is-pinned .rail-item .rail-media{aspect-ratio:2/1; margin-bottom:10px;}
+  .hpan.is-pinned .rail-item h3{font-size:var(--t-s); margin-bottom:7px;}
+  .hpan.is-pinned .rail-item .sector{margin-bottom:7px;}
+  .hpan.is-pinned .hpan-foot{margin-top:10px;}
+  .hpan.is-pinned .hpan-track{padding-bottom:0;}
+}
+
+/* Largeur des cartes au téléphone. Une carte occupe presque toute la largeur
+   utile, en laissant dépasser un fragment de la suivante : c'est ce fragment
+   qui dit qu'il y a une suite. Sans lui, la première carte a l'air seule. */
+@media (max-width: 700px){
+  .hpan-track{gap:16px;}
+  .rail-item{width:min(286px, calc(100vw - 2 * var(--gutter) - 34px));}
+}
+
 @media (max-width: 860px){
   .sticky-split{grid-template-columns:1fr;}
   .sticky-index{position:static;}

@@ -336,6 +336,12 @@
 .hpan.is-pinned .hpan-viewport{
   overflow:hidden;
   scroll-snap-type:none;
+  /* Épinglé, la piste n'est plus pilotée que par le défilement de la page.
+     overflow:hidden suffit à interdire le glissement horizontal, mais pas à
+     empêcher le navigateur d'INTERPRÉTER un geste en diagonale comme
+     horizontal : le geste est alors consommé sans rien faire, et il faut
+     recommencer. pan-y le dit explicitement — ici, seul le vertical existe. */
+  touch-action:pan-y;
 }
 
 /* ---------- mise en page en mode épinglé ----------

@@ -13,7 +13,17 @@
   var canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   var animate  = hasGSAP && !prefersReduced;
 
-  if(hasST) gsap.registerPlugin(ScrollTrigger);
+  if(hasST){
+    gsap.registerPlugin(ScrollTrigger);
+    /* Sur Android et iOS, la barre d'URL se rétracte au défilement : la
+       hauteur du viewport change de plusieurs dizaines de pixels, sans qu'il
+       se soit rien passé. ScrollTrigger recalculerait alors ses points de
+       départ et d'arrivée au milieu du geste, et la section épinglée
+       sauterait sous le doigt. ignoreMobileResize lui fait ignorer ces
+       variations de hauteur seule ; la rotation, elle, change la largeur et
+       reste prise en compte. */
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
 
 
   /* Espace de noms partagé avec main.js. Lu à l'appel, jamais au chargement :
@@ -219,10 +229,16 @@
      rapport 1:1 qui évite la sensation de page bloquée : le coût du geste
      correspond à ce qu'on voit avancer.
 
-     Repli assumé : sous 900px, sans GSAP, ou en mouvement réduit, aucun
-     épinglage n'est créé. La piste redevient une liste défilable au doigt,
-     avec ses points d'accroche. Le repli est l'état par défaut du CSS, pas
-     un correctif appliqué après coup.
+     Le geste reste vertical sur les deux plateformes : molette au bureau,
+     glissement du doigt au mobile. Dans les deux cas c'est le défilement de
+     la page qui pilote la translation, jamais un glissement horizontal.
+
+     Repli assumé : sans GSAP, en mouvement réduit, ou si la section ne tient
+     pas dans la hauteur d'écran, aucun épinglage n'est créé. La piste
+     redevient une liste défilable au doigt, avec ses points d'accroche. Le
+     repli est l'état par défaut du CSS, pas un correctif appliqué après coup.
+     C'est la HAUTEUR qui décide, plus la largeur : un téléphone tenu droit a
+     la place, le même couché ne l'a pas.
      ======================================================================= */
   (function(){
     var sections = Array.prototype.slice.call(document.querySelectorAll('[data-hpan]'));
@@ -332,7 +348,12 @@
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,                 // évite le saut sur molette rapide
-            scrub: .6,
+            /* La molette avance par crans : le lissage absorbe ces marches.
+               Le doigt, lui, produit un geste continu qui porte déjà son
+               inertie — 0,6 s de retard s'y lirait comme un décrochage entre
+               le doigt et les cartes. On lisse alors juste assez pour manger
+               le tremblement du geste. */
+            scrub: canHover ? .6 : .12,
             invalidateOnRefresh: true,
             onUpdate: function(self){ peindre(self.progress); marquerVisibles(self.progress); }
           }
@@ -420,8 +441,11 @@
         enCours = false;
       }
 
+      /* Plus de borne de largeur : le panoramique est le comportement voulu
+         sur téléphone aussi. Le seul garde-fou est tientDansEcran(), évalué
+         plus haut — il porte sur la hauteur, qui est la vraie contrainte. */
       gsap.matchMedia().add(
-        '(min-width: 900px) and (prefers-reduced-motion: no-preference)',
+        '(prefers-reduced-motion: no-preference)',
         function(){
           actif = true;
           evaluer();
@@ -433,13 +457,23 @@
       if(document.fonts && document.fonts.ready) document.fonts.ready.then(evaluer);
 
       /* matchMedia ne réagit qu'à la largeur. Or notre garde-fou porte sur la
-         hauteur : barre d'URL mobile, rotation, fenêtre redimensionnée. */
-      var derniereH = window.innerHeight, minuteur;
+         hauteur : rotation, fenêtre redimensionnée.
+         Une variation de hauteur SEULE est traitée à part. Au bureau elle
+         signale un vrai redimensionnement et doit être suivie. Au doigt, elle
+         vient presque toujours de la barre d'URL qui se rétracte pendant le
+         défilement : reconstruire l'épinglage à cet instant le ferait sauter
+         en pleine lecture. On l'ignore donc, et seul un changement de largeur
+         — la rotation — déclenche la réévaluation. */
+      var derniereH = window.innerHeight, derniereW = window.innerWidth, minuteur;
       window.addEventListener('resize', function(){
         clearTimeout(minuteur);
         minuteur = setTimeout(function(){
-          if(Math.abs(window.innerHeight - derniereH) > 40){
+          var dh = Math.abs(window.innerHeight - derniereH);
+          var dw = Math.abs(window.innerWidth  - derniereW);
+          if(dw < 2 && !canHover) return;     // barre d'URL : rien n'a changé
+          if(dh > 40 || dw > 2){
             derniereH = window.innerHeight;
+            derniereW = window.innerWidth;
             evaluer();
           }
         }, 240);
