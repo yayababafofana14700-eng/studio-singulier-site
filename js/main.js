@@ -120,7 +120,7 @@
     var input = document.getElementById('aiInput');
     if(!launcher || !form) return;
 
-    var WEB3FORMS_KEY = '032471fb-ba5f-437e-9023-bffd8f52ab76';
+    var WEB3FORMS_KEY = 'c14a592c-eac2-405b-8ccb-a946f68838ed';
     var CLOSER = " Souhaitez-vous réserver un appel gratuit ?";
 
     var answers = {
