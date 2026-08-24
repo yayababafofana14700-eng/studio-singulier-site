@@ -1,0 +1,67 @@
+/* =========================================================================
+   POLICES AUTO-HÉBERGÉES
+   -------------------------------------------------------------------------
+   JetBrains Mono, servie depuis assets/fonts/ au lieu de fonts.googleapis.com.
+
+   Pourquoi
+   Chaque feuille de police externe coûte un DNS, un TLS et un aller-retour
+   avant la première peinture. Sur 4G lente, Lighthouse chiffrait le blocage
+   du rendu à 1 790 ms pour les deux feuilles réunies.
+
+   Licence
+   JetBrains Mono est sous SIL Open Font License 1.1, qui autorise
+   explicitement la redistribution — le texte complet est dans
+   assets/fonts/OFL.txt, comme la licence l'exige.
+
+   Cabinet Grotesk et Satoshi restent servies par Fontshare : leur licence
+   (ITF Free Font License) autorise l'auto-hébergement mais interdit la
+   redistribution via un dépôt public, ce qu'est ce dépôt. Elles sont
+   chargées en media="print" onload, donc sans bloquer le rendu.
+
+   Sous-ensembles
+   Seuls latin et latin-ext sont repris : ils couvrent le français, accents
+   et ligatures compris. Les jeux cyrillique, grec et vietnamien servis par
+   Google ne sont jamais sollicités ici. Les plages unicode-range ci-dessous
+   sont copiées telles quelles depuis la réponse de Google — le navigateur
+   ne télécharge un fichier que si un caractère de sa plage apparaît.
+   ========================================================================= */
+
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
