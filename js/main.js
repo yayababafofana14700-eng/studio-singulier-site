@@ -797,4 +797,77 @@
     });
   })();
 
+  /* =========================================================================
+     22. TRANSITION ENTRE LES PAGES
+
+     Le voile monte au clic sur un lien interne, la page suivante s'affiche
+     normalement. Sortie seulement, jamais d'entrée : un voile posé au
+     chargement deviendrait l'élément peint en premier et repousserait le LCP
+     de la durée du fondu. Le site tient en dix pages statiques, et l'essentiel
+     de la continuité perçue vient du départ, pas de l'arrivée.
+
+     Le voile est créé ici et non dans le HTML : sans JavaScript il n'existe
+     pas, et aucun écran plein ne peut rester en travers d'un lien.
+     ========================================================================= */
+  (function(){
+    if(window.matchMedia &&
+       window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var voile = document.createElement('div');
+    voile.className = 'page-veil';
+    voile.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(voile);
+
+    var DUREE = 260;          /* doit rester égal à la transition CSS */
+    var enRoute = false;
+
+    /* Un lien n'est repris que s'il mène vraiment ailleurs sur ce site. Tout
+       le reste garde son comportement natif : ancres, courriel, téléphone,
+       téléchargements, nouvel onglet, domaines tiers. */
+    function estInterne(a){
+      if(!a || !a.getAttribute) return false;
+      if(a.target) return false;
+      if(a.hasAttribute('download')) return false;
+
+      var href = a.getAttribute('href');
+      if(!href) return false;
+      if(href.charAt(0) === '#') return false;
+      if(/^(mailto:|tel:|javascript:)/i.test(href)) return false;
+      if(a.origin !== window.location.origin) return false;
+
+      /* Ancre vers la page courante : le navigateur fait défiler, il ne
+         navigue pas. Lever le voile figerait l'écran pour rien. */
+      if(a.pathname === window.location.pathname && a.hash) return false;
+
+      return true;
+    }
+
+    document.addEventListener('click', function(e){
+      if(e.defaultPrevented) return;
+      if(e.button !== 0) return;                 /* clic droit, molette */
+      /* Ces modificateurs ouvrent un onglet ou téléchargent : la page courante
+         ne bouge pas, la voiler serait un contresens. */
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      var a = e.target && e.target.closest ? e.target.closest('a') : null;
+      if(!estInterne(a)) return;
+
+      e.preventDefault();
+      if(enRoute) return;                        /* double clic : une seule fois */
+      enRoute = true;
+
+      voile.classList.add('is-on');
+      setTimeout(function(){ window.location.href = a.href; }, DUREE);
+    });
+
+    /* Retour arrière : le navigateur restaure la page depuis son cache dans
+       l'état exact où on l'a quittée, voile levé compris. Sans ce nettoyage,
+       l'utilisateur retombe sur un écran plein et croit le site cassé. C'est
+       le piège classique de ce motif. */
+    window.addEventListener('pageshow', function(){
+      enRoute = false;
+      voile.classList.remove('is-on');
+    });
+  })();
+
 })();

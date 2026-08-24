@@ -804,3 +804,32 @@ html.is-resizing *{transition:none !important;}
 @media (prefers-reduced-motion: reduce){
   .skip-link{ transition:none; }
 }
+
+
+/* =========================================================================
+   VOILE DE TRANSITION ENTRE LES PAGES
+
+   Il monte au clic sur un lien interne, puis la page suivante s'affiche
+   normalement. Transition à la sortie seulement, jamais à l'entrée : un voile
+   posé au chargement deviendrait l'élément peint en premier et repousserait le
+   LCP de la durée du fondu.
+
+   Créé par le JavaScript, donc absent du DOM quand il n'y en a pas : sans JS,
+   les liens fonctionnent tels quels et rien ne peut rester en travers.
+
+   z-index 9998, juste sous le lien d'évitement : une transition ne doit jamais
+   masquer un outil d'accessibilité.
+   ========================================================================= */
+.page-veil{
+  position:fixed; inset:0;
+  background:var(--bg);
+  opacity:0;
+  pointer-events:none;
+  z-index:9998;
+  transition:opacity .26s ease;
+}
+.page-veil.is-on{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .page-veil{ transition:none; }
+}
