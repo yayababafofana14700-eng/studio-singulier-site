@@ -41,9 +41,32 @@ l'ancien domaine dans les 10 fichiers HTML.
 ## Cache
 
 Les feuilles de style et les scripts portent un paramètre de version
-(`?v=…`). **À chaque modification de CSS ou de JS, incrémenter ce numéro
-dans les 10 pages**, sinon les navigateurs continuent de servir l'ancienne
-version.
+(`?v=…`) qui est **l'empreinte de leur contenu**, pas une date.
+
+Après toute modification de CSS ou de JS :
+
+```
+node scripts/version-assets.mjs
+```
+
+Le script recalcule l'empreinte de chaque fichier et réécrit les dix pages.
+Il est idempotent : le relancer sans avoir rien changé ne touche à rien.
+
+Pour vérifier sans écrire — utile avant un commit ou un déploiement :
+
+```
+node scripts/version-assets.mjs --check
+```
+
+Il sort en 1 si une page est périmée, ou si le HTML référence un fichier
+absent du disque.
+
+Chaque asset a sa propre empreinte : modifier `style.css` ne fait pas
+expirer le cache de `main.js`.
+
+C'est ce qui rend sûr le `max-age=31536000, immutable` posé sur `/css/` et
+`/js/` dans `vercel.json` — l'URL change dès que l'octet change. Sans ce
+script, ces en-têtes serviraient un fichier périmé pendant un an.
 
 ## Formulaire de contact
 
