@@ -581,6 +581,51 @@
     });
   }
 
+  /* =========================================================================
+     14. PROFONDEUR : PARALLAXE DE L'IMAGE D'ATELIER
+
+     L'image dérive plus lentement que le texte qui la longe. C'est le procédé
+     le plus ancien du cinéma d'animation, et le moins coûteux : deux plans qui
+     n'avancent pas à la même vitesse suffisent à créer une distance là où il
+     n'y a qu'une surface plate.
+
+     Deux précautions.
+
+     L'image est en `object-fit: cover` : la déplacer telle quelle découvrirait
+     une bande vide en haut puis en bas. On l'agrandit donc de 12 %, ce qui
+     laisse 6 % de marge de chaque côté — la dérive de ±4 % reste dedans, avec
+     de la réserve.
+
+     Cet agrandissement est posé par GSAP et non par le CSS : sans JavaScript,
+     l'image garde exactement le cadrage d'origine. Une amélioration qui
+     dégrade le cas de repli n'en est pas une.
+     ========================================================================= */
+  if(animate && hasST){
+    var atelier = document.querySelector('.agence-media img');
+    var sectionAtelier = atelier && atelier.closest('.agence-split');
+
+    if(atelier && sectionAtelier){
+      gsap.fromTo(atelier,
+        { yPercent: -4, scale: 1.12 },
+        {
+          yPercent: 4, scale: 1.12,
+          ease: 'none',              /* la position du scroll EST la position */
+          scrollTrigger: {
+            trigger: sectionAtelier,
+            /* Toute la traversée de la section, de son entrée par le bas à sa
+               sortie par le haut : la dérive doit être imperceptible d'une
+               image à l'autre, et sensible d'un bout à l'autre. */
+            start: 'top bottom',
+            end: 'bottom top',
+            /* Même raisonnement qu'au panoramique : la molette avance par
+               crans qu'il faut lisser, le doigt porte déjà son inertie. */
+            scrub: canHover ? .5 : .12,
+            invalidateOnRefresh: true
+          }
+        });
+    }
+  }
+
   SS.lenis = lenis;
 
 })();
