@@ -516,8 +516,13 @@
       clearTimeout(reprise);  reprise = null;
     }
     /* Après une interaction, on laisse à l'utilisateur le temps de lire
-       avant de lui reprendre la main. */
+       avant de lui reprendre la main.
+
+       Sans objet quand le scroll pilote : relancer le minuteur au mouseleave
+       ferait avancer les panneaux pendant que la position du scroll dit
+       l'inverse, et les deux sources se disputeraient l'affichage. */
     function reprendrePlusTard(){
+      if(epingle) return;
       clearTimeout(reprise);
       reprise = setTimeout(demarrer, REPRISE);
     }
@@ -536,9 +541,56 @@
       }
     });
 
+    /* =====================================================================
+       ÉPINGLAGE : LE SCROLL PILOTE LES QUATRE PANNEAUX
+
+       La section se fige le temps qu'on traverse les quatre services. La
+       molette avance dans le contenu au lieu de le dépasser.
+
+       On réutilise `activer()` tel quel : le scroll remplace le minuteur
+       comme source de la position, rien d'autre ne change. Le survol et le
+       clavier continuent de fonctionner par-dessus.
+
+       Quatre conditions avant d'épingler, chacune avec sa raison :
+       - mouvement réduit demandé : on ne fige rien, la boucle reste neutralisée
+       - GSAP ou ScrollTrigger absents : repli sur le minuteur, jamais de page morte
+       - sous 900 px : épingler sur tactile se bat avec le scroll du système
+       - fenêtre plus courte que la section : une section figée plus haute que
+         l'écran cache son propre contenu
+
+       Quand l'épinglage prend, le minuteur ne démarre pas : deux sources de
+       position pour un même composant produiraient des sauts.
+       ===================================================================== */
+    var epingle = false;
+
+    (function(){
+      if(reduit) return;
+      if(!window.gsap || !window.ScrollTrigger) return;
+      if(!window.matchMedia('(min-width: 900px)').matches) return;
+      if(window.innerHeight < section.offsetHeight) return;
+
+      epingle = true;
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        /* Une longueur de défilement par panneau. Trop court, on saute deux
+           services d'un geste ; trop long, la page semble bloquée. */
+        end: '+=' + (items.length * 55) + '%',
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(self){
+          var i = Math.min(items.length - 1, Math.floor(self.progress * items.length));
+          if(i !== courant) activer(i);
+        }
+      });
+    })();
+
     /* Onglet en arrière-plan : inutile de faire tourner des fondus que
-       personne ne regarde. */
+       personne ne regarde. Sans objet quand le scroll pilote. */
     document.addEventListener('visibilitychange', function(){
+      if(epingle) return;
       document.hidden ? arreter() : demarrer();
     });
 
@@ -548,12 +600,14 @@
        l'observateur ne se déclenche pas : onglet en arrière-plan, page qui
        ne compose pas, navigateur exotique. Un composant qui ne bouge jamais
        est un bug ; un composant qui tourne un peu hors écran ne l'est pas. */
-    demarrer();
+    if(!epingle){
+      demarrer();
 
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(entrees){
-        entrees[0].isIntersecting ? demarrer() : arreter();
-      }, { threshold: .25 }).observe(section);
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(entrees){
+          entrees[0].isIntersecting ? demarrer() : arreter();
+        }, { threshold: .25 }).observe(section);
+      }
     }
   })();
 
