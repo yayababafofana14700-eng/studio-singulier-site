@@ -19,8 +19,21 @@ contact.html               Contact
 
 css/    style.css (socle) · pages.css (sections) · responsive.css (@media) · page-*.css
 js/     animations.js (GSAP, Lenis) · main.js (menu, dépliant, FAQ, formulaire, horloge)
+js/vendor/  GSAP, ScrollTrigger et Lenis, servis en local et non depuis un CDN
 assets/ images WebP + la vidéo du hero
+scripts/version-assets.mjs   recalcule les empreintes de cache (voir plus bas)
+POUSSER-SUR-GITHUB.bat       déploiement : contrôles, recalcul, push
 ```
+
+## Déployer
+
+Double-clic sur le raccourci **POUSSER SUR GITHUB** du Bureau, qui pointe
+vers `POUSSER-SUR-GITHUB.bat` à la racine du projet.
+
+Le script refuse de partir si des fichiers ne sont pas commités. Ce n'est
+pas de la prudence excessive : il recalcule ensuite les empreintes d'assets,
+et le faire sur un CSS non commité écrirait dans les pages la version d'un
+fichier que le serveur ne recevra jamais.
 
 ## Déploiement
 
