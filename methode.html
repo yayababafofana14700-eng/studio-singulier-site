@@ -54,7 +54,7 @@
 <link rel="stylesheet" href="css/style.css?v=1b505024">
 <link rel="stylesheet" href="css/pages.css?v=78f9f794">
 <link rel="stylesheet" href="css/responsive.css?v=5d3a120b">
-<link rel="stylesheet" href="css/page-methode.css?v=2ff8dade">
+<link rel="stylesheet" href="css/page-methode.css?v=81c9fdd3">
 </head>
 <body>
 
@@ -202,6 +202,13 @@
 
 <!-- ===================== VUE D'ENSEMBLE ===================== -->
 <section class="section rule-top reveal on-paper" aria-labelledby="ov-title">
+
+  <!-- Forme qui s'ordonne. Vide par défaut : le script n'y dessine que si
+       l'appareil sait afficher du WebGL et que le mouvement n'est pas réduit.
+       Purement décorative, donc masquée aux technologies d'assistance : il n'y
+       a aucun équivalent textuel à fournir pour un ornement. -->
+  <div id="methode-3d" class="methode-3d" aria-hidden="true"></div>
+
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Vue d'ensemble</p>
@@ -466,5 +473,7 @@
 
 <script src="js/animations.js?v=46ac0f8c" defer></script>
 <script src="js/main.js?v=e0b4d2c2" defer></script>
+  <!-- Scene WebGL, page methode uniquement. Charge Three.js a la demande. -->
+  <script src="js/methode-3d.js?v=2c768788" defer></script>
 </body>
 </html>

@@ -2,6 +2,44 @@
    Chargé après style.css, pages.css et responsive.css.
    Ne redéfinit jamais une règle de ces fichiers : n'ajoute que ce qui manque. */
 
+
+/* =========================================================================
+   FORME QUI S'ORDONNE — conteneur de la scène WebGL
+
+   Un calque derrière le texte, sur la moitié droite. Il porte ses dimensions
+   depuis le CSS et non depuis le script : sans cette réserve de place, le
+   canvas naîtrait à zéro pixel et ne dessinerait rien.
+
+   Vide dans le HTML. Le script n'y ajoute un canvas que si l'appareil sait
+   l'afficher — et comme le bloc est en position absolue, son abstention ne
+   laisse aucun trou dans la mise en page.
+
+   Sous 900 px le script sort avant même de charger la bibliothèque ; la règle
+   média qui suit évite au conteneur d'occuper l'espace pour rien.
+   ========================================================================= */
+.methode-3d{
+  position:absolute;
+  top:0; right:0;
+  width:min(46%, 620px);
+  height:100%;
+  z-index:0;
+  pointer-events:none;   /* ne vole jamais un clic au contenu */
+  opacity:.85;
+}
+
+/* La section devient le repère de positionnement, et son contenu repasse
+   au-dessus du calque. */
+.section:has(> .methode-3d){ position:relative; }
+.section:has(> .methode-3d) > .wrap{ position:relative; z-index:1; }
+
+@media (max-width: 900px){
+  .methode-3d{ display:none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .methode-3d{ display:none; }
+}
+
 /* =========================================================================
    FRISE — 5 étapes, pas 6
    .timeline vient de pages.css avec repeat(6, 1fr) pour la largeur bureau
