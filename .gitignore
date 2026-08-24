@@ -6,6 +6,12 @@
 .claude/
 .vscode/
 *.bat
+# Exception : ce .bat n'est pas un outil personnel, c'est la procedure de
+# deploiement. /css/ et /js/ etant servis avec un cache d'un an, un deploiement
+# fait sans lui pousserait des pages aux empreintes perimees, et le site
+# servirait des fichiers obsoletes pendant douze mois. Il doit suivre le depot.
+# Verifie avant ajout : aucun secret, aucun chemin absolu.
+!POUSSER-SUR-GITHUB.bat
 *.py
 
 # Notes de chantier, audits, archives
