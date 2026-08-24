@@ -63,15 +63,13 @@
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="preconnect" href="https://unpkg.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css?v=20260824b">
-<link rel="stylesheet" href="css/pages.css?v=20260824b">
-<link rel="stylesheet" href="css/responsive.css?v=20260824b">
-<link rel="stylesheet" href="css/page-a-propos.css?v=20260824b">
+<link rel="stylesheet" href="css/style.css?v=20260824c">
+<link rel="stylesheet" href="css/pages.css?v=20260824c">
+<link rel="stylesheet" href="css/responsive.css?v=20260824c">
+<link rel="stylesheet" href="css/page-a-propos.css?v=20260824c">
 </head>
 <body>
 
@@ -457,17 +455,11 @@
      Si un CDN est compromis ou détourné, le navigateur refuse d'exécuter le script
      plutôt que de le laisser réécrire la clé du formulaire et détourner les leads.
      La page se replie proprement en statique sans ces trois bibliothèques. -->
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"
-        integrity="sha256-C/F005uavDBKPVAatkV1h+dW0HvYJPhopTJLXPFRJbA="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-        crossorigin="anonymous"></script>
+<script src="js/vendor/lenis.min.js?v=20260824c" defer></script>
+<script src="js/vendor/gsap.min.js?v=20260824c" defer></script>
+<script src="js/vendor/ScrollTrigger.min.js?v=20260824c" defer></script>
 
-<script src="js/animations.js?v=20260824b" defer></script>
-<script src="js/main.js?v=20260824b" defer></script>
+<script src="js/animations.js?v=20260824c" defer></script>
+<script src="js/main.js?v=20260824c" defer></script>
 </body>
 </html>
