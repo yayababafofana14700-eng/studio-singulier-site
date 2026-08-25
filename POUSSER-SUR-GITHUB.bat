@@ -15,10 +15,11 @@ REM  ecrirait dans les pages l'empreinte d'un CSS modifie mais non commite : le
 REM  site en ligne pointerait vers une version qui n'existe pas chez lui, et le
 REM  cache d'un an la garderait tout ce temps.
 REM ---------------------------------------------------------------------------
-git diff --quiet
-if errorlevel 1 goto NON_COMMITE
-git diff --cached --quiet
-if errorlevel 1 goto NON_COMMITE
+REM  On utilise git status --porcelain et non git diff : diff ne voit que les
+REM  fichiers DEJA SUIVIS. Un fichier neuf jamais ajoute passerait au travers,
+REM  et c'est le cas le plus dangereux ici : l'etape 2 calculerait l'empreinte
+REM  d'un CSS present sur le disque mais absent du commit.
+for /f "delims=" %%L in ('git status --porcelain 2^>nul') do goto NON_COMMITE
 
 REM ---------------------------------------------------------------------------
 REM  2. Recalcul des empreintes d'assets.
