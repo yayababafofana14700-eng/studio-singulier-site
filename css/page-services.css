@@ -98,3 +98,38 @@
   .svc-head-visual{order:-1; max-width:220px; margin:0 auto;}
   .svc-head-row h2{max-width:none;}
 }
+
+
+/* =========================================================================
+   DÉMONSTRATION VIDÉO
+
+   Reprend les conventions du média de hero : même rayon que tous les visuels
+   du site, et un fond posé sous la vidéo pour éviter le rectangle blanc entre
+   la mise en page et le décodage de la première image.
+
+   Le rapport de forme est déclaré ici ET par les attributs width/height de la
+   balise : le navigateur réserve la place avant le premier octet, donc aucun
+   décalage de mise en page.
+   ========================================================================= */
+.svc-demo{
+  margin:0 0 3rem;
+}
+
+.svc-demo video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1280 / 618;
+  border-radius:var(--r-media);
+  background:var(--bg-2);
+  /* La capture vient d'un écran : l'étirer au-delà de sa taille d'origine la
+     rendrait floue. */
+  max-width:1280px;
+}
+
+.svc-demo figcaption{
+  margin-top:.75rem;
+  color:var(--fg-dim);
+  font-size:.92rem;
+  max-width:60ch;
+}
