@@ -1034,6 +1034,16 @@ footer{
 }
 .work-card h3{margin:0 0 8px;}
 .work-type{font-size:var(--t-xs); color:var(--fg-faint);}
+/* Meme vocabulaire de lien que .work-note juste en dessous : un seul
+   traitement pour toute la section. */
+.work-link{
+  display:inline-block; margin-top:12px;
+  font-size:var(--t-xs);
+  color:var(--fg);
+  border-bottom:1px solid var(--rule-signal);
+  padding-bottom:2px;
+}
+.work-link:hover{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
 .work-note{
   margin-top:var(--r-block);
   font-size:var(--t-s);
