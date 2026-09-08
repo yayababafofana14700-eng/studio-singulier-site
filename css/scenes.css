@@ -1,0 +1,804 @@
+/* Studio Singulier — compositions animées des pages service
+   Chargé par index.html et par les fiches qui en affichent une : sites-web,
+   applications-mobiles, cartes-nfc. Deux fiches chargent le fichier sans
+   scène (ecommerce-shopify, visibilite-locale) : leur visuel est une image,
+   traitée par .viz-shot et .viz-3d dans style.css.
+
+   Le rail compte CINQ services depuis le retrait de « Réseaux sociaux ».
+   La scène qui l'illustrait (.scn-social, .soc-*) a été retirée avec lui,
+   ainsi que son image d'origine social-media-contenu.webp.
+
+   TROIS RÈGLES HÉRITÉES DE LA SCÈNE DU HERO, PAYÉES CHER :
+
+   1. Sur --bg #0E0F11, une ombre noire ne porte AUCUNE information. Le
+      volume vient de la lumière : arêtes internes éclairées, halo clair,
+      surface surélevée. L'ombre ne sert qu'à décoller du fond.
+
+   2. Pas de cadre. Aucun border, aucun overflow:hidden sur la scène : un
+      objet dans une boîte lit « image collée ». Le halo déborde.
+
+   3. On ne calcule pas la boîte englobante d'un objet tourné en 3D avec
+      de la trigonométrie plane. On pose par transform-origin, on REGARDE
+      le rendu, on ajuste.
+
+   Le châssis d'iPhone (.scene-phone, .phone-edge, .phone-body,
+   .phone-screen, .phone-notch) vient de pages.css et n'est PAS recopié :
+   ce sont des sélecteurs de classe sans ancêtre imposé, calés en cqw. On
+   ne surcharge ici que leur position dans la scène.
+   ========================================================================= */
+
+/* =========================================================================
+   LE CONTENEUR
+   ========================================================================= */
+.scn{
+  position:relative;
+  container-type:inline-size;
+  perspective:1400px;
+  perspective-origin:62% 40%;
+  /* Échelle de TYPE, séparée des positions. Les positions restent en cqw
+     et suivent la largeur ; le type a un plancher, sinon les repères des
+     écrans disparaissent sous 260px. */
+  --u:1cqw;
+}
+
+/* Halo : un vermillon discret plus une lumière au sol. Il déborde du
+   conteneur, et c'est ce débordement qui fond la scène dans la page au
+   lieu de la poser dessus. */
+.scn-glow{
+  position:absolute;
+  inset:-32% -18% -26% -22%;
+  pointer-events:none;
+  background:
+    radial-gradient(34% 30% at 58% 32%, rgba(240,74,38,.11), transparent 72%),
+    radial-gradient(42% 16% at 54% 78%, rgba(237,232,220,.06), transparent 70%);
+}
+
+/* ---------- dérive ----------
+   Trois trajectoires, jamais la même durée : deux objets qui reviennent au
+   même point au même instant lisent « boucle », pas « flottement ». */
+@keyframes scnDriftA{
+  from{transform:translate3d(0,0,0);}
+  to  {transform:translate3d(-1.2cqw,-2.4cqw,0);}
+}
+@keyframes scnDriftB{
+  from{transform:translate3d(0,0,0);}
+  to  {transform:translate3d(1.6cqw,-1.7cqw,0);}
+}
+
+/* =========================================================================
+   PIÈCES COMMUNES D'ÉCRAN
+   Un écran de téléphone ou d'ordinateur porte les mêmes primitives : des
+   barres qui figurent du texte, des pavés qui figurent des images.
+   ========================================================================= */
+.sx-bar{
+  display:block;
+  border-radius:999px;
+  background:rgba(237,232,220,.30);
+}
+.sx-bar.is-dim{background:rgba(237,232,220,.15);}
+
+.sx-pill{
+  display:flex; align-items:center; justify-content:center;
+  border-radius:999px;
+  background:var(--signal);
+}
+
+.sx-tile{
+  border-radius:calc(1.1 * var(--u));
+  background:rgba(237,232,220,.055);
+  border:1px solid rgba(237,232,220,.07);
+}
+
+/* La pastille de marque d un site montre. Elle s appelait .ls-mark et
+   vivait dans la scene du portable ; celle-ci a ete remplacee par la
+   plaque, et seule la scene Shopify l utilise encore. Une piece partagee
+   porte le prefixe des pieces partagees. */
+.sx-mark{
+  width:2.2cqw; height:2.2cqw;
+  border-radius:.5cqw;
+  background:var(--signal);
+  flex:none;
+}
+
+/* =========================================================================
+   LE CHÂSSIS DE PORTABLE — pièce partagée, plus une scène
+   C'était la scène 01, « Sites web ». Elle a été remplacée aux deux endroits
+   qui l'affichaient — accueil et fiche — par la plaque de la scène 06, qui
+   montre un site réellement livré plutôt qu'un ordinateur générique. Le
+   numéro 01 est donc vacant, et les scènes suivantes gardent le leur : les
+   renuméroter ne rendrait pas le fichier plus clair, cette note si.
+
+   Le châssis, lui, reste vivant : la scène 04 (Shopify) le réemploie tel
+   quel et n'y change que le contenu de la dalle. Les habillages propres à
+   l'ancienne scène — barre de navigation, corps de page, bandeau bas — ont
+   été retirés, plus aucun balisage ne les portait.
+
+   Cotes réelles du MacBook Pro 14 pouces : capot 312,6 x 221,2 mm, soit
+   un rapport de 1,413 ; dalle active 301 x 195,4 mm, donc une bordure de
+   5,8 mm sur les côtés — 1,86 % de la largeur du capot.
+   ========================================================================= */
+.scn-lap{
+  position:absolute;
+  left:3cqw; top:14cqw;
+  width:88cqw;
+  transform-style:preserve-3d;
+  transform:rotateX(9deg) rotateY(-14deg) rotateZ(-2deg);
+}
+/* La dérive est portée par un enfant : le parent tient déjà la rotation,
+   et une animation sur transform l'écraserait entièrement. */
+.scn-lap-float{
+  transform-style:preserve-3d;
+  animation:scnDriftA 13s var(--ease) infinite alternate;
+}
+
+.lap-lid{
+  position:relative;
+  aspect-ratio:1.413;
+  border-radius:calc(1.4 * var(--u));
+  padding:1.86cqw;
+  background:
+    linear-gradient(122deg,
+      rgba(237,232,220,.30)   0%,
+      rgba(237,232,220,.10)  32%,
+      rgba(237,232,220,.05)  60%,
+      rgba(237,232,220,.15) 100%),
+    #14171B;
+  /* Les deux filets internes font tout le volume : l'arête haute-gauche
+     prend la clé, l'arête basse-droite le retour. L'ombre ne fait que
+     décoller. */
+  box-shadow:
+    inset .9px .9px 0 rgba(240,236,226,.55),
+    inset -.9px -.9px 0 rgba(237,232,220,.16),
+    0 3cqw 6cqw rgba(0,0,0,.66);
+}
+
+.lap-screen{
+  position:relative;
+  height:100%;
+  border-radius:calc(.7 * var(--u));
+  overflow:hidden;
+  background:#101317;
+  display:flex; flex-direction:column;
+}
+/* Un seul reflet rasant, dans l'axe du halo. */
+.lap-screen::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:linear-gradient(118deg,
+    rgba(237,232,220,.07)  0%,
+    rgba(237,232,220,.02) 22%,
+    rgba(237,232,220,0)   46%);
+}
+
+/* ---------- le socle ----------
+   Couché par un rotateX autour de la charnière (transform-origin en haut).
+   Aucune coordonnée dérivée : le navigateur fait la projection. */
+.lap-base{
+  position:absolute;
+  left:-1.4%; right:-1.4%;
+  top:100%;
+  height:58cqw;               /* profondeur du socle, avant projection */
+  transform-origin:top center;
+  /* -72 et non -79 : a 79 degres le socle etait si rasant que le pave
+     tactile disparaissait, et l objet lisait « ecran sur pied » plutot que
+     « portable ouvert ». */
+  transform:rotateX(-72deg);
+  border-radius:0 0 calc(1.1 * var(--u)) calc(1.1 * var(--u));
+  background:
+    linear-gradient(180deg,
+      rgba(237,232,220,.20) 0%,
+      rgba(237,232,220,.09) 26%,
+      rgba(237,232,220,.04) 100%),
+    #14171B;
+  box-shadow:inset 0 1px 0 rgba(240,236,226,.42);
+}
+/* Le pavé tactile : la seule pièce qui fait lire « ordinateur » et non
+   « planche ». Centré, un tiers de la largeur. */
+.lap-base::after{
+  content:'';
+  position:absolute;
+  left:50%; bottom:14%;
+  transform:translateX(-50%);
+  width:34%; height:40%;
+  border-radius:calc(.5 * var(--u));
+  background:rgba(14,15,17,.34);
+  box-shadow:inset 0 1px 0 rgba(237,232,220,.10);
+}
+
+/* =========================================================================
+   SCÈNE 02 — APPLICATIONS MOBILES
+   Recomposée d'après la référence fournie, élément pour élément : téléphone
+   centré, grande carte en haut de l'écran, trois rangées de liste, barre de
+   navigation en bas, interrupteur flottant à gauche, grille d'icônes en bas
+   à gauche, pastilles de plateforme à droite.
+
+   COTES, relevées sur la référence (620x611, ramenée à 100 cqw) :
+     téléphone      x 35-66 %, y 17-80 %   -> --pw 32cqw, left 34, top 15
+     interrupteur   x 8-22 %,  y 34-39 %
+     grille         x 7-28 %,  y 73-88 %   -> 3 colonnes, 2 rangées
+     plateformes    x 78-91 %, y 67-84 %
+
+   DEUX ÉCARTS ASSUMÉS, et leurs raisons :
+
+   1. La référence est crème et turquoise, sur une page claire. Ici le rail
+      est sombre : six couleurs d'icônes et un fond clair y liraient comme
+      une image collée. On garde la composition, on la passe au registre —
+      un seul accent, le reste en valeurs de crème.
+
+   2. Sa barre de navigation est sombre sur un écran clair. L'inverse ici :
+      sur une dalle sombre, une barre plus sombre encore ne se détache pas.
+      Elle est donc plus claire que l'écran. Règle du fichier : le volume
+      vient de la lumière.
+
+   Deux pastilles et non trois : la référence affiche « PWA », que ce site
+   ne propose nulle part. iOS et Android sont les deux systèmes que les
+   textes citent réellement.
+   ========================================================================= */
+.scn-app .scene-phone{
+  position:absolute; z-index:2;
+  left:34cqw; top:15cqw;
+  --pw:32cqw;
+  animation:scnDriftA 14s var(--ease) infinite alternate;
+}
+
+/* ---------- l'écran ---------- */
+.ap-hero{
+  margin:4.4cqw 2.4cqw 3cqw;
+  height:22%;
+  border-radius:calc(1.3 * var(--u));
+  background:
+    linear-gradient(150deg, rgba(240,74,38,.30), rgba(240,74,38,.06)),
+    #191C21;
+  border:1px solid rgba(237,232,220,.09);
+}
+.ap-list{
+  padding:0 2.4cqw;
+  display:flex; flex-direction:column; gap:2.2cqw;
+}
+.ap-row{display:flex; align-items:center; gap:2cqw;}
+.ap-row .sx-tile{flex:none; width:6cqw; aspect-ratio:1; border-radius:1.6cqw;}
+.ap-lines{flex:1; display:flex; flex-direction:column; gap:1.1cqw;}
+.ap-lines .sx-bar{height:max(2px,.9cqw);}
+.ap-lines .sx-bar:first-child{width:88%;}
+.ap-lines .sx-bar:last-child{width:56%;}
+
+/* Barre de navigation : PLUS CLAIRE que la dalle, contrairement à la
+   référence — voir l'écart 2 en tête de scène. */
+.ap-nav{
+  margin-top:auto;
+  padding:2.6cqw 3cqw;
+  display:flex; align-items:center; gap:2cqw;
+  background:rgba(237,232,220,.10);
+  border-top:1px solid rgba(237,232,220,.10);
+}
+.ap-nav .ap-pin{
+  flex:none;
+  width:6cqw; height:1.8cqw;
+  border-radius:999px;
+  background:var(--signal);
+}
+.ap-nav i{
+  width:1.6cqw; height:1.6cqw;
+  border-radius:50%;
+  background:rgba(237,232,220,.34);
+}
+.ap-nav i:nth-of-type(1){margin-left:auto;}
+
+/* ---------- l'interrupteur qui flotte ---------- */
+.ap-toggle{
+  position:absolute; z-index:3;
+  left:8cqw; top:34cqw;
+  width:14cqw; height:6cqw;
+  border-radius:999px;
+  display:flex; align-items:center;
+  padding:0 1cqw;
+  background:
+    linear-gradient(148deg, rgba(237,232,220,.16), rgba(237,232,220,.04)),
+    #171A20;
+  box-shadow:
+    inset .8px .8px 0 rgba(240,236,226,.40),
+    inset -.8px -.8px 0 rgba(237,232,220,.10),
+    0 1.4cqw 3cqw rgba(0,0,0,.55);
+  animation:scnDriftB 11s var(--ease) infinite alternate;
+}
+.ap-toggle::after{
+  content:'';
+  margin-left:auto;
+  width:4cqw; aspect-ratio:1;
+  border-radius:50%;
+  background:var(--signal);
+}
+
+/* ---------- la grille d'icônes ----------
+   Six pastilles, une seule en signal. La référence en colore six
+   différemment ; ici la variation se fait en valeur, pas en teinte — le
+   site n'autorise qu'un accent. On lit quand même « plusieurs
+   applications ». */
+.ap-grid{
+  position:absolute; z-index:3;
+  left:7cqw; top:72cqw;
+  width:21cqw;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1.4cqw;
+  animation:scnDriftA 17s var(--ease) infinite alternate;
+}
+.ap-grid span{
+  aspect-ratio:1;
+  border-radius:28%;
+  background:rgba(237,232,220,.10);
+  box-shadow:inset .6px .6px 0 rgba(240,236,226,.30);
+}
+.ap-grid span:nth-child(2){background:rgba(237,232,220,.18);}
+.ap-grid span:nth-child(4){background:rgba(237,232,220,.06);}
+.ap-grid span:nth-child(5){background:var(--signal);}
+.ap-grid span:nth-child(6){background:rgba(237,232,220,.14);}
+
+/* ---------- les plateformes ---------- */
+.ap-plats{
+  position:absolute; z-index:3;
+  right:9cqw; top:70cqw;
+  display:flex; flex-direction:column; gap:2cqw;
+  animation:scnDriftB 13s var(--ease) infinite alternate;
+}
+.ap-plat{
+  padding:1.4cqw 3cqw;
+  border-radius:999px;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:max(7px, 2.4cqw);
+  letter-spacing:.06em;
+  text-align:center;
+  color:var(--fg);
+  background:
+    linear-gradient(148deg, rgba(237,232,220,.14), rgba(237,232,220,.04)),
+    #171A20;
+  box-shadow:
+    inset .7px .7px 0 rgba(240,236,226,.34),
+    0 1.2cqw 2.6cqw rgba(0,0,0,.52);
+}
+/* La première est active, comme dans la référence. */
+.ap-plat.is-on{
+  background:var(--signal);
+  color:#0B0C0D;
+  box-shadow:0 1.2cqw 2.6cqw rgba(0,0,0,.52);
+}
+
+/* =========================================================================
+   SCENE 03 - CARTES NFC
+   La plaque n'est plus dessinee en CSS : c'est le visuel du produit,
+   detoure (assets/plaque-avis-google.webp, 900x899, fond supprime).
+
+   Son ombre portee d'origine a ete mangee au detourage, et refaite ici.
+   Raison : elle etait calculee pour un fond blanc - posee sur #0E0F11 elle
+   formait un halo gris autour de la plaque. On la reprend en drop-shadow
+   et non en box-shadow, parce que drop-shadow epouse le canal alpha : elle
+   suit les coins arrondis, la ou un box-shadow dessinerait le rectangle de
+   l'image.
+
+   Le reticule est positionne en POURCENTAGE de la plaque, jamais en cqw.
+   Le QR occupe 65,4-84,6 % en x et 59,7-80,9 % en y du fichier, mesure au
+   pixel sur l'image detouree. En pourcentage il reste cale quelle que soit
+   la taille rendue ; en cqw il faudrait le recalculer a chaque rupture.
+   ========================================================================= */
+
+/* ---------- LE SCAN ----------
+   Une seule horloge de 7 s, cinq temps. Les cinq pistes partagent ces
+   bornes : les desynchroniser ne donnerait plus un geste mais cinq
+   animations qui se croisent.
+
+     0-20 %    le telephone descend vers le QR
+     20-26 %   le reticule se pose et se resserre
+     26-44 %   la ligne balaie le code
+     44-52 %   l'ecran bascule de la camera a la fiche
+     52-80 %   il tient, la fiche est ouverte
+     80-100 %  il repart, l'ecran se rendort                            */
+@keyframes nfcMain{
+  0%,   6%  {transform:translate3d(9cqw, 8cqw, 0) rotateZ(6deg);}
+  20%, 80%  {transform:translate3d(0, 0, 0) rotateZ(0deg);}
+  100%      {transform:translate3d(9cqw, 8cqw, 0) rotateZ(6deg);}
+}
+@keyframes nfcVise{
+  0%,  17%  {opacity:0; transform:scale(1.4);}
+  26%, 44%  {opacity:1; transform:scale(1);}
+  53%, 100% {opacity:0; transform:scale(1);}
+}
+/* La bande fait 25 % de la hauteur du reticule : de -100 % a 400 % elle
+   parcourt 125 % de cette hauteur, soit le code entier plus une entree et
+   une sortie propres. C'est un translate, donc composite - animer `top`
+   aurait repeint le reticule a chaque image. */
+@keyframes nfcRay{
+  0%,  25%  {opacity:0; transform:translateY(-100%);}
+  30%       {opacity:1;}
+  43%       {opacity:1; transform:translateY(400%);}
+  47%, 100% {opacity:0; transform:translateY(400%);}
+}
+@keyframes nfcCam{
+  0%,  44%  {opacity:1;}
+  52%, 82%  {opacity:0;}
+  92%, 100% {opacity:1;}
+}
+@keyframes nfcFiche{
+  0%,  46%  {opacity:0; transform:translateY(2.4cqw);}
+  54%, 80%  {opacity:1; transform:translateY(0);}
+  88%, 100% {opacity:0; transform:translateY(2.4cqw);}
+}
+
+/* ---------- la plaque ---------- */
+.pq-plaque{
+  position:absolute; z-index:2;
+  left:0; top:12cqw;
+  width:71cqw;
+  transform:rotateZ(-2.5deg);
+  filter:
+    drop-shadow(0 1cqw 1.4cqw rgba(0,0,0,.55))
+    drop-shadow(0 4cqw 7cqw rgba(0,0,0,.42));
+}
+.pq-img{display:block; width:100%; height:auto;}
+
+/* ---------- le reticule, cale sur le QR ---------- */
+.pq-vise{
+  position:absolute;
+  left:64.4%; top:58.6%; width:21.2%; height:23.4%;
+  overflow:hidden;                 /* borne la course de la bande */
+  animation:nfcVise 7s var(--ease) infinite;
+}
+.pq-vise i{
+  position:absolute;
+  width:27%; height:25%;
+  border:max(1.2px, .34cqw) solid var(--signal);
+}
+.pq-vise i:nth-of-type(1){left:0;  top:0;    border-right:0; border-bottom:0;}
+.pq-vise i:nth-of-type(2){right:0; top:0;    border-left:0;  border-bottom:0;}
+.pq-vise i:nth-of-type(3){left:0;  bottom:0; border-right:0; border-top:0;}
+.pq-vise i:nth-of-type(4){right:0; bottom:0; border-left:0;  border-top:0;}
+/* LINEAR, et non var(--ease) comme le reste du fichier : un faisceau qui
+   balaie le fait a vitesse constante. Avec la courbe maison il couvrait
+   les trois quarts du code des le premier tiers de sa course, ce qui se
+   lit comme un eclair, pas comme une lecture. */
+.pq-ray{
+  position:absolute; left:0; right:0; top:0;
+  height:25%;
+  background:linear-gradient(180deg,
+    rgba(240,74,38,0)   0%,
+    rgba(240,74,38,.20) 40%,
+    rgba(240,74,38,1)   49%,
+    rgba(255,236,230,1) 50%,
+    rgba(240,74,38,1)   51%,
+    rgba(240,74,38,.20) 60%,
+    rgba(240,74,38,0)  100%);
+  animation:nfcRay 7s linear infinite;
+}
+
+/* ---------- le telephone ----------
+   Il se pose a droite du code, jamais dessus : un scan dont on ne voit
+   pas la cible ne se lit pas. Le QR finit a 60 cqw, le corps commence
+   a 67. */
+.scn-nfc .scene-phone{
+  position:absolute; z-index:3;
+  right:0; top:14cqw;
+  --pw:33cqw;
+  animation:nfcMain 7s var(--ease) infinite;
+}
+
+/* ---------- l'ecran : la camera, puis la fiche ---------- */
+.nq-cam{
+  position:absolute; inset:0; z-index:0;
+  display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(120% 80% at 50% 46%, #1B2028, #08090B 76%);
+  animation:nfcCam 7s var(--ease) infinite;
+}
+/* Deux equerres en diagonale, pas quatre : a cette taille d'ecran, quatre
+   ne liraient plus comme une visee mais comme du bruit. */
+.nq-target{
+  position:relative;
+  width:58%; aspect-ratio:1;
+  display:flex; align-items:center; justify-content:center;
+}
+.nq-target::before,
+.nq-target::after{
+  content:''; position:absolute;
+  width:34%; height:34%;
+  border:max(1px, .5cqw) solid rgba(237,232,220,.72);
+}
+.nq-target::before{left:0;  top:0;    border-right:0; border-bottom:0;}
+.nq-target::after {right:0; bottom:0; border-left:0;  border-top:0;}
+.nq-cam .pq-qr{width:72%;}
+.pq-qr{
+  aspect-ratio:1;
+  background:
+    repeating-linear-gradient(90deg, #14171B 0 14%, transparent 14% 28%),
+    repeating-linear-gradient(0deg,  #14171B 0 14%, transparent 14% 28%),
+    #FFF;
+}
+.nq-sheet{
+  position:relative; z-index:1;
+  margin:auto 2.6cqw 3.4cqw;
+  animation:nfcFiche 7s var(--ease) infinite;
+  padding:3.4cqw 2.6cqw 2.6cqw;
+  border-radius:2cqw;
+  background:#FBF9F4;
+  display:flex; flex-direction:column; align-items:center; gap:1.6cqw;
+}
+.nq-kicker{
+  margin:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:max(5px, 1.7cqw);
+  letter-spacing:.12em;
+  color:#2E88C8;
+}
+.nq-name{
+  margin:0;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:max(8px, 4.2cqw);
+  color:#1A1D21;
+}
+.nq-send{
+  margin-top:1.4cqw;
+  width:100%;
+  padding:1.8cqw 0;
+  border-radius:1.4cqw;
+  background:#14171B;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:max(5px, 1.8cqw);
+  color:#FBF9F4;
+}
+
+/* =========================================================================
+   SCÈNE 04 — E-COMMERCE
+   Le même portable que la scène 01, au même angle : c'est le même objet
+   physique, seul le contenu de l'écran change. .scn-lap, .lap-lid,
+   .lap-screen et .lap-base sont des classes sans ancêtre imposé — on les
+   réemploie tels quels, aucun pixel de châssis n'est réécrit ici.
+
+   Ce qui distingue les deux scènes, c'est ce que montre la dalle : une
+   grille de produits, un prix en signal, un bouton d'ajout pleine largeur.
+   Une boutique se reconnaît à sa mise en page, pas à son cadre.
+   ========================================================================= */
+.scn-shop{ --u:1cqw; }
+
+.shop-nav{
+  display:flex; align-items:center; gap:1.4cqw;
+  padding:1.5cqw 2cqw;
+  border-bottom:1px solid rgba(237,232,220,.08);
+}
+/* nth-of-type et non nth-child : le panier est un <span> d'une autre
+   classe, il ne doit pas décaler le comptage des barres. */
+.shop-nav .sx-bar{height:max(2px,.6cqw); flex:none;}
+.shop-nav .sx-bar:nth-of-type(1){width:11cqw;}
+.shop-nav .sx-bar:nth-of-type(2){width:6cqw; margin-left:auto;}
+.shop-cart{
+  flex:none;
+  width:2.6cqw; height:2.6cqw;
+  color:var(--signal);
+}
+.shop-cart svg{
+  width:100%; height:100%;
+  fill:none; stroke:currentColor;
+  stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
+}
+
+.shop-grid{
+  flex:1;
+  margin:2.8cqw 2.8cqw 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2cqw;
+  align-content:start;
+}
+.shop-card{display:flex; flex-direction:column; gap:1.1cqw;}
+.shop-card .sx-tile{aspect-ratio:1.15;}
+.shop-card .sx-bar{height:max(2px,.85cqw); width:72%;}
+/* Le prix : la seule tache de signal de l'écran. Une boutique se lit au
+   prix avant de se lire au produit. */
+.shop-price{
+  display:block;
+  height:max(2px,1cqw); width:36%;
+  border-radius:999px;
+  background:var(--signal);
+}
+.shop-cta{margin:2.6cqw 2.8cqw 3cqw;}
+.shop-cta .sx-pill{height:3.4cqw; width:100%;}
+
+/* =========================================================================
+   SCÈNE 06 — LA PLAQUE D'UN SITE LIVRÉ
+   Illustre « Sites web » sur l'accueil. Ce n'est plus un ordinateur
+   générique mais UN site précis, celui du Complexe Scolaire Francoarabe
+   GNIETAA — le seul projet réellement livré, déjà cité dans « Nos
+   réalisations ». Les trois faits portés par la plaque (école franco-arabe
+   à Bamako, site vitrine de huit pages, référencement et mise en ligne)
+   sont ceux publiés plus bas sur la même page. Rien n'est ajouté pour
+   l'occasion.
+
+   COTES. Rapport 1,1 : celui de la plaque de la référence, mesuré à
+   597x550. Le rayon vaut 4,5 % de la largeur, la barre de navigation 13 %
+   de la hauteur — proportions d'un en-tête de site réel, pas d'un bandeau
+   décoratif.
+
+   L'objet, lui, a le droit d'avoir un bord et de couper son contenu : la
+   règle « pas de cadre » de ce fichier porte sur la SCÈNE, pas sur ce
+   qu'elle contient. Une plaque sans bord ne serait plus une plaque.
+   ========================================================================= */
+.scn-plaque{ --u:1cqw; }
+
+.scn-pl{
+  position:absolute;
+  left:4cqw; top:10cqw;
+  width:92cqw;
+  transform-style:preserve-3d;
+  /* Moins incliné que le portable : une plaque se présente, elle ne se pose
+     pas sur un bureau. Assez pour qu'elle ne lise pas comme une capture
+     collée à plat, pas assez pour qu'on doive lire de travers. */
+  transform:rotateX(7deg) rotateY(-11deg) rotateZ(-1.5deg);
+}
+.scn-pl-float{
+  transform-style:preserve-3d;
+  animation:scnDriftA 14s var(--ease) infinite alternate;
+}
+
+.pl-card{
+  position:relative;
+  /* 1,32 et non le 1,1 de la reference : mesure au rendu, un rapport de 1,1
+     laissait 45 % du corps vide sous le bouton. La reference remplit cette
+     zone avec une rangee de points et une accroche plus longue ; notre
+     contenu tient en trois lignes. On ajuste la boite au contenu reel
+     plutot que de gonfler un texte pour remplir une boite. */
+  aspect-ratio:1.32;
+  border-radius:4.5cqw;
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  background:
+    linear-gradient(145deg,
+      rgba(237,232,220,.09)  0%,
+      rgba(237,232,220,.03) 42%,
+      rgba(237,232,220,.06) 100%),
+    #15181C;
+  /* Volume par la lumière : arête haute-gauche vive, retour bas-droite
+     assourdi. L'ombre ne fait que décoller du fond, elle ne modèle rien. */
+  box-shadow:
+    inset 1px 1px 0 rgba(240,236,226,.50),
+    inset -1px -1px 0 rgba(237,232,220,.14),
+    0 3.4cqw 7cqw rgba(0,0,0,.66);
+}
+/* Reflet rasant, dans l'axe du halo — même geste que la dalle du portable. */
+.pl-card::after{
+  content:'';
+  position:absolute; inset:0;
+  pointer-events:none;
+  background:linear-gradient(118deg,
+    rgba(237,232,220,.06)  0%,
+    rgba(237,232,220,.02) 24%,
+    rgba(237,232,220,0)   48%);
+}
+
+/* ---------- la barre de navigation du site montré ---------- */
+.pl-nav{
+  flex:none;
+  height:13%;
+  display:flex; align-items:center; gap:2.6cqw;
+  padding:0 4cqw;
+  border-bottom:1px solid rgba(237,232,220,.08);
+}
+.pl-mark{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:max(9px, 3.4cqw);
+  letter-spacing:-.01em;
+  color:var(--fg);
+}
+.pl-links{display:flex; gap:2.2cqw; margin-left:auto;}
+.pl-links i{
+  display:block;
+  width:5cqw; height:max(2px,.7cqw);
+  border-radius:999px;
+  background:rgba(237,232,220,.22);
+}
+.pl-visit{
+  flex:none;
+  padding:1.1cqw 2.6cqw;
+  border-radius:999px;
+  background:var(--signal);
+  color:#0B0C0D;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:max(7px, 2.2cqw);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+/* ---------- le contenu ---------- */
+.pl-body{
+  flex:1;
+  display:grid;
+  grid-template-columns:1.25fr 1fr;
+  gap:3.4cqw;
+  padding:4.4cqw 4cqw 4.4cqw;
+  align-content:start;
+}
+.pl-kicker{
+  grid-column:1 / -1;
+  margin:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:max(7px, 2.2cqw);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--signal-ink);
+}
+.pl-name{
+  margin:1.4cqw 0 0;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:max(20px, 12cqw);
+  line-height:.94;
+  letter-spacing:-.03em;
+  color:var(--fg);
+}
+.pl-note{
+  margin:2.2cqw 0 0;
+  font-size:max(7px, 2.4cqw);
+  line-height:1.45;
+  color:var(--fg-dim);
+}
+.pl-open{
+  display:inline-flex; align-items:center;
+  margin-top:3cqw;
+  padding:1.5cqw 3.2cqw;
+  border:1px solid rgba(237,232,220,.30);
+  border-radius:999px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:max(7px, 2.2cqw);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--fg);
+}
+/* Le pavé de droite : l'image du site, réduite à sa place et à ses lignes.
+   Un aplat vaut mieux qu'une vignette illisible à cette échelle. */
+.pl-media{
+  align-self:start;
+  margin-top:1.4cqw;
+  aspect-ratio:1.24;
+  border-radius:2.2cqw;
+  padding:3cqw;
+  display:flex; flex-direction:column; justify-content:center; gap:1.6cqw;
+  background:
+    linear-gradient(150deg, rgba(240,74,38,.20), rgba(240,74,38,.04)),
+    #1B1F24;
+  border:1px solid rgba(237,232,220,.08);
+}
+.pl-media .sx-bar{height:max(2px,1cqw);}
+.pl-media .sx-bar:nth-of-type(1){width:86%;}
+.pl-media .sx-bar:nth-of-type(2){width:62%;}
+.pl-media .sx-bar:nth-of-type(3){width:74%;}
+
+/* =========================================================================
+   RUPTURES
+   Une seule cote bouge par rupture : le plancher de type. Les positions
+   restent en cqw et suivent d'elles-mêmes — c'est tout l'intérêt du
+   conteneur de requête.
+   ========================================================================= */
+@media (max-width: 1024px){
+  .scn{--u:1.15cqw;}
+}
+@media (max-width: 560px){
+  .scn{--u:1.5cqw;}
+}
+
+/* =========================================================================
+   MOUVEMENT RÉDUIT
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce){
+  .scn-lap-float,
+  .scn-app .scene-phone,
+  .scn-nfc .scene-phone,
+  .pq-vise,
+  .pq-ray,
+  .nq-cam,
+  .nq-sheet,
+  .ap-toggle,
+  .ap-grid,
+  .ap-plats{animation:none;}
+}

@@ -24,11 +24,17 @@
 @media (max-width: 1024px){
   .hero{
     min-height:0;
-    padding:calc(72px + var(--r-block)) 0 var(--r-block);
+    /* Le bas du hero passe a 0 : la scene s y appuie et se fait couper
+       par le bord, au lieu de flotter puis d etre tronquee au hasard
+       par le bas du viewport. 64px au lieu de 72 en haut. */
+    /* 14px en bas et non zero : la scene s appuie sur le bas de la
+       section, et sans cette garde le coin bas du telephone etait rogne
+       de 7px par overflow:hidden. */
+    padding:calc(64px + var(--r-block)) 0 14px;
   }
   .hero-grid{
     grid-template-columns:1fr;
-    gap:clamp(32px, 5vw, 52px);
+    gap:24px;
   }
   .hero-copy{max-width:min(100%, 620px);}
   .hero-lead{max-width:56ch;}
@@ -37,14 +43,14 @@
 @media (max-width: 720px){
   .hero-copy{max-width:none;}
   .hero-lead{max-width:none;}
-  .hero-ctas .btn{flex:1 1 100%;}
-}
-
-/* Mobile : le 16/9 devient une bande de 200px de haut, trop maigre pour
-   qu'on distingue quoi que ce soit. On passe en 4/3, plus haut, et on
-   recadre au centre plutôt que de déformer. */
-@media (max-width: 560px){
-  .hero-video{aspect-ratio:4/3;}
+  /* Les deux CTA cote a cote et non empiles : 71px repris sur la
+     hauteur du hero, ce qui remonte la scene au-dessus du pli. */
+  /* flex-basis a 0 et non auto : avec auto, la somme des largeurs de
+     contenu (380px) depassait les 335 disponibles et les deux boutons
+     retombaient l un sous l autre. A 0 ils se partagent la ligne. */
+  .hero-ctas{gap:10px;}
+  .hero-ctas .btn{flex:1 1 0; min-width:0; padding-left:14px; padding-right:14px;}
+  .hero-lead{margin-bottom:24px;}
 }
 
 @media (max-width: 640px){
@@ -187,49 +193,6 @@
 }
 @media (max-width: 420px){
   .steps-lite{grid-template-columns:1fr;}
-}
-
-
-/* ---------- Prestations : 4 panneaux ---------- */
-
-/* Tablette : quatre colonnes deviennent illisibles bien avant le mobile.
-   On passe à deux, en gardant le fond photo et le principe d'accentuation. */
-@media (max-width: 1024px){
-  .services-panels{min-height:0;}
-  .sp-list{grid-template-columns:repeat(2, 1fr);}
-  .sp-item:nth-child(-n+2){border-bottom:1px solid rgba(237,232,220,.14);}
-  .sp-item:last-child{border-right:none;}
-  /* Deux rangées au lieu d'une : la hauteur des panneaux doit être divisée,
-     sinon la section atteint 99vh et occupe tout l'écran à elle seule
-     (mesuré à 1024x768 avant correction). */
-  .sp-link{min-height:clamp(170px, 22vh, 220px);}
-  .sp-head{padding-top:var(--r-block);}
-}
-
-/* Mobile : on empile. Les panneaux ne sont plus des colonnes mais des bandes
-   pleine largeur, assez hautes pour qu'on lise sans plisser les yeux. Le
-   fond photo reste, l'accentuation reste, seule la disposition change. */
-@media (max-width: 680px){
-  .sp-list{grid-template-columns:1fr;}
-  .sp-item{
-    border-left:none;
-    border-right:none !important;
-    border-top:1px solid rgba(237,232,220,.14);
-  }
-  .sp-item:nth-child(-n+2){border-bottom:none;}
-  .sp-link{
-    min-height:0;
-    padding:var(--s-4) var(--gutter);
-    gap:var(--s-3);
-  }
-  .sp-desc{max-width:44ch;}
-  /* Sur mobile il n'y a pas de survol : les quatre CTA et numéros restent
-     visibles en permanence plutôt que de dépendre d'un état actif que
-     l'utilisateur ne peut pas déclencher au doigt sans cliquer. */
-  .sp-num, .sp-cta{opacity:1; transform:none;}
-  .sp-item::before{opacity:.28;}
-  .sp-item.is-on::before{opacity:0;}
-  .sp-head h2{max-width:none;}
 }
 
 

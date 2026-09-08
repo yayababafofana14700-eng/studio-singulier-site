@@ -157,6 +157,25 @@
 *{box-sizing:border-box;}
 html.lenis{height:auto;}
 html{scroll-behavior:auto; -webkit-text-size-adjust:100%;}
+
+/* Garde-fou horizontal.
+   Les compositions de la phase 5 posent leur halo dans une boîte volon-
+   tairement plus grande qu'elles (`.scn-glow`, inset négatif) : c'est ce
+   débord qui donne au dessin sa lumière d'ambiance.
+
+   `body{overflow-x:hidden}` plus bas ne suffit pas, et c'est contre-
+   intuitif : tant que `html` reste en `visible`, c'est le débordement de
+   `body` qui se propage à la fenêtre. `body` se comporte alors lui-même
+   comme `visible` et ne coupe plus rien. Mesuré à 1280 px sur l'accueil
+   et sur sites-web.html : document large de 1305 px pour 1265 px visibles,
+   et `window.scrollX` monte à 40 — la page se décale bel et bien.
+
+   Poser la règle sur `html` casse cette propagation. `clip` et non
+   `hidden` : `hidden` ferait de la racine une boîte de défilement et
+   casserait le `position:sticky` de la colonne d'infos du bloc de demande
+   (vérifié : il reste `sticky` après correction). La lumière est intacte,
+   les dégradés du halo s'éteignent bien avant le bord de leur boîte. */
+html{overflow-x:clip;}
 html:not(.lenis){scroll-behavior:smooth;}
 
 body{
@@ -832,4 +851,88 @@ html.is-resizing *{transition:none !important;}
 
 @media (prefers-reduced-motion: reduce){
   .page-veil{ transition:none; }
+}
+/* Sentinelle du bandeau. Posee tout en haut du document, hors flux : quand
+   elle sort du champ, main.js pose .scrolled sur .site-header et le bandeau
+   devient opaque. Elle manquait a toutes les pages depuis la mise en ligne,
+   donc l observer de main.js portait sur null et le bandeau restait
+   transparent partout — le logo passait par-dessus le contenu. */
+#topSentinel{
+  position:absolute;
+  top:0; left:0;
+  width:1px; height:1px;
+  pointer-events:none;
+}
+
+/* =========================================================================
+   VISUELS 3D DETOURES
+   Troisieme famille d'images, a cote de .ph (photos, etalonnees et cadrees)
+   et de .scn (compositions construites en CSS). Un objet detoure n'a besoin
+   ni de cadre, ni de fond, ni d'etalonnage : il sort deja de sa scene dans
+   la palette du site. Passer par .ph lui poserait une plaque grise arrondie
+   dessous et le desaturerait deux fois.
+
+   Declaree ici, une seule fois : .sr-visual-img (rail) et .sv-visual-img
+   (fiches) portaient le meme filter recopie dans deux feuilles.
+
+   L'ombre est en cqw, jamais en pixels : la meme image sert une boite de
+   160 px dans le rail et de 260 px sur sa fiche. En pixels fixes elle
+   serait deux fois trop lourde sur mobile.
+   ========================================================================= */
+.viz-3d{
+  position:relative;
+  container-type:inline-size;   /* pour exprimer l'ombre en cqw */
+  display:flex; align-items:center; justify-content:center;
+}
+.viz-3d img{
+  position:relative;
+  width:100%; height:100%;
+  object-fit:contain;
+  /* Le premier filet est CLAIR et decale vers le haut-gauche : c'est la
+     lumiere qui donne le volume, regle heritee de scenes.css. Le second,
+     noir et large, ne fait que decoller du fond — il ne met pas en scene. */
+  filter:
+    drop-shadow(-1px -1px 0 rgba(240,236,226,.50))
+    drop-shadow(0 2.4cqw 4.5cqw rgba(0,0,0,.55));
+}
+
+/* =========================================================================
+   MAQUETTES ENCADREES
+   Quatrieme famille d'images, a cote de .ph (photos etalonnees), .viz-3d
+   (objets detoures) et .scn (compositions construites en CSS).
+
+   Une maquette est une SCENE complete : son propre fond, son propre
+   eclairage. Elle ne peut pas leviter. Mesure sur shopify-maquette.webp :
+   ses bords sont a 0,20-0,38 de luminance quand le fond du site est a
+   0,058, avec des pics a 0,99 — un fondu laisserait un rectangle clair, et
+   il n'y a aucun fond uni ou mordre pour un detourage. Elle assume donc
+   son cadre.
+
+   La regle "pas de cadre" de scenes.css porte sur les objets qui flottent,
+   pas sur celle-ci : c'est le registre de .ph work-media.
+
+   Le rapport est celui du fichier au pixel pres, donc object-fit:cover ne
+   rogne rien. Il est declare sur un selecteur DOUBLE parce que
+   patron-service.css est charge apres style.css et impose aspect-ratio:1/1
+   a .sv-visual : a specificite egale, il gagnerait.
+   ========================================================================= */
+.sr-visual.viz-shot,
+.sv-visual.viz-shot{aspect-ratio:1672/941;}
+
+.viz-shot{
+  position:relative;
+  container-type:inline-size;
+  overflow:hidden;
+  border-radius:var(--r-media);
+  background:var(--bg-2);
+  /* Le liseré clair fait le bord. Sans lui la maquette se dissout dans le
+     fond par ses angles sombres et flotte par ses angles clairs. */
+  box-shadow:
+    inset 0 0 0 1px rgba(237,232,220,.14),
+    0 2.4cqw 4.5cqw rgba(0,0,0,.55);
+}
+.viz-shot img{
+  display:block;
+  width:100%; height:100%;
+  object-fit:cover;
 }

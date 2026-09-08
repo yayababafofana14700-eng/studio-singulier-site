@@ -175,7 +175,7 @@
        CDN GSAP tombe, aucune règle n'a masqué la vidéo, elle reste visible.
        Un déplacement de 18px seulement — la consigne interdit les zooms et
        les effets appuyés. */
-    var vid = document.getElementById('heroVideo');
+    var vid = document.getElementById('heroScene');
     if(vid){
       gsap.set(vid, { opacity: 0, y: 18 });
       tl.to(vid, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, '-=1.15');

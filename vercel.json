@@ -1,5 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/demande.html",        "destination": "/devis.html",   "permanent": true },
+    { "source": "/contact.html",        "destination": "/devis.html", "permanent": true },
+    { "source": "/methode.html",        "destination": "/devis.html", "permanent": true },
+    { "source": "/reseaux-sociaux.html", "destination": "/",             "permanent": true },
+    { "source": "/agents-ia.html",      "destination": "/",             "permanent": true },
+    { "source": "/automatisation.html", "destination": "/",             "permanent": true },
+    { "source": "/a-propos.html",       "destination": "/",             "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

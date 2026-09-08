@@ -1,0 +1,254 @@
+/* Studio Singulier — patron de page service
+   Chargé par les six pages service, après style.css, pages.css,
+   responsive.css et bloc-demande.css. Ne redéclare aucun jeton.
+
+   Le patron tient en cinq sections :
+     1. Hero                  — ce fichier (.sv-hero)
+     2. Ce que vous obtenez   — ce fichier (.gets)
+     3. Comment ça se passe   — .steps-lite de pages.css, tel quel
+     4. Ça se marie bien avec — .cat-grid de pages.css, tel quel
+     5. Composez votre demande — bloc-demande.css
+
+   Deux sections seulement sont dessinées ici : les deux autres existaient
+   déjà dans le socle et n'avaient pas besoin d'un second jeu de règles.
+   ========================================================================= */
+
+/* =========================================================================
+   1. HERO DE SERVICE
+   Texte à gauche, visuel à droite. Le visuel accueillera en phase 5 une
+   composition animée ; d'ici là il porte le rendu 3D existant, au même
+   emplacement et au même gabarit — le remplacement ne bougera pas la page.
+   ========================================================================= */
+.sv-hero{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:var(--r-block);
+  align-items:center;
+}
+/* h1 sur une page service, h2 quand l accueil reemploie le meme patron
+   pour sa section Sites web : meme dessin, rang de titre different. */
+.sv-hero h1,
+.sv-hero h2{
+  max-width:16ch;
+  margin-bottom:var(--s-4);
+}
+.sv-lead{
+  font-size:var(--t-lead);
+  color:var(--fg-dim);
+  line-height:1.6;
+  max-width:52ch;
+  margin-bottom:var(--s-5);
+}
+
+/* ---------- liste de bénéfices ----------
+   Amorce en gras puis la précision en encre atténuée : l'œil attrape les
+   quatre amorces en diagonale, la phrase complète attend celui qui lit. */
+.sv-bullets{
+  list-style:none;
+  margin:0 0 var(--s-5);
+  padding:0;
+  display:grid;
+  gap:14px;
+}
+.sv-bullets li{
+  display:grid;
+  grid-template-columns:18px 1fr;
+  gap:12px;
+  align-items:start;
+  font-size:var(--t-s);
+  line-height:1.55;
+  color:var(--fg-dim);
+}
+.sv-bullets b{
+  color:var(--fg);
+  font-weight:700;
+}
+.sv-bullets svg{
+  margin-top:4px;
+  fill:none;
+  stroke:var(--signal-ink);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.sv-ctas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* ---------- le visuel ---------- */
+.sv-visual{
+  /* width:100% est OBLIGATOIRE, pas decoratif. Plus bas, la rupture
+     tablette pose margin-inline:auto pour centrer le visuel. Sur un
+     element de grille, une marge automatique annule justify-self:stretch
+     et la largeur retombe sur le contenu ; or le contenu est une <img>
+     en width:100%, pourcentage calcule contre ce meme parent. La boucle
+     se referme a zero, le conteneur fait 0x0 et l image en loading=lazy
+     n est jamais demandee. Une largeur definie casse la boucle. */
+  width:100%;
+  aspect-ratio:1/1;
+  align-self:center;
+}
+/* Les fiches qui portent une PHOTO gardent .ph, dont .ph img (style.css,
+   et non pages.css comme disait cette note) assure object-fit:cover et
+   l'etalonnage maison. On ne surcharge pas cette regle ici : chargee plus
+   tard a specificite egale, elle retirerait le traitement sans rien
+   apporter.
+
+   Cinq des six fiches ne portent plus d'image : leur visuel est une
+   composition CSS (.scn, css/scenes.css), comme les panneaux du rail. La
+   sixieme, visibilite-locale, garde un rendu detoure — il passe par
+   .viz-3d, declaree une seule fois dans style.css, qui a remplace les
+   deux regles jumelles .sv-visual-img et .sr-visual-img.
+
+   Ce qui a fait basculer les autres, mesure : les fichiers venaient de
+   trois series differentes — luminance 0,16 pour les vrais rendus sombres
+   contre 0,87 pour les captures detourees d'un fond blanc — et le visuel
+   du rail tombait a 139 px sur iPhone, sous le plancher de 260 px que
+   scenes.css s'impose pour ses propres compositions. */
+
+/* =========================================================================
+   2. CE QUE VOUS OBTENEZ
+   Des pastilles courtes, pas des paragraphes : c'est une liste de courses,
+   on la parcourt, on ne la lit pas.
+   ========================================================================= */
+.gets{
+  display:grid;
+  /* 300px et non 268 : a 1168px de contenu utile, 268 laissait passer une
+     quatrieme colonne et les cinq pastilles tombaient en 4 + 1, avec une
+     ligne solitaire. 300 en impose trois, donc 3 + 2 comme la reference,
+     et redescend proprement a deux puis une colonne. */
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:12px;
+  margin-top:var(--r-item);
+}
+.get{
+  display:grid;
+  grid-template-columns:17px 1fr;
+  gap:12px;
+  align-items:start;
+  padding:15px 18px;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  background:rgba(237,232,220,.02);
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg);
+}
+.get svg{
+  margin-top:3px;
+  fill:none;
+  stroke:var(--signal-ink);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* =========================================================================
+   ANCRAGE
+   Le bandeau fixe fait 72px : sans cette marge, un saut vers #bd-title
+   déposerait le titre juste dessous, à moitié couvert (WCAG 2.4.11).
+   ========================================================================= */
+#bd-title{scroll-margin-top:96px;}
+
+/* =========================================================================
+   RUPTURES
+   ========================================================================= */
+@media (max-width: 1024px){
+  .sv-hero{
+    grid-template-columns:1fr;
+    gap:var(--r-item);
+  }
+  /* Le visuel passe AU-DESSUS du texte : sur un écran étroit, une image
+     reléguée sous quatre bénéfices et deux boutons n'est jamais vue. */
+  .sv-visual{
+    order:-1;
+    max-width:340px;
+    margin-inline:auto;
+  }
+  .sv-hero h1{max-width:none;}
+}
+
+@media (max-width: 560px){
+  .sv-visual{max-width:260px;}
+  .sv-lead{margin-bottom:var(--s-4);}
+  .sv-ctas .btn{flex:1 1 100%; justify-content:center;}
+  .get{padding:13px 15px;}
+}
+
+/* =========================================================================
+   MOITIÉ JOUR
+   ========================================================================= */
+.on-paper .get{background:rgba(23,20,15,.02);}
+
+/* Hero sans visuel : deux des six pages n'ont pas encore de rendu propre
+   (applications mobiles, réseaux sociaux). Plutôt que d'y coller une image
+   qui parle d'autre chose, le texte prend toute la largeur jusqu'à ce que
+   la phase 5 fournisse leur composition. */
+.sv-hero.is-solo{grid-template-columns:1fr;}
+.sv-hero.is-solo h1,
+.sv-hero.is-solo h2{max-width:22ch;}
+
+/* Respiration entre un titre de section et la grille qui le suit. */
+.sv-after{margin-top:var(--r-item);}
+
+/* =========================================================================
+   BANDE VERS LE DEVIS
+   Ferme chaque page service depuis septembre 2026. Elle remplace le tableau
+   à trois onglets qui vivait là : le même tableau existe sur devis.html, et
+   le servir deux fois obligeait à maintenir deux exemplaires du même
+   formulaire — c'est d'ailleurs pour ça qu'il était généré par script.
+
+   Ce n'est plus un formulaire mais une invitation : le visiteur qui a lu la
+   fiche entière décide d'aller au devis, il n'y est pas poussé dedans.
+   ========================================================================= */
+.band-devis{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--s-4);
+  padding:clamp(24px, 4vw, 40px);
+  border-radius:var(--r-media);
+  background:var(--bg-2);
+  border:1px solid var(--rule);
+  /* Arête haute éclairée : sur --bg, une surface surélevée se lit à sa
+     lumière, jamais à son ombre. Même principe que les compositions. */
+  box-shadow:inset 0 1px 0 rgba(237,232,220,.06);
+}
+.bdv-copy{min-width:0;}
+.bdv-copy h2{
+  font-size:var(--t-h3);
+  line-height:1.15;
+  margin:12px 0 0;
+  text-wrap:balance;
+}
+.bdv-note{
+  display:flex; align-items:center; gap:9px;
+  margin:14px 0 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+}
+/* Le point rappelle la pastille de disponibilité du pied de page : même
+   signe pour la même idée, « c'est ouvert, sans contrepartie ». */
+.bdv-dot{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--signal);
+  flex:none;
+}
+.bdv-cta{flex:none;}
+
+@media (max-width: 700px){
+  .band-devis{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:var(--r-item);
+  }
+  .bdv-cta{width:100%; justify-content:center;}
+}

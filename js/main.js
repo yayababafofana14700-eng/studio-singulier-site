@@ -123,26 +123,40 @@
     var WEB3FORMS_KEY = 'c14a592c-eac2-405b-8ccb-a946f68838ed';
     var CLOSER = " Souhaitez-vous réserver un appel gratuit ?";
 
+    /* Les six prestations du catalogue, et rien d autre. Les Agents IA ont
+       ete retires du catalogue en septembre 2026 : l assistant ne doit plus
+       les proposer ni les chiffrer. La cle `ia` reste, mais pour dire ce que
+       fait cet assistant-ci — un visiteur qui tape « chatbot » parle
+       probablement de la bulle qu il a sous les yeux. */
     var answers = {
-      prix: "Le tarif dépend du projet : site seul, boutique Shopify, ou site plus agent IA. On vous donne un chiffrage clair après un premier échange, sans surprise ensuite." + CLOSER,
-      shopify: "Oui, on crée des boutiques Shopify complètes : design, fiches produits, paiement. On peut y connecter un agent IA de support." + CLOSER,
-      site: "Oui, on crée des sites vitrines modernes, rapides et pensés mobile. On peut aussi les transformer en outils intelligents avec un agent IA." + CLOSER,
-      ia: "Un agent IA répond à vos clients automatiquement, qualifie les demandes et peut être connecté à WhatsApp, Messenger ou votre site." + CLOSER,
+      prix: "Le tarif dépend du projet : un site vitrine, une landing page, une boutique Shopify et une application mobile ne se chiffrent pas pareil. On vous donne un chiffrage clair après un premier échange, sans surprise ensuite." + CLOSER,
+      shopify: "Oui, on crée des boutiques Shopify complètes : design, fiches produits, paiement, livraison et parcours d'achat." + CLOSER,
+      site: "Oui, on crée des sites vitrines et des landing pages, rapides et pensés pour le téléphone d'abord." + CLOSER,
+      app: "Oui, on développe des applications mobiles pour iOS et Android, publiées sur l'App Store et Google Play." + CLOSER,
+      nfc: "Une carte NFC s'approche du téléphone et ouvre vos coordonnées, votre site ou votre fiche Google. Le contenu reste modifiable après l'impression." + CLOSER,
+      social: "On tient votre ligne éditoriale, on crée les visuels et les textes, et on publie régulièrement." + CLOSER,
+      ia: "Je suis l'assistant du site : je réponds aux questions courantes et je transmets votre demande. Pour tout le reste, un humain vous répond." + CLOSER,
       seo: "On structure vos pages et votre contenu pour être bien compris par les moteurs de recherche et cohérent avec votre fiche Google, sans promettre de classement garanti." + CLOSER,
-      maintenance: "Après la mise en ligne, votre site et votre agent IA peuvent évoluer avec vous : contenus, fonctionnalités, ajustements des réponses." + CLOSER,
-      delais: "Ça dépend de la taille du projet. Un site simple va plus vite qu'une boutique Shopify avec agent IA connecté. On vous donne une estimation dès le premier échange." + CLOSER,
-      "default": "Bonne question. Je peux vous renseigner sur nos sites, nos boutiques Shopify, nos agents IA, le référencement, la maintenance ou les délais. Sur quoi voulez-vous en savoir plus ?" + CLOSER
+      maintenance: "Après la mise en ligne, votre site peut évoluer avec vous : contenus, pages, fonctionnalités." + CLOSER,
+      delais: "Ça dépend de la taille du projet. Une landing page va plus vite qu'une boutique Shopify ou qu'une application mobile. On vous donne une estimation dès le premier échange." + CLOSER,
+      "default": "Bonne question. Je peux vous renseigner sur nos sites, nos applications mobiles, nos boutiques Shopify, les cartes NFC, la visibilité locale, la maintenance ou les délais. Sur quoi voulez-vous en savoir plus ?" + CLOSER
     };
 
     function matchAnswer(text){
       var t = text.toLowerCase();
+      /* L ordre compte : les motifs les plus specifiques passent devant.
+         « application » avant « site », sinon « application web » tombe
+         dans la reponse des sites. Et « google » reste sur le referencement
+         plutot que sur la fiche : c est la question la plus frequente. */
       if(/prix|tarif|coût|cout|combien/.test(t)) return answers.prix;
+      if(/nfc|carte de visite|sans contact/.test(t)) return answers.nfc;
+      if(/appli|application|mobile|android|ios|play store|app store/.test(t)) return answers.app;
       if(/shopify|boutique|e-?commerce/.test(t)) return answers.shopify;
       if(/ia\b|agent|intelligence artificielle|chatbot|automat/.test(t)) return answers.ia;
       if(/seo|référencement|referencement|google/.test(t)) return answers.seo;
       if(/maintenance|évolu|evolu|modifier/.test(t)) return answers.maintenance;
       if(/délai|delai|temps|combien de temps|rapide/.test(t)) return answers.delais;
-      if(/site|vitrine|web/.test(t)) return answers.site;
+      if(/site|vitrine|landing|web/.test(t)) return answers.site;
       return answers["default"];
     }
 
@@ -332,11 +346,11 @@
           form.reset();
           setStatus("Message envoyé. On revient vers vous très vite.", 'is-ok');
         } else {
-          setStatus("Un problème est survenu. Vous pouvez aussi écrire directement à yayababafofana14700@gmail.com.", 'is-error');
+          setStatus("Un problème est survenu. Vous pouvez aussi écrire directement à studiosingulier2026@gmail.com.", 'is-error');
         }
       })
       .catch(function(){
-        setStatus("Connexion impossible. Vous pouvez aussi écrire directement à yayababafofana14700@gmail.com.", 'is-error');
+        setStatus("Connexion impossible. Vous pouvez aussi écrire directement à studiosingulier2026@gmail.com.", 'is-error');
       })
       .finally(function(){
         btn.disabled = false;
@@ -465,337 +479,235 @@
   })();
 
   /* =======================================================================
-     19. PRESTATIONS : 4 PANNEAUX, FOND QUI CHANGE
-     Quatre colonnes qui ne bougent jamais. Seuls changent l'image de fond
-     et le panneau mis en avant. La boucle tourne seule ; le survol reprend
-     la main, puis elle repart.
+     19. SERVICES : RAIL HORIZONTAL PILOTÉ PAR LE DÉFILEMENT VERTICAL
+     La section s'épingle et le rail des six prestations glisse en x pendant
+     que la page défile en y — molette, trackpad ou doigt.
+
+     CE QUI A CHANGÉ, ET POURQUOI : l'ancien composant réservait son
+     épinglage à `min-width: 900px`. Sur téléphone il ne se passait donc
+     rien, alors que c'est justement là que la demande portait. Aucune
+     largeur n'est exclue ici.
+
+     Trois réglages viennent de la relecture UX et ne sont pas décoratifs :
+
+       - le scrub est plus serré au doigt qu'à la molette. À 0,35 sous le
+         doigt, le rail suit avec un retard qu'on sent : le contact est
+         direct, le décalage se voit. À la molette le contact est indirect,
+         un peu d'inertie adoucit au contraire le geste.
+
+       - sous 600 px, la course de défilement est raccourcie. À l'échelle
+         1:1, traverser six panneaux sur un téléphone coûte quatre à cinq
+         hauteurs d'écran : l'utilisateur croit son défilement cassé. Le
+         rail parcourt la même distance, en moins de scroll.
+
+       - les panneaux hors champ passent en `inert`. Sans ça, une tabulation
+         atteint le panneau 5 pendant que le panneau 1 est seul à l'écran :
+         l'anneau de focus part hors de l'écran (WCAG 2.4.11), et un lecteur
+         d'écran en navigation virtuelle traverse six panneaux sans qu'aucun
+         glissement ne se déclenche pour lui.
      ======================================================================= */
   (function(){
     var section = document.getElementById('services');
-    if(!section || !section.classList.contains('services-panels')) return;
+    if(!section || !section.classList.contains('services-rail')) return;
 
-    var items  = [].slice.call(section.querySelectorAll('.sp-item'));
-    var layers = [].slice.call(section.querySelectorAll('.sp-bg-layer'));
-    if(!items.length) return;
-
-    /* Les images viennent des data-img du HTML : changer un visuel ne
-       demande aucune retouche de ce fichier. On précharge pour que le
-       premier fondu ne montre pas un trou. */
-    items.forEach(function(it, i){
-      var src = it.getAttribute('data-img');
-      if(!src || !layers[i]) return;
-      var img = new Image();
-      img.onload = function(){ layers[i].style.backgroundImage = 'url("' + src + '")'; };
-      img.src = src;
-    });
-
-    var courant = 0;
-    var minuteur = null;
-    var reprise = null;
-    var DUREE = 4200;    /* assez lent pour lire les deux lignes de description */
-    var REPRISE = 3200;  /* délai avant que la boucle reprenne après un survol */
+    var pin    = document.getElementById('srPin');
+    var track  = document.getElementById('srTrack');
+    var panels = [].slice.call(section.querySelectorAll('.sr-panel'));
+    var chips  = [].slice.call(section.querySelectorAll('.sr-chip'));
+    if(!pin || !track || !panels.length) return;
 
     var reduit = window.matchMedia &&
                  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    var actif = -1;
+    var ancre = null;
+
+    /* Met à jour la puce ET l'état inerte des panneaux. Les deux vont
+       ensemble : ce qui n'est pas à l'écran ne doit être ni annoncé comme
+       courant, ni atteignable au clavier. */
+    /* La puce suit le panneau le plus proche du centre : un repère de
+       position n'en désigne qu'un. */
     function activer(i){
-      if(i === courant) return;
-      courant = i;
-      items.forEach(function(it, n){ it.classList.toggle('is-on', n === i); });
-      layers.forEach(function(l, n){ l.classList.toggle('is-on', n === i); });
+      if(i === actif) return;
+      actif = i;
+      chips.forEach(function(chip, n){
+        if(n === i) chip.setAttribute('aria-current', 'true');
+        else        chip.removeAttribute('aria-current');
+      });
     }
 
-    function suivant(){ activer((courant + 1) % items.length); }
+    /* L'inertie, elle, suit ce qui est RÉELLEMENT à l'écran — pas l'index
+       de la puce.
 
-    function demarrer(){
-      if(reduit || minuteur) return;
-      minuteur = setInterval(suivant, DUREE);
+       Premier jet : tout ce qui n'était pas le panneau courant passait en
+       inert. Erreur nette, et visible tout de suite à l'usage : le rail en
+       montre toujours deux (le débord du suivant est même le signe qu'il y
+       a une suite), et `inert` ne coupe pas que le clavier — il coupe la
+       souris aussi. Les liens du panneau d'à côté étaient donc morts sous
+       le curseur alors qu'on les lisait parfaitement.
+
+       On mesure donc le recouvrement avec le cadre. Au-delà d'un tiers de
+       sa largeur, un panneau est là pour de bon : il reste cliquable et
+       atteignable au clavier. En deçà, il est sorti, et l'anneau de focus
+       n'a rien à y faire (WCAG 2.4.11). */
+    function majEtat(){
+      var cadre  = pin.getBoundingClientRect();
+      var boites = panels.map(function(p){ return p.getBoundingClientRect(); });
+
+      var courant = 0, plusProche = Infinity;
+      var presence = boites.map(function(b){
+        var recouvre = Math.min(b.right, cadre.right) - Math.max(b.left, cadre.left);
+        return recouvre > b.width * 0.35;
+      });
+
+      /* La puce désigne le panneau en position de lecture : le plus à gauche
+         de ceux qui sont là. On la déduit des positions, plus d un index
+         arrondi — un arrondi désignait parfois un panneau déjà sorti. */
+      boites.forEach(function(b, n){
+        if(!presence[n]) return;
+        var ecart = Math.abs(b.left - cadre.left);
+        if(ecart < plusProche){ plusProche = ecart; courant = n; }
+      });
+
+      /* On n écrit que si l état change : inutile de toucher le DOM à
+         chaque image pendant que le rail glisse. */
+      presence.forEach(function(present, n){
+        if(present === panels[n].hasAttribute('inert')){
+          if(present) panels[n].removeAttribute('inert');
+          else        panels[n].setAttribute('inert', '');
+        }
+      });
+
+      activer(courant);
     }
-    function arreter(){
-      clearInterval(minuteur); minuteur = null;
-      clearTimeout(reprise);  reprise = null;
+
+    /* Repli : mouvement réduit, ou GSAP absent. Le CSS a déjà tout remis en
+       colonne (voir services-rail.css, .services-rail:not(.sr-live)), donc
+       les six panneaux sont lisibles et atteignables tels quels. On ne pose
+       AUCUN inert dans ce cas : rien n'est caché, tout est dans le flux. */
+    if(reduit || !window.gsap || !window.ScrollTrigger){
+      chips.forEach(function(chip, i){
+        chip.addEventListener('click', function(){
+          panels[i].scrollIntoView({
+            behavior: reduit ? 'auto' : 'smooth',
+            block: 'center'
+          });
+        });
+      });
+      return;
     }
-    /* Après une interaction, on laisse à l'utilisateur le temps de lire
-       avant de lui reprendre la main.
 
-       Sans objet quand le scroll pilote : relancer le minuteur au mouseleave
-       ferait avancer les panneaux pendant que la position du scroll dit
-       l'inverse, et les deux sources se disputeraient l'affichage. */
-    function reprendrePlusTard(){
-      if(epingle) return;
-      clearTimeout(reprise);
-      reprise = setTimeout(demarrer, REPRISE);
+    gsap.registerPlugin(ScrollTrigger);
+    section.classList.add('sr-live');   /* le CSS peut cesser d'empiler */
+
+    /* Le doigt et la molette ne demandent pas le même suivi. */
+    var grossier = window.matchMedia('(pointer: coarse)').matches;
+
+    /* Course : distance réelle du rail sur grand écran, raccourcie sur
+       petit. 0,62 place les six panneaux sous ~2,5 hauteurs d'écran à
+       375 px, contre 4 à 5 à l'échelle 1:1. */
+    function course(){
+      var d = track.scrollWidth - pin.clientWidth;
+      if(d <= 0) return 0;
+      return Math.round(d * (window.innerWidth <= 600 ? 0.62 : 1));
     }
 
-    items.forEach(function(it, i){
-      var lien = it.querySelector('.sp-link');
-
-      it.addEventListener('mouseenter', function(){ arreter(); activer(i); });
-      it.addEventListener('mouseleave', reprendrePlusTard);
-
-      /* Le clavier suit la même logique que la souris : tabuler jusqu'à un
-         panneau l'active, exactement comme le survoler. */
-      if(lien){
-        lien.addEventListener('focus', function(){ arreter(); activer(i); });
-        lien.addEventListener('blur', reprendrePlusTard);
-      }
-    });
-
-    /* =====================================================================
-       ÉPINGLAGE : LE SCROLL PILOTE LES QUATRE PANNEAUX
-
-       La section se fige le temps qu'on traverse les quatre services. La
-       molette avance dans le contenu au lieu de le dépasser.
-
-       On réutilise `activer()` tel quel : le scroll remplace le minuteur
-       comme source de la position, rien d'autre ne change. Le survol et le
-       clavier continuent de fonctionner par-dessus.
-
-       Quatre conditions avant d'épingler, chacune avec sa raison :
-       - mouvement réduit demandé : on ne fige rien, la boucle reste neutralisée
-       - GSAP ou ScrollTrigger absents : repli sur le minuteur, jamais de page morte
-       - sous 900 px : épingler sur tactile se bat avec le scroll du système
-       - fenêtre plus courte que la section : une section figée plus haute que
-         l'écran cache son propre contenu
-
-       Quand l'épinglage prend, le minuteur ne démarre pas : deux sources de
-       position pour un même composant produiraient des sauts.
-       ===================================================================== */
-    var epingle = false;
-
-    (function(){
-      if(reduit) return;
-      if(!window.gsap || !window.ScrollTrigger) return;
-      if(!window.matchMedia('(min-width: 900px)').matches) return;
-      if(window.innerHeight < section.offsetHeight) return;
-
-      epingle = true;
-
-      ScrollTrigger.create({
+    /* x et end sont des FONCTIONS : ScrollTrigger les rappelle à chaque
+       refresh, donc une rotation d'écran ou un redimensionnement recalcule
+       la course tout seul. `ignoreMobileResize` est déjà posé globalement
+       dans animations.js — la barre d'adresse Android qui se rétracte ne
+       déclenche donc pas ce recalcul en plein geste. */
+    gsap.to(track, {
+      x: function(){ return -(track.scrollWidth - pin.clientWidth); },
+      /* ease:'none' est obligatoire : toute autre courbe désynchronise le
+         geste et la position du rail, et l'écart se sent immédiatement. */
+      ease: 'none',
+      /* L état se recalcule à CHAQUE application du tween, jamais depuis
+         l onUpdate du déclencheur : avec un scrub, la transformation traîne
+         derrière le scroll (0,12 à 0,35 s). Les rectangles lus côté
+         déclencheur étaient donc en avance sur ce que montrait l écran, et
+         un panneau parfaitement visible pouvait rester inerte. */
+      onUpdate: majEtat,
+      scrollTrigger: {
+        /* On épingle la SECTION, titre et puces compris — pas le seul rail.
+           Épingler `pin` laissait les puces sortir par le haut juste avant
+           le début du glissement : le repère de position s'en allait au
+           moment précis où il devient utile. Le déclencheur suit la même
+           cible, sinon l'épinglage démarrerait un écran trop tard. */
         trigger: section,
+        pin: section,
         start: 'top top',
-        /* Une longueur de défilement par panneau. Trop court, on saute deux
-           services d'un geste ; trop long, la page semble bloquée. */
-        end: '+=' + (items.length * 55) + '%',
-        pin: true,
+        end: function(){ return '+=' + course(); },
+        scrub: grossier ? 0.12 : 0.35,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        onUpdate: function(self){
-          var i = Math.min(items.length - 1, Math.floor(self.progress * items.length));
-          if(i !== courant) activer(i);
-        }
-      });
-    })();
-
-    /* Onglet en arrière-plan : inutile de faire tourner des fondus que
-       personne ne regarde. Sans objet quand le scroll pilote. */
-    document.addEventListener('visibilitychange', function(){
-      if(epingle) return;
-      document.hidden ? arreter() : demarrer();
-    });
-
-    /* On démarre tout de suite, et l'observateur ne sert qu'à METTRE EN
-       PAUSE hors écran. L'inverse — ne démarrer qu'à l'entrée dans le
-       viewport — laisse le composant définitivement figé partout où
-       l'observateur ne se déclenche pas : onglet en arrière-plan, page qui
-       ne compose pas, navigateur exotique. Un composant qui ne bouge jamais
-       est un bug ; un composant qui tourne un peu hors écran ne l'est pas. */
-    if(!epingle){
-      demarrer();
-
-      if('IntersectionObserver' in window){
-        new IntersectionObserver(function(entrees){
-          entrees[0].isIntersecting ? demarrer() : arreter();
-        }, { threshold: .25 }).observe(section);
+        /* Le débordement vertical est traité en CSS, par le plafond
+           --sr-vmax posé sur le visuel : c'est lui, et non le texte, qui
+           dictait la hauteur du panneau et donc celle de la boîte épinglée.
+           Aucune bascule JS ici — retirer .sr-live remettrait les six
+           panneaux en pile, ce qui rend la section BEAUCOUP plus haute et
+           relancerait aussitôt le même test : la garde oscillerait. */
+        onRefresh: function(self){ ancre = self; majEtat(); },
+        onUpdate: function(self){ ancre = self; }
       }
-    }
-  })();
-
-
-  /* =======================================================================
-     20. DÉPLIANT SERVICES
-     Ouverture au survol (comme la référence) ET au clic, pour que clavier
-     et tactile aient le même accès. Fermeture : nouveau clic, clic dehors,
-     Échap, choix d'une prestation, ou sortie de la souris.
-     ======================================================================= */
-  (function(){
-    var bouton = document.getElementById('navServices');
-    var panneau = document.getElementById('megaServices');
-    if(!bouton || !panneau) return;
-
-    /* Le voile est créé ici et non dans le HTML : il n'a aucun sens sans JS,
-       et l'écrire dans les 6 pages n'aurait servi qu'à les alourdir. */
-    var voile = document.createElement('div');
-    voile.className = 'mega-voile';
-    document.body.appendChild(voile);
-
-    var ouvert = false;
-    var minuteurFermeture = null;
-    /* Le survol se déclenche à l'intention, pas au passage : sans ce délai,
-       traverser « Services » pour aller vers « Agents IA » ouvrirait le
-       panneau au passage. */
-    var DELAI_OUVERTURE = 90;
-    var DELAI_FERMETURE = 260;
-    var minuteurOuverture = null;
-
-    function ouvrir(){
-      clearTimeout(minuteurFermeture);
-      if(ouvert) return;
-      ouvert = true;
-      panneau.hidden = false;
-      /* Il faut un état de départ calculé avant de poser la classe, sinon le
-         navigateur fusionne les deux et la transition ne démarre pas.
-         On force ce calcul par une lecture de offsetHeight plutôt que par un
-         requestAnimationFrame : rAF ne s'exécute pas dans un onglet en
-         arrière-plan, et le panneau resterait alors ouvert mais invisible.
-         Une lecture de géométrie, elle, est synchrone et toujours honorée. */
-      void panneau.offsetHeight;
-      panneau.classList.add('is-open');
-      voile.classList.add('is-open');
-      bouton.setAttribute('aria-expanded', 'true');
-    }
-
-    function fermer(){
-      clearTimeout(minuteurOuverture);
-      if(!ouvert) return;
-      ouvert = false;
-      panneau.classList.remove('is-open');
-      voile.classList.remove('is-open');
-      bouton.setAttribute('aria-expanded', 'false');
-      /* On attend la fin du fondu avant de remettre `hidden`, sinon le
-         panneau disparaît d'un coup au lieu de se refermer. */
-      setTimeout(function(){ if(!ouvert) panneau.hidden = true; }, 460);
-    }
-
-    function basculer(){ ouvert ? fermer() : ouvrir(); }
-
-    /* --- souris --- */
-    function survolEntre(){
-      clearTimeout(minuteurFermeture);
-      minuteurOuverture = setTimeout(ouvrir, DELAI_OUVERTURE);
-    }
-    function survolSort(){
-      clearTimeout(minuteurOuverture);
-      minuteurFermeture = setTimeout(fermer, DELAI_FERMETURE);
-    }
-    bouton.addEventListener('mouseenter', survolEntre);
-    bouton.addEventListener('mouseleave', survolSort);
-    panneau.addEventListener('mouseenter', function(){ clearTimeout(minuteurFermeture); });
-    panneau.addEventListener('mouseleave', survolSort);
-
-    /* --- clic, clavier --- */
-    bouton.addEventListener('click', function(e){ e.preventDefault(); basculer(); });
-    voile.addEventListener('click', fermer);
-
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && ouvert){ fermer(); bouton.focus(); }
     });
 
-    /* Choisir une prestation ferme le panneau. Sur une ancre de la page
-       courante, aucune navigation n'a lieu : sans ça le panneau resterait
-       ouvert par-dessus la section qu'on vient de demander. */
-    panneau.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', fermer);
+    majEtat();
+
+    /* Recalcul sur changement de LARGEUR seulement.
+       `ignoreMobileResize` protège du redimensionnement parasite que provoque
+       la barre d'adresse Android en se rétractant — mais il s'est avéré, à la
+       mesure, qu'il retenait aussi des changements de largeur réels : après un
+       passage de 716 à 1440 px, le rail gardait sa course d'avant et les
+       panneaux leur ancienne largeur. Une rotation d'écran tomberait dans le
+       même trou. On compare donc la largeur nous-mêmes : elle seule décide. */
+    var largeur = window.innerWidth;
+    var hauteur = window.innerHeight;
+    var minuteurRefresh = null;
+    window.addEventListener('resize', function(){
+      var dW = window.innerWidth !== largeur;
+      /* La HAUTEUR compte désormais elle aussi : --sr-vmax est exprimé en
+         svh, donc le plafond du visuel — et par ricochet la hauteur de toute
+         la section — change avec elle. L'ignorer laissait ScrollTrigger
+         épingler une boîte mesurée pour une autre fenêtre.
+         `svh` étant la hauteur PETITE du viewport, la barre d'adresse Android
+         qui se rétracte ne la modifie pas : le motif que `ignoreMobileResize`
+         protégeait ne repasse pas par ici. On amortit tout de même de 150 ms,
+         un redimensionnement à la souris émettant des dizaines d'événements. */
+      var dH = Math.abs(window.innerHeight - hauteur) > 2;
+      if(!dW && !dH) return;
+      largeur = window.innerWidth;
+      hauteur = window.innerHeight;
+      clearTimeout(minuteurRefresh);
+      minuteurRefresh = setTimeout(function(){ ScrollTrigger.refresh(); }, 150);
     });
 
-    /* Sortir du panneau au clavier le referme, sinon le focus continue
-       derrière un panneau resté ouvert. */
-    document.addEventListener('focusin', function(e){
-      if(!ouvert) return;
-      if(!panneau.contains(e.target) && e.target !== bouton) fermer();
-    });
-
-    /* Le panneau est en position fixe sous une barre de 72px : au
-       redimensionnement vers le mobile, la barre disparaît au profit du
-       menu plein écran. On ferme pour ne pas laisser un panneau orphelin. */
-    var mqMobile = window.matchMedia('(max-width: 940px)');
-    (mqMobile.addEventListener ? mqMobile.addEventListener.bind(mqMobile, 'change')
-                               : mqMobile.addListener.bind(mqMobile))(function(){ fermer(); });
-  })();
-
-
-  /* =======================================================================
-     21. REPLI SERVICES DU MENU MOBILE
-     Sous 940px la barre du haut disparaît, et le dépliant Services avec elle.
-     Le survol n'existe pas au doigt : ce repli est le seul accès aux cinq
-     pages de prestation sur téléphone.
-     ======================================================================= */
-  (function(){
-    var btn  = document.getElementById('mmServices');
-    var sous = document.getElementById('mmSousServices');
-    if(!btn || !sous) return;
-
-    var deplie = false;
-    var minuteur = null;
-
-    function replier(){
-      clearTimeout(minuteur);
-      if(!deplie) return;
-      deplie = false;
-      sous.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      /* On attend la fin du repli avant de remettre `hidden`. Sans ce délai
-         la liste disparaîtrait d'un coup ; sans `hidden` du tout, ses cinq
-         liens resteraient atteignables au clavier derrière un `max-height:0`
-         (SC 2.4.3), car `overflow:hidden` masque sans retirer du parcours. */
-      minuteur = setTimeout(function(){ if(!deplie) sous.hidden = true; }, 440);
-    }
-
-    function deplier(){
-      clearTimeout(minuteur);
-      if(deplie) return;
-      deplie = true;
-      sous.hidden = false;
-      /* Même raison qu'au dépliant du haut : il faut un état de départ
-         calculé avant de poser la classe, sinon le navigateur fusionne les
-         deux et la transition ne démarre pas. Une lecture de géométrie est
-         synchrone, contrairement à requestAnimationFrame. */
-      void sous.offsetHeight;
-      sous.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-
-      /* Sur un écran court, déplier pousse la fin de la liste hors champ : on
-         voyait s'ouvrir deux prestations sur cinq, sans rien qui indique que
-         les trois autres existent plus bas. On amène donc le bas du repli
-         dans le champ une fois l'animation finie — avant, la hauteur mesurée
-         serait encore celle du repli fermé. */
-      minuteur = setTimeout(function(){
-        if(!deplie) return;
-        var zone = sous.parentElement;
-        /* On mesure sur `scrollHeight`, la hauteur déployée, et non sur le
-           rectangle courant : celui-ci vaut ce que l'animation a parcouru.
-           Si la transition est escamotée — mouvement réduit, onglet en
-           arrière-plan — le rectangle vaudrait encore zéro et le débordement
-           serait calculé négatif, donc ignoré. */
-        var basDeploye = sous.getBoundingClientRect().top + sous.scrollHeight;
-        var debord = basDeploye - zone.getBoundingClientRect().bottom;
-        if(debord > 0){
-          zone.scrollBy({
-            top: debord + 8,
-            behavior: (window.SS && SS.prefersReduced) ? 'auto' : 'smooth'
-          });
+    /* Clic sur une puce : on saute à la position de défilement qui amène ce
+       panneau à l'écran. C'est le seul accès direct au sixième service sans
+       traverser les cinq autres — utile à la souris, indispensable au
+       clavier. */
+    chips.forEach(function(chip, i){
+      chip.addEventListener('click', function(){
+        if(!ancre){
+          panels[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
         }
-      }, 460);
-    }
-
-    btn.addEventListener('click', function(){ deplie ? replier() : deplier(); });
-
-    /* Le menu plein écran se referme de trois façons : le bouton Fermer, le
-       choix d'un lien, et Échap. Dans les trois cas on replie, pour que la
-       prochaine ouverture reparte d'un menu au repos. */
-    var fermeture = document.getElementById('closeMenu');
-    if(fermeture) fermeture.addEventListener('click', replier);
-
-    var menu = document.getElementById('mobileMenu');
-    if(menu){
-      menu.querySelectorAll('a').forEach(function(a){
-        a.addEventListener('click', replier);
+        var y = ancre.start + (ancre.end - ancre.start) * (i / (panels.length - 1));
+        window.scrollTo({ top: y, behavior: 'smooth' });
       });
-    }
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') replier();
     });
   })();
+
+
+  /* =======================================================================
+     20-21. DÉPLIANT SERVICES ET SON REPLI MOBILE — RETIRÉS
+     Le menu déroulant des prestations a disparu de la navigation en
+     septembre 2026 : les six services sont présentés sur l accueil, dans le
+     rail de la section 19. La nav se limite à Accueil et Devis, et ces deux
+     blocs — ouverture au survol, fermeture au clic dehors, repli accordéon
+     du menu mobile — n avaient plus aucune cible dans le DOM.
+     ======================================================================= */
+
 
   /* =========================================================================
      22. TRANSITION ENTRE LES PAGES

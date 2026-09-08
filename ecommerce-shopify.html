@@ -57,8 +57,8 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Création de sites web",
-          "description": "Sites vitrine rapides, pensés mobile d'abord, structurés pour Google.",
+          "name": "Création de sites web et landing pages",
+          "description": "Sites vitrines et pages de vente, pensés mobile d'abord et structurés pour Google.",
           "url": "https://singulier.apexwebstudio.studio/sites-web.html"
         }
       },
@@ -66,26 +66,17 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Réseaux sociaux",
-          "description": "Gestion et création de la présence sur les réseaux sociaux.",
-          "url": "https://singulier.apexwebstudio.studio/reseaux-sociaux.html"
+          "name": "Développement d'applications mobiles",
+          "description": "Applications iOS et Android, publiées sur l'App Store et Google Play.",
+          "url": "https://singulier.apexwebstudio.studio/applications-mobiles.html"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Création de contenu",
-          "description": "Visuels, textes et ligne éditoriale.",
-          "url": "https://singulier.apexwebstudio.studio/reseaux-sociaux.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Boutiques Shopify",
-          "description": "Fiches produits, paiement et livraison configurés.",
+          "name": "Boutiques e-commerce Shopify",
+          "description": "Fiches produits, paiement, livraison et parcours d'achat configurés.",
           "url": "https://singulier.apexwebstudio.studio/ecommerce-shopify.html"
         }
       },
@@ -93,54 +84,18 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Supports marketing",
-          "description": "Flyers et supports imprimés.",
+          "name": "Cartes de visite NFC",
+          "description": "Une carte qu'on approche du téléphone ; le contenu reste modifiable après impression.",
+          "url": "https://singulier.apexwebstudio.studio/cartes-nfc.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Visibilité locale et Google Business Profile",
+          "description": "Fiche d'établissement créée, remplie et tenue à jour.",
           "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Google Business Profile",
-          "description": "Création et suivi de la fiche d'établissement.",
-          "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Cartes NFC",
-          "description": "Cartes de visite sans contact.",
-          "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Solutions IA",
-          "description": "Agents IA de support client.",
-          "url": "https://singulier.apexwebstudio.studio/agents-ia.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Automatisation",
-          "description": "Scénarios reliant formulaire, agent, fiche client, email et WhatsApp.",
-          "url": "https://singulier.apexwebstudio.studio/automatisation.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Support client automatisé",
-          "description": "Réponses aux demandes répétitives, 24h/24.",
-          "url": "https://singulier.apexwebstudio.studio/automatisation.html"
         }
       }
     ]
@@ -157,9 +112,11 @@
   <noscript><link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/fonts.css?v=fc470791">
 
-<link rel="stylesheet" href="css/style.css?v=1b505024">
-<link rel="stylesheet" href="css/pages.css?v=1066f3eb">
-<link rel="stylesheet" href="css/responsive.css?v=5d3a120b">
+<link rel="stylesheet" href="css/style.css?v=db7abe24">
+<link rel="stylesheet" href="css/pages.css?v=41c63677">
+<link rel="stylesheet" href="css/responsive.css?v=240536fb">
+<link rel="stylesheet" href="css/patron-service.css?v=ba590227">
+<link rel="stylesheet" href="css/scenes.css?v=29f6d264">
 <link rel="stylesheet" href="css/page-services.css?v=1aee703b">
 </head>
 <body>
@@ -169,6 +126,11 @@
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ===================== EN-TÊTE ===================== -->
+<!-- Sentinelle du bandeau : observee par main.js pour poser .scrolled sur
+     .site-header. Absolue et haute d un pixel, elle ne touche a aucune mise
+     en page. Sans elle, l observer porte sur null et le bandeau reste
+     transparent a toute profondeur de defilement. -->
+<div id="topSentinel" aria-hidden="true"></div>
 <header class="site-header" id="siteHeader">
   <div class="wrap nav-inner">
     <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
@@ -182,73 +144,14 @@
     </a>
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="index.html">Accueil</a>
-      <button type="button" class="nav-svc" data-courante id="navServices"
-              aria-expanded="false" aria-controls="megaServices" aria-haspopup="true">
-        Services <span class="nav-svc-chev" aria-hidden="true"></span>
-      </button>
-      <a href="agents-ia.html">Agents IA</a>
-      <a href="methode.html">Méthode</a>
-      <a href="a-propos.html">À propos</a>
-      <a href="contact.html">Contact</a>
+      <a href="devis.html">Devis</a>
     </nav>
-    <a href="contact.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <a href="devis.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
     <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span>
     </button>
   </div>
 </header>
-
-<!-- ===================== DÉPLIANT SERVICES ===================== -->
-<!-- Hors du <header> volontairement : celui-ci fait 72px avec
-     align-items:center, un panneau à l'intérieur serait écrasé par cette
-     hauteur. Ici il se déploie librement juste sous la barre. -->
-<div class="mega" id="megaServices" role="region" aria-label="Nos services" hidden>
-  <div class="wrap mega-inner">
-    <p class="eyebrow mega-eyebrow">Nos prestations</p>
-    <ul class="mega-list">
-      <li class="mega-item">
-        <a class="mega-link" href="sites-web.html">
-          <span class="mega-num" aria-hidden="true">01</span>
-          <span class="mega-title">Sites web &amp; solutions digitales</span>
-          <span class="mega-desc">Sites vitrine rapides, pensés mobile d'abord, structurés pour être trouvés sur Google.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="reseaux-sociaux.html">
-          <span class="mega-num" aria-hidden="true">02</span>
-          <span class="mega-title">Réseaux sociaux &amp; contenu</span>
-          <span class="mega-desc">Ligne éditoriale, création de visuels et de textes, publication régulière.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="ecommerce-shopify.html">
-          <span class="mega-num" aria-hidden="true">03</span>
-          <span class="mega-title">E-commerce &amp; Shopify</span>
-          <span class="mega-desc">Fiches produits, paiement, livraison, et un panier qui va jusqu'au bout.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="visibilite-locale.html">
-          <span class="mega-num" aria-hidden="true">04</span>
-          <span class="mega-title">Visibilité locale</span>
-          <span class="mega-desc">Fiche Google Business, cartes de visite NFC et supports imprimés.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="automatisation.html">
-          <span class="mega-num" aria-hidden="true">05</span>
-          <span class="mega-title">Automatisation</span>
-          <span class="mega-desc">Scénarios reliant formulaire, agent IA, fiche client, email et WhatsApp.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <!-- data-lenis-prevent : Lenis écoute les touchmove sur window et, dès qu'il
      est arrêté, appelle preventDefault() sur chacun. Cela verrouille bien la
@@ -273,106 +176,115 @@
   </div>
   <nav aria-label="Navigation mobile">
     <a href="index.html"><i>01</i>Accueil</a>
-    <button type="button" class="mm-svc" id="mmServices" aria-expanded="false" aria-controls="mmSousServices">
-      <i>02</i>Services<span class="mm-chev" aria-hidden="true"></span>
-    </button>
-    <ul class="mm-sub" id="mmSousServices" hidden>
-      <li><a href="sites-web.html"><i>01</i>Sites web &amp; solutions digitales</a></li>
-      <li><a href="reseaux-sociaux.html"><i>02</i>Réseaux sociaux &amp; contenu</a></li>
-      <li><a href="ecommerce-shopify.html"><i>03</i>E-commerce &amp; Shopify</a></li>
-      <li><a href="visibilite-locale.html"><i>04</i>Visibilité locale</a></li>
-      <li><a href="automatisation.html"><i>05</i>Automatisation</a></li>
-    </ul>
-    <a href="agents-ia.html"><i>03</i>Agents IA</a>
-    <a href="methode.html"><i>04</i>Méthode</a>
-    <a href="a-propos.html"><i>05</i>À propos</a>
-    <a href="contact.html"><i>06</i>Contact</a>
+        <a href="devis.html"><i>02</i>Devis</a>
   </nav>
   <div class="mm-foot">
-    <a href="contact.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+    <a href="devis.html" class="btn btn-primary btn-block">Démarrer un projet</a>
   </div>
 </div>
 
 <main id="top">
 
-<!-- ===================== 03 · E-COMMERCE & SHOPIFY ===================== -->
-<section class="section rule-top reveal" id="ecommerce" aria-labelledby="ec-title">
+<!-- ===================== HERO ===================== -->
+<section class="section reveal" aria-labelledby="sv-title">
   <div class="wrap">
-    <div class="svc-head-row">
+    <div class="sv-hero">
       <div>
-        <p class="eyebrow">E-commerce &amp; Shopify</p>
-        <h1 data-split id="ec-title">Un panier qu'on abandonne juste avant de payer.</h1>
-      </div>
-      <div class="ph svc-head-visual">
-        <img src="assets/3d/shopify.webp" width="1100" height="1100" loading="lazy" decoding="async" alt="Rendu 3D stylisé d'un tableau de bord Shopify affichant une liste de produits, avec le logo Shopify">
-      </div>
-    </div>
-
-    <div class="svc-pair">
-      <div class="svc-pair-col">
-        <h2 class="svc-tag">Le problème</h2>
-        <p>Vendre en ligne pose des questions concrètes : comment prendre le paiement, comment gérer la livraison, comment présenter un produit pour donner envie de l'acheter sans le toucher. Une boutique mal construite perd des ventes au moment décisif : au paiement.</p>
-      </div>
-      <div class="svc-pair-col is-solution">
-        <h2 class="svc-tag">La solution</h2>
-        <p>On construit une boutique Shopify complète : fiches produits soignées, paiement fonctionnel, livraison configurée, et un tunnel d'achat qui va jusqu'au bout sans accroc.</p>
-      </div>
-    </div>
-
-    <div class="svc-pair">
-      <div class="svc-pair-col">
-        <h2 class="svc-tag">Les bénéfices</h2>
-        <div class="serp-checks">
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Un tunnel d'achat testé, du panier jusqu'à la confirmation</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Des fiches produits qui donnent envie et répondent aux questions</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Paiement et livraison adaptés à votre activité</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Une boutique que vous pouvez faire évoluer vous-même</span></div>
+        <p class="eyebrow">Service 03 &middot; E-commerce &amp; Shopify</p>
+        <h1 data-split id="sv-title">Un panier qu'on n'abandonne plus juste avant de payer.</h1>
+        <p class="sv-lead">Une boutique Shopify compl&egrave;te&nbsp;: des fiches produits qui donnent envie, un paiement qui fonctionne, une livraison configur&eacute;e.</p>
+        <ul class="sv-bullets">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Un tunnel test&eacute;</b> &mdash; du panier jusqu'&agrave; la confirmation, en conditions r&eacute;elles.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Des fiches qui r&eacute;pondent</b> &mdash; photos, description, variantes. Les questions trouvent leur r&eacute;ponse sur la page.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Paiement et livraison</b> &mdash; configur&eacute;s pour votre activit&eacute; et pour le Maroc.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Une boutique que vous tenez</b> &mdash; ajouter un produit ne demande pas de nous rappeler.</span></li>
+        </ul>
+        <div class="sv-ctas">
+          <a href="devis.html?service=ecommerce-shopify" class="btn btn-primary">Discutons-en <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">&Eacute;crire sur WhatsApp</a>
         </div>
       </div>
-      <div class="svc-pair-col">
-        <h2 class="svc-tag">Ce qui est livré</h2>
-        <div class="uflow">
-          <div class="uflow-step"><span class="k">Boutique Shopify configurée</span><span>Thème, structure, pages légales.</span></div>
-          <div class="uflow-step"><span class="k">Fiches produits</span><span>Photos, descriptions, prix, variantes.</span></div>
-          <div class="uflow-step"><span class="k">Paiement et livraison</span><span>Connectés et testés avant l'ouverture.</span></div>
-          <div class="uflow-step"><span class="k">Guide de gestion</span><span>Comment ajouter un produit, suivre une commande.</span></div>
-        </div>
+      <div class="sv-visual viz-shot">
+        <img src="assets/3d/shopify-maquette.webp"
+               srcset="assets/3d/shopify-maquette-700.webp 700w,
+                       assets/3d/shopify-maquette.webp 1400w"
+               sizes="(max-width: 560px) 260px, (max-width: 1024px) 340px, 34vw"
+               width="1400" height="788" loading="eager" fetchpriority="high" decoding="async"
+               alt="Maquette d&#39;une boutique Shopify affich&eacute;e sur un ordinateur portable et un smartphone.">
       </div>
-    </div>
-
-    <div class="svc-process">
-      <h2 class="svc-tag">Le déroulé</h2>
-      <ol class="steps-lite">
-        <li><span class="sl-num" aria-hidden="true">01</span><h3>Catalogue</h3><p>On organise vos produits, catégories, prix.</p></li>
-        <li><span class="sl-num" aria-hidden="true">02</span><h3>Construction</h3><p>La boutique prend forme sur Shopify.</p></li>
-        <li><span class="sl-num" aria-hidden="true">03</span><h3>Tests</h3><p>Paiement et livraison testés en conditions réelles.</p></li>
-        <li><span class="sl-num" aria-hidden="true">04</span><h3>Ouverture</h3><p>La boutique est prête à recevoir ses premières commandes.</p></li>
-      </ol>
-    </div>
-
-    <p class="work-note">Une boutique qui vend mieux répond aussi vite : voir <a href="agents-ia.html">nos agents IA de support client</a>.</p>
-    <div class="svc-cta-wrap">
-      <a href="contact.html" class="svc-cta">Lancer votre boutique <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>
 
-
-<!-- ===================== CTA FINAL ===================== -->
-<section class="final" aria-labelledby="cta-title">
+<!-- ===================== CE QUE VOUS OBTENEZ ===================== -->
+<section class="section rule-top reveal" aria-labelledby="get-title">
   <div class="wrap">
-    <h2 id="cta-title">Une prestation vous intéresse ? Parlons de votre projet.</h2>
-    <div class="final-ctas">
-      <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
-      <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+    <div class="section-head wide">
+      <p class="eyebrow">Livrables</p>
+      <h2 data-split id="get-title">Ce que vous obtenez.</h2>
     </div>
-    <p class="final-meta">
-      <span>Réponse sous 24h</span>
-      <span aria-hidden="true">·</span>
-      <span>Devis gratuit</span>
-      <span aria-hidden="true">·</span>
-      <span id="casaClock">Casablanca · l'agent répond</span>
-    </p>
+    <div class="gets">
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Une boutique Shopify configur&eacute;e, th&egrave;me et pages l&eacute;gales compris</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Vos fiches produits&nbsp;: photos, descriptions, prix, variantes</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Le paiement connect&eacute; et test&eacute; avant l'ouverture</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Les modes de livraison param&eacute;tr&eacute;s</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Un guide de gestion&nbsp;: ajouter un produit, suivre une commande</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMENT CA SE PASSE ===================== -->
+<section class="section rule-top reveal" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">D&eacute;roul&eacute;</p>
+      <h2 data-split id="how-title">Comment &ccedil;a se passe.</h2>
+    </div>
+    <ol class="steps-lite sv-after">
+      <li><span class="sl-num" aria-hidden="true">01</span><h3>Catalogue</h3><p>On organise vos produits, vos cat&eacute;gories, vos prix.</p></li>
+      <li><span class="sl-num" aria-hidden="true">02</span><h3>Construction</h3><p>La boutique prend forme sur Shopify.</p></li>
+      <li><span class="sl-num" aria-hidden="true">03</span><h3>Tests</h3><p>Paiement et livraison &eacute;prouv&eacute;s avant la premi&egrave;re commande.</p></li>
+      <li><span class="sl-num" aria-hidden="true">04</span><h3>Ouverture</h3><p>La boutique re&ccedil;oit ses premi&egrave;res commandes, on reste &agrave; c&ocirc;t&eacute;.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== CA SE MARIE BIEN AVEC ===================== -->
+<section class="section rule-top reveal" aria-labelledby="mix-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Aller plus loin</p>
+      <h2 data-split id="mix-title">&Ccedil;a se marie bien avec.</h2>
+    </div>
+    <div class="cat-grid sv-after">
+      <a class="cat-card" href="sites-web.html">
+        <span class="cat-num">Web</span>
+        <h3>Une vitrine qui am&egrave;ne vers la boutique.</h3>
+        <span class="cat-go">Voir la prestation <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="cat-card" href="visibilite-locale.html">
+        <span class="cat-num">Local</span>
+        <h3>Se faire trouver aussi hors des r&eacute;seaux.</h3>
+        <span class="cat-go">Voir la prestation <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VERS LE DEVIS =====================
+     Remplace le tableau a trois onglets qui vivait ici : il faisait doublon
+     avec la page devis, seule a le porter desormais. Ce qui reste est une
+     invitation, pas un formulaire — le visiteur choisit d y aller. -->
+<section class="section" aria-labelledby="bd-title">
+  <div class="wrap">
+    <div class="band-devis">
+      <div class="bdv-copy">
+        <p class="eyebrow">Service 03</p>
+        <h2 id="bd-title">E-commerce &amp; Shopify</h2>
+        <p class="bdv-note"><span class="bdv-dot" aria-hidden="true"></span>Sur devis &middot; sans engagement</p>
+      </div>
+      <a href="devis.html?service=ecommerce-shopify" class="btn btn-primary bdv-cta">Discutons-en <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -384,7 +296,7 @@
       <h3>Une question avant de se lancer ?</h3>
       <p>Écrivez-nous, on répond rapidement, sans jargon.</p>
     </div>
-    <a href="contact.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <a href="devis.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
   </div>
 </div>
 
@@ -401,10 +313,7 @@
     </span>
     <nav class="foot-nav" aria-label="Navigation de pied de page">
       <a href="sites-web.html">Services</a>
-      <a href="agents-ia.html">Agents IA</a>
-      <a href="methode.html">Méthode</a>
-      <a href="a-propos.html">À propos</a>
-      <a href="contact.html">Contact</a>
+      <a href="devis.html">Demande</a>
     </nav>
     <div class="foot-links">
       <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
@@ -433,7 +342,7 @@
     </div>
   </div>
   <div class="ai-body" id="aiBody">
-    <div class="msg bot">Bonjour. Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
+    <div class="msg bot">Bonjour. Je suis l'assistant de Studio Singulier. Posez-moi une question sur nos sites, nos applications, Shopify, les cartes NFC ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
   </div>
   <div class="ai-suggestions">
     <button class="chat-chip" data-q="Vos prix ?">Vos prix ?</button>
@@ -456,7 +365,7 @@
 <script src="js/vendor/gsap.min.js?v=28033e44" defer></script>
 <script src="js/vendor/ScrollTrigger.min.js?v=ad33c2df" defer></script>
 
-<script src="js/animations.js?v=46ac0f8c" defer></script>
-<script src="js/main.js?v=e0b4d2c2" defer></script>
+<script src="js/animations.js?v=7da0de0e" defer></script>
+<script src="js/main.js?v=b4f18c42" defer></script>
 </body>
 </html>

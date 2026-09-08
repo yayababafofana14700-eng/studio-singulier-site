@@ -1,0 +1,455 @@
+/* Studio Singulier — bloc « Composez votre demande »
+   Chargé après style.css, pages.css, responsive.css, sur les six pages
+   service et sur demande.html. Ne redéclare aucun jeton.
+
+   Les champs (.field, .field-row, .form-note) viennent de pages.css et ne
+   sont pas redéfinis ici : le composant ne fabrique que ce qui lui est
+   propre — la carte à onglets, les options à cocher, la colonne latérale.
+
+   ORDRE DE LECTURE. La carte est à GAUCHE et la colonne d'information à
+   DROITE, l'inverse de la référence. Motif : à toutes les largeurs l'ordre
+   du DOM, l'ordre visuel et l'ordre de tabulation coïncident. Placer la
+   colonne à gauche aurait imposé un grid-column ou un order, donc un focus
+   qui saute par-dessus la carte avant d'y revenir.
+
+   PROFONDEUR EN REGISTRE NUIT. Sur --bg #0E0F11 une ombre noire ne porte
+   aucune information : on ne verrait rien. Le relief vient de la lumière —
+   arête haute éclairée en inset, halo clair au sommet de la carte, surface
+   surélevée --bg-2 sur le fond. Leçon déjà payée sur la scène du hero.
+   ========================================================================= */
+
+/* =========================================================================
+   GRILLE
+   ========================================================================= */
+.bd-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);
+  gap:var(--r-item);
+  align-items:start;
+  margin-top:var(--r-block);
+}
+
+/* =========================================================================
+   LA CARTE À ONGLETS
+   C'est le seul conteneur plein du site, dont le langage de forme est le
+   filet. Il se justifie parce qu'il délimite un état : ce qui est dedans
+   est en cours de composition et sera envoyé, ce qui est dehors ne l'est
+   pas. La carte n'est pas une décoration, c'est la frontière du formulaire.
+   ========================================================================= */
+.bd-card{
+  position:relative;
+  background:var(--bg-2);
+  border:1px solid var(--rule);
+  border-radius:12px;
+  overflow:hidden;
+  /* arête haute éclairée : la seule source de relief admise sur fond nuit */
+  box-shadow:inset 0 1px 0 rgba(237,232,220,.06);
+}
+/* halo au sommet, pas d'ombre au sol : la lumière tombe d'en haut */
+.bd-card::before{
+  content:'';
+  position:absolute;
+  inset:0 0 auto;
+  height:160px;
+  background:radial-gradient(120% 100% at 50% 0%, rgba(237,232,220,.05), transparent 72%);
+  pointer-events:none;
+}
+
+/* ---------- barre d'onglets ----------
+   Trois onglets seulement : ils tiennent en trois colonnes égales jusqu'à
+   320px de large. Pas de défilement horizontal — un tablist qui défile
+   cache des onglets hors champ, et l'utilisateur ne sait pas qu'ils
+   existent. */
+.bd-tabs{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  background:rgba(0,0,0,.24);
+  border-bottom:1px solid var(--rule);
+}
+.bd-tab{
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent;
+  border:0;
+  border-bottom:2px solid transparent;
+  margin:0;
+  /* 52px : au-dessus du minimum de 24px de WCAG 2.5.8 et confortable au
+     pouce, qui est la cible réelle sur ce site. */
+  min-height:52px;
+  padding:15px 6px;
+  cursor:pointer;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  transition:color .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
+}
+.bd-tab:hover{color:var(--fg);}
+/* L'onglet actif fusionne avec le panneau : même fond, plus de séparation
+   basse, et un filet signal qui dit lequel est ouvert sans recourir à la
+   seule couleur (la fusion des fonds porte déjà l'information). */
+.bd-tab[aria-selected="true"]{
+  color:var(--fg);
+  background:var(--bg-2);
+  border-bottom-color:var(--signal);
+}
+.bd-tab:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:-3px;
+}
+.bd-tab-num{
+  color:var(--fg-faint);
+  margin-right:7px;
+}
+.bd-tab[aria-selected="true"] .bd-tab-num{color:var(--signal);}
+
+/* ---------- panneaux ---------- */
+.bd-panel{
+  position:relative;
+  padding:var(--s-5) var(--s-4) var(--s-4);
+}
+/* Le panneau est focalisable pour recevoir le focus après un changement
+   d'onglet au clavier ; l'anneau reste discret puisqu'il n'est pas une
+   cible cliquable. */
+.bd-panel:focus-visible{
+  outline:2px solid var(--signal-ink);
+  outline-offset:-4px;
+}
+
+/* ---------- intertitre de groupe ---------- */
+.bd-legend{
+  display:block;
+  margin:0 0 var(--s-3);
+  padding:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--signal-ink);
+}
+.bd-group{border:0; padding:0; margin:0; min-width:0;}
+.bd-group + .bd-group{margin-top:var(--s-5);}
+
+/* =========================================================================
+   OPTIONS À COCHER
+   ========================================================================= */
+.bd-opts{
+  display:grid;
+  gap:10px;
+}
+.bd-opts.is-packs{grid-template-columns:1fr 1fr;}
+
+.bd-opt{
+  position:relative;
+  display:block;
+  /* 48px de haut minimum, réserve à droite pour la pastille */
+  min-height:48px;
+  padding:14px 46px 14px 15px;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  background:rgba(237,232,220,.018);
+  cursor:pointer;
+  transition:border-color .18s var(--ease), background .18s var(--ease);
+}
+.bd-opt:hover{
+  border-color:var(--rule-strong);
+  background:rgba(237,232,220,.045);
+}
+/* La case reste dans le flux du clavier : elle est transparente, pas
+   display:none, sinon elle sortirait de l'ordre de tabulation et
+   deviendrait inatteignable autrement qu'à la souris. */
+.bd-opt input{
+  position:absolute;
+  top:16px; right:15px;
+  width:18px; height:18px;
+  margin:0;
+  opacity:0;
+  cursor:pointer;
+}
+.bd-opt .k{
+  display:block;
+  font-weight:700;
+  font-size:var(--t-s);
+  line-height:1.35;
+  color:var(--fg);
+  margin-bottom:5px;
+}
+.bd-opt .d{
+  display:block;
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg-dim);
+}
+.bd-opt .mark{
+  position:absolute;
+  top:16px; right:15px;
+  width:18px; height:18px;
+  border:1px solid var(--rule-strong);
+  border-radius:50%;
+  pointer-events:none;
+  transition:border-color .18s var(--ease), background .18s var(--ease);
+}
+.bd-opt input:checked ~ .mark{
+  border-color:var(--signal);
+  background:var(--signal);
+}
+.bd-opt input:checked ~ .mark::after{
+  content:'';
+  position:absolute;
+  left:5px; top:3px;
+  width:5px; height:9px;
+  border:solid var(--bg);
+  border-width:0 2px 2px 0;
+  transform:rotate(43deg);
+}
+/* :has() n'est pas indispensable — la pastille ci-dessus porte déjà l'état
+   sans lui. Il n'ajoute que la teinte de fond, qui se perd proprement sur
+   un navigateur qui l'ignore. */
+.bd-opt:has(input:checked){
+  border-color:var(--rule-signal);
+  background:var(--signal-wash);
+}
+
+/* ---------- prestation verrouillée ----------
+   Posée par le JS quand on arrive depuis une fiche service : le choix est
+   déjà fait, la case n'est plus qu'un accusé de réception. Elle garde son
+   aspect coché — on ne grise rien, il n'y a rien d'interdit, il n'y a
+   simplement plus qu'une option. Seul le curseur dit qu'il n'y a rien à
+   cliquer. */
+.bd-opt.is-verrou{cursor:default;}
+.bd-opt.is-verrou:hover{border-color:var(--rule-signal);}
+.bd-verrou-note{
+  margin:14px 2px 0;
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg-dim);
+}
+.bd-verrou-note a{
+  color:var(--fg);
+  border-bottom:1px solid var(--rule-signal);
+  padding-bottom:1px;
+}
+.bd-verrou-note a:hover{color:var(--signal-ink); border-bottom-color:var(--signal-ink);}
+.bd-opt:has(input:focus-visible){
+  outline:2px solid var(--signal);
+  outline-offset:2px;
+}
+
+/* =========================================================================
+   PIED DE PANNEAU — navigation entre onglets
+   ========================================================================= */
+.bd-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:var(--s-5);
+  padding-top:var(--s-4);
+  border-top:1px solid var(--rule);
+}
+.bd-actions .btn{flex:1 1 auto; justify-content:center;}
+.bd-actions .btn-ghost{flex:0 1 auto;}
+
+/* ---------- récapitulatif de la sélection, dans l'onglet Contacter ----------
+   Miroir en lecture seule de ce qui partira réellement dans l'email : les
+   cases cochées vivent dans un panneau masqué, personne ne doit envoyer une
+   demande sans voir ce qu'elle contient. */
+.bd-recap{
+  margin:0 0 var(--s-4);
+  padding:14px 16px;
+  border:1px solid var(--rule);
+  border-left:2px solid var(--signal);
+  border-radius:0 8px 8px 0;
+  background:rgba(237,232,220,.02);
+}
+.bd-recap-t{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  margin-bottom:7px;
+}
+.bd-recap-v{
+  font-size:var(--t-xs);
+  line-height:1.6;
+  color:var(--fg);
+}
+.bd-recap-v.is-empty{color:var(--fg-faint);}
+
+/* =========================================================================
+   COLONNE D'INFORMATION
+   Collante à partir de 1025px : la carte est haute (quatre packs plus huit
+   options), la colonne est courte. Sans sticky elle disparaît au premier
+   tiers du défilement, au moment précis où l'on coche — donc au moment où
+   la réassurance sert.
+   ========================================================================= */
+.bd-side{min-width:0;}
+
+.bd-note{
+  padding:16px 18px;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  background:rgba(237,232,220,.02);
+}
+.bd-note + .bd-note{margin-top:12px;}
+.bd-note h3{
+  font-size:var(--t-s);
+  font-weight:700;
+  margin:0 0 6px;
+  letter-spacing:0;
+}
+.bd-note p{
+  font-size:var(--t-xs);
+  line-height:1.6;
+  color:var(--fg-dim);
+  margin:0;
+}
+
+.bd-steps-t{
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-dim);
+  margin:var(--s-5) 0 var(--s-3);
+}
+.bd-steps{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:var(--s-3);
+}
+.bd-steps li{
+  display:grid;
+  grid-template-columns:26px 1fr;
+  gap:13px;
+  align-items:start;
+}
+.bd-steps .n{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:26px; height:26px;
+  border:1px solid var(--rule-strong);
+  border-radius:50%;
+  font-family:'JetBrains Mono',monospace;
+  /* 11 px et non 10,5 : c est le plancher que le projet s est fixe.
+     La pastille fait 26 px, le chiffre y tient sans la deformer. */
+  font-size:11px;
+  color:var(--fg);
+}
+.bd-steps h3{
+  font-size:var(--t-s);
+  font-weight:700;
+  margin:0 0 3px;
+  letter-spacing:0;
+  line-height:1.3;
+}
+.bd-steps p{
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg-dim);
+  margin:0;
+}
+
+.bd-vows{
+  list-style:none;
+  margin:var(--s-5) 0 0;
+  padding:var(--s-4) 0 0;
+  border-top:1px solid var(--rule);
+  display:grid;
+  gap:10px;
+}
+.bd-vows li{
+  display:grid;
+  grid-template-columns:16px 1fr;
+  gap:10px;
+  align-items:start;
+  font-size:var(--t-xs);
+  line-height:1.55;
+  color:var(--fg-dim);
+}
+.bd-vows svg{
+  margin-top:3px;
+  fill:none;
+  stroke:var(--signal);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* =========================================================================
+   RUPTURES
+   ========================================================================= */
+
+/* Tablette : une seule colonne, la carte reste en tête. La colonne
+   d'information passe dessous et perd son sticky, qui n'a plus de sens
+   quand elle ne longe plus rien. */
+@media (max-width: 1024px){
+  .bd-grid{
+    grid-template-columns:1fr;
+    gap:var(--r-block);
+  }
+  .bd-side{position:static;}
+}
+@media (min-width: 1025px){
+  .bd-side{
+    position:sticky;
+    /* 72px de bandeau fixe + 24px de respiration */
+    top:96px;
+  }
+}
+
+/* Téléphone. C'est le cas de vérité de ce site.
+   Les trois onglets tiennent encore côte à côte à 320px : 3 × ~93px pour
+   des libellés de sept lettres au plus. On y gagne un tablist entièrement
+   visible, sans geste de défilement à découvrir. */
+@media (max-width: 560px){
+  .bd-grid{margin-top:var(--s-6);}
+  .bd-tab{
+    padding:15px 3px;
+    font-size:10.5px;
+    letter-spacing:.06em;
+  }
+  /* Le numéro d'onglet est un repère de confort, pas une information : à
+     cette largeur il vole la place du libellé, on le retire. */
+  .bd-tab-num{display:none;}
+  .bd-panel{padding:var(--s-4) var(--s-3) var(--s-3);}
+  /* Deux packs par ligne à 335px de large donneraient 160px par carte,
+     soit une description en cinq lignes de trois mots. Une colonne. */
+  .bd-opts.is-packs{grid-template-columns:1fr;}
+  .bd-opt{padding:13px 44px 13px 13px;}
+  .bd-actions .btn{flex:1 1 100%;}
+  .bd-note{padding:14px 15px;}
+}
+
+/* =========================================================================
+   MOITIÉ JOUR
+   Le bloc reste lisible si une page le pose dans une section .on-paper :
+   les rgba() clairs deviennent des rgba() sombres, sinon les surfaces
+   surélevées disparaîtraient dans le papier.
+   ========================================================================= */
+.on-paper .bd-card{box-shadow:inset 0 1px 0 rgba(23,20,15,.05);}
+.on-paper .bd-card::before{
+  background:radial-gradient(120% 100% at 50% 0%, rgba(23,20,15,.04), transparent 72%);
+}
+.on-paper .bd-tabs{background:rgba(23,20,15,.05);}
+.on-paper .bd-opt{background:rgba(23,20,15,.02);}
+.on-paper .bd-opt:hover{background:rgba(23,20,15,.045);}
+.on-paper .bd-note,
+.on-paper .bd-recap{background:rgba(23,20,15,.02);}
+
+/* =========================================================================
+   MOUVEMENT RÉDUIT
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce){
+  .bd-tab,
+  .bd-opt,
+  .bd-opt .mark{transition:none;}
+}

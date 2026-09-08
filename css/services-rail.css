@@ -1,0 +1,398 @@
+/* Studio Singulier — rail des prestations (accueil)
+   Chargé par index.html seul, après pages.css et scenes.css.
+
+   REMPLACE l'ancien composant à panneaux fixes (.services-panels), retiré
+   de pages.css en même temps. L'ancien montrait six colonnes immobiles sur
+   un fond photo en fondu, et son épinglage était réservé aux écrans de plus
+   de 900 px : sur téléphone il ne se passait rien. C'est précisément ce qui
+   a motivé la reprise.
+
+   PRINCIPE : la section s'épingle, et un rail de six panneaux glisse
+   horizontalement au rythme du défilement VERTICAL — molette, trackpad ou
+   doigt. Aucune requête de média n'exclut le tactile.
+
+   TROIS DÉCISIONS ISSUES DE LA RELECTURE, à ne pas défaire sans raison :
+
+   1. Pas d'eyebrow « SERVICE 0X » dans les panneaux. style.css rationne les
+      eyebrows à quatre sur une page entière ; l'accueil en consomme déjà
+      cinq (hero, agence, services, approche, réalisations). Six de plus,
+      un par panneau, viderait le dispositif de son sens — et ferait doublon
+      avec les puces nommées, qui répondent déjà à « quel service ».
+
+   2. Puces en texte seul, soulignées en signal quand elles sont actives.
+      Une pastille pleine sur fond sombre lit « badge de bibliothèque UI ».
+      Le rayon --r-pill reste réservé aux .btn : le réemployer pour une
+      navigation passive brouillerait la frontière entre bouton et repère.
+
+   3. overflow-x:hidden mais overflow-y:VISIBLE sur la zone épinglée. Le
+      masquage horizontal est indispensable — sans lui les panneaux 2 à 6
+      s'étaleraient hors section. Le masquage vertical, lui, tronquerait en
+      silence un panneau dont le texte déborde sur un écran court. La
+      hauteur du rail n'est d'ailleurs jamais fixée : c'est le panneau le
+      plus haut qui la donne.
+   ========================================================================= */
+
+/* C'est la SECTION ENTIÈRE qui est épinglée, pas seulement le rail — titre
+   et puces compris. Épingler le seul rail les faisait sortir par le haut
+   juste avant que le glissement ne commence : le repère de position
+   disparaissait exactement au moment où il sert.
+
+   min-height et non height : la section occupe au moins l'écran, ce qui
+   évite une bande vide sous le panneau pendant tout l'épinglage, mais elle
+   peut grandir si un texte déborde. Aucune hauteur n'est jamais imposée au
+   contenu. svh et non vh : sur Android, vh se mesure barre d'adresse
+   dépliée, et la section dépasserait d'autant. */
+.services-rail{
+  position:relative;
+  background:var(--bg);
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  /* Le bandeau du site est fixe et fait 72 px. Une section épinglée à
+     `top top` glisse dessous : sans cette réserve, la première ligne du
+     titre est mangée pendant toute la traversée du rail. Même raison que
+     le scroll-margin-top des ancres, ailleurs dans le projet. */
+  padding-top:72px;
+  /* Souffle bas. Il vivait dans le padding-bottom de .sr-track, où il
+     s'ajoutait à la hauteur du RAIL — donc à la hauteur du panneau le plus
+     haut, donc à la hauteur de la section. Ici il est porté par la section
+     elle-même : même respiration à l'oeil, mais il ne gonfle plus la boîte
+     que l'épinglage doit faire tenir dans l'écran. */
+  padding-bottom:var(--r-item);
+
+  /* ===== LE BUDGET VERTICAL =====
+     Une section épinglée à `top top` ne peut montrer que 100svh. Ce qui
+     dépasse est perdu par le bas, sans avertissement — c'est très
+     exactement le défaut corrigé ici : la section mesurait 838 px pour une
+     fenêtre de 660, et le bas des panneaux (visuel + « Voir le détail »)
+     tombait hors champ à chaque instant de la traversée.
+
+     La hauteur du panneau n'est pas dictée par son texte mais par son
+     visuel, carré (aspect-ratio:1/1) et large de la moitié du panneau :
+     sur 780 px de panneau, cela fait 353 px imposés à la section, quelle
+     que soit la hauteur de l'écran. C'est ce chiffre-là qu'il faut rendre
+     élastique, et lui seul — le texte, lui, n'est jamais tronqué.
+
+     --sr-vmax = ce que l'écran laisse une fois retirés : la réserve du
+     bandeau (72), l'en-tête (~215), les puces (~75) et le souffle bas
+     (~44). Sur deux colonnes le texte est À CÔTÉ du visuel : il ne
+     s'ajoute pas au budget.
+     Le plancher de 200 px est délibéré : sous une fenêtre très courte, mieux
+     vaut un léger débordement qu'une vignette de 80 px illisible. */
+  --sr-vmax:max(200px, calc(100svh - 420px));
+}
+
+/* =========================================================================
+   EN-TÊTE
+   ========================================================================= */
+.sr-head{
+  /* Pas de padding en haut : la section réserve déjà ses 72 px sous le
+     bandeau fixe. Les deux se cumulaient (72 + 44 = 116 px de vide avant
+     l'eyebrow) et poussaient d'autant le rail vers le bas de l'écran.
+     Le padding horizontal reste : .wrap en pose déjà un, celui-ci le
+     double volontairement pour aligner l'en-tête sur les panneaux. */
+  padding:0 var(--gutter) var(--r-item);
+  margin:0 auto;
+  width:100%;
+}
+.sr-head h2{
+  font-size:var(--t-h2);
+  max-width:18ch;
+  margin-top:14px;
+}
+
+/* =========================================================================
+   PUCES DE POSITION
+   role="group" et non "tablist" : les six panneaux restent tous présents et
+   perceptibles, seulement déplacés hors champ par une transformation. Un
+   patron ARIA d'onglets annoncerait une exclusion mutuelle qui n'existe pas,
+   et promettrait une navigation par flèches que ces boutons n'ont pas.
+   aria-current dit ce qui est vrai : la position courante dans un ensemble.
+   ========================================================================= */
+.sr-chips{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 var(--gutter) var(--r-item);
+  /* Six libellés ne tiennent pas sur 375 px : on défile plutôt que de
+     rétrécir le texte sous le plancher de lisibilité. */
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.sr-chips::-webkit-scrollbar{display:none;}
+
+.sr-chip{
+  flex:none;
+  appearance:none;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid transparent;
+  padding:6px 0 7px;
+  cursor:pointer;
+  font-family:'JetBrains Mono',monospace;
+  font-size:var(--t-micro);
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  color:var(--fg-dim);
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.sr-chip:hover{color:var(--fg);}
+.sr-chip[aria-current="true"]{
+  color:var(--fg);
+  border-bottom-color:var(--signal-ink);
+}
+.sr-chip:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:3px;
+}
+
+/* Filet de séparation. Un <span> décoratif plutôt qu'une bordure sur la
+   puce : une bordure suivrait l'état actif et clignoterait avec lui. */
+.sr-sep{
+  flex:none;
+  width:1px; height:13px;
+  background:var(--rule);
+}
+
+/* =========================================================================
+   LA ZONE ÉPINGLÉE ET LE RAIL
+   ========================================================================= */
+.sr-pin{
+  position:relative;
+  overflow-x:hidden;
+  overflow-y:visible;
+}
+.sr-track{
+  display:flex;
+  align-items:stretch;
+  gap:3vw;
+  /* Le padding-bottom (--r-block, jusqu'à 80 px) est parti sur la section :
+     posé ici, il s'ajoutait à la hauteur du rail et donc à celle de la
+     boîte épinglée, pour un vide qu'on ne voyait même pas. Il est rétabli
+     plus bas dans l'état de repli, où le rail redevient une pile. */
+  padding:0 var(--gutter);
+  will-change:transform;
+}
+
+.sr-panel{
+  flex:0 0 auto;
+  /* Moins de 100 % : le bord du panneau suivant reste visible. C'est ce
+     débord qui dit « ça continue sur le côté » — sans lui, le glissement
+     lit comme un diaporama plein écran et la logique horizontale disparaît
+     justement là où l'écran est le plus étroit. */
+  width:min(86%, 780px);
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(24px, 4vw, 56px);
+  align-items:center;
+}
+
+/* ---------- colonne de texte ---------- */
+.sr-title{
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-weight:800;
+  font-size:var(--t-h3);
+  line-height:1.14;
+  letter-spacing:-.02em;
+  margin:0 0 var(--s-4);
+  text-wrap:balance;
+}
+.sr-list{
+  list-style:none;
+  margin:0 0 var(--s-4);
+  padding:0;
+  display:grid;
+  gap:12px;
+}
+.sr-list li{
+  display:grid;
+  grid-template-columns:17px 1fr;
+  gap:11px;
+  align-items:start;
+  font-size:var(--t-s);
+  line-height:1.55;
+  color:var(--fg-dim);
+}
+.sr-list b{color:var(--fg); font-weight:700;}
+.sr-list svg{
+  margin-top:4px;
+  fill:none;
+  stroke:var(--signal-ink);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* ---------- les deux issues d'un panneau ----------
+   « Voir le détail » mène à la fiche du service, « Discutons-en » au devis.
+   Deux liens sur une seule ligne, jamais deux boutons empilés : la hauteur
+   du panneau est plafonnée par l'épinglage, et deux .btn coûteraient 90 px
+   là où deux liens en coûtent 20. Le second porte le signal — c'est
+   l'action que le site cherche. */
+.sr-ctas{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 24px;
+  margin-top:18px;
+}
+.sr-ctas .svc-cta{margin-top:0;}
+.svc-cta.is-devis{
+  color:var(--signal-ink);
+  border-bottom-color:var(--signal-ink);
+}
+.svc-cta.is-devis:hover{color:var(--fg); border-bottom-color:var(--fg);}
+
+/* =========================================================================
+   VISUELS
+   Une seule mise en scène pour les six, celle des compositions : pas de
+   cadre, pas de coin arrondi, un halo qui déborde. Le traitement .ph
+   (boîte arrondie, voile duotone) répond à un autre problème — faire tenir
+   ensemble des photos d'origines disparates — et le poser à côté d'objets
+   qui flottent dans le noir aurait donné deux mondes dans un même rail.
+   ========================================================================= */
+.sr-visual{
+  /* min() et non max-height : le visuel doit rester CARRÉ. Les
+     compositions de scenes.css se placent en pourcentage de leur boîte —
+     un max-height seul l'aurait aplatie et les aurait déformées. En
+     bornant la LARGEUR, le carré se conserve et la hauteur suit.
+     100% tant que l'écran est haut : sur un grand écran rien ne change. */
+  width:min(100%, var(--sr-vmax));
+  aspect-ratio:1/1;
+  align-self:center;
+  margin-inline:auto;
+}
+/* L'illustration de la fiche Google est le seul visuel matriciel du rail.
+   Elle sort de son cadre : contain et non cover — l'illustration porte déjà
+   sa propre composition, la recadrer la couperait.
+
+   L'ombre est refaite ici parce que le détourage l'a retirée du fichier :
+   celle d'origine était calculée pour un fond blanc et formait un halo gris
+   sur le fond sombre du rail. drop-shadow épouse le canal alpha, donc elle
+   suit les coins arrondis de la plaque au lieu du rectangle de l'image.
+   Le conteneur de requête sert uniquement à exprimer cette ombre en cqw :
+   en pixels fixes elle serait deux fois trop lourde sur un rail mobile. */
+
+/* =========================================================================
+   RUPTURES
+   Le site empile à 1024 partout ailleurs. Ici on empile à 700, et c'est
+   délibéré : ce composant est le seul dont la hauteur est plafonnée par
+   l'épinglage, et l'empilement est sa disposition la plus coûteuse en
+   hauteur — le texte passe SOUS le visuel au lieu d'être à côté, ce qui
+   ajoute ~200 px au budget vertical. À 1024x768, empiler faisait tomber le
+   visuel à 148 px ; en deux colonnes il tient ~348 px pour la même fenêtre.
+
+   700 et non 560 : à 701 px la colonne de texte mesure encore ~295 px,
+   assez pour que l'amorce en gras d'une puce tienne sur sa ligne avant le
+   tiret. En dessous elle passe sous 280 et les amorces se brisent. 700
+   garde donc la tablette en portrait (768) sur deux colonnes, ce qui est
+   tout l'intérêt d'avoir descendu le seuil.
+   ========================================================================= */
+@media (max-width: 700px){
+  .sr-panel{
+    width:min(90%, 560px);
+    grid-template-columns:1fr;
+    gap:var(--s-4);
+  }
+  /* Le visuel passe au-dessus du texte : sous une colonne unique, une
+     image reléguée sous deux bénéfices et un lien n'est jamais vue. Même
+     raisonnement que le hero des pages service. */
+  .sr-visual{
+    order:-1;
+    max-width:300px;
+    margin-inline:auto;
+  }
+  /* Colonne unique : le texte n'est plus À CÔTÉ du visuel mais EN DESSOUS.
+     Il s'ajoute donc au budget vertical — ~220 px de puces et de lien, plus
+     la gouttière. Le plafond du visuel se resserre d'autant : mesuré à
+     1024x768, l'en-tête, les puces et les réserves coûtent 367 px, le texte
+     244 de plus, d'où les 620 retirés.
+
+     C'est la disposition la plus coûteuse en hauteur du composant : sur une
+     fenêtre courte le visuel y devient petit, et c'est de l'arithmétique, pas
+     un réglage. Si le visuel doit rester grand à cette largeur, la vraie
+     réponse est de descendre le seuil d'empilement (deux colonnes tiennent
+     dans bien moins de hauteur), pas de relever ce plafond : le relever
+     remettrait le bas du panneau hors champ. */
+  .services-rail{ --sr-vmax:max(140px, calc(100svh - 620px)); }
+  .sr-track{gap:4vw;}
+}
+
+/* ---------- Fenêtre courte ----------
+   Rupture sur la HAUTEUR, pas la largeur : c'est le seul endroit du site
+   qui en a besoin, parce que c'est le seul composant dont la boîte doit
+   tenir dans l'écran (l'épinglage ne montre jamais plus de 100svh).
+
+   Mesuré à 900x600, épinglé : la section faisait 706 px pour 600 de
+   fenêtre. Rien n'était coupé — les 106 px de trop étaient du vide sous le
+   lien « Voir le détail » — mais un panneau au texte plus long que celui
+   des sites web y aurait perdu sa dernière ligne.
+
+   Ce qu'on resserre est du souffle, jamais du contenu : le titre de
+   section descend de 4,2vw à 2,9vw (77 px sur deux lignes deviennent 56),
+   les trois respirations verticales passent de --r-item à --s-4, et
+   l'interligne des puces à cocher se referme d'un cran. Le corps du texte
+   ne bouge pas : réduire la taille des puces pour gagner des pixels aurait
+   été prendre sur la lisibilité, ce que la hauteur d'une fenêtre ne
+   justifie jamais. */
+@media (max-height: 700px){
+  .services-rail{
+    padding-top:64px;
+    padding-bottom:var(--s-4);
+    /* Coûts fixes retombés à ~340 px une fois l'en-tête resserré. */
+    --sr-vmax:max(170px, calc(100svh - 340px));
+  }
+  .sr-head{padding-bottom:var(--s-4);}
+  .sr-head h2{
+    font-size:clamp(24px, 2.9vw, 34px);
+    margin-top:8px;
+  }
+  .sr-chips{padding-bottom:var(--s-4);}
+  .sr-list{gap:9px;}
+  .sr-title{margin-bottom:var(--s-4);}
+}
+
+@media (max-width: 560px){
+  /* L'en-tête et les puces rétrécissent avec la largeur (--t-h2 est en vw) :
+     le budget se desserre d'autant. Mesuré à 560x740 : 306 px d'en-tête et
+     de réserves, 230 de texte, 24 de gouttière. */
+  .services-rail{ --sr-vmax:max(160px, calc(100svh - 570px)); }
+  .sr-panel{width:88%;}
+  .sr-visual{max-width:230px;}
+  .sr-head h2{max-width:none;}
+  .sr-chips{gap:12px;}
+}
+
+/* =========================================================================
+   REPLI — MOUVEMENT RÉDUIT, OU GSAP ABSENT
+   Le JS ne pose .sr-live que s'il a effectivement pris la main. Sans cette
+   classe, rien n'est épinglé et le rail redevient ce qu'il est dans le
+   document : six blocs empilés, lus de haut en bas. C'est aussi l'état
+   servi si le script échoue à charger — le contenu ne dépend jamais de lui.
+   ========================================================================= */
+.services-rail:not(.sr-live) .sr-track{
+  flex-direction:column;
+  gap:var(--r-block);
+  transform:none !important;
+  /* Rien n'est épinglé ici : la section peut être aussi haute qu'elle veut,
+     et le rythme vertical d'origine reprend ses droits. */
+  padding-block:0 var(--r-block);
+}
+/* Aucun plafond non plus sur le visuel : la page défile normalement, la
+   hauteur de fenêtre ne contraint plus rien. */
+.services-rail:not(.sr-live){ --sr-vmax:100%; }
+.services-rail:not(.sr-live) .sr-panel{
+  width:100%;
+  max-width:780px;
+  margin-inline:auto;
+}
+.services-rail:not(.sr-live) .sr-chips{display:none;}
+
+/* =========================================================================
+   MOITIÉ JOUR
+   ========================================================================= */
+.on-paper .sr-sep{background:rgba(23,20,15,.14);}

@@ -57,8 +57,8 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Création de sites web",
-          "description": "Sites vitrine rapides, pensés mobile d'abord, structurés pour Google.",
+          "name": "Création de sites web et landing pages",
+          "description": "Sites vitrines et pages de vente, pensés mobile d'abord et structurés pour Google.",
           "url": "https://singulier.apexwebstudio.studio/sites-web.html"
         }
       },
@@ -66,26 +66,17 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Réseaux sociaux",
-          "description": "Gestion et création de la présence sur les réseaux sociaux.",
-          "url": "https://singulier.apexwebstudio.studio/reseaux-sociaux.html"
+          "name": "Développement d'applications mobiles",
+          "description": "Applications iOS et Android, publiées sur l'App Store et Google Play.",
+          "url": "https://singulier.apexwebstudio.studio/applications-mobiles.html"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Création de contenu",
-          "description": "Visuels, textes et ligne éditoriale.",
-          "url": "https://singulier.apexwebstudio.studio/reseaux-sociaux.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Boutiques Shopify",
-          "description": "Fiches produits, paiement et livraison configurés.",
+          "name": "Boutiques e-commerce Shopify",
+          "description": "Fiches produits, paiement, livraison et parcours d'achat configurés.",
           "url": "https://singulier.apexwebstudio.studio/ecommerce-shopify.html"
         }
       },
@@ -93,54 +84,18 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Supports marketing",
-          "description": "Flyers et supports imprimés.",
+          "name": "Cartes de visite NFC",
+          "description": "Une carte qu'on approche du téléphone ; le contenu reste modifiable après impression.",
+          "url": "https://singulier.apexwebstudio.studio/cartes-nfc.html"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Visibilité locale et Google Business Profile",
+          "description": "Fiche d'établissement créée, remplie et tenue à jour.",
           "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Google Business Profile",
-          "description": "Création et suivi de la fiche d'établissement.",
-          "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Cartes NFC",
-          "description": "Cartes de visite sans contact.",
-          "url": "https://singulier.apexwebstudio.studio/visibilite-locale.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Solutions IA",
-          "description": "Agents IA de support client.",
-          "url": "https://singulier.apexwebstudio.studio/agents-ia.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Automatisation",
-          "description": "Scénarios reliant formulaire, agent, fiche client, email et WhatsApp.",
-          "url": "https://singulier.apexwebstudio.studio/automatisation.html"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Support client automatisé",
-          "description": "Réponses aux demandes répétitives, 24h/24.",
-          "url": "https://singulier.apexwebstudio.studio/automatisation.html"
         }
       }
     ]
@@ -157,9 +112,11 @@
   <noscript><link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/fonts.css?v=fc470791">
 
-<link rel="stylesheet" href="css/style.css?v=1b505024">
-<link rel="stylesheet" href="css/pages.css?v=1066f3eb">
-<link rel="stylesheet" href="css/responsive.css?v=5d3a120b">
+<link rel="stylesheet" href="css/style.css?v=db7abe24">
+<link rel="stylesheet" href="css/pages.css?v=41c63677">
+<link rel="stylesheet" href="css/responsive.css?v=240536fb">
+<link rel="stylesheet" href="css/patron-service.css?v=ba590227">
+<link rel="stylesheet" href="css/scenes.css?v=29f6d264">
 <link rel="stylesheet" href="css/page-services.css?v=1aee703b">
 </head>
 <body>
@@ -169,6 +126,11 @@
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ===================== EN-TÊTE ===================== -->
+<!-- Sentinelle du bandeau : observee par main.js pour poser .scrolled sur
+     .site-header. Absolue et haute d un pixel, elle ne touche a aucune mise
+     en page. Sans elle, l observer porte sur null et le bandeau reste
+     transparent a toute profondeur de defilement. -->
+<div id="topSentinel" aria-hidden="true"></div>
 <header class="site-header" id="siteHeader">
   <div class="wrap nav-inner">
     <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
@@ -182,73 +144,14 @@
     </a>
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="index.html">Accueil</a>
-      <button type="button" class="nav-svc" data-courante id="navServices"
-              aria-expanded="false" aria-controls="megaServices" aria-haspopup="true">
-        Services <span class="nav-svc-chev" aria-hidden="true"></span>
-      </button>
-      <a href="agents-ia.html">Agents IA</a>
-      <a href="methode.html">Méthode</a>
-      <a href="a-propos.html">À propos</a>
-      <a href="contact.html">Contact</a>
+      <a href="devis.html">Devis</a>
     </nav>
-    <a href="contact.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <a href="devis.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
     <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span>
     </button>
   </div>
 </header>
-
-<!-- ===================== DÉPLIANT SERVICES ===================== -->
-<!-- Hors du <header> volontairement : celui-ci fait 72px avec
-     align-items:center, un panneau à l'intérieur serait écrasé par cette
-     hauteur. Ici il se déploie librement juste sous la barre. -->
-<div class="mega" id="megaServices" role="region" aria-label="Nos services" hidden>
-  <div class="wrap mega-inner">
-    <p class="eyebrow mega-eyebrow">Nos prestations</p>
-    <ul class="mega-list">
-      <li class="mega-item">
-        <a class="mega-link" href="sites-web.html">
-          <span class="mega-num" aria-hidden="true">01</span>
-          <span class="mega-title">Sites web &amp; solutions digitales</span>
-          <span class="mega-desc">Sites vitrine rapides, pensés mobile d'abord, structurés pour être trouvés sur Google.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="reseaux-sociaux.html">
-          <span class="mega-num" aria-hidden="true">02</span>
-          <span class="mega-title">Réseaux sociaux &amp; contenu</span>
-          <span class="mega-desc">Ligne éditoriale, création de visuels et de textes, publication régulière.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="ecommerce-shopify.html">
-          <span class="mega-num" aria-hidden="true">03</span>
-          <span class="mega-title">E-commerce &amp; Shopify</span>
-          <span class="mega-desc">Fiches produits, paiement, livraison, et un panier qui va jusqu'au bout.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="visibilite-locale.html">
-          <span class="mega-num" aria-hidden="true">04</span>
-          <span class="mega-title">Visibilité locale</span>
-          <span class="mega-desc">Fiche Google Business, cartes de visite NFC et supports imprimés.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-      <li class="mega-item">
-        <a class="mega-link" href="automatisation.html">
-          <span class="mega-num" aria-hidden="true">05</span>
-          <span class="mega-title">Automatisation</span>
-          <span class="mega-desc">Scénarios reliant formulaire, agent IA, fiche client, email et WhatsApp.</span>
-          <span class="mega-go" aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <!-- data-lenis-prevent : Lenis écoute les touchmove sur window et, dès qu'il
      est arrêté, appelle preventDefault() sur chacun. Cela verrouille bien la
@@ -273,89 +176,86 @@
   </div>
   <nav aria-label="Navigation mobile">
     <a href="index.html"><i>01</i>Accueil</a>
-    <button type="button" class="mm-svc" id="mmServices" aria-expanded="false" aria-controls="mmSousServices">
-      <i>02</i>Services<span class="mm-chev" aria-hidden="true"></span>
-    </button>
-    <ul class="mm-sub" id="mmSousServices" hidden>
-      <li><a href="sites-web.html"><i>01</i>Sites web &amp; solutions digitales</a></li>
-      <li><a href="reseaux-sociaux.html"><i>02</i>Réseaux sociaux &amp; contenu</a></li>
-      <li><a href="ecommerce-shopify.html"><i>03</i>E-commerce &amp; Shopify</a></li>
-      <li><a href="visibilite-locale.html"><i>04</i>Visibilité locale</a></li>
-      <li><a href="automatisation.html"><i>05</i>Automatisation</a></li>
-    </ul>
-    <a href="agents-ia.html"><i>03</i>Agents IA</a>
-    <a href="methode.html"><i>04</i>Méthode</a>
-    <a href="a-propos.html"><i>05</i>À propos</a>
-    <a href="contact.html"><i>06</i>Contact</a>
+        <a href="devis.html"><i>02</i>Devis</a>
   </nav>
   <div class="mm-foot">
-    <a href="contact.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+    <a href="devis.html" class="btn btn-primary btn-block">Démarrer un projet</a>
   </div>
 </div>
 
 <main id="top">
 
-<!-- ===================== 04 · VISIBILITÉ LOCALE ===================== -->
-<section class="section rule-top reveal on-paper" id="visibilite" aria-labelledby="vis-title">
+<!-- ===================== HERO ===================== -->
+<section class="section reveal" aria-labelledby="sv-title">
   <div class="wrap">
-    <div class="local">
-      <div class="serp" aria-hidden="true">
-        <div class="serp-bar">
-          <span class="mag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
-          <span class="q">votre activité, casablanca</span>
-        </div>
-        <div class="serp-body">
-          <div class="serp-result">
-            <p class="url">google.com &rsaquo; maps &rsaquo; place</p>
-            <p class="ttl">Votre entreprise</p>
-            <p class="snip">Casablanca, Maroc · Fiche complétée : horaires, photos, coordonnées, lien vers votre site.</p>
-          </div>
-          <p class="serp-meta">Fiche <b>Google Business Profile</b></p>
-          <div class="serp-checks">
-            <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Horaires et adresse à jour</span></div>
-            <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Photos de votre activité</span></div>
-            <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Lien direct vers votre site</span></div>
-            <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg><span>Réponse aux avis reçus</span></div>
-          </div>
+    <div class="sv-hero">
+      <div>
+        <p class="eyebrow">Service 05 &middot; Visibilit&eacute; locale</p>
+        <h1 data-split id="sv-title">Introuvable sur Google, c'est introuvable tout court.</h1>
+        <p class="sv-lead">Un client cherche votre activit&eacute; et tombe sur une fiche incompl&egrave;te, ou sur rien. On construit votre pr&eacute;sence l&agrave; o&ugrave; il regarde vraiment.</p>
+        <ul class="sv-bullets">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Trouv&eacute; pr&egrave;s de chez vous</b> &mdash; sur Maps et dans la recherche locale.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Une fiche qui reste &agrave; jour</b> &mdash; horaires, photos, coordonn&eacute;es. Pas fig&eacute;e au jour de la cr&eacute;ation.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Les avis re&ccedil;oivent une r&eacute;ponse</b> &mdash; y compris ceux qui piquent.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span><b>Des supports imprim&eacute;s coh&eacute;rents</b> &mdash; flyers et affichettes au m&ecirc;me langage que la fiche.</span></li>
+        </ul>
+        <div class="sv-ctas">
+          <a href="devis.html?service=visibilite-locale" class="btn btn-primary">Discutons-en <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">&Eacute;crire sur WhatsApp</a>
         </div>
       </div>
-      <div class="local-copy">
-        <p class="eyebrow">Visibilité locale</p>
-        <h1 data-split id="vis-title">Introuvable sur Google, ignoré à la carte de visite.</h1>
-        <p class="lead">Un client cherche votre commerce sur Google et tombe sur une fiche incomplète, ou sur rien du tout. Une carte de visite en papier finit dans un tiroir, son numéro jamais composé. On construit votre visibilité là où vos clients regardent réellement : une fiche Google Business complète, une carte NFC qui partage vos coordonnées d'un geste, et les supports imprimés qui accompagnent votre activité au quotidien.</p>
+      <div class="sv-visual viz-3d" aria-hidden="true">
+        <span class="scn-glow"></span>
+        <img src="assets/3d/fiche-google-salon.webp"
+               srcset="assets/3d/fiche-google-salon-620.webp 620w,
+                       assets/3d/fiche-google-salon.webp 1208w"
+               sizes="(max-width: 560px) 260px, (max-width: 1024px) 340px, 34vw"
+               width="1208" height="1208" loading="eager" fetchpriority="high" decoding="async" alt="">
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="svc-pair">
-      <div class="svc-pair-col">
-        <h2 class="svc-tag">Les bénéfices</h2>
-        <div class="serp-checks">
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Trouvé plus facilement par les clients qui cherchent près de chez eux</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Coordonnées partagées en un geste, sans appli à installer</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Une image cohérente entre fiche, cartes et supports imprimés</span></div>
-          <div class="serp-check"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Une présence qui reste à jour, pas figée au jour de la création</span></div>
-        </div>
-      </div>
-      <div class="svc-pair-col">
-        <h2 class="svc-tag">Ce qui est livré</h2>
-        <div class="uflow">
-          <div class="uflow-step"><span class="k">Fiche Google Business Profile</span><span>Créée ou reprise en main, complétée.</span></div>
-          <div class="uflow-step"><span class="k">Carte de visite NFC</span><span>Programmée avec vos coordonnées et vos liens.</span></div>
-          <div class="uflow-step"><span class="k">Flyers et supports imprimés</span><span>Conçus selon vos besoins.</span></div>
-          <div class="uflow-step"><span class="k">Suivi de la fiche</span><span>Réponses aux avis, mise à jour des informations.</span></div>
-        </div>
-      </div>
+<!-- ===================== CE QUE VOUS OBTENEZ ===================== -->
+<section class="section rule-top reveal" aria-labelledby="get-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Livrables</p>
+      <h2 data-split id="get-title">Ce que vous obtenez.</h2>
     </div>
+    <div class="gets">
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Votre fiche Google Business cr&eacute;&eacute;e ou reprise en main</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Horaires, adresse, cat&eacute;gories et coordonn&eacute;es compl&eacute;t&eacute;s</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Des photos de votre activit&eacute; publi&eacute;es</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Le dossier de v&eacute;rification pr&eacute;par&eacute; avec vous</span></div>
+      <div class="get"><svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l6 6L20 6"/></svg><span>Vos flyers et supports imprim&eacute;s con&ccedil;us au besoin</span></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Démonstration : à quoi ressemble une fiche Google Business Profile
-         une fois reprise en main. Placée juste après la liste des livrables,
-         parce qu'elle montre le premier d'entre eux.
+<!-- ===================== COMMENT CA SE PASSE ===================== -->
+<section class="section rule-top reveal" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">D&eacute;roul&eacute;</p>
+      <h2 data-split id="how-title">Comment &ccedil;a se passe.</h2>
+    </div>
+    <ol class="steps-lite sv-after">
+      <li><span class="sl-num" aria-hidden="true">01</span><h3>&Eacute;tat des lieux</h3><p>Ce que Google affiche aujourd'hui de vous, et ce que vos concurrents montrent.</p></li>
+      <li><span class="sl-num" aria-hidden="true">02</span><h3>Cr&eacute;ation ou reprise</h3><p>La fiche est compl&eacute;t&eacute;e&nbsp;: cat&eacute;gories, horaires, photos, liens.</p></li>
+      <li><span class="sl-num" aria-hidden="true">03</span><h3>V&eacute;rification</h3><p>Google r&eacute;clame une preuve. On pr&eacute;pare le dossier et on vous accompagne le jour J.</p></li>
+      <li><span class="sl-num" aria-hidden="true">04</span><h3>Suivi</h3><p>R&eacute;ponses aux avis, mises &agrave; jour, corrections signal&eacute;es par Google.</p></li>
+    </ol>
+  </div>
+</section>
 
-         Sans piste audio : la capture d'origine en portait une, totalement
-         silencieuse, qui pesait 192 kbps pour rien.
-
-         Le poster s'affiche pendant le chargement, donc jamais de rectangle
-         vide à cet endroit de la page. -->
+<!-- ===================== DEMONSTRATION ===================== -->
+<section class="section rule-top reveal" aria-labelledby="demo-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">En images</p>
+      <h2 data-split id="demo-title">&Agrave; quoi ressemble une fiche reprise en main.</h2>
+    </div>
     <figure class="svc-demo">
       <video
         src="assets/video/profil-google.mp4"
@@ -367,40 +267,45 @@
         aria-label="Démonstration d'une fiche Google Business Profile complétée : photos, horaires, coordonnées et avis"></video>
       <figcaption>Une fiche Google Business Profile complétée : photos, horaires, coordonnées et avis.</figcaption>
     </figure>
+  </div>
+</section>
 
-    <div class="svc-process">
-      <h2 class="svc-tag">Le déroulé</h2>
-      <ol class="steps-lite">
-        <li><span class="sl-num" aria-hidden="true">01</span><h3>État des lieux</h3><p>On regarde ce qui existe déjà, ou son absence.</p></li>
-        <li><span class="sl-num" aria-hidden="true">02</span><h3>Fiche Google</h3><p>Création ou reprise complète de la fiche.</p></li>
-        <li><span class="sl-num" aria-hidden="true">03</span><h3>Supports</h3><p>Carte NFC et imprimés conçus et commandés.</p></li>
-        <li><span class="sl-num" aria-hidden="true">04</span><h3>Suivi</h3><p>La fiche reste à jour, les avis reçoivent une réponse.</p></li>
-      </ol>
+<!-- ===================== CA SE MARIE BIEN AVEC ===================== -->
+<section class="section rule-top reveal" aria-labelledby="mix-title">
+  <div class="wrap">
+    <div class="section-head wide">
+      <p class="eyebrow">Aller plus loin</p>
+      <h2 data-split id="mix-title">&Ccedil;a se marie bien avec.</h2>
     </div>
-
-    <p class="work-note">Cette visibilité s'appuie sur un site qui convertit une fois le clic obtenu : voir <a href="sites-web.html">nos sites web</a>.</p>
-    <div class="svc-cta-wrap">
-      <a href="contact.html" class="svc-cta">Être trouvé plus facilement <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <div class="cat-grid sv-after">
+      <a class="cat-card" href="cartes-nfc.html">
+        <span class="cat-num">NFC</span>
+        <h3>Une carte qui renvoie vers la fiche.</h3>
+        <span class="cat-go">Voir la prestation <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="cat-card" href="sites-web.html">
+        <span class="cat-num">Web</span>
+        <h3>Un site au bout du lien de la fiche.</h3>
+        <span class="cat-go">Voir la prestation <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
     </div>
   </div>
 </section>
 
-
-<!-- ===================== CTA FINAL ===================== -->
-<section class="final" aria-labelledby="cta-title">
+<!-- ===================== VERS LE DEVIS =====================
+     Remplace le tableau a trois onglets qui vivait ici : il faisait doublon
+     avec la page devis, seule a le porter desormais. Ce qui reste est une
+     invitation, pas un formulaire — le visiteur choisit d y aller. -->
+<section class="section" aria-labelledby="bd-title">
   <div class="wrap">
-    <h2 id="cta-title">Une prestation vous intéresse ? Parlons de votre projet.</h2>
-    <div class="final-ctas">
-      <a href="contact.html" class="btn btn-primary">Démarrer un projet</a>
-      <a href="https://wa.me/212635485491" class="btn btn-ghost" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+    <div class="band-devis">
+      <div class="bdv-copy">
+        <p class="eyebrow">Service 05</p>
+        <h2 id="bd-title">Visibilit&eacute; locale</h2>
+        <p class="bdv-note"><span class="bdv-dot" aria-hidden="true"></span>Sur devis &middot; sans engagement</p>
+      </div>
+      <a href="devis.html?service=visibilite-locale" class="btn btn-primary bdv-cta">Discutons-en <span class="arrow" aria-hidden="true">&rarr;</span></a>
     </div>
-    <p class="final-meta">
-      <span>Réponse sous 24h</span>
-      <span aria-hidden="true">·</span>
-      <span>Devis gratuit</span>
-      <span aria-hidden="true">·</span>
-      <span id="casaClock">Casablanca · l'agent répond</span>
-    </p>
   </div>
 </section>
 
@@ -412,7 +317,7 @@
       <h3>Une question avant de se lancer ?</h3>
       <p>Écrivez-nous, on répond rapidement, sans jargon.</p>
     </div>
-    <a href="contact.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <a href="devis.html" class="btn btn-ghost">Nous écrire <span class="arrow" aria-hidden="true">&rarr;</span></a>
   </div>
 </div>
 
@@ -429,10 +334,7 @@
     </span>
     <nav class="foot-nav" aria-label="Navigation de pied de page">
       <a href="sites-web.html">Services</a>
-      <a href="agents-ia.html">Agents IA</a>
-      <a href="methode.html">Méthode</a>
-      <a href="a-propos.html">À propos</a>
-      <a href="contact.html">Contact</a>
+      <a href="devis.html">Demande</a>
     </nav>
     <div class="foot-links">
       <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
@@ -461,7 +363,7 @@
     </div>
   </div>
   <div class="ai-body" id="aiBody">
-    <div class="msg bot">Bonjour. Je suis l'agent IA de Studio Singulier. Posez-moi une question sur nos sites, Shopify, nos agents IA ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
+    <div class="msg bot">Bonjour. Je suis l'assistant de Studio Singulier. Posez-moi une question sur nos sites, nos applications, Shopify, les cartes NFC ou nos tarifs, ou dites-moi si vous voulez réserver un appel.</div>
   </div>
   <div class="ai-suggestions">
     <button class="chat-chip" data-q="Vos prix ?">Vos prix ?</button>
@@ -484,7 +386,7 @@
 <script src="js/vendor/gsap.min.js?v=28033e44" defer></script>
 <script src="js/vendor/ScrollTrigger.min.js?v=ad33c2df" defer></script>
 
-<script src="js/animations.js?v=46ac0f8c" defer></script>
-<script src="js/main.js?v=e0b4d2c2" defer></script>
+<script src="js/animations.js?v=7da0de0e" defer></script>
+<script src="js/main.js?v=b4f18c42" defer></script>
 </body>
 </html>
