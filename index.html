@@ -112,10 +112,14 @@
 <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet"></noscript>
+<!-- L'image du hero est posee en background-image : sans ce preload
+     le navigateur ne la decouvre qu'apres avoir analyse le CSS.
+     C'est l'element LCP de la page. -->
+<link rel="preload" as="image" href="assets/realisations/cs-fag-600.webp" fetchpriority="high">
 <link rel="stylesheet" href="css/fonts.css?v=fc470791">
 
 <link rel="stylesheet" href="css/style.css?v=db7abe24">
-<link rel="stylesheet" href="css/pages.css?v=41c63677">
+<link rel="stylesheet" href="css/pages.css?v=cb92ea20">
 <link rel="stylesheet" href="css/responsive.css?v=240536fb">
 <!-- patron-service.css a été retiré d'ici : il n'était chargé que pour la
      section « prestation phare », supprimée à la demande du propriétaire.

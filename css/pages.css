@@ -1336,7 +1336,10 @@ footer{
 .ps-visual{
   position:relative;
   height:55%;
-  background:#1A1D22 url(../assets/realisations/cs-fag.webp) center/cover;
+  /* Variante 600 : cet element est le LCP de l'accueil et ne depasse
+     jamais 372 px d'affichage. Le fichier 1200x900 coutait 58 Kio
+     de plus pour aucun pixel visible. */
+  background:#1A1D22 url(../assets/realisations/cs-fag-600.webp) center/cover;
   display:flex; align-items:flex-end;
   padding:2.4cqw 2.2cqw;
 }
