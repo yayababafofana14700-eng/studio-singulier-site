@@ -28,6 +28,7 @@
 
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { transformSync } from 'esbuild';
 import { join, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -52,15 +53,63 @@ function fichiers(dossier, extensions) {
   return trouve;
 }
 
-// Table : chemin tel qu'il apparaît dans le HTML  ->  empreinte
+/** Minifie une source et renvoie son code.
+ *
+ *  47 % du CSS de ce site est du commentaire. Ils expliquent chaque cote et
+ *  chaque arbitrage, et doivent rester dans les sources — mais rien n'oblige
+ *  a les envoyer au visiteur. Les fichiers servis sont donc des copies
+ *  minifiees, generees ici et JAMAIS editees a la main.
+ *
+ *  esbuild, et non un minifieur maison : ce CSS emploie calc(), clamp() et
+ *  max(), ou les espaces autour des operateurs sont OBLIGATOIRES. Un retrait
+ *  naif des blancs casserait silencieusement la mise en page.
+ */
+function minifier(abs) {
+  const estCss = abs.endsWith('.css');
+  const source = readFileSync(abs, 'utf8');
+  const { code } = transformSync(source, {
+    loader: estCss ? 'css' : 'js',
+    minify: true,
+    legalComments: 'none',
+  });
+  return { source, code, cible: abs.replace(/\.(css|js)$/, '.min.$1') };
+}
+
+// Table : chemin de la SOURCE tel qu'il apparaît dans le HTML
+//         ->  { fichier réellement servi, empreinte de son contenu }
 const versions = new Map();
+let octetsAvant = 0;
+let octetsApres = 0;
+
+const sources = [...fichiers(join(RACINE, 'css'), ['.css']), ...fichiers(join(RACINE, 'js'), ['.js'])]
+  .filter((f) => !/\.min\.(css|js)$/.test(f));
+
+// Les bibliotheques tierces arrivent deja minifiees (js/vendor/*.min.js).
+// On ne les repasse pas dans esbuild : rien a gagner, et le risque de casser
+// un code qu'on n'a pas ecrit. Elles sont servies telles quelles, mais
+// versionnees comme le reste — sans quoi le cache d'un an de vercel.json les
+// figerait pour de bon.
+const generes = new Set(sources.map((f) => f.replace(/\.(css|js)$/, '.min.$1')));
 for (const abs of [...fichiers(join(RACINE, 'css'), ['.css']), ...fichiers(join(RACINE, 'js'), ['.js'])]) {
-  versions.set(relative(RACINE, abs).split(sep).join('/'), empreinte(abs));
+  if (!/\.min\.(css|js)$/.test(abs) || generes.has(abs)) continue;
+  const cle = relative(RACINE, abs).split(sep).join('/');
+  versions.set(cle, { servi: cle, v: empreinte(abs) });
+}
+
+for (const abs of sources) {
+  const { source, code, cible } = minifier(abs);
+  octetsAvant += source.length;
+  octetsApres += code.length;
+  if (!CHECK) writeFileSync(cible, code, 'utf8');
+  versions.set(relative(RACINE, abs).split(sep).join('/'), {
+    servi: relative(RACINE, cible).split(sep).join('/'),
+    v: createHash('sha256').update(code).digest('hex').slice(0, 8),
+  });
 }
 
 // Ne réécrit que les URL dont le fichier existe réellement : une faute de
 // frappe dans un chemin doit rester visible, pas être versionnée en silence.
-const MOTIF = /(href|src)="((?:css|js)\/[^"?]+\.(?:css|js))(\?v=[^"]*)?"/g;
+const MOTIF = /(href|src)="((?:css|js)\/[^"?]+\.(?:css|js))(?:\?v=[^"]*)?"/g;
 
 const pages = readdirSync(RACINE).filter((f) => f.endsWith('.html'));
 let pagesModifiees = 0;
@@ -71,9 +120,12 @@ for (const page of pages) {
   const avant = readFileSync(chemin, 'utf8');
 
   const apres = avant.replace(MOTIF, (complet, attr, fichier) => {
-    const v = versions.get(fichier);
-    if (!v) { introuvables.add(fichier); return complet; }
-    return `${attr}="${fichier}?v=${v}"`;
+    // `fichier` peut etre une source (css/style.css), sa version minifiee
+    // (css/style.min.css) ou une bibliotheque deja minifiee. On essaie tel
+    // quel, puis en retirant le .min pour retrouver la source.
+    const e = versions.get(fichier) || versions.get(fichier.replace(/\.min\.(css|js)$/, '.$1'));
+    if (!e) { introuvables.add(fichier); return complet; }
+    return `${attr}="${e.servi}?v=${e.v}"`;
   });
 
   if (apres !== avant) {
@@ -86,6 +138,12 @@ for (const page of pages) {
 for (const f of introuvables) {
   console.error(`  ATTENTION : ${f} est reference dans le HTML mais absent du disque`);
 }
+
+const ko = (o) => (o / 1024).toFixed(0);
+console.log(
+  `  minification : ${ko(octetsAvant)} Ko -> ${ko(octetsApres)} Ko ` +
+  `(-${Math.round(100 - (octetsApres / octetsAvant) * 100)} %)`
+);
 
 console.log(
   pagesModifiees === 0

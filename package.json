@@ -1,0 +1,24 @@
+{
+  "name": "studio-singulier-web",
+  "version": "1.0.0",
+  "description": "Site vitrine de Studio Singulier, agence digitale à Casablanca. Site statique : HTML, CSS et JavaScript, sans build ni dépendance à installer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yayababafofana14700-eng/studio-singulier-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yayababafofana14700-eng/studio-singulier-site/issues"
+  },
+  "homepage": "https://github.com/yayababafofana14700-eng/studio-singulier-site#readme",
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
