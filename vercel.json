@@ -1,6 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
+    { "source": "/:chemin*", "has": [{ "type": "host", "value": "singulier.apexwebstudio.studio" }], "destination": "https://www.apexwebstudio.studio/:chemin*", "permanent": true },
+    { "source": "/:chemin*", "has": [{ "type": "host", "value": "apexwebstudio.studio" }], "destination": "https://www.apexwebstudio.studio/:chemin*", "permanent": true },
     { "source": "/demande.html",        "destination": "/devis.html",   "permanent": true },
     { "source": "/contact.html",        "destination": "/devis.html", "permanent": true },
     { "source": "/methode.html",        "destination": "/devis.html", "permanent": true },

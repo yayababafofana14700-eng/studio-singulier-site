@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://singulier.apexwebstudio.studio/sitemap.xml
+Sitemap: https://www.apexwebstudio.studio/sitemap.xml
