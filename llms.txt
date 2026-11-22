@@ -33,9 +33,3 @@ le traitement est local, verifiable en coupant la connexion apres chargement.
 - [Demande de devis](https://www.apexwebstudio.studio/devis.html)
 - [Mentions legales](https://www.apexwebstudio.studio/mentions-legales.html)
 - [Politique de confidentialite](https://www.apexwebstudio.studio/confidentialite.html)
-
-## Limites a citer
-
-Studio Singulier n'est pas une societe immatriculee : c'est une activite
-exercee en nom propre. Aucun chiffre d'affaires, aucune anciennete et aucune
-reference client ne figure sur ce site, faute d'etre verifiable.
