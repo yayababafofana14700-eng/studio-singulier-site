@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur de TVA — Maroc et France, HT vers TTC</title>
+<meta name="description" content="Calculez la TVA dans les deux sens : du hors taxe au toutes taxes comprises et inversement. Taux marocains (20, 14, 10, 7 %) et français. Gratuit, instantané.">
+<link rel="canonical" href="https://www.apexwebstudio.studio/outil-tva.html">
+
+<meta property="og:title" content="Calculateur de TVA — Maroc et France">
+<meta property="og:description" content="Du hors taxe au toutes taxes comprises et inversement, avec les taux marocains et français.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://www.apexwebstudio.studio/outil-tva.html">
+<meta property="og:site_name" content="Studio Singulier">
+<meta property="og:image" content="https://www.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculateur de TVA — Maroc et France">
+<meta name="twitter:description" content="Du hors taxe au toutes taxes comprises et inversement.">
+<meta name="twitter:image" content="https://www.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta name="theme-color" content="#0E0F11">
+<meta name="color-scheme" content="dark light">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230E0F11'/%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='3.0700' stroke-linecap='butt'%3E%3Cpath d='M17.074 4.602A5.859 4.219 0 1 0 8.732 10.213L10.812 11.220'/%3E%3Cpath d='M13.333 12.439L15.413 13.446A6.118 4.405 0 1 1 6.701 19.305'/%3E%3Ccircle cx='17.074' cy='4.602' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='6.701' cy='19.305' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='8.732' cy='10.213' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='15.413' cy='13.446' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Calculateur de TVA Maroc et France",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Navigateur web",
+  "url": "https://www.apexwebstudio.studio/outil-tva.html",
+  "description": "Calcule la TVA dans les deux sens, du hors taxe au toutes taxes comprises et inversement, avec les taux marocains et français.",
+  "inLanguage": "fr",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MAD" },
+  "publisher": { "@type": "Organization", "name": "Studio Singulier", "url": "https://www.apexwebstudio.studio/" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Comment retrouver le montant hors taxe à partir du TTC ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "On divise le montant TTC par 1 plus le taux. À 20 %, le hors taxe vaut le TTC divisé par 1,20. L'erreur la plus courante consiste à retirer 20 % du TTC, ce qui donne un résultat trop bas : retirer 20 % de 1 200 donne 960, alors que le hors taxe réel est 1 000." } },
+    { "@type": "Question", "name": "Quels sont les taux de TVA au Maroc ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le droit marocain prévoit un taux normal de 20 % et des taux réduits de 14 %, 10 % et 7 %. Le taux applicable dépend de la nature exacte de l'opération, et la loi de finances le fait évoluer d'une année sur l'autre : vérifiez le vôtre auprès de la Direction générale des impôts." } },
+    { "@type": "Question", "name": "Faut-il arrondir la TVA sur une facture ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "L'usage est de calculer la TVA sur le total hors taxe de la facture, puis d'arrondir ce montant unique, plutôt que d'arrondir ligne par ligne. Arrondir chaque ligne fait apparaître des écarts de quelques centimes sur une facture qui en comporte beaucoup." } }
+  ]
+}
+</script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/fonts.min.css?v=febdbe34">
+<link rel="stylesheet" href="css/style.min.css?v=a798cf8e">
+<link rel="stylesheet" href="css/pages.min.css?v=2c4c602c">
+<link rel="stylesheet" href="css/responsive.min.css?v=9464f0b5">
+<link rel="stylesheet" href="css/outils.min.css?v=7bc3dcdc">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9344973454063626" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<a href="#top" class="skip-link">Aller au contenu</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="topSentinel" aria-hidden="true"></div>
+<header class="site-header" id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="outils.html">Outils</a>
+      <a href="devis.html">Devis</a>
+    </nav>
+    <a href="devis.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" data-lenis-prevent>
+  <div class="mm-top">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <button class="mm-close" id="closeMenu">Fermer</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html"><i>01</i>Accueil</a>
+    <a href="outils.html"><i>02</i>Outils</a>
+    <a href="devis.html"><i>03</i>Devis</a>
+  </nav>
+  <div class="mm-foot">
+    <a href="devis.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+  </div>
+</div>
+
+<main id="top">
+<section class="section">
+  <div class="wrap">
+
+    <nav class="o-legende" aria-label="Fil d'Ariane" style="margin-bottom:14px;">
+      <a href="index.html" style="color:inherit;">Accueil</a> &rsaquo;
+      <a href="outils.html" style="color:inherit;">Outils</a> &rsaquo;
+      <span style="color:var(--fg);">Calculateur de TVA</span>
+    </nav>
+
+    <p class="eyebrow">Outil gratuit</p>
+    <h1>Calculateur de TVA</h1>
+    <p class="lead">Entrez un montant, choisissez le sens du calcul et le taux. Le résultat s'affiche à la frappe, sans bouton à presser.</p>
+
+    <div class="outil" style="margin-top:clamp(20px,4vw,32px);">
+
+      <div class="o-grille">
+        <div class="o-champ">
+          <span class="o-legende" id="lblSens">Mon montant est</span>
+          <div class="o-segments" role="radiogroup" aria-labelledby="lblSens">
+            <label class="o-segment"><input type="radio" name="sens" value="ht" checked><span>Hors taxe</span></label>
+            <label class="o-segment"><input type="radio" name="sens" value="ttc"><span>Toutes taxes comprises</span></label>
+          </div>
+        </div>
+
+        <div class="o-champ">
+          <label for="montant">Montant</label>
+          <input type="number" id="montant" min="0" step="0.01" value="1000" inputmode="decimal" autocomplete="off">
+        </div>
+
+        <div class="o-champ">
+          <label for="devise">Devise</label>
+          <select id="devise">
+            <option value="MAD" selected>Dirham marocain (MAD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="USD">Dollar (USD)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="o-grille" style="margin-top:14px;">
+        <div class="o-champ">
+          <span class="o-legende" id="lblPays">Pays</span>
+          <div class="o-segments" role="radiogroup" aria-labelledby="lblPays">
+            <label class="o-segment"><input type="radio" name="pays" value="ma" checked><span>Maroc</span></label>
+            <label class="o-segment"><input type="radio" name="pays" value="fr"><span>France</span></label>
+          </div>
+        </div>
+
+        <div class="o-champ">
+          <span class="o-legende" id="lblTaux">Taux de TVA</span>
+          <div class="o-segments" id="zoneTaux" role="radiogroup" aria-labelledby="lblTaux"></div>
+        </div>
+
+        <div class="o-champ">
+          <label for="tauxLibre">Autre taux (%)</label>
+          <input type="number" id="tauxLibre" min="0" max="100" step="0.1" placeholder="ex. 8,5" inputmode="decimal" autocomplete="off">
+          <p class="o-aide">Rempli, ce champ remplace le taux choisi ci-dessus.</p>
+        </div>
+      </div>
+
+      <div class="o-resultat">
+        <dl class="o-lignes">
+          <div class="o-ligne"><dt>Montant hors taxe</dt><dd id="resHT">&mdash;</dd></div>
+          <div class="o-ligne"><dt>TVA <span id="resTauxLabel"></span></dt><dd id="resTVA">&mdash;</dd></div>
+          <div class="o-ligne est-total"><dt>Total toutes taxes comprises</dt><dd id="resTTC">&mdash;</dd></div>
+        </dl>
+        <div class="o-sortie-barre" style="margin-top:14px; margin-bottom:0;">
+          <span class="o-legende" id="etatCopie"></span>
+          <button type="button" class="o-btn" id="btnCopier">Copier le détail</button>
+        </div>
+      </div>
+
+      <p class="o-avis">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>
+        </svg>
+        <span><strong>Le taux dépend de votre activité.</strong> Cet outil applique le taux que vous choisissez, il ne détermine pas lequel vous concerne. Au Maroc, vérifiez-le auprès de la
+        <a href="https://www.tax.gov.ma/" target="_blank" rel="noopener">Direction générale des impôts</a> ou de votre comptable : la loi de finances le fait évoluer chaque année.</span>
+      </p>
+
+      <noscript>
+        <p class="o-avis" style="margin-top:0;">Ce calculateur a besoin de JavaScript.</p>
+      </noscript>
+    </div>
+
+    <div class="o-pub" aria-hidden="true"></div>
+
+    <div class="o-prose">
+      <h2>Les deux sens du calcul</h2>
+      <p>Il y a deux situations, et l'une des deux provoque presque toutes les erreurs.</p>
+      <h3>Du hors taxe vers le TTC</h3>
+      <p>C'est le cas simple : on multiplie. Un montant de 1 000 au taux de 20 % donne 200 de TVA et 1 200 à payer.</p>
+      <h3>Du TTC vers le hors taxe</h3>
+      <p>C'est là qu'on se trompe. On ne retire pas 20 % du TTC, on divise par 1,20. Sur 1 200, retirer 20 % donnerait 960, alors que le hors taxe réel est 1 000. L'écart de 40 vient de ce que le pourcentage ne porte pas sur la même base : la TVA se calcule sur le hors taxe, pas sur le total.</p>
+
+      <h2>Les taux</h2>
+      <p><strong>Au Maroc</strong>, le taux normal est de 20 %, avec des taux réduits de 14 %, 10 % et 7 % selon la nature de l'opération. La loi de finances les fait évoluer : plusieurs taux réduits ont bougé ces dernières années dans le cadre de la réforme de la TVA.</p>
+      <p><strong>En France</strong>, le taux normal est de 20 %, avec des taux réduits de 10 %, 5,5 % et 2,1 %.</p>
+      <p>Dans les deux pays, c'est la nature précise du bien ou du service qui commande le taux, pas le secteur d'activité en général. Deux prestations voisines peuvent relever de taux différents.</p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="o-faq">
+        <details>
+          <summary>Comment retrouver le hors taxe à partir du TTC ?</summary>
+          <p>On divise le TTC par 1 plus le taux. À 20 %, c'est le TTC divisé par 1,20. Retirer 20 % du TTC donne un résultat trop bas.</p>
+        </details>
+        <details>
+          <summary>Faut-il arrondir la TVA sur une facture ?</summary>
+          <p>L'usage est de calculer la TVA sur le total hors taxe de la facture puis d'arrondir ce montant unique, plutôt que d'arrondir ligne par ligne, ce qui fait apparaître des écarts de centimes.</p>
+        </details>
+        <details>
+          <summary>Mes montants sont-ils enregistrés ?</summary>
+          <p>Non. Le calcul se fait dans votre navigateur et rien n'est transmis.</p>
+        </details>
+      </div>
+
+      <div class="o-avis" style="margin-top:28px;">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>
+        </svg>
+        <span><strong>Vous vendez en ligne ?</strong> Une boutique bien réglée calcule la TVA toute seule, par pays et par type de produit.
+        <a href="ecommerce-shopify.html">Voir nos boutiques Shopify</a>.</span>
+      </div>
+    </div>
+
+    <h2 style="margin-top:clamp(34px,6vw,54px);">Nos autres outils gratuits</h2>
+    <div class="outils-grille">
+      <a class="outil-carte" href="outil-convertisseur-webp.html">
+        <span class="o-etiquette">Images</span>
+        <h3>Convertisseur WebP</h3>
+        <p>Compressez vos images sans qu'elles quittent votre appareil. Deux à cinq fois plus léger.</p>
+        <span class="outil-carte-pied">Ouvrir l'outil <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="outil-carte" href="outil-mentions-legales.html">
+        <span class="o-etiquette">Juridique</span>
+        <h3>Générateur de pages légales</h3>
+        <p>Mentions légales et politique de confidentialité, droit marocain (loi 09-08) ou RGPD.</p>
+        <span class="outil-carte-pied">Ouvrir l'outil <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <a class="outil-carte" href="outil-qr-code.html">
+        <span class="o-etiquette">Marketing</span>
+        <h3>Générateur de QR code</h3>
+        <p>Pour un lien, un avis Google, un réseau wifi ou une fiche de contact.</p>
+        <span class="outil-carte-pied">Ouvrir l'outil <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <nav class="foot-nav" aria-label="Navigation de pied de page">
+      <a href="sites-web.html">Services</a>
+      <a href="outils.html">Outils</a>
+      <a href="contact.html">Contact</a>
+      <a href="devis.html">Demande</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <div class="foot-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:studiosingulier2026@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/company/studio-singulier/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-copy">&copy; 2026 Studio Singulier, Belvédère, Casablanca, Maroc</p>
+  </div>
+</footer>
+
+<script src="js/vendor/lenis.min.js?v=0bf174d3" defer></script>
+<script src="js/main.min.js?v=e3b487e0" defer></script>
+
+<script>
+/* ============================================================================
+   CALCULATEUR DE TVA
+   Le taux libre PRIME sur le segment : c'est le champ qu'on remplit en
+   dernier, et l'ignorer au profit d'un segment resté coché affichait un
+   résultat qui ne correspondait à aucune saisie visible à l'écran.
+   ========================================================================= */
+(function(){
+  'use strict';
+
+  var TAUX = { ma: [20, 14, 10, 7], fr: [20, 10, 5.5, 2.1] };
+
+  var montant    = document.getElementById('montant');
+  var devise     = document.getElementById('devise');
+  var tauxLibre  = document.getElementById('tauxLibre');
+  var zoneTaux   = document.getElementById('zoneTaux');
+  var resHT      = document.getElementById('resHT');
+  var resTVA     = document.getElementById('resTVA');
+  var resTTC     = document.getElementById('resTTC');
+  var resTauxLbl = document.getElementById('resTauxLabel');
+  var btnCopier  = document.getElementById('btnCopier');
+  var etatCopie  = document.getElementById('etatCopie');
+
+  if (!montant || !zoneTaux) { return; }
+
+  function paysChoisi(){
+    var c = document.querySelector('input[name="pays"]:checked');
+    return c ? c.value : 'ma';
+  }
+
+  function sensChoisi(){
+    var c = document.querySelector('input[name="sens"]:checked');
+    return c ? c.value : 'ht';
+  }
+
+  /* Reconstruit les segments quand le pays change. Le premier taux est coché
+     d'office, sinon le groupe se retrouve sans sélection et le calcul tombe
+     à zéro sans que rien ne l'explique à l'écran. */
+  function peuplerTaux(){
+    var pays = paysChoisi();
+    zoneTaux.innerHTML = '';
+    TAUX[pays].forEach(function(t, i){
+      var label = document.createElement('label');
+      label.className = 'o-segment';
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'taux';
+      input.value = String(t);
+      if (i === 0) { input.checked = true; }
+      input.addEventListener('change', calculer);
+      var span = document.createElement('span');
+      span.textContent = String(t).replace('.', ',') + ' %';
+      label.appendChild(input);
+      label.appendChild(span);
+      zoneTaux.appendChild(label);
+    });
+  }
+
+  function tauxActif(){
+    var libre = parseFloat(String(tauxLibre.value).replace(',', '.'));
+    if (!isNaN(libre) && libre >= 0) { return libre; }
+    var c = document.querySelector('input[name="taux"]:checked');
+    return c ? parseFloat(c.value) : 20;
+  }
+
+  function formater(n){
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: devise.value,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(n);
+  }
+
+  function calculer(){
+    var val  = parseFloat(String(montant.value).replace(',', '.'));
+    var taux = tauxActif();
+
+    resTauxLbl.textContent = '(' + String(taux).replace('.', ',') + ' %)';
+
+    if (isNaN(val) || val < 0) {
+      resHT.textContent = resTVA.textContent = resTTC.textContent = '—';
+      return;
+    }
+
+    var ht, tva, ttc;
+    if (sensChoisi() === 'ht') {
+      ht  = val;
+      tva = ht * taux / 100;
+      ttc = ht + tva;
+    } else {
+      ttc = val;
+      ht  = ttc / (1 + taux / 100);
+      tva = ttc - ht;
+    }
+
+    resHT.textContent  = formater(ht);
+    resTVA.textContent = formater(tva);
+    resTTC.textContent = formater(ttc);
+  }
+
+  /* Choisir la France en laissant « dirham » affiché produit un résultat juste
+     mais incohérent, que personne ne relit. La devise suit donc le pays — sauf
+     si l'utilisateur l'a changée lui-même, auquel cas son choix l'emporte :
+     une facture marocaine libellée en euros est un cas réel. */
+  var deviseChoisieAlaMain = false;
+  devise.addEventListener('change', function(){ deviseChoisieAlaMain = true; });
+
+  function accorderDevise(pays){
+    if (deviseChoisieAlaMain) { return; }
+    var attendue = (pays === 'fr') ? 'EUR' : 'MAD';
+    if (devise.value !== attendue) { devise.value = attendue; }
+  }
+
+  ['input', 'change'].forEach(function(ev){
+    montant.addEventListener(ev, calculer);
+    tauxLibre.addEventListener(ev, calculer);
+    devise.addEventListener(ev, calculer);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="sens"]'), function(r){
+    r.addEventListener('change', calculer);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="pays"]'), function(r){
+    r.addEventListener('change', function(){ accorderDevise(this.value); peuplerTaux(); calculer(); });
+  });
+
+  btnCopier.addEventListener('click', function(){
+    var texte = 'Hors taxe : ' + resHT.textContent + '\n' +
+                'TVA ' + resTauxLbl.textContent + ' : ' + resTVA.textContent + '\n' +
+                'Total TTC : ' + resTTC.textContent;
+
+    function fait(){
+      btnCopier.classList.add('est-fait');
+      etatCopie.textContent = 'Copié';
+      setTimeout(function(){
+        btnCopier.classList.remove('est-fait');
+        etatCopie.textContent = '';
+      }, 1800);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texte).then(fait, function(){ etatCopie.textContent = 'Copie refusée'; });
+    } else {
+      /* Repli pour les contextes non sécurisés, où navigator.clipboard est
+         absent : un textarea hors écran et execCommand. */
+      var zone = document.createElement('textarea');
+      zone.value = texte;
+      zone.style.position = 'fixed';
+      zone.style.left = '-9999px';
+      document.body.appendChild(zone);
+      zone.select();
+      try { document.execCommand('copy'); fait(); } catch (e) { etatCopie.textContent = 'Copie refusée'; }
+      document.body.removeChild(zone);
+    }
+  });
+
+  peuplerTaux();
+  calculer();
+})();
+</script>
+
+</body>
+</html>
