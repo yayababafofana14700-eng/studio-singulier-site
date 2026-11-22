@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertir une image en WebP — gratuit, sans envoi de fichier</title>
+<meta name="description" content="Convertissez et compressez vos images en WebP, JPEG ou PNG directement dans votre navigateur. Aucun fichier n'est envoyé sur un serveur. Gratuit, sans inscription, sans limite.">
+<link rel="canonical" href="https://www.apexwebstudio.studio/outil-convertisseur-webp.html">
+
+<meta property="og:title" content="Convertir une image en WebP — gratuit, sans envoi de fichier">
+<meta property="og:description" content="Compressez vos images en WebP sans qu'elles quittent votre téléphone ou votre ordinateur. Gratuit et sans inscription.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://www.apexwebstudio.studio/outil-convertisseur-webp.html">
+<meta property="og:site_name" content="Studio Singulier">
+<meta property="og:image" content="https://www.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Convertir une image en WebP — gratuit, sans envoi de fichier">
+<meta name="twitter:description" content="Compressez vos images en WebP sans qu'elles quittent votre appareil.">
+<meta name="twitter:image" content="https://www.apexwebstudio.studio/assets/og-studio-singulier.jpg">
+<meta name="theme-color" content="#0E0F11">
+<meta name="color-scheme" content="dark light">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%230E0F11'/%3E%3Cg fill='none' stroke='%23EDE8DC' stroke-width='3.0700' stroke-linecap='butt'%3E%3Cpath d='M17.074 4.602A5.859 4.219 0 1 0 8.732 10.213L10.812 11.220'/%3E%3Cpath d='M13.333 12.439L15.413 13.446A6.118 4.405 0 1 1 6.701 19.305'/%3E%3Ccircle cx='17.074' cy='4.602' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='6.701' cy='19.305' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='8.732' cy='10.213' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3Ccircle cx='15.413' cy='13.446' r='1.5350' fill='%23EDE8DC' stroke='none'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- ===================== ADSENSE =====================
+     COLLER ICI le script fourni par AdSense (Annonces > Obtenir le code) :
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+     Tant qu'il n'est pas collé, la page fonctionne : .o-pub reste vide.
+     ==================================================== -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Convertisseur d'images WebP",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Navigateur web",
+  "url": "https://www.apexwebstudio.studio/outil-convertisseur-webp.html",
+  "description": "Convertit et compresse des images en WebP, JPEG ou PNG dans le navigateur, sans envoi de fichier sur un serveur.",
+  "inLanguage": "fr",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MAD" },
+  "publisher": { "@type": "Organization", "name": "Studio Singulier", "url": "https://www.apexwebstudio.studio/" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Mes images sont-elles envoyées sur un serveur ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Non. La conversion se fait entièrement dans votre navigateur, par l'API canvas. Aucun fichier ne quitte votre appareil. Coupez votre connexion après le chargement de la page : l'outil continue de fonctionner." } },
+    { "@type": "Question", "name": "Quelle qualité choisir pour le web ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Entre 75 et 85 pour une photographie destinée à un site web. En dessous de 60, les aplats de couleur se dégradent visiblement. Au-dessus de 90, le poids augmente beaucoup pour un gain que l'œil ne perçoit plus." } },
+    { "@type": "Question", "name": "Le WebP est-il lisible par tous les navigateurs ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui. Chrome, Firefox, Edge, Safari, Opera et les navigateurs mobiles Android et iOS lisent le WebP. Safari l'a adopté avec iOS 14 en 2020." } },
+    { "@type": "Question", "name": "Pourquoi mon PNG transparent devient-il blanc en JPEG ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le format JPEG ne gère pas la transparence : les zones transparentes sont remplies en blanc. Pour la conserver, choisissez WebP, qui la gère tout en restant beaucoup plus léger que le PNG." } }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.apexwebstudio.studio/" },
+    { "@type": "ListItem", "position": 2, "name": "Outils gratuits", "item": "https://www.apexwebstudio.studio/outils.html" },
+    { "@type": "ListItem", "position": 3, "name": "Convertisseur WebP", "item": "https://www.apexwebstudio.studio/outil-convertisseur-webp.html" }
+  ]
+}
+</script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/fonts.min.css?v=febdbe34">
+<link rel="stylesheet" href="css/style.min.css?v=a798cf8e">
+<link rel="stylesheet" href="css/pages.min.css?v=2c4c602c">
+<link rel="stylesheet" href="css/responsive.min.css?v=9464f0b5">
+<link rel="stylesheet" href="css/outils.min.css?v=7bc3dcdc">
+</head>
+<body>
+
+<a href="#top" class="skip-link">Aller au contenu</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="topSentinel" aria-hidden="true"></div>
+<header class="site-header" id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="outils.html">Outils</a>
+      <a href="devis.html">Devis</a>
+    </nav>
+    <a href="devis.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" data-lenis-prevent>
+  <div class="mm-top">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <button class="mm-close" id="closeMenu">Fermer</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html"><i>01</i>Accueil</a>
+    <a href="outils.html"><i>02</i>Outils</a>
+    <a href="devis.html"><i>03</i>Devis</a>
+  </nav>
+  <div class="mm-foot">
+    <a href="devis.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+  </div>
+</div>
+
+<main id="top">
+<section class="section">
+  <div class="wrap">
+
+    <nav class="o-legende" aria-label="Fil d'Ariane" style="margin-bottom:14px;">
+      <a href="index.html" style="color:inherit;">Accueil</a> &rsaquo;
+      <a href="outils.html" style="color:inherit;">Outils</a> &rsaquo;
+      <span style="color:var(--fg);">Convertisseur WebP</span>
+    </nav>
+
+    <p class="eyebrow">Outil gratuit</p>
+    <h1>Convertir une image en WebP</h1>
+    <p class="lead">Déposez vos images, choisissez la qualité, récupérez des fichiers deux à cinq fois plus légers. Tout se passe dans votre navigateur : aucune image n'est envoyée sur un serveur, pas même le nôtre.</p>
+
+    <div class="outil" style="margin-top:clamp(20px,4vw,32px);">
+
+      <div id="zoneDepot" class="o-depot" role="button" tabindex="0" aria-label="Choisir des images à convertir">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/>
+        </svg>
+        <strong>Déposez vos images ici</strong>
+        <span>ou touchez pour les choisir &middot; JPEG, PNG, WebP, GIF, BMP</span>
+      </div>
+      <input type="file" id="saisieFichiers" accept="image/*" multiple hidden>
+
+      <div class="o-grille" style="margin-top:20px;">
+        <div class="o-champ">
+          <span class="o-legende" id="lblFormat">Format de sortie</span>
+          <div class="o-segments" role="radiogroup" aria-labelledby="lblFormat">
+            <label class="o-segment"><input type="radio" name="format" value="image/webp" checked><span>WebP</span></label>
+            <label class="o-segment"><input type="radio" name="format" value="image/jpeg"><span>JPEG</span></label>
+            <label class="o-segment"><input type="radio" name="format" value="image/png"><span>PNG</span></label>
+          </div>
+          <p class="o-aide" id="aideFormat">Le WebP conserve la transparence et pèse le moins lourd.</p>
+        </div>
+
+        <div class="o-champ">
+          <label for="qualite">Qualité : <strong id="valQualite" style="color:var(--signal-ink);">82</strong></label>
+          <input type="range" id="qualite" min="30" max="100" step="1" value="82"
+                 style="accent-color:var(--signal); padding:0; border:0; background:transparent;">
+          <p class="o-aide">75 à 85 est le bon réglage pour une photo destinée au web.</p>
+        </div>
+
+        <div class="o-champ">
+          <label for="largeurMax">Largeur maximale (px)</label>
+          <input type="number" id="largeurMax" min="0" max="12000" step="10" value="0" inputmode="numeric">
+          <p class="o-aide">0 conserve les dimensions d'origine. 1600 suffit pour un site.</p>
+        </div>
+      </div>
+
+      <div class="o-resultat" id="blocResultat" hidden>
+        <div class="o-sortie-barre">
+          <span class="o-legende" id="recap"></span>
+          <button type="button" class="o-btn est-plein" id="btnToutTelecharger">Tout télécharger</button>
+          <button type="button" class="o-btn" id="btnVider">Vider</button>
+        </div>
+        <ul class="o-fichiers" id="listeFichiers"></ul>
+      </div>
+
+      <p id="messageErreur" class="o-avis" hidden>
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>
+        </svg>
+        <span id="texteErreur"></span>
+      </p>
+
+      <noscript>
+        <p class="o-avis" style="margin-top:0;">Cet outil a besoin de JavaScript pour convertir les images dans votre navigateur.</p>
+      </noscript>
+    </div>
+
+    <div class="o-pub" aria-hidden="true"></div>
+
+    <div class="o-prose">
+      <h2>Pourquoi convertir vos images en WebP</h2>
+      <p>Une photo sortie d'un téléphone pèse entre trois et huit mégaoctets. Publiée telle quelle sur un site, elle devient la raison pour laquelle vos visiteurs partent avant d'avoir vu votre page. La même photo convertie en WebP à qualité 82 tombe souvent sous les 300 kilooctets, sans différence perceptible à l'écran.</p>
+      <p>Le WebP a été publié par Google en 2010. Il remplace à la fois le JPEG, dont il reprend la compression avec perte en plus efficace, et le PNG, dont il garde la transparence pour une fraction du poids.</p>
+
+      <h3>Ce que ça change</h3>
+      <ul>
+        <li><strong>La vitesse de chargement</strong>, premier critère de confort sur un téléphone en 4G.</li>
+        <li><strong>Le référencement</strong> : Google mesure la vitesse réelle de vos pages et en tient compte.</li>
+        <li><strong>Votre bande passante</strong>, divisée d'autant.</li>
+      </ul>
+
+      <h2>Comment choisir la qualité</h2>
+      <p>Le curseur ne correspond pas à un pourcentage de pixels conservés mais à un réglage de l'encodeur. Les repères utiles :</p>
+      <ul>
+        <li><strong>90 à 100</strong> — pour une photo de produit qu'on va agrandir. Le poids grimpe vite.</li>
+        <li><strong>75 à 85</strong> — le bon compromis dans presque tous les cas.</li>
+        <li><strong>60 à 75</strong> — pour une vignette ou une image d'arrière-plan.</li>
+        <li><strong>Sous 60</strong> — les dégradés se tachent. À réserver aux cas où le poids compte plus que l'image.</li>
+      </ul>
+
+      <h2>Vos fichiers ne partent nulle part</h2>
+      <p>La plupart des convertisseurs en ligne envoient vos images sur leurs serveurs, les traitent, puis vous renvoient le résultat. Vos photos passent alors entre les mains d'un tiers dont vous ne savez ni où il les stocke ni combien de temps.</p>
+      <p>Cet outil fonctionne autrement. Votre navigateur décode l'image, la redessine sur une zone de dessin invisible et la réencode lui-même. Vérifiez-le : chargez cette page, coupez votre connexion, puis convertissez une image. Ça marche toujours.</p>
+
+      <h2>Questions fréquentes</h2>
+      <div class="o-faq">
+        <details>
+          <summary>Mes images sont-elles envoyées sur un serveur ?</summary>
+          <p>Non. La conversion se fait entièrement dans votre navigateur, par l'API canvas. Aucun fichier ne quitte votre appareil et nous n'en recevons aucune copie.</p>
+        </details>
+        <details>
+          <summary>Le WebP est-il lisible par tous les navigateurs ?</summary>
+          <p>Oui. Chrome, Firefox, Edge, Safari, Opera et les navigateurs mobiles Android et iOS l'affichent. Safari l'a adopté avec iOS 14, en 2020.</p>
+        </details>
+        <details>
+          <summary>Pourquoi mon PNG transparent devient-il blanc en JPEG ?</summary>
+          <p>Le JPEG ne gère pas la transparence : les zones transparentes sont remplies en blanc. Pour la conserver, choisissez WebP.</p>
+        </details>
+        <details>
+          <summary>Y a-t-il une limite de taille ou de nombre ?</summary>
+          <p>Aucune de notre fait. La seule contrainte est la mémoire de votre appareil, puisque le traitement s'y déroule. Sur un téléphone, procédez par lots d'une dizaine d'images.</p>
+        </details>
+        <details>
+          <summary>Et les fichiers HEIC de mon iPhone ?</summary>
+          <p>Cela dépend du navigateur. Safari sur iPhone sait les décoder, Chrome sur Windows non. Si une image HEIC est refusée, exportez-la en JPEG depuis l'application Photos.</p>
+        </details>
+      </div>
+
+      <div class="o-avis" style="margin-top:28px;">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>
+        </svg>
+        <span><strong>Votre site est lent malgré des images allégées ?</strong>
+        Le poids des images n'est qu'une cause parmi d'autres. Nous construisons des sites à Casablanca en travaillant la vitesse dès la conception.
+        <a href="sites-web.html">Voir comment</a>.</span>
+      </div>
+    </div>
+
+    <h2 style="margin-top:clamp(34px,6vw,54px);">Nos autres outils gratuits</h2>
+    <div class="outils-grille">
+      <div class="outil-carte est-bientot">
+        <span class="o-etiquette">Juridique</span>
+        <h3>Générateur de pages légales</h3>
+        <p>Mentions légales, politique de confidentialité et bandeau cookies, au choix selon le droit marocain (loi 09-08) ou le RGPD.</p>
+        <span class="outil-carte-pied">Bientôt</span>
+      </div>
+      <a class="outil-carte" href="outil-qr-code.html">
+        <span class="o-etiquette">Marketing</span>
+        <h3>Générateur de QR code</h3>
+        <p>Un QR code pour un lien, un avis Google, un réseau wifi ou une fiche de contact. En PNG et en SVG.</p>
+        <span class="outil-carte-pied">Ouvrir l'outil <span class="arrow" aria-hidden="true">&rarr;</span></span>
+      </a>
+      <div class="outil-carte est-bientot">
+        <span class="o-etiquette">Gestion</span>
+        <h3>Calculateur de TVA</h3>
+        <p>Passez du hors taxe au toutes taxes comprises et inversement, avec les taux marocains et français.</p>
+        <span class="outil-carte-pied">Bientôt</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <nav class="foot-nav" aria-label="Navigation de pied de page">
+      <a href="sites-web.html">Services</a>
+      <a href="outils.html">Outils</a>
+      <a href="devis.html">Demande</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <div class="foot-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:studiosingulier2026@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/company/studio-singulier/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-copy">&copy; 2026 Studio Singulier, Belvédère, Casablanca, Maroc</p>
+  </div>
+</footer>
+
+<script src="js/vendor/lenis.min.js?v=0bf174d3" defer></script>
+<script src="js/main.min.js?v=e3b487e0" defer></script>
+
+<script>
+/* ============================================================================
+   CONVERTISSEUR D'IMAGES — 100 % dans le navigateur
+   Chaîne : File -> createImageBitmap -> canvas -> toBlob
+
+   POURQUOI createImageBitmap ET PAS new Image() :
+   une photo prise à l'horizontale porte son orientation dans ses métadonnées
+   EXIF, pas dans ses pixels. Dessinée via new Image(), elle ressort couchée
+   sur le côté sur la moitié des photos de téléphone. createImageBitmap
+   accepte imageOrientation:'from-image', qui applique la rotation EXIF au
+   décodage. C'est la seule voie fiable.
+   ========================================================================= */
+(function(){
+  'use strict';
+
+  var depot      = document.getElementById('zoneDepot');
+  var saisie     = document.getElementById('saisieFichiers');
+  var qualite    = document.getElementById('qualite');
+  var valQualite = document.getElementById('valQualite');
+  var largeurMax = document.getElementById('largeurMax');
+  var bloc       = document.getElementById('blocResultat');
+  var liste      = document.getElementById('listeFichiers');
+  var recap      = document.getElementById('recap');
+  var btnTout    = document.getElementById('btnToutTelecharger');
+  var btnVider   = document.getElementById('btnVider');
+  var boiteErr   = document.getElementById('messageErreur');
+  var texteErr   = document.getElementById('texteErreur');
+  var aideFormat = document.getElementById('aideFormat');
+
+  if (!depot || !saisie) { return; }
+
+  /* Les URL d'objets sont retenues ici : sans revoke, une session d'une
+     centaine d'images garde plusieurs centaines de mégaoctets en mémoire
+     jusqu'à la fermeture de l'onglet. */
+  var urls = [];
+  var resultats = [];
+
+  var AIDES = {
+    'image/webp': 'Le WebP conserve la transparence et pèse le moins lourd.',
+    'image/jpeg': 'Le JPEG ne gère pas la transparence : elle sera remplie en blanc.',
+    'image/png' : 'Le PNG est sans perte, donc lourd. Le curseur de qualité ne s’y applique pas.'
+  };
+
+  function formatChoisi(){
+    var coche = document.querySelector('input[name="format"]:checked');
+    return coche ? coche.value : 'image/webp';
+  }
+
+  function poids(octets){
+    if (octets < 1024) { return octets + ' o'; }
+    if (octets < 1048576) { return (octets / 1024).toFixed(0) + ' Ko'; }
+    return (octets / 1048576).toFixed(2) + ' Mo';
+  }
+
+  function erreur(message){
+    texteErr.textContent = message;
+    boiteErr.hidden = false;
+  }
+
+  function extension(type){
+    if (type === 'image/webp') { return '.webp'; }
+    if (type === 'image/jpeg') { return '.jpg';  }
+    return '.png';
+  }
+
+  function telecharger(url, nom){
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = nom;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  /* Le canvas est recréé à chaque image : réutiliser un canvas unique
+     laissait les pixels de l'image précédente visibles dans les bords d'une
+     image plus petite, car changer width/height ne nettoie la surface que si
+     les dimensions changent réellement. */
+  function convertir(fichier, type, q, lmax){
+    return createImageBitmap(fichier, { imageOrientation: 'from-image' })
+      .then(function(bitmap){
+        var l = bitmap.width;
+        var h = bitmap.height;
+
+        if (lmax > 0 && l > lmax) {
+          h = Math.round(h * (lmax / l));
+          l = lmax;
+        }
+
+        var canvas = document.createElement('canvas');
+        canvas.width  = Math.max(1, l);
+        canvas.height = Math.max(1, h);
+        var ctx = canvas.getContext('2d');
+
+        /* Sans ce fond, les zones transparentes ressortaient en NOIR et non
+           en blanc : un canvas vide vaut rgba(0,0,0,0) et l'encodeur JPEG
+           aplatit sur du noir. */
+        if (type === 'image/jpeg') {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+        bitmap.close();
+
+        return new Promise(function(resoudre, rejeter){
+          canvas.toBlob(function(blob){
+            if (!blob) { rejeter(new Error('Encodage impossible')); return; }
+            resoudre({ blob: blob, largeur: canvas.width, hauteur: canvas.height });
+          }, type, type === 'image/png' ? undefined : q / 100);
+        });
+      });
+  }
+
+  function afficher(entree){
+    var li = document.createElement('li');
+    li.className = 'o-fichier';
+
+    var vignette = document.createElement('img');
+    vignette.className = 'o-vignette';
+    vignette.alt = '';
+    vignette.src = entree.url;
+    urls.push(entree.url);
+
+    var infos = document.createElement('div');
+    var nom = document.createElement('div');
+    nom.className = 'o-fichier-nom';
+    nom.textContent = entree.nom;
+
+    var meta = document.createElement('div');
+    meta.className = 'o-fichier-meta';
+
+    var gain = Math.round((1 - entree.apres / entree.avant) * 100);
+    var texteGain = gain > 0
+      ? '<span class="o-gain">−' + gain + ' %</span>'
+      : '<span>+' + Math.abs(gain) + ' %</span>';
+
+    meta.innerHTML = poids(entree.avant) + ' → ' + poids(entree.apres) +
+                     ' &middot; ' + texteGain +
+                     ' &middot; ' + entree.largeur + '×' + entree.hauteur;
+
+    infos.appendChild(nom);
+    infos.appendChild(meta);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'o-btn';
+    btn.textContent = 'Télécharger';
+    btn.addEventListener('click', function(){ telecharger(entree.url, entree.nom); });
+
+    li.appendChild(vignette);
+    li.appendChild(infos);
+    li.appendChild(btn);
+    liste.appendChild(li);
+  }
+
+  function majRecap(){
+    var avant = 0, apres = 0;
+    resultats.forEach(function(r){ avant += r.avant; apres += r.apres; });
+    var gain = avant ? Math.round((1 - apres / avant) * 100) : 0;
+    recap.textContent = resultats.length + ' image' + (resultats.length > 1 ? 's' : '') +
+      ' · ' + poids(avant) + ' → ' + poids(apres) +
+      (gain > 0 ? ' (−' + gain + ' %)' : '');
+  }
+
+  function traiter(fichiers){
+    boiteErr.hidden = true;
+
+    var images = Array.prototype.filter.call(fichiers, function(f){
+      return f.type.indexOf('image/') === 0;
+    });
+
+    if (!images.length) {
+      erreur('Aucune image reconnue. Formats acceptés : JPEG, PNG, WebP, GIF, BMP.');
+      return;
+    }
+
+    var type = formatChoisi();
+    var q    = parseInt(qualite.value, 10);
+    var lmax = parseInt(largeurMax.value, 10) || 0;
+    var refuses = [];
+
+    bloc.hidden = false;
+    recap.textContent = 'Conversion en cours…';
+
+    /* Séquentiel et non parallèle : vingt décodages simultanés d'images de
+       douze mégapixels font tomber l'onglet sur un téléphone d'entrée de
+       gamme. La boucle enchaîne les promesses une à une. */
+    images.reduce(function(chaine, fichier){
+      return chaine.then(function(){
+        return convertir(fichier, type, q, lmax).then(function(sortie){
+          var base = fichier.name.replace(/\.[^.]+$/, '');
+          var entree = {
+            nom     : base + extension(type),
+            avant   : fichier.size,
+            apres   : sortie.blob.size,
+            largeur : sortie.largeur,
+            hauteur : sortie.hauteur,
+            url     : URL.createObjectURL(sortie.blob)
+          };
+          resultats.push(entree);
+          afficher(entree);
+          majRecap();
+        }).catch(function(){ refuses.push(fichier.name); });
+      });
+    }, Promise.resolve()).then(function(){
+      majRecap();
+      if (refuses.length) {
+        erreur('Non convertie' + (refuses.length > 1 ? 's' : '') + ' : ' + refuses.join(', ') +
+               '. Ce navigateur ne sait pas décoder ce format — exportez le fichier en JPEG, puis réessayez.');
+      }
+    });
+  }
+
+  depot.addEventListener('click', function(){ saisie.click(); });
+
+  depot.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); saisie.click(); }
+  });
+
+  saisie.addEventListener('change', function(){
+    if (saisie.files && saisie.files.length) { traiter(saisie.files); }
+    /* Remis à zéro pour que redéposer le MÊME fichier déclenche encore
+       l'événement change, qui ne part pas si la valeur est inchangée. */
+    saisie.value = '';
+  });
+
+  ['dragenter', 'dragover'].forEach(function(ev){
+    depot.addEventListener(ev, function(e){ e.preventDefault(); depot.classList.add('est-survol'); });
+  });
+
+  ['dragleave', 'drop'].forEach(function(ev){
+    depot.addEventListener(ev, function(e){ e.preventDefault(); depot.classList.remove('est-survol'); });
+  });
+
+  depot.addEventListener('drop', function(e){
+    if (e.dataTransfer && e.dataTransfer.files.length) { traiter(e.dataTransfer.files); }
+  });
+
+  qualite.addEventListener('input', function(){ valQualite.textContent = qualite.value; });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="format"]'), function(radio){
+    radio.addEventListener('change', function(){ aideFormat.textContent = AIDES[formatChoisi()] || ''; });
+  });
+
+  btnTout.addEventListener('click', function(){
+    /* Les navigateurs étouffent une rafale de téléchargements lancés dans la
+       même tâche : on les espace de 220 ms. */
+    resultats.forEach(function(r, i){
+      setTimeout(function(){ telecharger(r.url, r.nom); }, i * 220);
+    });
+  });
+
+  btnVider.addEventListener('click', function(){
+    urls.forEach(function(u){ URL.revokeObjectURL(u); });
+    urls = [];
+    resultats = [];
+    liste.innerHTML = '';
+    bloc.hidden = true;
+    boiteErr.hidden = true;
+  });
+
+  window.addEventListener('pagehide', function(){
+    urls.forEach(function(u){ URL.revokeObjectURL(u); });
+  });
+})();
+</script>
+
+</body>
+</html>

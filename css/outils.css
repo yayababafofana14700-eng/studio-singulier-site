@@ -1,0 +1,502 @@
+/* ============================================================================
+   OUTILS — pages d'outils gratuits
+   ============================================================================
+   Chargée APRÈS style.css, pages.css et responsive.css. Elle n'introduit
+   aucune couleur : tout vient des jetons de :root (style.css).
+
+   RÈGLE PAYÉE CHER, reprise de scenes.css :
+   sur --bg (#0E0F11), une ombre noire ne porte aucune information. Le relief
+   d'un panneau vient de la LUMIÈRE — un filet clair en bordure interne — pas
+   d'un box-shadow sombre qu'on ne voit pas.
+
+   DEUXIÈME RÈGLE, propre aux outils :
+   un outil se juge au temps qui précède le premier résultat. Aucun écran
+   d'accueil, aucune étape préalable : le champ est au-dessus de la ligne de
+   flottaison et le résultat s'affiche dès la frappe. Tout ce qui explique,
+   rassure ou vend passe EN DESSOUS du résultat.
+   ========================================================================= */
+
+/* ---------- Enveloppe d'outil ---------- */
+
+.outil{
+  background:var(--bg-2);
+  border-radius:var(--r-media);
+  /* Filet interne clair : le relief par la lumière, pas par l'ombre. */
+  box-shadow:inset 0 0 0 1px var(--rule);
+  padding:clamp(18px, 4vw, 34px);
+}
+
+.outil + .outil{margin-top:18px;}
+
+.outil-titre{
+  font-size:clamp(1rem, 2.4vw, 1.12rem);
+  margin:0 0 4px;
+}
+
+.outil-note{
+  color:var(--fg-faint);
+  font-size:.86rem;
+  line-height:1.55;
+  margin:0 0 18px;
+}
+
+/* ---------- Champs ---------- */
+
+.o-grille{
+  display:grid;
+  gap:14px 18px;
+  grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.o-champ{display:flex; flex-direction:column; gap:7px; min-width:0;}
+
+.o-champ > label,
+.o-legende{
+  color:var(--fg-dim);
+  font-size:.79rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+
+/* Les contrôles portent --rule-strong : SC 1.4.11 réclame 3:1 pour la
+   bordure d'un composant d'interface réel, et --rule ne tient que 1,6:1
+   sur --bg-2. */
+.o-champ input[type=text],
+.o-champ input[type=number],
+.o-champ input[type=email],
+.o-champ input[type=url],
+.o-champ input[type=date],
+.o-champ select,
+.o-champ textarea{
+  width:100%;
+  box-sizing:border-box;
+  background:var(--bg-3);
+  color:var(--fg);
+  border:1px solid var(--rule-strong);
+  border-radius:var(--r-media);
+  padding:11px 13px;
+  font:inherit;
+  font-size:.95rem;
+  transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.o-champ textarea{min-height:92px; resize:vertical; line-height:1.6;}
+
+.o-champ input:focus-visible,
+.o-champ select:focus-visible,
+.o-champ textarea:focus-visible{
+  outline:none;
+  border-color:var(--signal);
+  box-shadow:0 0 0 3px var(--signal-wash);
+}
+
+/* Le sélecteur natif garde sa flèche système : la remplacer par un chevron
+   en background réduisait la zone de frappe sous les 48px sur Android. */
+.o-champ select{cursor:pointer;}
+
+.o-aide{color:var(--fg-faint); font-size:.78rem; line-height:1.5;}
+
+/* ---------- Cases et radios ---------- */
+
+.o-cases{display:grid; gap:9px;}
+
+.o-case{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  cursor:pointer;
+  font-size:.92rem;
+  line-height:1.5;
+  color:var(--fg);
+}
+
+.o-case input{
+  flex:0 0 auto;
+  width:17px; height:17px;
+  margin:2px 0 0;
+  accent-color:var(--signal);
+  cursor:pointer;
+}
+
+/* ---------- Segments (choix exclusif visible d'un coup d'œil) ---------- */
+
+.o-segments{display:flex; flex-wrap:wrap; gap:7px;}
+
+.o-segment{position:relative; display:inline-flex;}
+
+.o-segment input{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  cursor:pointer;
+  margin:0;
+}
+
+.o-segment span{
+  display:inline-flex;
+  align-items:center;
+  min-height:40px;
+  padding:0 15px;
+  border:1px solid var(--rule-strong);
+  border-radius:var(--r-pill);
+  color:var(--fg-dim);
+  font-size:.88rem;
+  font-weight:500;
+  white-space:nowrap;
+  transition:border-color .18s var(--ease), color .18s var(--ease),
+             background-color .18s var(--ease);
+}
+
+.o-segment input:checked + span{
+  background:var(--signal);
+  border-color:var(--signal);
+  color:#fff;
+}
+
+.o-segment input:focus-visible + span{box-shadow:0 0 0 3px var(--signal-wash);}
+
+.o-segment input:not(:checked):hover + span{
+  color:var(--fg);
+  border-color:var(--fg-faint);
+}
+
+/* ---------- Résultat ---------- */
+
+.o-resultat{
+  margin-top:20px;
+  padding-top:20px;
+  border-top:1px solid var(--rule);
+}
+
+.o-lignes{
+  display:grid;
+  gap:1px;
+  background:var(--rule);
+  border-radius:var(--r-media);
+  overflow:hidden;
+  margin:0;
+}
+
+.o-ligne{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  background:var(--bg-2);
+  padding:12px 14px;
+}
+
+.o-ligne dt{color:var(--fg-dim); font-size:.89rem; margin:0;}
+
+.o-ligne dd{
+  margin:0;
+  font-size:1.02rem;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+
+/* La ligne de total : l'accent ne sert qu'une fois par écran. */
+.o-ligne.est-total{background:var(--bg-3);}
+.o-ligne.est-total dt{color:var(--fg);}
+.o-ligne.est-total dd{color:var(--signal-ink); font-size:1.24rem;}
+
+/* ---------- Sortie texte (générateurs) ---------- */
+
+.o-sortie{position:relative; margin-top:18px;}
+
+.o-sortie-barre{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:9px;
+  margin-bottom:10px;
+}
+
+.o-sortie-barre .o-legende{margin-right:auto;}
+
+.o-texte{
+  width:100%;
+  box-sizing:border-box;
+  min-height:300px;
+  max-height:62vh;
+  background:var(--bg);
+  color:var(--fg-dim);
+  border:1px solid var(--rule);
+  border-radius:var(--r-media);
+  padding:16px;
+  font-family:ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size:.82rem;
+  line-height:1.72;
+  white-space:pre-wrap;
+  overflow:auto;
+  resize:vertical;
+}
+
+/* ---------- Boutons compacts propres aux outils ---------- */
+
+.o-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:40px;
+  padding:0 16px;
+  border:1px solid var(--rule-strong);
+  border-radius:var(--r-pill);
+  background:transparent;
+  color:var(--fg);
+  font:inherit;
+  font-size:.88rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:border-color .18s var(--ease), background-color .18s var(--ease),
+             transform .12s var(--ease);
+}
+
+.o-btn:hover{border-color:var(--fg-faint); background:var(--bg-3);}
+.o-btn:active{transform:scale(.975);}
+.o-btn[disabled]{opacity:.45; cursor:not-allowed; transform:none;}
+
+.o-btn.est-plein{
+  background:var(--signal);
+  border-color:var(--signal);
+  color:#fff;
+}
+.o-btn.est-plein:hover{background:#FF5C39; border-color:#FF5C39;}
+
+/* État « copié » : le retour se lit sur le bouton lui-même, sans alerte
+   flottante qui masquerait le contenu sur un écran de téléphone. */
+.o-btn.est-fait{border-color:var(--signal); color:var(--signal-ink);}
+
+/* ---------- Avertissement ---------- */
+
+.o-avis{
+  display:flex;
+  gap:11px;
+  margin-top:18px;
+  padding:13px 15px;
+  background:var(--signal-wash);
+  border-left:2px solid var(--signal);
+  border-radius:0 var(--r-media) var(--r-media) 0;
+  color:var(--fg-dim);
+  font-size:.85rem;
+  line-height:1.6;
+}
+
+.o-avis strong{color:var(--fg);}
+.o-avis svg{flex:0 0 auto; width:17px; height:17px; margin-top:2px; stroke:var(--signal); fill:none;}
+
+/* ---------- Zone de dépôt de fichiers ---------- */
+
+.o-depot{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:168px;
+  padding:26px 20px;
+  border:1px dashed var(--rule-strong);
+  border-radius:var(--r-media);
+  background:var(--bg-3);
+  text-align:center;
+  cursor:pointer;
+  transition:border-color .18s var(--ease), background-color .18s var(--ease);
+}
+
+.o-depot:hover,
+.o-depot.est-survol{border-color:var(--signal); background:var(--signal-wash);}
+
+.o-depot:focus-visible{
+  outline:none;
+  border-color:var(--signal);
+  box-shadow:0 0 0 3px var(--signal-wash);
+}
+
+.o-depot svg{width:30px; height:30px; stroke:var(--fg-faint); fill:none;}
+.o-depot.est-survol svg{stroke:var(--signal);}
+.o-depot strong{font-size:.98rem;}
+.o-depot span{color:var(--fg-faint); font-size:.82rem;}
+
+/* ---------- Liste de fichiers traités ---------- */
+
+.o-fichiers{list-style:none; margin:16px 0 0; padding:0; display:grid; gap:9px;}
+
+.o-fichier{
+  display:grid;
+  grid-template-columns:52px 1fr auto;
+  align-items:center;
+  gap:13px;
+  padding:10px;
+  background:var(--bg-3);
+  border-radius:var(--r-media);
+}
+
+.o-vignette{
+  width:52px; height:52px;
+  border-radius:4px;
+  object-fit:cover;
+  background:var(--bg);
+  display:block;
+}
+
+.o-fichier-nom{
+  min-width:0;
+  font-size:.88rem;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.o-fichier-meta{color:var(--fg-faint); font-size:.79rem; margin-top:2px;}
+.o-gain{color:var(--signal-ink); font-weight:700;}
+
+/* ---------- Sommaire des outils ---------- */
+
+.outils-grille{
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(258px, 1fr));
+  margin-top:clamp(22px, 4vw, 38px);
+}
+
+.outil-carte{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  padding:21px;
+  background:var(--bg-2);
+  border-radius:var(--r-media);
+  box-shadow:inset 0 0 0 1px var(--rule);
+  color:inherit;
+  text-decoration:none;
+  transition:transform .22s var(--ease), box-shadow .22s var(--ease);
+}
+
+.outil-carte:hover{
+  transform:translateY(-3px);
+  box-shadow:inset 0 0 0 1px var(--rule-signal);
+}
+
+/* Outil annoncé mais pas encore publié. Pas de pointer-events:none : la carte
+   n'est pas un lien, il n'y a donc rien à neutraliser, et le texte doit rester
+   sélectionnable. Le pied perd la couleur de signal pour ne pas promettre un
+   clic qui n'existe pas. */
+.outil-carte.est-bientot{cursor:default;}
+.outil-carte.est-bientot:hover{transform:none; box-shadow:inset 0 0 0 1px var(--rule);}
+.outil-carte.est-bientot .outil-carte-pied{color:var(--fg-faint); font-weight:500;}
+
+.outil-carte h3{font-size:1.02rem; margin:0;}
+.outil-carte p{color:var(--fg-dim); font-size:.89rem; line-height:1.6; margin:0; flex:1;}
+
+.outil-carte-pied{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--signal-ink);
+  font-size:.85rem;
+  font-weight:600;
+}
+
+.outil-carte-pied .arrow{transition:transform .22s var(--ease);}
+.outil-carte:hover .arrow{transform:translateX(4px);}
+
+.o-etiquette{
+  align-self:flex-start;
+  padding:3px 9px;
+  border:1px solid var(--rule-strong);
+  border-radius:var(--r-pill);
+  color:var(--fg-faint);
+  font-size:.71rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+/* ---------- Contenu rédigé sous l'outil ---------- */
+
+.o-prose{max-width:68ch;}
+.o-prose h2{font-size:clamp(1.2rem, 3vw, 1.5rem); margin:clamp(30px,5vw,44px) 0 12px;}
+.o-prose h3{font-size:1.02rem; margin:24px 0 7px;}
+.o-prose p,
+.o-prose li{color:var(--fg-dim); font-size:.95rem; line-height:1.75;}
+.o-prose p{margin:0 0 13px;}
+.o-prose ul{margin:0 0 15px; padding-left:21px;}
+.o-prose li{margin-bottom:6px;}
+.o-prose strong{color:var(--fg);}
+.o-prose a{color:var(--signal-ink);}
+
+/* ---------- Questions fréquentes ---------- */
+
+.o-faq{border-top:1px solid var(--rule); margin-top:10px;}
+
+.o-faq details{border-bottom:1px solid var(--rule);}
+
+.o-faq summary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 0;
+  cursor:pointer;
+  font-weight:600;
+  font-size:.97rem;
+  list-style:none;
+}
+
+.o-faq summary::-webkit-details-marker{display:none;}
+
+.o-faq summary::after{
+  content:"+";
+  flex:0 0 auto;
+  color:var(--signal-ink);
+  font-size:1.3rem;
+  line-height:1;
+  transition:transform .22s var(--ease);
+}
+
+.o-faq details[open] summary::after{transform:rotate(45deg);}
+
+.o-faq details p{
+  color:var(--fg-dim);
+  font-size:.93rem;
+  line-height:1.72;
+  margin:0 0 16px;
+  max-width:68ch;
+}
+
+/* ---------- Emplacement publicitaire ---------- */
+
+/* Hauteur réservée AVANT le chargement de l'annonce : sans minimum, l'arrivée
+   de l'iframe AdSense pousse le contenu vers le bas, le CLS part en vrille,
+   et cela dégrade à la fois le score Core Web Vitals et le revenu par mille. */
+.o-pub{
+  margin:clamp(26px, 5vw, 40px) 0;
+  min-height:106px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ---------- Téléphone ---------- */
+
+@media (max-width: 560px){
+  .o-grille{grid-template-columns:1fr;}
+  .o-ligne{flex-direction:column; gap:3px;}
+  .o-ligne dd{font-size:1.1rem;}
+  .o-fichier{grid-template-columns:44px 1fr; row-gap:9px;}
+  .o-vignette{width:44px; height:44px;}
+  .o-fichier > .o-btn{grid-column:1 / -1; justify-content:center;}
+  .o-texte{min-height:230px; font-size:.78rem;}
+}
+
+/* ---------- Mouvement réduit ---------- */
+
+@media (prefers-reduced-motion: reduce){
+  .outil-carte,
+  .outil-carte .arrow,
+  .o-btn,
+  .o-segment span{transition:none;}
+  .outil-carte:hover{transform:none;}
+}
