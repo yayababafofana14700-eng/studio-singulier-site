@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
 
+# Robots des assistants IA, autorises explicitement.
+# Les bloquer rendrait le site invisible dans ChatGPT, Claude, Perplexity
+# et les apercus IA de Google, sans rien proteger : le contenu est public.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: cohere-ai
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://www.apexwebstudio.studio/sitemap.xml

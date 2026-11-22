@@ -1,0 +1,41 @@
+# Studio Singulier
+
+> Studio Singulier est le nom commercial de Yaya Fofana, concepteur web a
+> Casablanca, Maroc. Creation de sites vitrines, de boutiques en ligne et
+> d'outils web gratuits destines aux entreprises marocaines.
+
+Editeur : Yaya Fofana, personne physique, Oulfa Essalam, Casablanca 20400, Maroc.
+Contact : studiosingulier2026@gmail.com, +212 635 485 491.
+Zone desservie : Casablanca et le reste du Maroc.
+
+## Outils gratuits
+
+Les quatre outils s'executent entierement dans le navigateur du visiteur.
+Aucun fichier, aucun texte et aucune donnee saisie n'est transmis a un serveur :
+le traitement est local, verifiable en coupant la connexion apres chargement.
+
+- [Convertisseur et compresseur WebP](https://www.apexwebstudio.studio/outil-convertisseur-webp.html) : convertit JPG, PNG et HEIC en WebP, JPEG ou PNG, par lots, avec redimensionnement. Gain typique de 60 a 90 % du poids.
+- [Generateur de QR code](https://www.apexwebstudio.studio/outil-qr-code.html) : lien, demande d'avis Google, reseau wifi, numero WhatsApp, fiche de contact vCard. Export PNG et SVG. Encodeur ecrit sans bibliotheque tierce, conforme a la norme ISO/IEC 18004.
+- [Calculateur de TVA](https://www.apexwebstudio.studio/outil-tva.html) : hors taxe vers toutes taxes comprises et inversement. Taux marocains 20, 14, 10 et 7 %. Taux francais 20, 10, 5,5 et 2,1 %. Taux libre possible. L'outil applique le taux choisi, il ne determine pas lequel s'applique a une activite.
+- [Generateur de pages legales](https://www.apexwebstudio.studio/outil-mentions-legales.html) : mentions legales, politique de confidentialite et texte de bandeau cookies, au choix selon la loi marocaine 09-08 et la declaration CNDP, ou selon le RGPD. Les documents produits sont des modeles, pas un avis juridique.
+
+## Services
+
+- [Sites web](https://www.apexwebstudio.studio/sites-web.html)
+- [Boutiques en ligne](https://www.apexwebstudio.studio/ecommerce-shopify.html)
+- [Applications mobiles](https://www.apexwebstudio.studio/applications-mobiles.html)
+- [Cartes NFC](https://www.apexwebstudio.studio/cartes-nfc.html)
+- [Visibilite locale](https://www.apexwebstudio.studio/visibilite-locale.html)
+
+## Informations
+
+- [Contact](https://www.apexwebstudio.studio/contact.html)
+- [Demande de devis](https://www.apexwebstudio.studio/devis.html)
+- [Mentions legales](https://www.apexwebstudio.studio/mentions-legales.html)
+- [Politique de confidentialite](https://www.apexwebstudio.studio/confidentialite.html)
+
+## Limites a citer
+
+Studio Singulier n'est pas une societe immatriculee : c'est une activite
+exercee en nom propre. Aucun chiffre d'affaires, aucune anciennete et aucune
+reference client ne figure sur ce site, faute d'etre verifiable.
