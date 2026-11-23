@@ -1,0 +1,3555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de fiches de prospection gratuit — 22 modèles par métier et export Excel</title>
+<meta name="description" content="Créez vos fiches de prospection commerciale en ligne : vingt-deux modèles dont douze par métier ciblé, recherche d’établissements par ville ou par rayon, import et export Excel, export PDF. Sans inscription, tout reste dans votre navigateur.">
+<link rel="canonical" href="https://www.apexwebstudio.studio/outil-fiches-prospection.html">
+
+<meta property="og:title" content="Générateur de fiches de prospection gratuit">
+<meta property="og:description" content="Vingt-deux modèles, dont douze par métier ciblé, un vrai tableur, un classeur Excel qui entre et qui ressort, un PDF prêt à imprimer. Sans inscription, vos prospects restent sur votre machine.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Studio Singulier">
+<meta property="og:url" content="https://www.apexwebstudio.studio/outil-fiches-prospection.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Générateur de fiches de prospection",
+  "url": "https://www.apexwebstudio.studio/outil-fiches-prospection.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Tout navigateur web",
+  "inLanguage": "fr",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "MAD" },
+  "publisher": { "@type": "Organization", "name": "Studio Singulier", "url": "https://www.apexwebstudio.studio/" },
+  "author": {
+    "@type": "Person",
+    "name": "Yaya Fofana",
+    "jobTitle": "Concepteur web",
+    "worksFor": { "@type": "Organization", "name": "Studio Singulier", "url": "https://www.apexwebstudio.studio/" }
+  },
+  "featureList": "Recherche d’établissements par métier et par zone depuis OpenStreetMap, vingt-deux modèles dont douze par secteur ciblé (salon de coiffure, restaurant, cabinet médical, bureau d’études, bâtiment, commerce, hôtellerie, formation, pharmacie, agence immobilière, garage, transport), dix modèles de prospection, tableur éditable, tri et filtres, annuler et rétablir, feuilles dérivées avec filiation et relance, récapitulatif par colonne, fusion entre feuilles, import Excel et CSV, export Excel, CSV et PDF"
+}
+</script>
+
+<link rel="stylesheet" href="css/fonts.min.css?v=febdbe34">
+<link rel="stylesheet" href="css/style.min.css?v=a798cf8e">
+<link rel="stylesheet" href="css/pages.min.css?v=2c4c602c">
+<link rel="stylesheet" href="css/responsive.min.css?v=9464f0b5">
+<link rel="stylesheet" href="css/outils.min.css?v=7bc3dcdc">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9344973454063626" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<a href="#top" class="skip-link">Aller au contenu</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div id="topSentinel" aria-hidden="true"></div>
+<header class="site-header" id="siteHeader">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo" aria-label="Studio Singulier, accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="outils.html">Outils</a>
+      <a href="devis.html">Devis</a>
+    </nav>
+    <a href="devis.html" class="btn btn-primary nav-cta">Démarrer un projet</a>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" data-lenis-prevent>
+  <div class="mm-top">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <button class="mm-close" id="closeMenu">Fermer</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html"><i>01</i>Accueil</a>
+    <a href="outils.html"><i>02</i>Outils</a>
+    <a href="devis.html"><i>03</i>Devis</a>
+  </nav>
+  <div class="mm-foot">
+    <a href="devis.html" class="btn btn-primary btn-block">Démarrer un projet</a>
+  </div>
+</div>
+
+<style>
+/* ===== Fiches de prospection : feuille de style de l'application ===== */
+.pro-wrap{max-width:none;padding:0 clamp(14px,3vw,34px)}
+.pro-intro{max-width:720px;margin:0 auto clamp(26px,4vw,44px);text-align:center}
+.pro-intro h1{font-size:clamp(30px,5vw,52px);line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.pro-intro p{color:var(--fg-dim);font-size:var(--t-lead);line-height:1.65}
+
+.pro-shell{display:grid;grid-template-columns:262px minmax(0,1fr);gap:0;
+  border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--bg-2);
+  height:clamp(560px,76vh,860px);position:relative}
+
+/* ---- colonne laterale ---- */
+.pro-side{background:#141619;border-right:1px solid var(--rule);display:flex;flex-direction:column;min-height:0}
+.pro-side-head{padding:14px 14px 10px;border-bottom:1px solid var(--rule);display:flex;gap:8px;align-items:center}
+.pro-side-head strong{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);flex:1}
+.pro-side-body{overflow:auto;flex:1;padding:8px}
+.pro-side-foot{padding:10px 12px;border-top:1px solid var(--rule);font-size:11px;color:var(--fg-faint);
+  display:flex;justify-content:space-between;align-items:center;gap:8px}
+
+.tree-node{width:100%;text-align:left;background:none;border:0;color:var(--fg-dim);
+  font:inherit;font-size:13px;padding:7px 9px;border-radius:6px;cursor:pointer;line-height:1.35;
+  display:flex;align-items:center;gap:7px}
+.tree-node:hover{background:rgba(237,232,220,.06);color:var(--fg)}
+.tree-node[aria-current="true"]{background:var(--signal-wash);color:var(--fg);box-shadow:inset 2px 0 0 var(--signal)}
+.tree-node .tn-lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tree-node .tn-count{margin-left:auto;font-size:10.5px;color:var(--fg-faint);white-space:nowrap}
+.tree-via{font-size:10.5px;color:var(--fg-faint);padding:0 9px 5px 25px;line-height:1.4}
+.tree-kids{margin-left:12px;padding-left:9px;border-left:1px solid var(--rule)}
+.tree-group{margin-bottom:12px}
+.tg-title{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);
+  padding:6px 9px 4px;display:flex;align-items:center;gap:6px}
+
+/* ---- zone de travail ---- */
+.pro-main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bg)}
+.pro-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--rule);
+  flex-wrap:wrap;background:var(--bg-2);min-height:50px}
+.pro-bar .spacer{flex:1}
+.pro-sheetname{font-size:14px;font-weight:600;letter-spacing:-.01em;background:none;border:1px solid transparent;
+  color:var(--fg);padding:4px 7px;border-radius:5px;font-family:inherit;min-width:90px;max-width:260px}
+.pro-sheetname:hover{border-color:var(--rule)}
+.pro-sheetname:focus{outline:none;border-color:var(--signal);background:var(--bg-3)}
+.pro-lineage{font-size:11px;color:var(--fg-faint);padding:0 12px 8px;border-bottom:1px solid var(--rule);
+  background:var(--bg-2);display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.pro-lineage a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dotted var(--rule-strong);cursor:pointer}
+.pro-lineage a:hover{color:var(--signal)}
+.pro-lineage .tbtn{margin-left:auto;font-size:11px;padding:3px 9px}
+td.cell .lienc{float:right;color:var(--signal);text-decoration:none;font-size:12px;line-height:1;
+  padding:0 0 0 6px;opacity:.55;transition:opacity .12s}
+td.cell:hover .lienc{opacity:1}
+td.cell .lient{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.segm{display:flex;gap:6px;flex-wrap:wrap}
+.segm button{flex:1 1 150px;background:var(--bg-3);border:1px solid var(--rule);border-radius:6px;
+  padding:7px 11px;color:var(--fg-dim);font:inherit;font-size:12.5px;cursor:pointer;
+  transition:background .14s,color .14s,border-color .14s}
+.segm button:hover{border-color:var(--rule-strong);color:var(--fg)}
+.segm button.on{background:var(--signal);border-color:var(--signal);color:#fff}
+.tpltabs{display:flex;gap:8px;margin:2px 0 16px;flex-wrap:wrap}
+.tpltab{flex:1 1 180px;background:var(--bg-3);border:1px solid var(--rule);border-radius:8px;
+  padding:9px 13px;color:var(--fg-dim);font:inherit;font-size:13.5px;text-align:left;cursor:pointer;
+  display:flex;flex-direction:column;gap:2px;transition:border-color .14s,color .14s,background .14s}
+.tpltab small{font-size:11.5px;color:var(--fg-faint)}
+.tpltab:hover{border-color:var(--rule-strong);color:var(--fg)}
+.tpltab.on{background:var(--signal);border-color:var(--signal);color:#fff}
+.tpltab.on small{color:rgba(255,255,255,.82)}
+.secteurs-liste p{color:var(--fg-dim);line-height:1.7;font-size:14.5px;padding:9px 0;
+  border-bottom:1px solid var(--rule)}
+.secteurs-liste p:last-child{border-bottom:none}
+.secteurs-liste strong{color:var(--fg);font-weight:500}
+
+.tbtn{background:var(--bg-3);border:1px solid var(--rule);color:var(--fg-dim);font:inherit;font-size:12.5px;
+  padding:6px 11px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  white-space:nowrap;transition:background .14s,color .14s,border-color .14s}
+.tbtn:hover:not(:disabled){background:#2E333B;color:var(--fg);border-color:var(--rule-strong)}
+.tbtn:disabled{opacity:.38;cursor:not-allowed}
+.tbtn.primary{background:var(--signal);border-color:var(--signal);color:#fff}
+.tbtn.primary:hover:not(:disabled){background:#FF5C38;border-color:#FF5C38;color:#fff}
+.tbtn.ghost{background:none}
+.tsearch{background:var(--bg-3);border:1px solid var(--rule);border-radius:6px;padding:6px 10px;color:var(--fg);
+  font:inherit;font-size:12.5px;width:170px;max-width:38vw}
+.tsearch:focus{outline:none;border-color:var(--signal)}
+
+/* ---- grille ---- */
+.pro-grid-wrap{flex:1;overflow:auto;position:relative;min-height:0}
+table.pgrid{border-collapse:separate;border-spacing:0;font-size:13px;table-layout:fixed;width:max-content;min-width:100%}
+.pgrid th,.pgrid td{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:0;vertical-align:top;background:var(--bg);position:relative}
+.pgrid thead th{position:sticky;top:0;z-index:3;background:var(--bg-2);text-align:left;
+  font-weight:500;color:var(--fg-dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  white-space:nowrap;user-select:none}
+.pgrid .hcell{display:flex;align-items:center;gap:5px;padding:8px 9px;cursor:grab}
+.pgrid .hcell.dragging{opacity:.4}
+.pgrid th.drop-target{box-shadow:inset 3px 0 0 var(--signal)}
+.pgrid .hname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pgrid .hsort{color:var(--signal);font-size:10px}
+.pgrid .hfiltered{color:var(--signal);font-size:10px}
+.pgrid .hmenu{background:none;border:0;color:var(--fg-faint);cursor:pointer;padding:2px 3px;
+  margin-left:auto;border-radius:3px;line-height:1;font-size:13px}
+.pgrid .hmenu:hover{background:rgba(237,232,220,.1);color:var(--fg)}
+.pgrid .rsz{position:absolute;top:0;right:-3px;width:7px;height:100%;cursor:col-resize;z-index:4}
+.pgrid .rsz:hover{background:var(--rule-signal)}
+
+.pgrid td.cell{cursor:cell}
+.pgrid .cv{padding:7px 9px;min-height:32px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:var(--fg);line-height:1.35}
+.pgrid td.sel{background:var(--signal-wash);box-shadow:inset 0 0 0 1px var(--rule-signal)}
+.pgrid td.anchor{box-shadow:inset 0 0 0 2px var(--signal)}
+.pgrid td.editing{box-shadow:inset 0 0 0 2px var(--signal);background:var(--bg-3)}
+.pgrid td input.ced{width:100%;border:0;background:transparent;color:var(--fg);font:inherit;font-size:13px;
+  padding:7px 9px;outline:none}
+.pgrid .rnum{position:sticky;left:0;z-index:2;background:var(--bg-2);color:var(--fg-faint);font-size:11px;
+  text-align:right;width:54px;min-width:54px;user-select:none}
+.pgrid thead .rnum{z-index:5}
+.pgrid .rnum .cv{padding:7px 8px;white-space:nowrap;min-height:0}
+.pgrid tr.rowsel .rnum{background:var(--signal-wash);color:var(--signal)}
+.pgrid td.err{box-shadow:inset 0 0 0 1px rgba(240,74,38,.55)}
+.pgrid td.dup .cv::after{content:"doublon";font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--signal);margin-left:7px}
+.pgrid .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;line-height:1.5;
+  border:1px solid var(--rule-strong);color:var(--fg-dim)}
+.pgrid .pill[data-t="1"]{border-color:rgba(240,74,38,.5);color:#FF7B5C;background:rgba(240,74,38,.1)}
+.pgrid .pill[data-t="2"]{border-color:rgba(120,200,140,.45);color:#8FD3A4;background:rgba(120,200,140,.1)}
+.pgrid .pill[data-t="3"]{border-color:rgba(120,160,230,.45);color:#93B4E8;background:rgba(120,160,230,.1)}
+.pgrid .pill[data-t="4"]{border-color:rgba(220,190,110,.45);color:#E0C26E;background:rgba(220,190,110,.1)}
+.pgrid .guess{border-bottom:1px dashed var(--signal);padding-bottom:1px}
+.pgrid tbody tr:hover td:not(.sel):not(.rnum){background:#111316}
+.addrow{padding:9px 12px;border-bottom:1px solid var(--rule)}
+.pro-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  height:100%;color:var(--fg-faint);text-align:center;padding:30px}
+
+/* ---- barre d'etat ---- */
+.pro-foot{display:flex;align-items:center;gap:12px;padding:8px 12px;border-top:1px solid var(--rule);
+  background:var(--bg-2);font-size:11.5px;color:var(--fg-faint);flex-wrap:wrap;min-height:40px}
+.pro-foot .spacer{flex:1}
+.savedot{width:7px;height:7px;border-radius:50%;background:#6FBF8A;display:inline-block;margin-right:6px}
+.savedot.busy{background:var(--signal)}
+
+/* ---- menus et fenetres ---- */
+.pmenu{position:fixed;z-index:90;background:#1C1F24;border:1px solid var(--rule-strong);border-radius:8px;
+  padding:5px;min-width:208px;box-shadow:0 18px 44px rgba(0,0,0,.6);max-height:70vh;overflow:auto}
+.pmenu button{display:flex;width:100%;align-items:center;gap:8px;background:none;border:0;
+  color:var(--fg-dim);font:inherit;font-size:13px;padding:7px 9px;border-radius:5px;cursor:pointer;text-align:left}
+.pmenu button:hover{background:rgba(237,232,220,.07);color:var(--fg)}
+.pmenu button .mk{margin-left:auto;color:var(--signal);font-size:11px}
+.pmenu hr{border:0;border-top:1px solid var(--rule);margin:5px 2px}
+.pmenu .mtitle{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint);padding:7px 9px 3px}
+.pmenu .mdanger:hover{color:#FF7B5C}
+.pmenu input[type=text]{width:100%;background:var(--bg-3);border:1px solid var(--rule);border-radius:5px;
+  color:var(--fg);font:inherit;font-size:13px;padding:6px 8px;margin:3px 0}
+.pmenu input[type=text]:focus{outline:none;border-color:var(--signal)}
+
+.pmodal{position:fixed;inset:0;z-index:100;background:rgba(6,7,8,.72);display:flex;align-items:center;
+  justify-content:center;padding:18px;overflow:auto}
+.pmodal-box{background:var(--bg-2);border:1px solid var(--rule-strong);border-radius:12px;width:min(760px,100%);
+  max-height:88vh;overflow:auto;padding:clamp(20px,3vw,30px)}
+.pmodal-box h2{font-size:clamp(20px,2.6vw,27px);margin-bottom:6px;letter-spacing:-.01em}
+.pmodal-box .sub{color:var(--fg-dim);font-size:14px;margin-bottom:20px;line-height:1.6}
+.tplgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.tplcard{text-align:left;background:var(--bg-3);border:1px solid var(--rule);border-radius:9px;padding:13px;
+  cursor:pointer;color:var(--fg);font:inherit;transition:border-color .14s,transform .14s}
+.tplcard:hover{border-color:var(--signal);transform:translateY(-2px)}
+.tplcard b{display:block;font-size:13.5px;margin-bottom:5px;font-weight:600}
+.tplcard span{display:block;font-size:11.5px;color:var(--fg-faint);line-height:1.5}
+.tplcard i{display:block;font-size:10.5px;color:var(--signal);margin-top:8px;font-style:normal;letter-spacing:.06em}
+.frow{margin-bottom:14px}
+.frow label{display:block;font-size:12px;color:var(--fg-dim);margin-bottom:5px}
+.frow input,.frow select,.frow textarea{width:100%;background:var(--bg-3);border:1px solid var(--rule);
+  border-radius:6px;color:var(--fg);font:inherit;font-size:13.5px;padding:9px 11px}
+.frow textarea{min-height:150px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;resize:vertical}
+.frow input:focus,.frow select:focus,.frow textarea:focus{outline:none;border-color:var(--signal)}
+.frow .hint{font-size:11.5px;color:var(--fg-faint);margin-top:5px;line-height:1.55}
+.mactions{display:flex;gap:9px;justify-content:flex-end;margin-top:22px;flex-wrap:wrap}
+.soon{display:inline-block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-faint);
+  border:1px solid var(--rule);border-radius:999px;padding:1px 7px;margin-left:7px;vertical-align:middle}
+
+.ptoasts{position:fixed;right:16px;bottom:16px;z-index:120;display:flex;flex-direction:column;gap:8px;
+  max-width:min(340px,86vw)}
+.ptoast{background:#1C1F24;border:1px solid var(--rule-strong);border-left:3px solid var(--signal);
+  border-radius:7px;padding:11px 13px;font-size:13px;color:var(--fg);box-shadow:0 12px 30px rgba(0,0,0,.5);
+  line-height:1.5}
+.ptoast.ok{border-left-color:#6FBF8A}
+
+.pro-sidetoggle{display:none}
+.pro-scrim{display:none}
+@media(max-width:860px){
+  .pro-shell{grid-template-columns:1fr;height:auto}
+  .pro-side{position:fixed;inset:0 auto 0 0;width:min(284px,86vw);z-index:96;transform:translateX(-102%);
+    transition:transform .24s var(--ease);border-right:1px solid var(--rule-strong)}
+  .pro-side.open{transform:none}
+  .pro-scrim.open{display:block;position:fixed;inset:0;z-index:95;background:rgba(6,7,8,.6)}
+  .pro-sidetoggle{display:inline-flex}
+  .pro-grid-wrap{max-height:58vh}
+  .pro-main{min-height:72vh}
+  .tsearch{width:120px}
+  .pro-bar{gap:5px;padding:8px}
+  .tbtn{padding:6px 9px;font-size:12px}
+}
+@media(max-width:560px){
+  .pro-shell{border-radius:8px}
+  .pgrid .rnum{width:40px;min-width:40px}
+}
+</style>
+<main id="top">
+
+<section class="section">
+  <div class="wrap pro-wrap">
+
+    <div class="pro-intro">
+      <h1>Générateur de fiches de prospection</h1>
+      <p>Un tableur de prospection commerciale qui tourne entièrement dans votre navigateur. Dix modèles selon votre méthode, douze selon le métier que vous visez, des colonnes que vous façonnez, un classeur Excel qui entre et qui ressort, un PDF prêt à imprimer. Sans inscription, et aucune donnée de prospect ne quitte votre machine.</p>
+    </div>
+
+    <div class="pro-shell">
+      <div class="pro-scrim" id="proScrim" hidden></div>
+
+      <aside class="pro-side" id="proSide" aria-label="Vos feuilles de prospection">
+        <div class="pro-side-head">
+          <strong>Feuilles</strong>
+          <button class="tbtn ghost" id="btnNewSheet" title="Nouvelle feuille">Nouvelle</button>
+        </div>
+        <div class="pro-side-body" id="treeBody"></div>
+        <div class="pro-side-foot">
+          <span id="storeInfo">&mdash;</span>
+          <button class="tbtn ghost" id="btnWipe" title="Tout effacer">Effacer</button>
+        </div>
+      </aside>
+
+      <div class="pro-main">
+        <div class="pro-bar">
+          <button class="tbtn ghost pro-sidetoggle" id="btnSideToggle" aria-label="Afficher les feuilles" aria-expanded="false">Feuilles</button>
+          <input class="pro-sheetname" id="sheetName" aria-label="Nom de la feuille" maxlength="70">
+          <span class="spacer"></span>
+          <button class="tbtn" id="btnUndo" title="Annuler (Ctrl+Z)" disabled>Annuler</button>
+          <button class="tbtn" id="btnRedo" title="Rétablir (Ctrl+Y)" disabled>Rétablir</button>
+          <input class="tsearch" id="search" type="search" placeholder="Rechercher un prospect" aria-label="Rechercher un prospect">
+          <button class="tbtn" id="btnCol">Colonne</button>
+          <button class="tbtn" id="btnEnrich">Enrichir</button>
+          <button class="tbtn" id="btnTransform">Transformer</button>
+          <button class="tbtn" id="btnTrouver">Trouver</button>
+          <button class="tbtn" id="btnImport">Importer</button>
+          <button class="tbtn primary" id="btnExport">Exporter</button>
+        </div>
+
+        <div class="pro-lineage" id="proLineage" hidden></div>
+
+        <div class="pro-grid-wrap" id="gridWrap"></div>
+
+        <div class="pro-foot">
+          <span><span class="savedot" id="saveDot"></span><span id="saveTxt">Enregistré</span></span>
+          <span id="statRows">0 ligne</span>
+          <span id="statCols">0 colonne</span>
+          <span id="statSel"></span>
+          <span class="spacer"></span>
+          <button class="tbtn ghost" id="btnAddRow">Ajouter une ligne</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ptoasts" id="toasts" aria-live="polite"></div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" style="max-width:860px">
+    <h2 style="font-size:clamp(20px,2.6vw,27px);letter-spacing:-.01em;margin-bottom:14px">Constituer la liste sans la taper</h2>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Le bouton <strong>Trouver</strong> interroge OpenStreetMap, la base cartographique libre, et verse les résultats directement dans une feuille : nom, téléphone, site, adresse, horaires et le lien vers la fiche d'origine. Vingt-huit métiers, de la pharmacie au bureau d'études. Trois façons de délimiter la recherche : une ville, une région ou un pays entier ; un rayon autour de votre position ; un rayon autour d'une adresse que vous tapez.</p>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Ce qui revient à coup sûr : le nom, la position, souvent l'adresse. Le téléphone et le site, beaucoup plus rarement — ces champs reposent sur des contributeurs bénévoles et restent peu remplis au Maroc. Sur un relevé des pharmacies de Casablanca, 202 établissements sont ressortis, 155 avec une adresse, 2 avec un numéro. Chaque ligne reçoit donc un lien de recherche qui ouvre la fiche de l'établissement pour relever le contact.</p>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Une liste de deux cents commerces nommés et situés, ce n'est pas une session d'appels : c'est une tournée. Triez par quartier, exportez en PDF, relevez les numéros sur place ou par le lien de recherche. Le fichier d'appels se construit ensuite, dans la même feuille.</p>
+    <p style="color:var(--fg-dim);line-height:1.75">Ce que cette recherche n'est pas : un aspirateur à Google Maps. Google interdit l'extraction automatique de ses fiches, et son interface officielle exige une clé facturée au millier de requêtes. OpenStreetMap est ouvert, gratuit et citable. En contrepartie, sa couverture dépend des contributeurs : dense sur les pharmacies, les restaurants et les hôtels, plus clairsemée sur les artisans et les bureaux d'études. Un téléphone manquant veut dire « non renseigné dans la base », pas « n'existe pas ». Données &copy; les contributeurs d'OpenStreetMap, licence ODbL.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" style="max-width:860px">
+    <h2 style="font-size:clamp(20px,2.6vw,27px);letter-spacing:-.01em;margin-bottom:14px">Un modèle par métier ciblé</h2>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:18px">Prospecter des salons de coiffure et prospecter des bureaux d'études, ce n'est pas remplir le même tableau. Le premier demande le nombre de postes et le jour de fermeture, le second l'effectif ingénieurs et les logiciels employés. Douze modèles partent du métier que vous démarchez plutôt que de votre façon de démarcher.</p>
+    <div class="secteurs-liste">
+      <p><strong>Salon de coiffure et esthétique</strong> — nombre de postes, prestations, marques utilisées, jour de fermeture, compte Instagram, prise de rendez-vous en ligne.</p>
+      <p><strong>Restaurant, café et traiteur</strong> — type de cuisine, nombre de couverts, livraison Glovo ou livreur propre, carte en ligne.</p>
+      <p><strong>Cabinet médical et dentaire</strong> — spécialité, présence d'un secrétariat, logiciel de gestion, rendez-vous en ligne, conventionnement AMO.</p>
+      <p><strong>Bureau d'études techniques (BET)</strong> — domaines couverts, effectif ingénieurs, logiciels, qualification, références de chantiers.</p>
+      <p><strong>Artisan et entreprise du bâtiment</strong> — métier, zone d'intervention, effectif, assurance décennale, chantiers types.</p>
+      <p><strong>Commerce de détail et boutique</strong> — type de commerce, points de vente, vente en ligne, moyens de paiement acceptés.</p>
+      <p><strong>Hôtel, riad et maison d'hôtes</strong> — catégorie, nombre de chambres, canaux de réservation, site propre.</p>
+      <p><strong>École et centre de formation</strong> — niveau, effectif élèves, inscriptions en ligne, accréditation.</p>
+      <p><strong>Pharmacie et parapharmacie</strong> — garde, logiciel officinal, rayon parapharmacie, livraison.</p>
+      <p><strong>Agence immobilière</strong> — négociateurs, type de biens, portails utilisés, mandats exclusifs.</p>
+      <p><strong>Garage et centre auto</strong> — spécialité, nombre de baies, agrément constructeur, rendez-vous en ligne.</p>
+      <p><strong>Transport et logistique</strong> — activité, taille de la flotte, zone desservie.</p>
+    </div>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-top:18px">Ces modèles arrivent vides. Aucune entreprise, aucun numéro, aucune adresse n'est fourni : l'outil met le tableau en place, vous le remplissez avec ce que vous avez relevé vous-même.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" style="max-width:860px">
+    <h2 style="font-size:clamp(24px,3.4vw,38px);letter-spacing:-.02em;margin-bottom:18px">Comment cet outil fonctionne</h2>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Un fichier de prospection sert à une chose : savoir qui appeler demain matin, et ne pas appeler deux fois la même personne. La plupart des commerciaux tiennent ce fichier dans un classeur Excel qui finit par contenir trois onglets contradictoires et deux cents lignes en double.</p>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Cet outil part des mêmes habitudes, mais il structure le fichier dès le départ. Vous choisissez un modèle selon votre méthode — prospection téléphonique, LinkedIn, email, partenariats — ou selon le métier que vous démarchez : salon de coiffure, restaurant, cabinet médical, bureau d'études, pharmacie, garage. Chaque modèle arrive avec ses colonnes déjà pensées et ses listes de statuts. Vous ajoutez, renommez et déplacez les colonnes à la souris. Vous triez, vous filtrez, vous cherchez un nom. Ctrl+Z annule.</p>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Les feuilles se dérivent les unes des autres. Vous filtrez vos prospects chauds, l'outil crée une feuille enfant qui garde le lien vers sa feuille d'origine. Vous voyez d'où vient chaque liste, et vous remontez d'un clic. Quand la feuille mère a bougé, un bouton Relancer recalcule l'enfant depuis la recette qui l'a produit : dédoublonnage, éclatement, récapitulatif par colonne, fusion avec une autre feuille.</p>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Tout est enregistré dans votre navigateur, automatiquement. Il n'y a pas de compte à créer, et vos prospects restent chez vous : aucune ligne de votre feuille ne part ailleurs. Une seule chose sort, et seulement si vous la déclenchez — le bouton Trouver envoie le métier et la zone que vous tapez aux serveurs d'OpenStreetMap, qui renvoient les établissements. Rien d'autre ne transite. En contrepartie, le fichier vit sur cette machine et dans ce navigateur : exportez en Excel, en CSV ou en PDF pour le garder ailleurs.</p>
+    <h2 style="font-size:clamp(20px,2.6vw,27px);letter-spacing:-.01em;margin:34px 0 14px">Ce qui est calculé, et ce qui ne l'est pas</h2>
+    <p style="color:var(--fg-dim);line-height:1.75;margin-bottom:16px">Les fonctions d'enrichissement travaillent sur ce que vous avez déjà saisi : extraire un domaine depuis un site ou un email, normaliser un numéro au format international, repérer les doublons, vérifier qu'un email a une forme valide, calculer une relance à partir d'une date. Ce sont des opérations vérifiables.</p>
+    <p style="color:var(--fg-dim);line-height:1.75">Une adresse email reconstituée à partir d'un prénom et d'un domaine reste une hypothèse : l'outil la souligne en pointillé et ne la présente jamais comme vérifiée. Aucune coordonnée n'est inventée. Une fusion entre deux feuilles recopie ce que vous avez déjà : elle ne va rien chercher dehors. Le bouton Trouver, lui, interroge OpenStreetMap et le dit avant de partir ; ce qu'il ramène vient de contributeurs bénévoles, avec les trous que cela suppose. Les sources de données externes, qui demandent un abonnement chez un fournisseur, ne sont pas branchées : l'emplacement existe dans le code, le bouton n'est pas affiché tant qu'il ne fait rien.</p>
+  </div>
+</section>
+
+</main>
+
+
+<footer>
+  <div class="wrap foot-grid">
+    <span class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="butt" aria-hidden="true">
+        <path d="M16.893 4.866A5.65 4.068 0 1 0 8.849 10.277L11.17 11.4"/>
+        <path d="M12.97 12.271L15.291 13.394A5.9 4.248 0 1 1 6.89 19.044"/>
+        <circle cx="16.893" cy="4.866" r="1.3" fill="currentColor" stroke="none"/>
+        <circle cx="6.89" cy="19.044" r="1.3" fill="currentColor" stroke="none"/>
+      </svg>
+      Studio Singulier
+    </span>
+    <nav class="foot-nav" aria-label="Navigation de pied de page">
+      <a href="sites-web.html">Services</a>
+      <a href="outils.html">Outils</a>
+      <a href="contact.html">Contact</a>
+      <a href="devis.html">Demande</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <div class="foot-links">
+      <a href="https://wa.me/212635485491" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:studiosingulier2026@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/company/studio-singulier/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-copy">&copy; 2026 Studio Singulier, Belvédère, Casablanca, Maroc</p>
+  </div>
+</footer>
+
+<script src="js/vendor/lenis.min.js?v=0bf174d3" defer></script>
+<script src="js/main.min.js?v=e3b487e0" defer></script>
+<script>
+/* =====================================================================
+   Fiches de prospection — noyau
+   Etat, persistance, modeles, rendu de la grille, edition, selection.
+   Aucune dependance externe : la CSP du site interdit les CDN.
+   ===================================================================== */
+(function(){
+'use strict';
+
+var CLE = 'ss_prospection_v1';
+var MAX_HIST = 40;
+var PAGE = 200;            /* lignes rendues par palier */
+var LARGEUR_DEF = 170;
+
+/* --- petits utilitaires ------------------------------------------- */
+
+function ident(p){ return p + Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4); }
+function ech(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function el(id){ return document.getElementById(id); }
+function maintenant(){ return Date.now(); }
+function copieProfonde(o){ return JSON.parse(JSON.stringify(o)); }
+
+function toast(texte, ok){
+  var z = el('toasts');
+  if (!z) { return; }
+  var d = document.createElement('div');
+  d.className = 'ptoast' + (ok ? ' ok' : '');
+  d.textContent = texte;
+  z.appendChild(d);
+  setTimeout(function(){
+    d.style.transition = 'opacity .3s';
+    d.style.opacity = '0';
+    setTimeout(function(){ if (d.parentNode) { d.parentNode.removeChild(d); } }, 320);
+  }, 3400);
+}
+
+/* --- types de colonne ---------------------------------------------- */
+
+var TYPES = {
+  texte:   { nom: 'Texte' },
+  email:   { nom: 'Email' },
+  tel:     { nom: 'Téléphone' },
+  url:     { nom: 'Site web' },
+  date:    { nom: 'Date' },
+  nombre:  { nom: 'Nombre' },
+  liste:   { nom: 'Liste de choix' },
+  long:    { nom: 'Texte long' }
+};
+
+var STATUTS = ['À contacter', 'Contacté', 'En discussion', 'Proposition envoyée', 'Gagné', 'Perdu', 'Sans suite'];
+var PRIORITES = ['Haute', 'Moyenne', 'Basse'];
+
+/* Teinte des pastilles : stable par valeur, pas par position. */
+function teinte(v){
+  var s = String(v || '');
+  if (/gagn|chaud|haute|oui|valide|sign/i.test(s)) { return '2'; }
+  if (/perdu|sans suite|froid|basse|non|annul|refus/i.test(s)) { return '4'; }
+  if (/discussion|proposition|relanc|moyenne|en cours|attente/i.test(s)) { return '3'; }
+  if (/contacter|nouveau|à faire|venir|identifi/i.test(s)) { return '1'; }
+  return '';
+}
+
+/* --- modeles -------------------------------------------------------- */
+
+function c(nom, type, largeur, options){
+  return { nom: nom, type: type || 'texte', largeur: largeur || LARGEUR_DEF, options: options || null };
+}
+
+var MODELES = [
+  { cle: 'b2b', nom: 'Prospection commerciale B2B', desc: 'Entreprises, décideurs, cycle de vente complet.',
+    cols: [c('Entreprise','texte',190), c('Secteur','texte',150), c('Décideur','texte',160), c('Fonction','texte',150),
+           c('Téléphone','tel',150), c('Email','email',210), c('Site web','url',170), c('Ville','texte',120),
+           c('Statut','liste',160,STATUTS), c('Priorité','liste',110,PRIORITES),
+           c('Premier contact','date',130), c('Prochaine relance','date',140), c('Commentaires','long',230)] },
+
+  { cle: 'tel', nom: 'Prospection téléphonique', desc: 'Pensé pour une session d’appels : numéro, issue, rappel.',
+    cols: [c('Entreprise','texte',190), c('Interlocuteur','texte',160), c('Téléphone','tel',150),
+           c('Issue de l’appel','liste',170,['Répondeur','Barrage secrétaire','Pas intéressé','À rappeler','Rendez-vous pris','Mauvais numéro']),
+           c('Date d’appel','date',130), c('Rappeler le','date',130), c('Heure','texte',90),
+           c('Priorité','liste',110,PRIORITES), c('Notes d’appel','long',260)] },
+
+  { cle: 'immo', nom: 'Prospection immobilière', desc: 'Biens, propriétaires, mandats et visites.',
+    cols: [c('Adresse du bien','texte',220), c('Quartier','texte',150), c('Type de bien','liste',140,['Appartement','Villa','Terrain','Local commercial','Bureau','Riad']),
+           c('Surface m2','nombre',110), c('Prix demandé','nombre',130), c('Propriétaire','texte',160),
+           c('Téléphone','tel',150), c('Origine','liste',140,['Pige','Panneau','Recommandation','Porte à porte','Annonce en ligne']),
+           c('Statut','liste',160,['À visiter','Visité','Mandat signé','En négociation','Vendu','Refusé']),
+           c('Date de visite','date',130), c('Commentaires','long',230)] },
+
+  { cle: 'entreprises', nom: 'Prospection entreprises', desc: 'Fiche société : effectif, secteur, implantation.',
+    cols: [c('Raison sociale','texte',200), c('Secteur','texte',160), c('Effectif','nombre',100),
+           c('Ville','texte',130), c('Pays','texte',110), c('Site web','url',180), c('Téléphone standard','tel',160),
+           c('Email de contact','email',210), c('Adresse','long',230), c('Statut','liste',160,STATUTS)] },
+
+  { cle: 'clients', nom: 'Clients potentiels', desc: 'Particuliers ou TPE : besoin, budget, échéance.',
+    cols: [c('Nom','texte',160), c('Prénom','texte',140), c('Téléphone','tel',150), c('Email','email',210),
+           c('Ville','texte',130), c('Besoin exprimé','long',240), c('Budget estimé','nombre',130),
+           c('Échéance','date',120), c('Source','liste',150,['Site web','Réseaux sociaux','Recommandation','Salon','Publicité','Autre']),
+           c('Statut','liste',160,STATUTS), c('Priorité','liste',110,PRIORITES)] },
+
+  { cle: 'partenaires', nom: 'Partenaires commerciaux', desc: 'Apporteurs, revendeurs, prescripteurs.',
+    cols: [c('Structure','texte',200), c('Type de partenariat','liste',180,['Apporteur d’affaires','Revendeur','Prescripteur','Co-traitance','Échange de visibilité']),
+           c('Contact','texte',160), c('Fonction','texte',150), c('Téléphone','tel',150), c('Email','email',210),
+           c('Complémentarité','long',230), c('Statut','liste',170,['Identifié','Premier échange','Accord oral','Convention signée','Abandonné']),
+           c('Dernier échange','date',140)] },
+
+  { cle: 'linkedin', nom: 'Prospection LinkedIn', desc: 'Invitations, messages, suivi de la séquence.',
+    cols: [c('Nom','texte',160), c('Fonction','texte',170), c('Entreprise','texte',180), c('Profil LinkedIn','url',220),
+           c('Invitation envoyée','date',150), c('Invitation acceptée','liste',150,['Oui','Non','En attente']),
+           c('Message 1','date',120), c('Message 2','date',120), c('Réponse','liste',140,['Aucune','Positive','Négative','Plus tard']),
+           c('Statut','liste',160,STATUTS), c('Notes','long',230)] },
+
+  { cle: 'email', nom: 'Prospection par email', desc: 'Séquence, relances, réponses, désinscriptions.',
+    cols: [c('Entreprise','texte',190), c('Contact','texte',160), c('Email','email',220),
+           c('Email vérifié','liste',130,['Oui','Non','Hypothèse']),
+           c('Envoi 1','date',110), c('Relance 1','date',110), c('Relance 2','date',110),
+           c('Ouverture','liste',120,['Oui','Non','Inconnu']), c('Réponse','liste',140,['Aucune','Positive','Négative','Désinscription']),
+           c('Statut','liste',160,STATUTS), c('Objet utilisé','texte',200)] },
+
+  { cle: 'rdv', nom: 'Suivi des rendez-vous', desc: 'Agenda commercial : date, lieu, issue, suite.',
+    cols: [c('Prospect','texte',190), c('Interlocuteur','texte',160), c('Date du rendez-vous','date',160),
+           c('Heure','texte',90), c('Lieu','liste',150,['Sur place','Visioconférence','Téléphone','Bureau']),
+           c('Objet','texte',200), c('Issue','liste',170,['À venir','Honoré','Reporté','Annulé','Sans suite']),
+           c('Suite à donner','long',230), c('Commercial','texte',150)] },
+
+  { cle: 'vierge', nom: 'Modèle personnalisable', desc: 'Trois colonnes de départ, vous construisez le reste.',
+    cols: [c('Nom','texte',200), c('Téléphone','tel',160), c('Statut','liste',160,STATUTS)] }
+];
+
+/* --- etat ------------------------------------------------------------ */
+
+var DB = null;
+var hist = {};            /* id de feuille -> { pile:[], pos:int } */
+var sel = null;           /* { r1,c1,r2,c2 } en index de la vue */
+var edition = null;       /* { ligneId, colId } */
+var rendu = PAGE;         /* nombre de lignes affichees */
+var recherche = '';
+var sauveTimer = null;
+
+/* --- persistance ----------------------------------------------------- */
+
+function neuf(){
+  return { v: 1, sheets: {}, ordre: [], actif: null };
+}
+
+function charger(){
+  var brut = null;
+  try { brut = localStorage.getItem(CLE); } catch (e) { brut = null; }
+  if (!brut) { return neuf(); }
+  try {
+    var d = JSON.parse(brut);
+    if (!d || !d.sheets || !d.ordre) { return neuf(); }
+    return d;
+  } catch (e) {
+    /* Un stockage illisible ne doit pas bloquer l'outil : on repart a neuf
+       sans ecraser, pour laisser une chance de recuperation manuelle. */
+    return neuf();
+  }
+}
+
+function marquerSale(){
+  if (enAttente) { var id = enAttente; enAttente = null; enregistrerEtat(id); }
+  var d = el('saveDot'), t = el('saveTxt');
+  if (d) { d.className = 'savedot busy'; }
+  if (t) { t.textContent = 'Enregistrement…'; }
+  if (sauveTimer) { clearTimeout(sauveTimer); }
+  sauveTimer = setTimeout(sauver, 420);
+}
+
+function sauver(){
+  var d = el('saveDot'), t = el('saveTxt');
+  try {
+    localStorage.setItem(CLE, JSON.stringify(DB));
+    if (d) { d.className = 'savedot'; }
+    if (t) { t.textContent = 'Enregistré'; }
+    infoStockage();
+  } catch (e) {
+    if (d) { d.className = 'savedot busy'; }
+    if (t) { t.textContent = 'Non enregistré'; }
+    toast('Le navigateur refuse d’enregistrer : espace saturé. Exportez votre fichier.');
+  }
+}
+
+function infoStockage(){
+  var z = el('storeInfo');
+  if (!z) { return; }
+  var n = DB.ordre.length;
+  var lignes = 0;
+  DB.ordre.forEach(function(id){ lignes += DB.sheets[id].rows.length; });
+  var ko = 0;
+  try { ko = Math.round((localStorage.getItem(CLE) || '').length / 1024); } catch (e) { ko = 0; }
+  z.textContent = n + (n > 1 ? ' feuilles' : ' feuille') + ' · ' + lignes + ' lignes · ' + ko + ' Ko';
+}
+
+/* --- historique ------------------------------------------------------ */
+
+var enAttente = null;
+
+/* L'etat enregistre doit etre celui d'APRES la modification, sinon la pile
+   ne contient jamais le resultat et « retablir » ne remonte sur rien.
+   instantane() annonce donc la modification a venir ; c'est marquerSale(),
+   toujours appele juste apres la mutation, qui enregistre le resultat. */
+function instantane(){
+  var f = actif();
+  if (!f) { return; }
+  var h = hist[f.id] || (hist[f.id] = { pile: [], pos: -1 });
+  h.pile = h.pile.slice(0, h.pos + 1);
+  enAttente = f.id;
+}
+
+function enregistrerEtat(id){
+  var f = DB.sheets[id];
+  if (!f) { return; }
+  var h = hist[id] || (hist[id] = { pile: [], pos: -1 });
+  h.pile.push(JSON.stringify({ cols: f.cols, rows: f.rows, nom: f.nom }));
+  if (h.pile.length > MAX_HIST) { h.pile.shift(); }
+  h.pos = h.pile.length - 1;
+  majHistBtns();
+}
+
+function appliquerInstantane(s){
+  var f = actif();
+  enAttente = null;   /* restaurer n'est pas une modification a enregistrer */
+  var o = JSON.parse(s);
+  f.cols = o.cols; f.rows = o.rows; f.nom = o.nom;
+  f.modif = maintenant();
+  sel = null; edition = null;
+  marquerSale(); dessiner(); arbre();
+  var n = el('sheetName'); if (n) { n.value = f.nom; }
+}
+
+function annuler(){
+  var f = actif(); if (!f) { return; }
+  var h = hist[f.id];
+  if (!h || h.pos <= 0) { return; }
+  h.pos--;
+  appliquerInstantane(h.pile[h.pos]);
+  majHistBtns();
+}
+
+function retablir(){
+  var f = actif(); if (!f) { return; }
+  var h = hist[f.id];
+  if (!h || h.pos >= h.pile.length - 1) { return; }
+  h.pos++;
+  appliquerInstantane(h.pile[h.pos]);
+  majHistBtns();
+}
+
+function majHistBtns(){
+  var f = actif();
+  var h = f ? hist[f.id] : null;
+  var u = el('btnUndo'), r = el('btnRedo');
+  if (u) { u.disabled = !h || h.pos <= 0; }
+  if (r) { r.disabled = !h || h.pos >= h.pile.length - 1; }
+}
+
+/* --- feuilles -------------------------------------------------------- */
+
+function actif(){ return DB.actif ? DB.sheets[DB.actif] : null; }
+
+function creerFeuille(nom, cols, lignes, parent, via){
+  var f = {
+    id: ident('f'), nom: nom, parent: parent || null, via: via || null,
+    cols: (cols || []).map(function(x){
+      return { id: ident('c'), nom: x.nom, type: x.type || 'texte',
+               largeur: x.largeur || LARGEUR_DEF, cache: false, options: x.options || null };
+    }),
+    rows: [], tri: null, filtres: {}, cree: maintenant(), modif: maintenant()
+  };
+  var n = (lignes == null) ? 6 : lignes;
+  for (var i = 0; i < n; i++) { f.rows.push({ id: ident('r'), c: {}, g: {} }); }
+  DB.sheets[f.id] = f;
+  DB.ordre.push(f.id);
+  return f;
+}
+
+function ouvrir(id){
+  if (!DB.sheets[id]) { return; }
+  DB.actif = id;
+  sel = null; edition = null; rendu = PAGE; recherche = '';
+  var s = el('search'); if (s) { s.value = ''; }
+  var n = el('sheetName'); if (n) { n.value = DB.sheets[id].nom; }
+  if (!hist[id]) { hist[id] = { pile: [], pos: -1 }; instantane(); }
+  marquerSale(); dessiner(); arbre(); filiation(); majHistBtns();
+  fermerLateral();
+}
+
+function supprimerFeuille(id){
+  var enfants = DB.ordre.filter(function(x){ return DB.sheets[x].parent === id; });
+  enfants.forEach(function(x){ DB.sheets[x].parent = DB.sheets[id].parent; });
+  delete DB.sheets[id];
+  DB.ordre = DB.ordre.filter(function(x){ return x !== id; });
+  delete hist[id];
+  if (DB.actif === id) { DB.actif = DB.ordre[0] || null; }
+  marquerSale();
+  if (DB.actif) { ouvrir(DB.actif); } else { dessiner(); arbre(); filiation(); }
+}
+
+/* --- vue : filtres, tri, recherche ----------------------------------- */
+
+function colonnesVisibles(){
+  var f = actif();
+  return f ? f.cols.filter(function(x){ return !x.cache; }) : [];
+}
+
+function valeurTexte(ligne, col){
+  var v = ligne.c[col.id];
+  return v == null ? '' : String(v);
+}
+
+function passeFiltres(f, ligne){
+  var ok = true;
+  Object.keys(f.filtres).forEach(function(cid){
+    if (!ok) { return; }
+    var fl = f.filtres[cid];
+    if (!fl) { return; }
+    var col = f.cols.filter(function(x){ return x.id === cid; })[0];
+    if (!col) { return; }
+    var v = valeurTexte(ligne, col).toLowerCase();
+    var cible = String(fl.valeur == null ? '' : fl.valeur).toLowerCase();
+    if (fl.mode === 'contient') { ok = v.indexOf(cible) !== -1; }
+    else if (fl.mode === 'egal') { ok = v === cible; }
+    else if (fl.mode === 'vide') { ok = v === ''; }
+    else if (fl.mode === 'rempli') { ok = v !== ''; }
+    else if (fl.mode === 'parmi') { ok = (fl.liste || []).some(function(x){ return String(x).toLowerCase() === v; }); }
+  });
+  return ok;
+}
+
+function passeRecherche(f, ligne){
+  if (!recherche) { return true; }
+  var q = recherche.toLowerCase();
+  return f.cols.some(function(col){ return valeurTexte(ligne, col).toLowerCase().indexOf(q) !== -1; });
+}
+
+function vue(){
+  var f = actif();
+  if (!f) { return []; }
+  var out = f.rows.filter(function(l){ return passeFiltres(f, l) && passeRecherche(f, l); });
+  if (f.tri) {
+    var col = f.cols.filter(function(x){ return x.id === f.tri.col; })[0];
+    if (col) {
+      var sens = f.tri.sens === 'desc' ? -1 : 1;
+      out = out.slice().sort(function(a, b){
+        var va = valeurTexte(a, col), vb = valeurTexte(b, col);
+        /* Les vides restent en bas quel que soit le sens : un tri qui remonte
+           200 lignes vides en premier ne sert a personne. */
+        if (va === '' && vb !== '') { return 1; }
+        if (vb === '' && va !== '') { return -1; }
+        if (col.type === 'nombre') {
+          var na = parseFloat(va.replace(',', '.')), nb = parseFloat(vb.replace(',', '.'));
+          if (!isNaN(na) && !isNaN(nb)) { return (na - nb) * sens; }
+        }
+        if (col.type === 'date') { return (va < vb ? -1 : va > vb ? 1 : 0) * sens; }
+        return va.localeCompare(vb, 'fr', { numeric: true, sensitivity: 'base' }) * sens;
+      });
+    }
+  }
+  return out;
+}
+
+/* --- rendu ------------------------------------------------------------ */
+
+function emailValide(v){
+  return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/.test(String(v || '').trim());
+}
+
+function celluleHTML(ligne, col){
+  var v = valeurTexte(ligne, col);
+  if (v === '') { return ''; }
+  var hypothese = ligne.g && ligne.g[col.id];
+  if (col.type === 'liste') {
+    return '<span class="pill" data-t="' + teinte(v) + '">' + ech(v) + '</span>';
+  }
+  if (hypothese) { return '<span class="guess" title="Hypothèse non vérifiée">' + ech(v) + '</span>'; }
+  if (col.type === 'url' && /^https?:\/\//i.test(v)) {
+    return '<a class="lienc" href="' + ech(v) + '" target="_blank" rel="noopener noreferrer nofollow"' +
+      ' title="Ouvrir dans un nouvel onglet" aria-label="Ouvrir le lien">\u2197</a>' +
+      '<span class="lient">' + ech(v.replace(/^https?:\/\/(www\.)?/i, '')) + '</span>';
+  }
+  if (col.type === 'email' && v.indexOf('@') > 0) {
+    return '<a class="lienc" href="mailto:' + ech(v) + '" title="Écrire à cette adresse" aria-label="Écrire">\u2197</a>' +
+      '<span class="lient">' + ech(v) + '</span>';
+  }
+  if (col.type === 'tel' && /\d{6}/.test(v)) {
+    return '<a class="lienc" href="tel:' + ech(v.replace(/[^+\d]/g, '')) + '" title="Appeler" aria-label="Appeler">\u2197</a>' +
+      '<span class="lient">' + ech(v) + '</span>';
+  }
+  return ech(v);
+}
+
+function dessiner(){
+  var f = actif();
+  var wrap = el('gridWrap');
+  if (!wrap) { return; }
+
+  if (!f) {
+    wrap.innerHTML = '<div class="pro-empty"><p>Aucune feuille ouverte.</p>' +
+      '<button class="tbtn primary" id="btnFirst">Choisir un modèle</button></div>';
+    var b = el('btnFirst');
+    if (b) { b.addEventListener('click', function(){ if (window.PROSPECT.modeles) { window.PROSPECT.modeles(); } }); }
+    stats(); return;
+  }
+
+  var cols = colonnesVisibles();
+  var lignes = vue();
+  var n = Math.min(rendu, lignes.length);
+
+  if (!cols.length) {
+    wrap.innerHTML = '<div class="pro-empty"><p>Toutes les colonnes sont masquées.</p>' +
+      '<button class="tbtn" id="btnShowAll">Tout réafficher</button></div>';
+    var sa = el('btnShowAll');
+    if (sa) { sa.addEventListener('click', function(){
+      f.cols.forEach(function(x){ x.cache = false; }); marquerSale(); dessiner();
+    }); }
+    stats(); return;
+  }
+
+  var h = ['<table class="pgrid"><thead><tr>'];
+  h.push('<th class="rnum"><div class="cv">#</div></th>');
+  cols.forEach(function(col, ci){
+    var fl = f.filtres[col.id];
+    var tri = f.tri && f.tri.col === col.id ? (f.tri.sens === 'desc' ? '↓' : '↑') : '';
+    h.push('<th style="width:' + col.largeur + 'px" data-ci="' + ci + '">' +
+      '<div class="hcell" draggable="true" data-ci="' + ci + '">' +
+      '<span class="hname" title="' + ech(col.nom) + '">' + ech(col.nom) + '</span>' +
+      (tri ? '<span class="hsort">' + tri + '</span>' : '') +
+      (fl ? '<span class="hfiltered" title="Filtre actif">filtre</span>' : '') +
+      '<button class="hmenu" data-colmenu="' + col.id + '" aria-label="Menu de la colonne ' + ech(col.nom) + '">⋯</button>' +
+      '</div><span class="rsz" data-rsz="' + col.id + '"></span></th>');
+  });
+  h.push('</tr></thead><tbody>');
+
+  for (var i = 0; i < n; i++) {
+    var ligne = lignes[i];
+    h.push('<tr data-ri="' + i + '"><td class="rnum"><div class="cv">' + (i + 1) + '</div></td>');
+    for (var j = 0; j < cols.length; j++) {
+      var col = cols[j];
+      var brut = valeurTexte(ligne, col);
+      var mauvais = col.type === 'email' && brut !== '' && !emailValide(brut);
+      h.push('<td class="cell' + (mauvais ? ' err' : '') + '" data-ri="' + i + '" data-ci="' + j + '"' +
+        (mauvais ? ' title="Format d&#39;email invalide"' : '') + '>' +
+        '<div class="cv">' + celluleHTML(ligne, col) + '</div></td>');
+    }
+    h.push('</tr>');
+  }
+  h.push('</tbody></table>');
+
+  if (lignes.length > n) {
+    h.push('<div class="addrow"><button class="tbtn" id="btnMore">Afficher ' +
+      Math.min(PAGE, lignes.length - n) + ' lignes de plus (' + (lignes.length - n) + ' restantes)</button></div>');
+  }
+
+  wrap.innerHTML = h.join('');
+  var more = el('btnMore');
+  if (more) { more.addEventListener('click', function(){ rendu += PAGE; dessiner(); }); }
+
+  peindreSelection();
+  stats();
+}
+
+function stats(){
+  var f = actif();
+  var sr = el('statRows'), sc = el('statCols'), ss = el('statSel');
+  if (!f) {
+    if (sr) { sr.textContent = '0 ligne'; }
+    if (sc) { sc.textContent = '0 colonne'; }
+    if (ss) { ss.textContent = ''; }
+    return;
+  }
+  var v = vue().length, t = f.rows.length;
+  if (sr) { sr.textContent = (v === t ? t + (t > 1 ? ' lignes' : ' ligne') : v + ' sur ' + t + ' lignes'); }
+  var caches = f.cols.filter(function(x){ return x.cache; }).length;
+  if (sc) {
+    sc.textContent = f.cols.length + (f.cols.length > 1 ? ' colonnes' : ' colonne') +
+      (caches ? ' (' + caches + ' masquée' + (caches > 1 ? 's' : '') + ')' : '');
+  }
+  if (ss) {
+    if (!sel) { ss.textContent = ''; }
+    else {
+      var nl = Math.abs(sel.r2 - sel.r1) + 1, nc = Math.abs(sel.c2 - sel.c1) + 1;
+      ss.textContent = (nl * nc > 1) ? (nl + ' × ' + nc + ' sélectionnées') : '';
+    }
+  }
+}
+
+function bornes(){
+  if (!sel) { return null; }
+  return { r1: Math.min(sel.r1, sel.r2), r2: Math.max(sel.r1, sel.r2),
+           c1: Math.min(sel.c1, sel.c2), c2: Math.max(sel.c1, sel.c2) };
+}
+
+function peindreSelection(){
+  var wrap = el('gridWrap');
+  if (!wrap) { return; }
+  var tds = wrap.querySelectorAll('td.cell');
+  for (var i = 0; i < tds.length; i++) { tds[i].classList.remove('sel', 'anchor'); }
+  var trs = wrap.querySelectorAll('tbody tr');
+  for (var k = 0; k < trs.length; k++) { trs[k].classList.remove('rowsel'); }
+  var b = bornes();
+  if (!b) { return; }
+  for (var r = b.r1; r <= b.r2; r++) {
+    var tr = wrap.querySelector('tbody tr[data-ri="' + r + '"]');
+    if (tr) { tr.classList.add('rowsel'); }
+    for (var cc = b.c1; cc <= b.c2; cc++) {
+      var td = wrap.querySelector('td.cell[data-ri="' + r + '"][data-ci="' + cc + '"]');
+      if (td) { td.classList.add('sel'); }
+    }
+  }
+  var a = wrap.querySelector('td.cell[data-ri="' + sel.r1 + '"][data-ci="' + sel.c1 + '"]');
+  if (a) { a.classList.add('anchor'); }
+}
+
+/* --- edition d'une cellule -------------------------------------------- */
+
+function ouvrirEdition(ri, ci, valeurInitiale){
+  var lignes = vue(), cols = colonnesVisibles();
+  if (!lignes[ri] || !cols[ci]) { return; }
+  var ligne = lignes[ri], col = cols[ci];
+  var td = el('gridWrap').querySelector('td.cell[data-ri="' + ri + '"][data-ci="' + ci + '"]');
+  if (!td) { return; }
+
+  if (col.type === 'liste' && col.options && col.options.length) {
+    menuListe(td, col, function(v){ ecrireCellule(ligne, col, v); });
+    return;
+  }
+
+  edition = { ligneId: ligne.id, colId: col.id };
+  td.classList.add('editing');
+  var dep = valeurInitiale != null ? valeurInitiale : valeurTexte(ligne, col);
+  var type = (col.type === 'date') ? 'date' : (col.type === 'nombre') ? 'number' : 'text';
+  td.innerHTML = '<input class="ced" type="' + type + '" value="' + ech(dep) + '">';
+  var inp = td.querySelector('input');
+  inp.focus();
+  if (valeurInitiale == null && type === 'text') { inp.select(); }
+
+  function fermer(valider){
+    if (!edition) { return; }
+    edition = null;
+    if (valider) { ecrireCellule(ligne, col, inp.value); }
+    else { dessiner(); }
+  }
+  inp.addEventListener('blur', function(){ fermer(true); });
+  inp.addEventListener('keydown', function(ev){
+    if (ev.key === 'Enter') { ev.preventDefault(); fermer(true); bouger(1, 0, false); }
+    else if (ev.key === 'Escape') { ev.preventDefault(); fermer(false); }
+    else if (ev.key === 'Tab') { ev.preventDefault(); fermer(true); bouger(0, ev.shiftKey ? -1 : 1, false); }
+    ev.stopPropagation();
+  });
+}
+
+function ecrireCellule(ligne, col, v){
+  var avant = valeurTexte(ligne, col);
+  if (avant === String(v == null ? '' : v)) { dessiner(); return; }
+  instantane();
+  if (v === '' || v == null) { delete ligne.c[col.id]; }
+  else { ligne.c[col.id] = String(v); }
+  if (ligne.g) { delete ligne.g[col.id]; }   /* une saisie manuelle n'est plus une hypothese */
+  actif().modif = maintenant();
+  marquerSale();
+  dessiner();
+}
+
+function menuListe(ancre, col, cb){
+  var r = ancre.getBoundingClientRect();
+  var h = ['<div class="mtitle">' + ech(col.nom) + '</div>'];
+  h.push('<button data-v="">Vider</button>');
+  (col.options || []).forEach(function(o){
+    h.push('<button data-v="' + ech(o) + '"><span class="pill" data-t="' + teinte(o) + '">' + ech(o) + '</span></button>');
+  });
+  ouvrirMenu(h.join(''), r.left, r.bottom + 2, function(m){
+    m.querySelectorAll('button[data-v]').forEach(function(b){
+      b.addEventListener('click', function(){ cb(b.getAttribute('data-v')); fermerMenu(); });
+    });
+  });
+}
+
+/* --- menu flottant ----------------------------------------------------- */
+
+var menuOuvert = null;
+
+function ouvrirMenu(html, x, y, apres){
+  fermerMenu();
+  var m = document.createElement('div');
+  m.className = 'pmenu';
+  m.innerHTML = html;
+  document.body.appendChild(m);
+  var r = m.getBoundingClientRect();
+  var mx = Math.max(8, Math.min(x, window.innerWidth - r.width - 8));
+  var my = Math.max(8, Math.min(y, window.innerHeight - r.height - 8));
+  m.style.left = mx + 'px';
+  m.style.top = my + 'px';
+  menuOuvert = m;
+  if (apres) { apres(m); }
+  setTimeout(function(){ document.addEventListener('mousedown', horsMenu, true); }, 0);
+  return m;
+}
+
+function horsMenu(ev){
+  if (menuOuvert && !menuOuvert.contains(ev.target)) { fermerMenu(); }
+}
+
+function fermerMenu(){
+  if (menuOuvert && menuOuvert.parentNode) { menuOuvert.parentNode.removeChild(menuOuvert); }
+  menuOuvert = null;
+  document.removeEventListener('mousedown', horsMenu, true);
+}
+
+/* --- fenetre modale ----------------------------------------------------- */
+
+var modaleOuverte = null;
+
+function ouvrirModale(html, apres){
+  fermerModale();
+  var m = document.createElement('div');
+  m.className = 'pmodal';
+  m.innerHTML = '<div class="pmodal-box">' + html + '</div>';
+  document.body.appendChild(m);
+  modaleOuverte = m;
+  m.addEventListener('mousedown', function(ev){ if (ev.target === m) { fermerModale(); } });
+  if (apres) { apres(m); }
+  return m;
+}
+
+function fermerModale(){
+  if (modaleOuverte && modaleOuverte.parentNode) { modaleOuverte.parentNode.removeChild(modaleOuverte); }
+  modaleOuverte = null;
+}
+
+/* --- deplacement au clavier --------------------------------------------- */
+
+function bouger(dr, dc, etendre){
+  if (!sel) { return; }
+  var lignes = vue(), cols = colonnesVisibles();
+  if (!lignes.length || !cols.length) { return; }
+  var r = Math.max(0, Math.min((etendre ? sel.r2 : sel.r1) + dr, lignes.length - 1));
+  var cc = Math.max(0, Math.min((etendre ? sel.c2 : sel.c1) + dc, cols.length - 1));
+  if (r >= rendu) { rendu = Math.min(lignes.length, r + 1 + PAGE); dessiner(); }
+  if (etendre) { sel.r2 = r; sel.c2 = cc; }
+  else { sel = { r1: r, c1: cc, r2: r, c2: cc }; }
+  peindreSelection(); stats();
+  var td = el('gridWrap').querySelector('td.cell[data-ri="' + r + '"][data-ci="' + cc + '"]');
+  if (td && td.scrollIntoView) { td.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+}
+
+/* --- arbre des feuilles -------------------------------------------------- */
+
+function arbre(){
+  var z = el('treeBody');
+  if (!z) { return; }
+  if (!DB.ordre.length) {
+    z.innerHTML = '<div class="tg-title">Aucune feuille</div>';
+    return;
+  }
+  var enfantsDe = {};
+  DB.ordre.forEach(function(id){
+    var p = DB.sheets[id].parent;
+    var k = p && DB.sheets[p] ? p : '_';
+    (enfantsDe[k] || (enfantsDe[k] = [])).push(id);
+  });
+
+  function noeud(id){
+    var f = DB.sheets[id];
+    var h = '<button class="tree-node" data-open="' + id + '" aria-current="' + (DB.actif === id) + '">' +
+      '<span class="tn-lab">' + ech(f.nom) + '</span>' +
+      '<span class="tn-count">' + f.rows.length + '</span></button>';
+    if (f.via) { h += '<div class="tree-via">via ' + ech(f.via) + '</div>'; }
+    var ks = enfantsDe[id] || [];
+    if (ks.length) { h += '<div class="tree-kids">' + ks.map(noeud).join('') + '</div>'; }
+    return h;
+  }
+
+  z.innerHTML = '<div class="tree-group"><div class="tg-title">Vos feuilles</div>' +
+    (enfantsDe._ || []).map(noeud).join('') + '</div>';
+
+  z.querySelectorAll('button[data-open]').forEach(function(b){
+    b.addEventListener('click', function(){ ouvrir(b.getAttribute('data-open')); });
+    b.addEventListener('contextmenu', function(ev){
+      ev.preventDefault();
+      var id = b.getAttribute('data-open');
+      ouvrirMenu('<button data-a="dup">Dupliquer</button><hr>' +
+        '<button class="mdanger" data-a="del">Supprimer cette feuille</button>',
+        ev.clientX, ev.clientY, function(m){
+          m.querySelector('[data-a="dup"]').addEventListener('click', function(){
+            var s = DB.sheets[id];
+            var f2 = creerFeuille(s.nom + ' (copie)', [], 0, s.parent, s.via);
+            f2.cols = copieProfonde(s.cols);
+            f2.rows = copieProfonde(s.rows);
+            fermerMenu(); marquerSale(); ouvrir(f2.id);
+          });
+          m.querySelector('[data-a="del"]').addEventListener('click', function(){
+            fermerMenu();
+            confirmer('Supprimer « ' + DB.sheets[id].nom + ' » ?',
+              'Les ' + DB.sheets[id].rows.length + ' lignes de cette feuille seront perdues. Ses feuilles enfants sont conservées et remontent d’un cran. Cette action ne peut pas être annulée.',
+              function(){ supprimerFeuille(id); toast('Feuille supprimée.', true); });
+          });
+        });
+    });
+  });
+}
+
+function filiation(){
+  var z = el('proLineage');
+  var f = actif();
+  if (!z) { return; }
+  if (!f || !f.parent || !DB.sheets[f.parent]) { z.hidden = true; z.innerHTML = ''; return; }
+  var chaine = [], cur = f;
+  while (cur && cur.parent && DB.sheets[cur.parent]) {
+    cur = DB.sheets[cur.parent];
+    chaine.unshift(cur);
+  }
+  z.hidden = false;
+  z.innerHTML = chaine.map(function(s){
+    return '<a data-go="' + s.id + '">' + ech(s.nom) + '</a>';
+  }).join(' <span>›</span> ') + ' <span>›</span> <span>' + ech(f.nom) + '</span>' +
+    (f.via ? ' <span>· via ' + ech(f.via) + '</span>' : '') +
+    (f.recette ? ' <button class="tbtn ghost" id="btnRelancer" title="Recalculer cette feuille depuis celle d\u2019origine">Relancer</button>' : '');
+  z.querySelectorAll('a[data-go]').forEach(function(a){
+    a.addEventListener('click', function(){ ouvrir(a.getAttribute('data-go')); });
+  });
+  var br = el('btnRelancer');
+  if (br) { br.addEventListener('click', function(){ window.PROSPECT.relancer(); }); }
+}
+
+function confirmer(titre, texte, oui){
+  ouvrirModale('<h2>' + ech(titre) + '</h2><p class="sub">' + ech(texte) + '</p>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Confirmer</button></div>',
+    function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){ fermerModale(); oui(); });
+    });
+}
+
+function fermerLateral(){
+  var s = el('proSide'), sc = el('proScrim'), b = el('btnSideToggle');
+  if (s) { s.classList.remove('open'); }
+  if (sc) { sc.hidden = true; sc.classList.remove('open'); }
+  if (b) { b.setAttribute('aria-expanded', 'false'); }
+}
+
+/* --- exposition au second module ---------------------------------------- */
+
+
+/* Les modeles sectoriels : un metier cible par entree. Ils partagent un socle
+   (contact, telephone, statut, relance, notes) et ajoutent les colonnes que
+   seul ce metier justifie. Aucune valeur n'est pre-remplie. */
+var OUINON = ['Oui', 'Non', 'Ne sait pas'];
+
+var SECTEURS = [
+  { cle: 'coiffure', nom: 'Salon de coiffure et esthétique', desc: 'Postes, marques utilisées, jour de fermeture.',
+    cols: [c('Nom du salon','texte',190), c('Gérant ou gérante','texte',160), c('Téléphone','tel',150),
+           c('Quartier','texte',140), c('Nombre de postes','nombre',130),
+           c('Prestations','liste',150,['Coiffure','Esthétique','Barbier','Mixte']),
+           c('Marques utilisées','texte',170),
+           c('Jour de fermeture','liste',140,['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche','Aucun']),
+           c('Instagram','url',170), c('Rendez-vous en ligne','liste',160,OUINON),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'restaurant', nom: 'Restaurant, café et traiteur', desc: 'Couverts, cuisine, livraison, carte en ligne.',
+    cols: [c('Enseigne','texte',190), c('Responsable','texte',160), c('Téléphone','tel',150),
+           c('Quartier','texte',140),
+           c('Type de cuisine','liste',160,['Marocaine','Italienne','Japonaise','Fast-food','Café','Pâtisserie','Autre']),
+           c('Nombre de couverts','nombre',140),
+           c('Livraison','liste',150,['Glovo','Livreur propre','Les deux','Aucune']),
+           c('Carte en ligne','liste',140,OUINON), c('Instagram','url',170),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'medical', nom: 'Cabinet médical et dentaire', desc: 'Spécialité, secrétariat, logiciel, prise de rendez-vous.',
+    cols: [c('Cabinet','texte',190), c('Praticien','texte',160),
+           c('Spécialité','liste',160,['Médecine générale','Dentaire','Pédiatrie','Dermatologie','Gynécologie','Kinésithérapie','Ophtalmologie','Autre']),
+           c('Téléphone','tel',150), c('Quartier','texte',140),
+           c('Secrétariat','liste',130,OUINON), c('Logiciel de gestion','texte',170),
+           c('Rendez-vous en ligne','liste',160,OUINON), c('Conventionné AMO','liste',150,OUINON),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'bet', nom: 'Bureau d’études techniques (BET)', desc: 'Domaines, effectif ingénieurs, logiciels, références.',
+    cols: [c('Bureau d’études','texte',200), c('Dirigeant','texte',160), c('Téléphone','tel',150),
+           c('Email','email',210), c('Ville','texte',130),
+           c('Domaines','liste',170,['Structure','Fluides','VRD','Thermique','Électricité','Tous corps d’état']),
+           c('Effectif ingénieurs','nombre',150), c('Logiciels','texte',170),
+           c('Qualification','texte',150), c('Références de chantiers','long',240),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',220)] },
+
+  { cle: 'btp', nom: 'Artisan et entreprise du bâtiment', desc: 'Métier, zone d’intervention, assurance, effectif.',
+    cols: [c('Entreprise','texte',190),
+           c('Métier','liste',160,['Maçonnerie','Électricité','Plomberie','Peinture','Menuiserie','Étanchéité','Climatisation','Carrelage','Autre']),
+           c('Responsable','texte',160), c('Téléphone','tel',150),
+           c('Zone d’intervention','texte',170), c('Effectif','nombre',110),
+           c('Assurance décennale','liste',160,OUINON), c('Chantiers types','texte',190),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'commerce', nom: 'Commerce de détail et boutique', desc: 'Type de commerce, points de vente, vente en ligne.',
+    cols: [c('Enseigne','texte',190),
+           c('Type de commerce','liste',170,['Prêt-à-porter','Épicerie','Électroménager','Téléphonie','Décoration','Sport','Librairie','Autre']),
+           c('Gérant','texte',160), c('Téléphone','tel',150), c('Quartier','texte',140),
+           c('Points de vente','nombre',130), c('Vend en ligne','liste',140,OUINON),
+           c('Paiement','liste',160,['Espèces seulement','Terminal bancaire','Paiement en ligne']),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'hotel', nom: 'Hôtel, riad et maison d’hôtes', desc: 'Catégorie, chambres, canaux de réservation.',
+    cols: [c('Établissement','texte',200),
+           c('Catégorie','liste',150,['Riad','Hôtel 2 étoiles','Hôtel 3 étoiles','Hôtel 4 étoiles','Hôtel 5 étoiles','Maison d’hôtes','Appart-hôtel']),
+           c('Responsable','texte',160), c('Téléphone','tel',150), c('Ville','texte',130),
+           c('Nombre de chambres','nombre',150), c('Canaux de réservation','texte',190),
+           c('Site propre','url',170), c('Statut','liste',160,STATUTS),
+           c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'formation', nom: 'École et centre de formation', desc: 'Niveau, effectif élèves, inscriptions en ligne.',
+    cols: [c('Établissement','texte',200),
+           c('Niveau','liste',160,['Crèche','Primaire','Collège','Lycée','Supérieur','Formation professionnelle','Langues','Soutien scolaire']),
+           c('Directeur','texte',160), c('Téléphone','tel',150), c('Ville','texte',130),
+           c('Nombre d’élèves','nombre',140), c('Inscriptions en ligne','liste',160,OUINON),
+           c('Accréditation','texte',150), c('Statut','liste',160,STATUTS),
+           c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'pharmacie', nom: 'Pharmacie et parapharmacie', desc: 'Garde, logiciel officinal, rayon parapharmacie.',
+    cols: [c('Officine','texte',190), c('Pharmacien titulaire','texte',180), c('Téléphone','tel',150),
+           c('Quartier','texte',140), c('Garde','liste',130,['Jour','Nuit','Les deux','Aucune']),
+           c('Logiciel officinal','texte',170), c('Rayon parapharmacie','liste',170,OUINON),
+           c('Livraison','liste',130,OUINON), c('Statut','liste',160,STATUTS),
+           c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'agence-immo', nom: 'Agence immobilière', desc: 'Négociateurs, type de biens, portails, mandats.',
+    cols: [c('Agence','texte',190), c('Directeur','texte',160), c('Téléphone','tel',150),
+           c('Ville','texte',130), c('Négociateurs','nombre',130),
+           c('Type de biens','liste',150,['Résidentiel','Commercial','Terrains','Luxe','Mixte']),
+           c('Portails utilisés','texte',180), c('Mandats exclusifs','liste',150,OUINON),
+           c('Site web','url',170), c('Statut','liste',160,STATUTS),
+           c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'garage', nom: 'Garage et centre auto', desc: 'Spécialité, baies, agrément constructeur.',
+    cols: [c('Garage','texte',190), c('Responsable','texte',160), c('Téléphone','tel',150),
+           c('Quartier','texte',140),
+           c('Spécialité','liste',170,['Mécanique générale','Carrosserie','Pneumatiques','Diagnostic','Multimarque','Agréé constructeur']),
+           c('Nombre de baies','nombre',140), c('Rendez-vous en ligne','liste',160,OUINON),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] },
+
+  { cle: 'transport', nom: 'Transport et logistique', desc: 'Activité, flotte, zone desservie.',
+    cols: [c('Entreprise','texte',190),
+           c('Activité','liste',180,['Messagerie','Transport de marchandises','Déménagement','Transport de personnes','Entreposage']),
+           c('Responsable','texte',160), c('Téléphone','tel',150), c('Ville','texte',130),
+           c('Taille de la flotte','nombre',150), c('Zone desservie','texte',180),
+           c('Statut','liste',160,STATUTS), c('Prochaine relance','date',140), c('Notes','long',230)] }
+];
+
+window.PROSPECT = {
+  CLE: CLE, TYPES: TYPES, MODELES: MODELES, SECTEURS: SECTEURS, STATUTS: STATUTS, PRIORITES: PRIORITES,
+  LARGEUR_DEF: LARGEUR_DEF, PAGE: PAGE,
+  get DB(){ return DB; }, set DB(x){ DB = x; },
+  get sel(){ return sel; }, set sel(x){ sel = x; },
+  get rendu(){ return rendu; }, set rendu(x){ rendu = x; },
+  get recherche(){ return recherche; }, set recherche(x){ recherche = x; },
+  get edition(){ return edition; },
+  ident: ident, ech: ech, el: el, toast: toast, copieProfonde: copieProfonde,
+  charger: charger, neuf: neuf, sauver: sauver, marquerSale: marquerSale, infoStockage: infoStockage,
+  instantane: instantane, annuler: annuler, retablir: retablir, majHistBtns: majHistBtns,
+  actif: actif, creerFeuille: creerFeuille, ouvrir: ouvrir, supprimerFeuille: supprimerFeuille,
+  colonnesVisibles: colonnesVisibles, valeurTexte: valeurTexte, vue: vue, bornes: bornes,
+  dessiner: dessiner, stats: stats, peindreSelection: peindreSelection, arbre: arbre, filiation: filiation,
+  ouvrirEdition: ouvrirEdition, ecrireCellule: ecrireCellule, bouger: bouger,
+  ouvrirMenu: ouvrirMenu, fermerMenu: fermerMenu, ouvrirModale: ouvrirModale, fermerModale: fermerModale,
+  confirmer: confirmer, fermerLateral: fermerLateral, emailValide: emailValide, teinte: teinte,
+  maintenant: maintenant
+};
+
+})();
+
+/* =====================================================================
+   Fiches de prospection — interactions, transformations, import, export
+   Consomme window.PROSPECT defini par le module noyau.
+   ===================================================================== */
+(function(){
+'use strict';
+
+var P = window.PROSPECT;
+var el = P.el, ech = P.ech, toast = P.toast;
+
+function sansAccent(s){
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+/* =====================================================================
+   1. MODELES
+   ===================================================================== */
+
+function modeles(){
+  var onglet = function(cle, titre, sous, actif){
+    return '<button class="tpltab' + (actif ? ' on' : '') + '" data-onglet="' + cle + '" role="tab" aria-selected="' +
+      (actif ? 'true' : 'false') + '">' + titre + '<small>' + sous + '</small></button>';
+  };
+  var grille = function(cle, liste, actif){
+    var g = '<div class="tplgrid" data-g="' + cle + '"' + (actif ? '' : ' hidden') + '>';
+    liste.forEach(function(m){
+      g += '<button class="tplcard" data-tpl="' + m.cle + '"><b>' + ech(m.nom) + '</b>' +
+        '<span>' + ech(m.desc) + '</span><i>' + m.cols.length + ' colonnes</i></button>';
+    });
+    return g + '</div>';
+  };
+
+  var h = '<h2>Choisir un modèle</h2>' +
+    '<p class="sub">Deux façons de partir : selon la manière dont vous prospectez, ou selon le métier des entreprises que vous visez. Les colonnes restent modifiables ensuite.</p>' +
+    '<div class="tpltabs" role="tablist">' +
+      onglet('methode', 'Par méthode', 'Comment vous prospectez', true) +
+      onglet('secteur', 'Par secteur ciblé', 'Le métier du prospect', false) +
+    '</div>' +
+    grille('methode', P.MODELES, true) +
+    grille('secteur', P.SECTEURS, false) +
+    '<div class="mactions"><button class="tbtn" data-x="fermer">Annuler</button></div>';
+
+  P.ouvrirModale(h, function(mo){
+    mo.querySelector('[data-x="fermer"]').addEventListener('click', P.fermerModale);
+    mo.querySelectorAll('[data-onglet]').forEach(function(t){
+      t.addEventListener('click', function(){
+        var k = t.getAttribute('data-onglet');
+        mo.querySelectorAll('[data-onglet]').forEach(function(o){
+          var on = o === t;
+          o.classList.toggle('on', on);
+          o.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        mo.querySelectorAll('[data-g]').forEach(function(g){ g.hidden = g.getAttribute('data-g') !== k; });
+      });
+    });
+    mo.querySelectorAll('[data-tpl]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var cle = b.getAttribute('data-tpl');
+        var m = P.MODELES.concat(P.SECTEURS).filter(function(x){ return x.cle === cle; })[0];
+        var f = P.creerFeuille(m.nom, m.cols, 8, null, null);
+        P.fermerModale();
+        P.marquerSale();
+        P.ouvrir(f.id);
+        toast('Feuille créée depuis le modèle ' + m.nom + '.', true);
+      });
+    });
+  });
+}
+P.modeles = modeles;
+
+/* =====================================================================
+   2. MENU DE COLONNE
+   ===================================================================== */
+
+function menuColonne(colId, x, y){
+  var f = P.actif();
+  if (!f) { return; }
+  var col = f.cols.filter(function(c){ return c.id === colId; })[0];
+  if (!col) { return; }
+  var idx = f.cols.indexOf(col);
+  var fl = f.filtres[colId];
+
+  var h = '<div class="mtitle">' + ech(col.nom) + '</div>' +
+    '<button data-a="tri-asc">Trier A → Z' + (f.tri && f.tri.col === colId && f.tri.sens === 'asc' ? '<span class="mk">actif</span>' : '') + '</button>' +
+    '<button data-a="tri-desc">Trier Z → A' + (f.tri && f.tri.col === colId && f.tri.sens === 'desc' ? '<span class="mk">actif</span>' : '') + '</button>' +
+    (f.tri && f.tri.col === colId ? '<button data-a="tri-non">Retirer le tri</button>' : '') +
+    '<hr><button data-a="filtre">Filtrer' + (fl ? '<span class="mk">actif</span>' : '') + '</button>' +
+    (fl ? '<button data-a="filtre-non">Retirer le filtre</button>' : '') +
+    '<hr><button data-a="renommer">Renommer</button>' +
+    '<button data-a="type">Changer le type (' + ech(P.TYPES[col.type] ? P.TYPES[col.type].nom : col.type) + ')</button>' +
+    (col.type === 'liste' ? '<button data-a="options">Modifier les choix</button>' : '') +
+    '<button data-a="masquer">Masquer</button>' +
+    '<hr><button data-a="gauche">Insérer une colonne à gauche</button>' +
+    '<button data-a="droite">Insérer une colonne à droite</button>' +
+    '<button data-a="dupcol">Dupliquer la colonne</button>' +
+    '<hr><button class="mdanger" data-a="suppr">Supprimer la colonne</button>';
+
+  P.ouvrirMenu(h, x, y, function(m){
+    function act(nom, fn){
+      var b = m.querySelector('[data-a="' + nom + '"]');
+      if (b) { b.addEventListener('click', function(){ P.fermerMenu(); fn(); }); }
+    }
+    act('tri-asc',    function(){ f.tri = { col: colId, sens: 'asc' }; P.marquerSale(); P.dessiner(); });
+    act('tri-desc',   function(){ f.tri = { col: colId, sens: 'desc' }; P.marquerSale(); P.dessiner(); });
+    act('tri-non',    function(){ f.tri = null; P.marquerSale(); P.dessiner(); });
+    act('filtre',     function(){ fenetreFiltre(col); });
+    act('filtre-non', function(){ delete f.filtres[colId]; P.marquerSale(); P.dessiner(); });
+    act('renommer',   function(){ renommerColonne(col); });
+    act('type',       function(){ changerType(col); });
+    act('options',    function(){ editerOptions(col); });
+    act('masquer',    function(){ P.instantane(); col.cache = true; P.marquerSale(); P.dessiner(); });
+    act('gauche',     function(){ nouvelleColonne(idx); });
+    act('droite',     function(){ nouvelleColonne(idx + 1); });
+    act('dupcol',     function(){ dupliquerColonne(col, idx); });
+    act('suppr',      function(){
+      P.confirmer('Supprimer la colonne « ' + col.nom + ' » ?',
+        'Les valeurs de cette colonne seront perdues sur les ' + f.rows.length + ' lignes. Ctrl+Z permet de revenir en arrière.',
+        function(){
+          P.instantane();
+          f.cols.splice(idx, 1);
+          f.rows.forEach(function(l){ delete l.c[colId]; if (l.g) { delete l.g[colId]; } });
+          delete f.filtres[colId];
+          if (f.tri && f.tri.col === colId) { f.tri = null; }
+          P.sel = null; P.marquerSale(); P.dessiner();
+        });
+    });
+  });
+}
+
+function champTexte(label, id, valeur){
+  return '<div class="frow"><label for="' + id + '">' + ech(label) + '</label>' +
+    '<input id="' + id + '" type="text" value="' + ech(valeur || '') + '"></div>';
+}
+
+function selectType(id, courant){
+  var h = '<div class="frow"><label for="' + id + '">Type de colonne</label><select id="' + id + '">';
+  Object.keys(P.TYPES).forEach(function(k){
+    h += '<option value="' + k + '"' + (k === courant ? ' selected' : '') + '>' + ech(P.TYPES[k].nom) + '</option>';
+  });
+  return h + '</select></div>';
+}
+
+function renommerColonne(col){
+  P.ouvrirModale('<h2>Renommer la colonne</h2>' + champTexte('Nom', 'fNom', col.nom) +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Renommer</button></div>', function(m){
+      var i = el('fNom'); i.focus(); i.select();
+      function valider(){
+        var v = i.value.trim();
+        if (!v) { toast('Le nom ne peut pas être vide.'); return; }
+        P.instantane(); col.nom = v; P.fermerModale(); P.marquerSale(); P.dessiner();
+      }
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', valider);
+      i.addEventListener('keydown', function(e){ if (e.key === 'Enter') { valider(); } });
+    });
+}
+
+function changerType(col){
+  P.ouvrirModale('<h2>Type de la colonne « ' + ech(col.nom) + ' »</h2>' +
+    '<p class="sub">Le type change l’affichage, la validation et le format à l’export Excel. Vos valeurs ne sont pas effacées.</p>' +
+    selectType('fType', col.type) +
+    '<div class="frow" id="zOpts" hidden><label for="fOpts">Choix possibles, un par ligne</label>' +
+    '<textarea id="fOpts">' + ech((col.options || P.STATUTS).join('\n')) + '</textarea>' +
+    '<div class="hint">Ces choix deviennent un menu déroulant dans la grille et dans le fichier Excel exporté.</div></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Appliquer</button></div>', function(m){
+      var s = el('fType'), z = el('zOpts');
+      function sync(){ z.hidden = s.value !== 'liste'; }
+      s.addEventListener('change', sync); sync();
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        P.instantane();
+        col.type = s.value;
+        if (s.value === 'liste') {
+          col.options = el('fOpts').value.split(/\r?\n/).map(function(x){ return x.trim(); })
+            .filter(function(x){ return x; });
+          if (!col.options.length) { col.options = P.STATUTS.slice(); }
+        } else { col.options = null; }
+        P.fermerModale(); P.marquerSale(); P.dessiner();
+      });
+    });
+}
+
+function editerOptions(col){
+  P.ouvrirModale('<h2>Choix de « ' + ech(col.nom) + ' »</h2>' +
+    '<div class="frow"><label for="fOpts">Un choix par ligne</label>' +
+    '<textarea id="fOpts">' + ech((col.options || []).join('\n')) + '</textarea></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Enregistrer</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        P.instantane();
+        col.options = el('fOpts').value.split(/\r?\n/).map(function(x){ return x.trim(); })
+          .filter(function(x){ return x; });
+        P.fermerModale(); P.marquerSale(); P.dessiner();
+      });
+    });
+}
+
+function nouvelleColonne(position){
+  var f = P.actif();
+  if (!f) { toast('Ouvrez une feuille d’abord.'); return; }
+  P.ouvrirModale('<h2>Nouvelle colonne</h2>' + champTexte('Nom', 'fNom', '') + selectType('fType', 'texte') +
+    '<div class="frow" id="zOpts" hidden><label for="fOpts">Choix possibles, un par ligne</label>' +
+    '<textarea id="fOpts">' + ech(P.STATUTS.join('\n')) + '</textarea></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Ajouter</button></div>', function(m){
+      var i = el('fNom'), s = el('fType'), z = el('zOpts');
+      i.focus();
+      function sync(){ z.hidden = s.value !== 'liste'; }
+      s.addEventListener('change', sync); sync();
+      function valider(){
+        var v = i.value.trim();
+        if (!v) { toast('Donnez un nom à la colonne.'); return; }
+        P.instantane();
+        var c = { id: P.ident('c'), nom: v, type: s.value, largeur: P.LARGEUR_DEF, cache: false, options: null };
+        if (s.value === 'liste') {
+          c.options = el('fOpts').value.split(/\r?\n/).map(function(x){ return x.trim(); })
+            .filter(function(x){ return x; });
+          if (!c.options.length) { c.options = P.STATUTS.slice(); }
+        }
+        f.cols.splice(position == null ? f.cols.length : position, 0, c);
+        P.fermerModale(); P.marquerSale(); P.dessiner();
+      }
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', valider);
+      i.addEventListener('keydown', function(e){ if (e.key === 'Enter') { valider(); } });
+    });
+}
+
+function dupliquerColonne(col, idx){
+  var f = P.actif();
+  P.instantane();
+  var c2 = { id: P.ident('c'), nom: col.nom + ' (copie)', type: col.type, largeur: col.largeur,
+             cache: false, options: col.options ? col.options.slice() : null };
+  f.cols.splice(idx + 1, 0, c2);
+  f.rows.forEach(function(l){ if (l.c[col.id] != null) { l.c[c2.id] = l.c[col.id]; } });
+  P.marquerSale(); P.dessiner();
+}
+
+function fenetreFiltre(col){
+  var f = P.actif();
+  var fl = f.filtres[col.id] || { mode: 'contient', valeur: '', liste: [] };
+  var modes = [['contient', 'Contient'], ['egal', 'Est exactement'], ['vide', 'Est vide'], ['rempli', 'Est rempli']];
+  if (col.type === 'liste') { modes.push(['parmi', 'Fait partie de']); }
+
+  var h = '<h2>Filtrer sur « ' + ech(col.nom) + ' »</h2>' +
+    '<div class="frow"><label for="fMode">Condition</label><select id="fMode">' +
+    modes.map(function(o){
+      return '<option value="' + o[0] + '"' + (fl.mode === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
+    }).join('') + '</select></div>' +
+    '<div class="frow" id="zVal"><label for="fVal">Valeur</label>' +
+    '<input id="fVal" type="text" value="' + ech(fl.valeur || '') + '"></div>';
+  if (col.type === 'liste') {
+    h += '<div class="frow" id="zListe" hidden><label>Choix retenus</label>' +
+      (col.options || []).map(function(o, i){
+        var coche = (fl.liste || []).indexOf(o) !== -1 ? ' checked' : '';
+        return '<label style="display:flex;gap:8px;align-items:center;margin:5px 0;font-size:13.5px;color:var(--fg)">' +
+          '<input type="checkbox" style="width:auto" data-opt="' + i + '" value="' + ech(o) + '"' + coche + '> ' + ech(o) + '</label>';
+      }).join('') + '</div>';
+  }
+  h += '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn" data-x="raz">Retirer le filtre</button>' +
+    '<button class="tbtn primary" data-x="oui">Filtrer</button></div>';
+
+  P.ouvrirModale(h, function(m){
+    var mode = el('fMode'), zv = el('zVal'), zl = el('zListe');
+    function sync(){
+      zv.hidden = (mode.value === 'vide' || mode.value === 'rempli' || mode.value === 'parmi');
+      if (zl) { zl.hidden = mode.value !== 'parmi'; }
+    }
+    mode.addEventListener('change', sync); sync();
+    m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+    m.querySelector('[data-x="raz"]').addEventListener('click', function(){
+      delete f.filtres[col.id]; P.fermerModale(); P.marquerSale(); P.rendu = P.PAGE; P.dessiner();
+    });
+    m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+      var nf = { mode: mode.value, valeur: el('fVal') ? el('fVal').value : '', liste: [] };
+      if (mode.value === 'parmi' && zl) {
+        zl.querySelectorAll('input[data-opt]').forEach(function(cb){ if (cb.checked) { nf.liste.push(cb.value); } });
+      }
+      f.filtres[col.id] = nf;
+      P.fermerModale(); P.marquerSale(); P.sel = null; P.rendu = P.PAGE; P.dessiner();
+    });
+  });
+}
+
+/* =====================================================================
+   3. ENRICHISSEMENT — operations locales et verifiables
+   ===================================================================== */
+
+function domaineDepuis(v){
+  var s = String(v || '').trim();
+  if (!s) { return ''; }
+  if (s.indexOf('@') !== -1) { return s.split('@').pop().toLowerCase(); }
+  s = s.replace(/^[a-z]+:\/\//i, '').replace(/^www\./i, '');
+  s = s.split('/')[0].split('?')[0].split(':')[0];
+  return s.toLowerCase();
+}
+
+function normaliserTel(v){
+  var s = String(v || '').replace(/[^0-9+]/g, '');
+  if (!s) { return ''; }
+  if (s.indexOf('+') === 0) { return s; }
+  if (s.indexOf('00') === 0) { return '+' + s.slice(2); }
+  /* Un numero marocain saisi en national commence par 0 et compte 10 chiffres. */
+  if (s.length === 10 && s.charAt(0) === '0') { return '+212' + s.slice(1); }
+  if (s.length === 9) { return '+212' + s; }
+  return s;
+}
+
+function initialesDe(v){
+  return String(v || '').trim().split(/\s+/).filter(function(x){ return x; })
+    .slice(0, 3).map(function(x){ return x.charAt(0).toUpperCase(); }).join('');
+}
+
+function joursDepuis(iso){
+  var d = Date.parse(String(iso || '').slice(0, 10));
+  if (isNaN(d)) { return ''; }
+  return String(Math.round((Date.now() - d) / 86400000));
+}
+
+var ENRICH = [
+  { cle: 'domaine', nom: 'Extraire le domaine', sortie: 'Domaine', fn: domaineDepuis },
+  { cle: 'tel', nom: 'Normaliser le téléphone', surPlace: true, fn: normaliserTel },
+  { cle: 'initiales', nom: 'Initiales', sortie: 'Initiales', fn: initialesDe },
+  { cle: 'majuscule', nom: 'Mettre en capitale initiale', surPlace: true,
+    fn: function(v){
+      return String(v || '').toLowerCase().replace(/(^|[\s\-’'])([a-zà-ÿ])/g,
+        function(t, a, b){ return a + b.toUpperCase(); });
+    } },
+  { cle: 'minuscule', nom: 'Tout en minuscules', surPlace: true,
+    fn: function(v){ return String(v || '').toLowerCase().trim(); } },
+  { cle: 'jours', nom: 'Jours écoulés depuis cette date', sortie: 'Jours écoulés', fn: joursDepuis },
+  { cle: 'valide', nom: 'Vérifier le format des emails', sortie: 'Email valide',
+    fn: function(v){ var s = String(v || '').trim(); return s ? (P.emailValide(s) ? 'Oui' : 'Non') : ''; } }
+];
+
+function menuEnrichir(x, y){
+  if (!P.actif()) { toast('Ouvrez une feuille d’abord.'); return; }
+  var h = '<div class="mtitle">Sur la colonne sélectionnée</div>';
+  ENRICH.forEach(function(e){ h += '<button data-e="' + e.cle + '">' + ech(e.nom) + '</button>'; });
+  h += '<hr><div class="mtitle">Sur toute la feuille</div>' +
+    '<button data-e="doublons">Marquer les doublons</button>' +
+    '<button data-e="email-probable">Deviner les emails professionnels</button>';
+  P.ouvrirMenu(h, x, y, function(m){
+    m.querySelectorAll('[data-e]').forEach(function(b){
+      b.addEventListener('click', function(){
+        P.fermerMenu();
+        var k = b.getAttribute('data-e');
+        if (k === 'doublons') { marquerDoublons(); }
+        else if (k === 'email-probable') { emailProbable(); }
+        else { appliquerEnrich(ENRICH.filter(function(e){ return e.cle === k; })[0]); }
+      });
+    });
+  });
+}
+
+function colonneSelectionnee(){
+  var b = P.bornes();
+  if (!b) { return null; }
+  return P.colonnesVisibles()[b.c1] || null;
+}
+
+function appliquerEnrich(e){
+  var f = P.actif();
+  var col = colonneSelectionnee();
+  if (!col) { toast('Sélectionnez d’abord une cellule dans la colonne à traiter.'); return; }
+
+  P.instantane();
+  var cible = col;
+  if (!e.surPlace) {
+    var nom = e.sortie + ' (' + col.nom + ')';
+    cible = f.cols.filter(function(c){ return c.nom === nom; })[0];
+    if (!cible) {
+      cible = { id: P.ident('c'), nom: nom, type: 'texte', largeur: 150, cache: false, options: null };
+      f.cols.splice(f.cols.indexOf(col) + 1, 0, cible);
+    }
+  }
+
+  var n = 0;
+  f.rows.forEach(function(l){
+    var v = l.c[col.id];
+    if (v == null || v === '') { return; }
+    var r = e.fn(v);
+    if (r === '' || r == null) { return; }
+    if (String(r) !== String(l.c[cible.id] || '')) { n++; }
+    l.c[cible.id] = String(r);
+    if (l.g) { delete l.g[cible.id]; }
+  });
+  P.marquerSale(); P.dessiner();
+  toast(n + ' valeur' + (n > 1 ? 's' : '') + ' traitée' + (n > 1 ? 's' : '') + '.', true);
+}
+
+function marquerDoublons(){
+  var f = P.actif();
+  var col = colonneSelectionnee();
+  if (!col) { toast('Sélectionnez une cellule dans la colonne qui sert de clé.'); return; }
+  P.instantane();
+  var nom = 'Doublon (' + col.nom + ')';
+  var cible = f.cols.filter(function(c){ return c.nom === nom; })[0];
+  if (!cible) {
+    cible = { id: P.ident('c'), nom: nom, type: 'liste', largeur: 130, cache: false, options: ['Oui', 'Non'] };
+    f.cols.splice(f.cols.indexOf(col) + 1, 0, cible);
+  }
+  var vus = {}, n = 0;
+  f.rows.forEach(function(l){
+    var v = sansAccent(String(l.c[col.id] || '').trim().toLowerCase());
+    if (!v) { delete l.c[cible.id]; return; }
+    if (vus[v]) { l.c[cible.id] = 'Oui'; n++; }
+    else { vus[v] = true; l.c[cible.id] = 'Non'; }
+  });
+  P.marquerSale(); P.dessiner();
+  toast(n ? (n + ' doublon' + (n > 1 ? 's' : '') + ' repéré' + (n > 1 ? 's' : '') + ' sur « ' + col.nom + ' ».')
+          : ('Aucun doublon sur « ' + col.nom + ' ».'), !n);
+}
+
+function emailProbable(){
+  var f = P.actif();
+  var textes = f.cols.filter(function(c){ return c.type === 'texte'; });
+  var dom = f.cols.filter(function(c){ return c.type === 'url' || /domaine/i.test(c.nom); });
+  if (!textes.length || !dom.length) {
+    toast('Il faut une colonne de nom et une colonne de site ou de domaine.');
+    return;
+  }
+  var h = '<h2>Deviner les emails professionnels</h2>' +
+    '<p class="sub">Une adresse reconstituée est une <strong>hypothèse</strong>, pas une donnée vérifiée. Elle sera soulignée en pointillé dans la grille. Vérifiez avant tout envoi.</p>' +
+    '<div class="frow"><label for="fNomCol">Colonne du nom</label><select id="fNomCol">' +
+      textes.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select></div>' +
+    '<div class="frow"><label for="fDomCol">Colonne du site ou du domaine</label><select id="fDomCol">' +
+      dom.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select></div>' +
+    '<div class="frow"><label for="fSchema">Schéma</label><select id="fSchema">' +
+      '<option value="p.n">prenom.nom@domaine</option>' +
+      '<option value="pn">prenomnom@domaine</option>' +
+      '<option value="in">pnom@domaine</option>' +
+      '<option value="n">nom@domaine</option>' +
+      '<option value="p">prenom@domaine</option>' +
+    '</select></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Calculer les hypothèses</button></div>';
+
+  P.ouvrirModale(h, function(m){
+    m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+    m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+      var cn = el('fNomCol').value, cd = el('fDomCol').value, sch = el('fSchema').value;
+      P.fermerModale();
+      P.instantane();
+      var cible = f.cols.filter(function(c){ return c.nom === 'Email probable'; })[0];
+      if (!cible) {
+        cible = { id: P.ident('c'), nom: 'Email probable', type: 'email', largeur: 220, cache: false, options: null };
+        f.cols.push(cible);
+      }
+      var n = 0;
+      f.rows.forEach(function(l){
+        var complet = sansAccent(String(l.c[cn] || '').trim().toLowerCase()).replace(/[^a-z \-]/g, '');
+        var d = domaineDepuis(l.c[cd]);
+        if (!complet || !d) { return; }
+        var mots = complet.split(/[\s\-]+/).filter(function(x){ return x; });
+        if (!mots.length) { return; }
+        var prenom = mots[0], nom = mots.length > 1 ? mots[mots.length - 1] : mots[0];
+        var local = sch === 'p.n' ? prenom + '.' + nom
+                  : sch === 'pn'  ? prenom + nom
+                  : sch === 'in'  ? prenom.charAt(0) + nom
+                  : sch === 'n'   ? nom
+                  : prenom;
+        l.c[cible.id] = local + '@' + d;
+        if (!l.g) { l.g = {}; }
+        l.g[cible.id] = true;   /* marque d'hypothese : jamais presentee comme verifiee */
+        n++;
+      });
+      P.marquerSale(); P.dessiner();
+      toast(n + ' hypothèse' + (n > 1 ? 's' : '') + ' calculée' + (n > 1 ? 's' : '') + '. À vérifier avant envoi.', true);
+    });
+  });
+}
+
+/* =====================================================================
+   4. TRANSFORMATIONS — produisent une feuille enfant
+   ===================================================================== */
+
+function menuTransformer(x, y){
+  if (!P.actif()) { toast('Ouvrez une feuille d’abord.'); return; }
+  P.ouvrirMenu(
+    '<div class="mtitle">Nouvelle feuille à partir de celle-ci</div>' +
+    '<button data-t="filtre">Extraire ce qui est affiché</button>' +
+    '<button data-t="selection">Extraire les lignes sélectionnées</button>' +
+    '<button data-t="dedup">Dédoublonner sur une colonne</button>' +
+    '<button data-t="eclater">Éclater une colonne en lignes</button>' +
+    '<button data-t="copie">Copier la feuille entière</button>' +
+    '<hr><div class="mtitle">Croiser et synthétiser</div>' +
+    '<button data-t="recap">Récapitulatif par colonne</button>' +
+    '<button data-t="fusion">Enrichir depuis une autre feuille</button>' +
+    '<button data-t="scinder">Scinder en plusieurs feuilles</button>',
+    x, y, function(m){
+      m.querySelectorAll('[data-t]').forEach(function(b){
+        b.addEventListener('click', function(){
+          P.fermerMenu();
+          var k = b.getAttribute('data-t');
+          if (k === 'filtre') { derive('ce qui était affiché', P.vue(), ' — extrait'); }
+          else if (k === 'selection') { deriveSelection(); }
+          else if (k === 'dedup') { dedoublonner(); }
+          else if (k === 'eclater') { eclater(); }
+          else if (k === 'copie') { derive('copie intégrale', P.actif().rows.slice(), ' (copie)', { type: 'copie' }); }
+          else if (k === 'recap') { P.recapitulatif(); }
+          else if (k === 'fusion') { P.fusionner(); }
+          else if (k === 'scinder') { P.scinder(); }
+        });
+      });
+    });
+}
+
+function derive(via, lignes, suffixe, recette){
+  var f = P.actif();
+  if (!lignes.length) { toast('Rien à extraire : la sélection est vide.'); return null; }
+  var f2 = P.creerFeuille(f.nom + (suffixe || ' — extrait'), [], 0, f.id, via);
+  /* La recette rend la transformation rejouable depuis la feuille mere.
+     Sans elle, le bouton « Relancer » ne s'affiche pas : une extraction
+     fondee sur le filtre ou la selection du moment n'est pas reproductible. */
+  if (recette) { f2.recette = recette; }
+  /* Les identifiants de colonne sont conserves tels quels : la feuille
+     enfant reste comparable a sa mere colonne par colonne. */
+  f2.cols = P.copieProfonde(f.cols);
+  f2.rows = lignes.map(function(l){
+    return { id: P.ident('r'), c: P.copieProfonde(l.c), g: P.copieProfonde(l.g || {}) };
+  });
+  P.marquerSale();
+  P.ouvrir(f2.id);
+  toast(f2.rows.length + ' ligne' + (f2.rows.length > 1 ? 's' : '') + ' dans la nouvelle feuille.', true);
+  return f2;
+}
+
+function deriveSelection(){
+  var b = P.bornes();
+  if (!b) { toast('Sélectionnez des lignes dans la grille.'); return; }
+  derive('lignes sélectionnées', P.vue().slice(b.r1, b.r2 + 1), ' — sélection');
+}
+
+function dedoublonner(){
+  var f = P.actif();
+  P.ouvrirModale('<h2>Dédoublonner</h2>' +
+    '<p class="sub">Une nouvelle feuille est créée avec une seule ligne par valeur. La feuille d’origine n’est pas touchée.</p>' +
+    '<div class="frow"><label for="fCol">Colonne qui sert de clé</label><select id="fCol">' +
+    f.cols.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select><div class="hint">La comparaison ignore la casse, les accents et les espaces en trop.</div></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Créer la feuille</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var cid = el('fCol').value;
+        var col = f.cols.filter(function(c){ return c.id === cid; })[0];
+        P.fermerModale();
+        var vus = {}, out = [], jetes = 0;
+        f.rows.forEach(function(l){
+          var v = sansAccent(String(l.c[cid] || '').trim().toLowerCase());
+          if (!v) { out.push(l); return; }
+          if (vus[v]) { jetes++; return; }
+          vus[v] = true; out.push(l);
+        });
+        derive('dédoublonné sur ' + col.nom, out, ' — sans doublons', { type: 'dedup', colId: cid });
+        if (jetes) { toast(jetes + ' doublon' + (jetes > 1 ? 's' : '') + ' écarté' + (jetes > 1 ? 's' : '') + '.', true); }
+      });
+    });
+}
+
+function eclater(){
+  var f = P.actif();
+  P.ouvrirModale('<h2>Éclater une colonne en lignes</h2>' +
+    '<p class="sub">Une cellule qui contient plusieurs valeurs séparées donne une ligne par valeur. Le reste de la ligne est recopié.</p>' +
+    '<div class="frow"><label for="fCol">Colonne à éclater</label><select id="fCol">' +
+    f.cols.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select></div>' + champTexte('Séparateur', 'fSep', ';') +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Créer la feuille</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var cid = el('fCol').value;
+        var col = f.cols.filter(function(c){ return c.id === cid; })[0];
+        var sep = el('fSep').value || ';';
+        P.fermerModale();
+        var out = [];
+        f.rows.forEach(function(l){
+          var v = String(l.c[cid] || '');
+          if (v.indexOf(sep) === -1) { out.push(l); return; }
+          v.split(sep).map(function(x){ return x.trim(); }).filter(function(x){ return x; })
+            .forEach(function(p){
+              var n = { id: P.ident('r'), c: P.copieProfonde(l.c), g: P.copieProfonde(l.g || {}) };
+              n.c[cid] = p;
+              out.push(n);
+            });
+        });
+        derive('éclaté sur ' + col.nom, out, ' — éclaté', { type: 'eclater', colId: cid, sep: sep });
+      });
+    });
+}
+
+/* =====================================================================
+   5. IMPORT
+   ===================================================================== */
+
+function separateurProbable(texte){
+  var l = texte.split(/\r?\n/)[0] || '';
+  var pv = (l.match(/;/g) || []).length;
+  var vg = (l.match(/,/g) || []).length;
+  var tb = (l.match(/\t/g) || []).length;
+  if (tb > 0 && tb >= pv && tb >= vg) { return '\t'; }
+  return pv >= vg ? ';' : ',';
+}
+
+/* Analyseur CSV complet : guillemets, guillemets doubles echappes et
+   sauts de ligne a l'interieur d'un champ. */
+function lireCSV(texte, sep){
+  var out = [], ligne = [], champ = '', i = 0, dedans = false;
+  texte = String(texte).replace(/^﻿/, '');
+  while (i < texte.length) {
+    var ch = texte.charAt(i);
+    if (dedans) {
+      if (ch === '"') {
+        if (texte.charAt(i + 1) === '"') { champ += '"'; i += 2; continue; }
+        dedans = false; i++; continue;
+      }
+      champ += ch; i++; continue;
+    }
+    if (ch === '"') { dedans = true; i++; continue; }
+    if (ch === sep) { ligne.push(champ); champ = ''; i++; continue; }
+    if (ch === '\n') { ligne.push(champ); out.push(ligne); ligne = []; champ = ''; i++; continue; }
+    if (ch === '\r') { i++; continue; }
+    champ += ch; i++;
+  }
+  if (champ !== '' || ligne.length) { ligne.push(champ); out.push(ligne); }
+  return out.filter(function(l){ return l.some(function(c){ return String(c).trim() !== ''; }); });
+}
+
+function typeDevine(nom, valeurs){
+  var n = sansAccent(String(nom || '')).toLowerCase();
+  if (/mail/.test(n)) { return 'email'; }
+  if (/tel|phone|portable|mobile|gsm/.test(n)) { return 'tel'; }
+  if (/site|web|url|linkedin|lien/.test(n)) { return 'url'; }
+  if (/date|relance|echeance|rdv/.test(n)) { return 'date'; }
+  if (/statut|etat|priorite|issue|reponse|source|type|lieu/.test(n)) { return 'liste'; }
+  if (/montant|prix|budget|effectif|surface|nombre|quantite|m2/.test(n)) { return 'nombre'; }
+  if (/commentaire|note|description|besoin|adresse/.test(n)) { return 'long'; }
+  var pleines = valeurs.filter(function(v){ return String(v == null ? '' : v).trim() !== ''; });
+  if (pleines.length && pleines.every(function(v){ return /^[0-9 .,]+$/.test(String(v).trim()); })) { return 'nombre'; }
+  if (pleines.length && pleines.every(function(v){ return /^\d{4}-\d{2}-\d{2}/.test(String(v).trim()); })) { return 'date'; }
+  return 'texte';
+}
+
+function importerTableau(matrice, nomFeuille, avecEntetes){
+  if (!matrice.length) { toast('Aucune donnée lisible.'); return; }
+  var entetes, corps;
+  if (avecEntetes) { entetes = matrice[0]; corps = matrice.slice(1); }
+  else { entetes = matrice[0].map(function(x, i){ return 'Colonne ' + (i + 1); }); corps = matrice; }
+
+  var largeur = Math.max.apply(null, matrice.map(function(l){ return l.length; }));
+  var cols = [];
+  for (var i = 0; i < largeur; i++) {
+    var brut = entetes[i];
+    var nom = (brut == null || String(brut).trim() === '') ? ('Colonne ' + (i + 1)) : String(brut).trim();
+    var apercu = corps.slice(0, 60).map(function(l){ return l[i]; });
+    var t = typeDevine(nom, apercu);
+    var c = { nom: nom, type: t, largeur: P.LARGEUR_DEF, options: null };
+    if (t === 'liste') {
+      var vals = {};
+      corps.forEach(function(l){ var v = String(l[i] == null ? '' : l[i]).trim(); if (v) { vals[v] = true; } });
+      var liste = Object.keys(vals);
+      /* Au-dela de 30 valeurs distinctes ce n'est plus une liste de choix. */
+      if (liste.length && liste.length <= 30) { c.options = liste; } else { c.type = 'texte'; }
+    }
+    cols.push(c);
+  }
+
+  var f = P.creerFeuille(nomFeuille, cols, 0, null, null);
+  corps.forEach(function(l){
+    var r = { id: P.ident('r'), c: {}, g: {} };
+    f.cols.forEach(function(col, j){
+      var v = l[j];
+      if (v != null && String(v).trim() !== '') { r.c[col.id] = String(v).trim(); }
+    });
+    f.rows.push(r);
+  });
+  P.marquerSale();
+  P.ouvrir(f.id);
+  toast(f.rows.length + ' lignes et ' + f.cols.length + ' colonnes importées.', true);
+}
+
+function fenetreImport(){
+  P.ouvrirModale('<h2>Importer des données</h2>' +
+    '<p class="sub">Un classeur Excel, un fichier CSV, ou un collage direct depuis Excel ou Google Sheets. Les types de colonne sont devinés, vous pourrez les corriger.</p>' +
+    '<div class="frow"><label for="fFichier">Fichier Excel (.xlsx) ou CSV</label>' +
+    '<input id="fFichier" type="file" accept=".xlsx,.csv,text/csv,text/plain"></div>' +
+    '<div class="frow"><label for="fColle">Ou collez vos données ici</label>' +
+    '<textarea id="fColle" placeholder="Entreprise&#9;Téléphone&#9;Ville&#10;Exemple SARL&#9;+212600000000&#9;Casablanca"></textarea></div>' +
+    '<div class="frow"><label style="display:flex;gap:8px;align-items:center;color:var(--fg)">' +
+    '<input type="checkbox" id="fEnt" checked style="width:auto"> La première ligne contient les noms de colonnes</label></div>' +
+    '<p class="hint" style="margin-bottom:0">Les classeurs .xlsx sont lus directement : première feuille, valeurs déjà calculées, dates reconnues. Les .xls d’avant 2007 ne sont pas lus — enregistrez-les en .xlsx ou en CSV UTF-8.</p>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Importer</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      el('fFichier').addEventListener('change', function(){
+        var fi = this.files && this.files[0];
+        if (!fi) { return; }
+        /* Un XLSX est une archive binaire : le lire en texte ne donnerait
+           rien d'exploitable. Il part au lecteur de classeur sans passer
+           par la zone de collage. */
+        if (/\.xlsx$/i.test(fi.name)) {
+          el('fColle').value = '';
+          el('fColle').placeholder = 'Classeur choisi : ' + fi.name;
+          return;
+        }
+        var fr = new FileReader();
+        fr.onload = function(){ el('fColle').value = String(fr.result || ''); };
+        fr.readAsText(fi, 'UTF-8');
+      });
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var ent = el('fEnt').checked;
+        var fi = el('fFichier').files && el('fFichier').files[0];
+        if (fi && /\.xlsx$/i.test(fi.name)) {
+          P.fermerModale();
+          P.importerXLSX(fi, ent);
+          return;
+        }
+        var txt = el('fColle').value;
+        if (!txt.trim()) { toast('Aucune donnée à importer.'); return; }
+        var nom = fi ? fi.name.replace(/\.[^.]+$/, '') : 'Import';
+        P.fermerModale();
+        importerTableau(lireCSV(txt, separateurProbable(txt)), nom, ent);
+      });
+    });
+}
+
+/* =====================================================================
+   6. EXPORT
+   ===================================================================== */
+
+function telecharger(nom, contenu, mime){
+  var b = new Blob([contenu], { type: mime });
+  var u = URL.createObjectURL(b);
+  var a = document.createElement('a');
+  a.href = u; a.download = nom;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(u); }, 400);
+}
+
+function nomFichier(ext){
+  var f = P.actif();
+  var base = sansAccent(f.nom).replace(/[^A-Za-z0-9 \-]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+  var d = new Date();
+  var j = ('0' + d.getDate()).slice(-2), mo = ('0' + (d.getMonth() + 1)).slice(-2);
+  return (base || 'prospection') + '-' + d.getFullYear() + mo + j + '.' + ext;
+}
+
+function exporterCSV(){
+  var f = P.actif();
+  var cols = f.cols.filter(function(c){ return !c.cache; });
+  var lignes = P.vue();
+  function q(v){
+    var s = String(v == null ? '' : v);
+    return /[";\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  var out = [cols.map(function(c){ return q(c.nom); }).join(';')];
+  lignes.forEach(function(l){ out.push(cols.map(function(c){ return q(l.c[c.id]); }).join(';')); });
+  /* BOM et point-virgule : c'est ce qu'Excel en francais ouvre sans
+     passer par l'assistant d'importation. */
+  telecharger(nomFichier('csv'), '﻿' + out.join('\r\n'), 'text/csv;charset=utf-8');
+  toast(lignes.length + ' lignes exportées en CSV.', true);
+}
+
+/* ---- ecriture XLSX sans bibliotheque -------------------------------- */
+
+var TABLE_CRC = (function(){
+  var t = new Uint32Array(256);
+  for (var n = 0; n < 256; n++) {
+    var c = n;
+    for (var k = 0; k < 8; k++) { c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); }
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+
+function crc32(u8){
+  var c = 0xFFFFFFFF;
+  for (var i = 0; i < u8.length; i++) { c = TABLE_CRC[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); }
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+function utf8(s){ return new TextEncoder().encode(s); }
+
+/* ZIP sans compression (methode 0). Excel l'accepte, et cela evite
+   d'embarquer un compresseur pour quelques dizaines de kilo-octets. */
+function zip(fichiers){
+  var locales = [], central = [], decalage = 0;
+  fichiers.forEach(function(f){
+    var nom = utf8(f.nom), data = utf8(f.contenu), c = crc32(data);
+
+    var lh = new Uint8Array(30 + nom.length);
+    var dv = new DataView(lh.buffer);
+    dv.setUint32(0, 0x04034b50, true);
+    dv.setUint16(4, 20, true); dv.setUint16(6, 0x0800, true); dv.setUint16(8, 0, true);
+    dv.setUint16(10, 0, true); dv.setUint16(12, 0, true);
+    dv.setUint32(14, c, true); dv.setUint32(18, data.length, true); dv.setUint32(22, data.length, true);
+    dv.setUint16(26, nom.length, true); dv.setUint16(28, 0, true);
+    lh.set(nom, 30);
+    locales.push(lh, data);
+
+    var ch = new Uint8Array(46 + nom.length);
+    var dc = new DataView(ch.buffer);
+    dc.setUint32(0, 0x02014b50, true);
+    dc.setUint16(4, 20, true); dc.setUint16(6, 20, true); dc.setUint16(8, 0x0800, true);
+    dc.setUint16(10, 0, true); dc.setUint16(12, 0, true); dc.setUint16(14, 0, true);
+    dc.setUint32(16, c, true); dc.setUint32(20, data.length, true); dc.setUint32(24, data.length, true);
+    dc.setUint16(28, nom.length, true); dc.setUint16(30, 0, true); dc.setUint16(32, 0, true);
+    dc.setUint16(34, 0, true); dc.setUint16(36, 0, true); dc.setUint32(38, 0, true);
+    dc.setUint32(42, decalage, true);
+    ch.set(nom, 46);
+    central.push(ch);
+    decalage += lh.length + data.length;
+  });
+
+  var tailleCentral = central.reduce(function(a, b){ return a + b.length; }, 0);
+  var fin = new Uint8Array(22);
+  var df = new DataView(fin.buffer);
+  df.setUint32(0, 0x06054b50, true);
+  df.setUint16(8, fichiers.length, true); df.setUint16(10, fichiers.length, true);
+  df.setUint32(12, tailleCentral, true); df.setUint32(16, decalage, true);
+
+  var out = new Uint8Array(decalage + tailleCentral + 22), p = 0;
+  locales.forEach(function(x){ out.set(x, p); p += x.length; });
+  central.forEach(function(x){ out.set(x, p); p += x.length; });
+  out.set(fin, p);
+  return out;
+}
+
+function xml(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&apos;')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
+}
+
+function lettreCol(n){
+  var s = '';
+  n = n + 1;
+  while (n > 0) { var r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); }
+  return s;
+}
+
+/* Excel compte les jours depuis le 30/12/1899. */
+function serieDate(iso){
+  var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '').trim());
+  if (!m) { return null; }
+  return Math.round((Date.UTC(+m[1], +m[2] - 1, +m[3]) - Date.UTC(1899, 11, 30)) / 86400000);
+}
+
+function exporterXLSX(){
+  var f = P.actif();
+  var cols = f.cols.filter(function(c){ return !c.cache; });
+  var lignes = P.vue();
+  if (!cols.length) { toast('Aucune colonne visible à exporter.'); return; }
+
+  var nbLignes = lignes.length + 1;
+  var colFin = lettreCol(cols.length - 1);
+
+  var sx = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<dimension ref="A1:' + colFin + nbLignes + '"/>' +
+    '<sheetViews><sheetView tabSelected="1" workbookViewId="0">' +
+    '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/>' +
+    '</sheetView></sheetViews>' +
+    '<sheetFormatPr defaultRowHeight="15"/><cols>'];
+  cols.forEach(function(c, i){
+    var larg = Math.max(10, Math.min(52, Math.round(c.largeur / 7.2) + 2));
+    sx.push('<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + larg + '" customWidth="1"/>');
+  });
+  sx.push('</cols><sheetData>');
+
+  sx.push('<row r="1" ht="24" customHeight="1">');
+  cols.forEach(function(c, i){
+    sx.push('<c r="' + lettreCol(i) + '1" s="1" t="inlineStr"><is><t>' + xml(c.nom) + '</t></is></c>');
+  });
+  sx.push('</row>');
+
+  lignes.forEach(function(l, ri){
+    var r = ri + 2;
+    sx.push('<row r="' + r + '">');
+    cols.forEach(function(c, i){
+      var v = l.c[c.id];
+      if (v == null || String(v) === '') { return; }
+      var ref = lettreCol(i) + r;
+      if (c.type === 'date') {
+        var s = serieDate(v);
+        if (s !== null) { sx.push('<c r="' + ref + '" s="2"><v>' + s + '</v></c>'); return; }
+      }
+      if (c.type === 'nombre') {
+        var n = parseFloat(String(v).replace(/\s/g, '').replace(',', '.'));
+        if (!isNaN(n)) { sx.push('<c r="' + ref + '" s="3"><v>' + n + '</v></c>'); return; }
+      }
+      var style = (c.type === 'long') ? '4' : '0';
+      sx.push('<c r="' + ref + '" s="' + style + '" t="inlineStr"><is><t xml:space="preserve">' + xml(v) + '</t></is></c>');
+    });
+    sx.push('</row>');
+  });
+  sx.push('</sheetData>');
+  sx.push('<autoFilter ref="A1:' + colFin + nbLignes + '"/>');
+
+  var dv = [];
+  cols.forEach(function(c, i){
+    if (c.type !== 'liste' || !c.options || !c.options.length) { return; }
+    var liste = c.options.join(',');
+    /* Excel refuse une liste litterale au-dela de 255 caracteres. */
+    if (liste.length > 250) { return; }
+    var plage = lettreCol(i) + '2:' + lettreCol(i) + Math.max(nbLignes, 1000);
+    dv.push('<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="0" sqref="' + plage + '">' +
+      '<formula1>"' + xml(liste) + '"</formula1></dataValidation>');
+  });
+  if (dv.length) { sx.push('<dataValidations count="' + dv.length + '">' + dv.join('') + '</dataValidations>'); }
+  sx.push('</worksheet>');
+
+  var styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<numFmts count="1"><numFmt numFmtId="164" formatCode="dd/mm/yyyy"/></numFmts>' +
+    '<fonts count="2">' +
+    '<font><sz val="11"/><name val="Calibri"/></font>' +
+    '<font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font>' +
+    '</fonts>' +
+    '<fills count="3"><fill><patternFill patternType="none"/></fill>' +
+    '<fill><patternFill patternType="gray125"/></fill>' +
+    '<fill><patternFill patternType="solid"><fgColor rgb="FFF04A26"/><bgColor indexed="64"/></patternFill></fill></fills>' +
+    '<borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>' +
+    '<border><left/><right/><top/><bottom style="thin"><color rgb="FFBFBFBF"/></bottom><diagonal/></border></borders>' +
+    '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+    '<cellXfs count="5">' +
+    '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>' +
+    '<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf>' +
+    '<xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>' +
+    '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>' +
+    '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf>' +
+    '</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+
+  var onglet = sansAccent(f.nom).replace(/[\\\/\?\*\[\]:]/g, '').slice(0, 28) || 'Prospection';
+
+  var fichiers = [
+    { nom: '[Content_Types].xml', contenu: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+      '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+      '<Default Extension="xml" ContentType="application/xml"/>' +
+      '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+      '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>' +
+      '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+      '</Types>' },
+    { nom: '_rels/.rels', contenu: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
+      '</Relationships>' },
+    { nom: 'xl/workbook.xml', contenu: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" ' +
+      'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+      '<sheets><sheet name="' + xml(onglet) + '" sheetId="1" r:id="rId1"/></sheets></workbook>' },
+    { nom: 'xl/_rels/workbook.xml.rels', contenu: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>' +
+      '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
+      '</Relationships>' },
+    { nom: 'xl/styles.xml', contenu: styles },
+    { nom: 'xl/worksheets/sheet1.xml', contenu: sx.join('') }
+  ];
+
+  telecharger(nomFichier('xlsx'), zip(fichiers),
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  toast(lignes.length + ' lignes exportées en Excel, en-têtes et filtres compris.', true);
+}
+
+function menuExport(x, y){
+  if (!P.actif()) { toast('Ouvrez une feuille d’abord.'); return; }
+  P.ouvrirMenu(
+    '<div class="mtitle">Exporter ce qui est affiché</div>' +
+    '<button data-x="xlsx">Excel (.xlsx) mis en forme</button>' +
+    '<button data-x="csv">CSV pour Excel</button>' +
+    '<button data-x="pdf">PDF prêt à imprimer</button>' +
+    '<hr><button data-x="json">Sauvegarde complète (.json)</button>',
+    x, y, function(m){
+      m.querySelector('[data-x="xlsx"]').addEventListener('click', function(){ P.fermerMenu(); exporterXLSX(); });
+      m.querySelector('[data-x="csv"]').addEventListener('click', function(){ P.fermerMenu(); exporterCSV(); });
+      m.querySelector('[data-x="pdf"]').addEventListener('click', function(){ P.fermerMenu(); P.exporterPDF(); });
+      m.querySelector('[data-x="json"]').addEventListener('click', function(){
+        P.fermerMenu();
+        telecharger('prospection-sauvegarde.json', JSON.stringify(P.DB), 'application/json');
+        toast('Sauvegarde complète téléchargée.', true);
+      });
+    });
+}
+
+/* =====================================================================
+   7. SELECTION, CLAVIER, PRESSE-PAPIERS
+   ===================================================================== */
+
+var enTrain = false;
+
+function brancherGrille(){
+  var wrap = el('gridWrap');
+
+  wrap.addEventListener('mousedown', function(ev){
+    var menu = ev.target.closest('[data-colmenu]');
+    if (menu) {
+      ev.preventDefault(); ev.stopPropagation();
+      var rm = menu.getBoundingClientRect();
+      menuColonne(menu.getAttribute('data-colmenu'), rm.left, rm.bottom + 4);
+      return;
+    }
+    var poignee = ev.target.closest('[data-rsz]');
+    if (poignee) { demarrerRedim(ev, poignee.getAttribute('data-rsz')); return; }
+
+    var td = ev.target.closest('td.cell');
+    if (!td) { return; }
+    var ri = +td.getAttribute('data-ri'), ci = +td.getAttribute('data-ci');
+    if (ev.shiftKey && P.sel) { P.sel.r2 = ri; P.sel.c2 = ci; }
+    else { P.sel = { r1: ri, c1: ci, r2: ri, c2: ci }; enTrain = true; }
+    P.peindreSelection(); P.stats();
+  });
+
+  wrap.addEventListener('mousemove', function(ev){
+    if (!enTrain || !P.sel) { return; }
+    var td = ev.target.closest('td.cell');
+    if (!td) { return; }
+    P.sel.r2 = +td.getAttribute('data-ri');
+    P.sel.c2 = +td.getAttribute('data-ci');
+    P.peindreSelection(); P.stats();
+  });
+
+  document.addEventListener('mouseup', function(){ enTrain = false; });
+
+  wrap.addEventListener('dblclick', function(ev){
+    var td = ev.target.closest('td.cell');
+    if (!td) { return; }
+    P.ouvrirEdition(+td.getAttribute('data-ri'), +td.getAttribute('data-ci'), null);
+  });
+
+  /* reorganisation des colonnes par glisser-deposer */
+  var depart = null;
+  wrap.addEventListener('dragstart', function(ev){
+    var h = ev.target.closest('.hcell');
+    if (!h) { return; }
+    depart = +h.getAttribute('data-ci');
+    h.classList.add('dragging');
+    ev.dataTransfer.effectAllowed = 'move';
+    try { ev.dataTransfer.setData('text/plain', String(depart)); } catch (e) { /* Firefox exige une donnee */ }
+  });
+  wrap.addEventListener('dragover', function(ev){
+    var th = ev.target.closest('th[data-ci]');
+    if (!th || depart === null) { return; }
+    ev.preventDefault();
+    wrap.querySelectorAll('th.drop-target').forEach(function(x){ x.classList.remove('drop-target'); });
+    th.classList.add('drop-target');
+  });
+  wrap.addEventListener('drop', function(ev){
+    var th = ev.target.closest('th[data-ci]');
+    if (!th || depart === null) { return; }
+    ev.preventDefault();
+    var arrivee = +th.getAttribute('data-ci');
+    if (arrivee !== depart) {
+      var f = P.actif();
+      var vis = P.colonnesVisibles();
+      var cd = vis[depart], ca = vis[arrivee];
+      if (cd && ca) {
+        P.instantane();
+        f.cols.splice(f.cols.indexOf(cd), 1);
+        f.cols.splice(f.cols.indexOf(ca) + (arrivee > depart ? 1 : 0), 0, cd);
+        P.marquerSale();
+      }
+    }
+    depart = null;
+    P.dessiner();
+  });
+  wrap.addEventListener('dragend', function(){
+    depart = null;
+    wrap.querySelectorAll('.dragging').forEach(function(x){ x.classList.remove('dragging'); });
+    wrap.querySelectorAll('th.drop-target').forEach(function(x){ x.classList.remove('drop-target'); });
+  });
+}
+
+function demarrerRedim(ev, colId){
+  ev.preventDefault();
+  var f = P.actif();
+  var col = f.cols.filter(function(c){ return c.id === colId; })[0];
+  if (!col) { return; }
+  var x0 = ev.clientX, l0 = col.largeur;
+  var poignee = el('gridWrap').querySelector('[data-rsz="' + colId + '"]');
+  var th = poignee ? poignee.closest('th') : null;
+  function bouge(e){
+    var l = Math.max(64, Math.min(560, l0 + (e.clientX - x0)));
+    col.largeur = l;
+    if (th) { th.style.width = l + 'px'; }
+  }
+  function fin(){
+    document.removeEventListener('mousemove', bouge);
+    document.removeEventListener('mouseup', fin);
+    P.marquerSale(); P.dessiner();
+  }
+  document.addEventListener('mousemove', bouge);
+  document.addEventListener('mouseup', fin);
+}
+
+function brancherClavier(){
+  document.addEventListener('keydown', function(ev){
+    var c = ev.target;
+    var saisie = c && (c.tagName === 'INPUT' || c.tagName === 'TEXTAREA' || c.tagName === 'SELECT');
+    var k = (ev.key || '').toLowerCase();
+
+    if ((ev.ctrlKey || ev.metaKey) && k === 'z' && !ev.shiftKey && !saisie) { ev.preventDefault(); P.annuler(); return; }
+    if ((ev.ctrlKey || ev.metaKey) && (k === 'y' || (ev.shiftKey && k === 'z')) && !saisie) { ev.preventDefault(); P.retablir(); return; }
+    if (ev.key === 'Escape' && !saisie) { P.fermerMenu(); P.fermerModale(); return; }
+    if (saisie || !P.sel || !P.actif()) { return; }
+
+    if ((ev.ctrlKey || ev.metaKey) && k === 'a') {
+      ev.preventDefault();
+      var nl = P.vue().length, nc = P.colonnesVisibles().length;
+      P.sel = { r1: 0, c1: 0, r2: Math.max(0, nl - 1), c2: Math.max(0, nc - 1) };
+      P.peindreSelection(); P.stats(); return;
+    }
+    if ((ev.ctrlKey || ev.metaKey) && k === 'd') { ev.preventDefault(); remplirVersLeBas(); return; }
+    if ((ev.ctrlKey || ev.metaKey) && k === 'c') { ev.preventDefault(); copier(); return; }
+    if (ev.ctrlKey || ev.metaKey || ev.altKey) { return; }
+
+    if (ev.key === 'ArrowUp')    { ev.preventDefault(); P.bouger(-1, 0, ev.shiftKey); return; }
+    if (ev.key === 'ArrowDown')  { ev.preventDefault(); P.bouger(1, 0, ev.shiftKey); return; }
+    if (ev.key === 'ArrowLeft')  { ev.preventDefault(); P.bouger(0, -1, ev.shiftKey); return; }
+    if (ev.key === 'ArrowRight') { ev.preventDefault(); P.bouger(0, 1, ev.shiftKey); return; }
+    if (ev.key === 'Tab')        { ev.preventDefault(); P.bouger(0, ev.shiftKey ? -1 : 1, false); return; }
+    if (ev.key === 'Enter' || ev.key === 'F2') { ev.preventDefault(); P.ouvrirEdition(P.sel.r1, P.sel.c1, null); return; }
+    if (ev.key === 'Delete' || ev.key === 'Backspace') { ev.preventDefault(); viderSelection(); return; }
+    if (ev.key.length === 1) { ev.preventDefault(); P.ouvrirEdition(P.sel.r1, P.sel.c1, ev.key); }
+  });
+
+  document.addEventListener('paste', function(ev){
+    if (!P.sel || !P.actif()) { return; }
+    var c = ev.target;
+    if (c && (c.tagName === 'INPUT' || c.tagName === 'TEXTAREA')) { return; }
+    var t = (ev.clipboardData || window.clipboardData).getData('text');
+    if (!t) { return; }
+    ev.preventDefault();
+    coller(t);
+  });
+}
+
+function viderSelection(){
+  var b = P.bornes();
+  if (!b) { return; }
+  var f = P.actif(), lignes = P.vue(), cols = P.colonnesVisibles();
+  P.instantane();
+  for (var r = b.r1; r <= b.r2; r++) {
+    for (var cc = b.c1; cc <= b.c2; cc++) {
+      if (lignes[r] && cols[cc]) {
+        delete lignes[r].c[cols[cc].id];
+        if (lignes[r].g) { delete lignes[r].g[cols[cc].id]; }
+      }
+    }
+  }
+  f.modif = P.maintenant();
+  P.marquerSale(); P.dessiner();
+}
+
+function remplirVersLeBas(){
+  var b = P.bornes();
+  if (!b || b.r2 === b.r1) { toast('Sélectionnez la cellule source puis les lignes à remplir.'); return; }
+  var lignes = P.vue(), cols = P.colonnesVisibles();
+  P.instantane();
+  for (var cc = b.c1; cc <= b.c2; cc++) {
+    var src = (lignes[b.r1] && cols[cc]) ? lignes[b.r1].c[cols[cc].id] : null;
+    for (var r = b.r1 + 1; r <= b.r2; r++) {
+      if (!lignes[r] || !cols[cc]) { continue; }
+      if (src == null || src === '') { delete lignes[r].c[cols[cc].id]; }
+      else { lignes[r].c[cols[cc].id] = src; }
+    }
+  }
+  P.marquerSale(); P.dessiner();
+  toast('Rempli vers le bas.', true);
+}
+
+function copier(){
+  var b = P.bornes();
+  if (!b) { return; }
+  var lignes = P.vue(), cols = P.colonnesVisibles();
+  var out = [];
+  for (var r = b.r1; r <= b.r2; r++) {
+    var l = [];
+    for (var cc = b.c1; cc <= b.c2; cc++) {
+      l.push((lignes[r] && cols[cc]) ? String(lignes[r].c[cols[cc].id] || '') : '');
+    }
+    out.push(l.join('\t'));
+  }
+  var txt = out.join('\n');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function(){ toast('Copié.', true); }, function(){ copieSecours(txt); });
+  } else { copieSecours(txt); }
+}
+
+function copieSecours(txt){
+  var ta = document.createElement('textarea');
+  ta.value = txt;
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); toast('Copié.', true); } catch (e) { toast('La copie a échoué.'); }
+  document.body.removeChild(ta);
+}
+
+function coller(texte){
+  var f = P.actif(), b = P.bornes();
+  if (!b) { return; }
+  var mat = lireCSV(texte, separateurProbable(texte));
+  if (!mat.length) { return; }
+  var cols = P.colonnesVisibles(), lignes = P.vue();
+  P.instantane();
+
+  /* On cree les lignes manquantes : coller 300 contacts dans une feuille
+     de 8 lignes doit marcher sans preparation. */
+  var besoin = b.r1 + mat.length - lignes.length;
+  for (var i = 0; i < besoin; i++) { f.rows.push({ id: P.ident('r'), c: {}, g: {} }); }
+  lignes = P.vue();
+
+  var ecrites = 0;
+  mat.forEach(function(l, ri){
+    var cible = lignes[b.r1 + ri];
+    if (!cible) { return; }
+    l.forEach(function(v, ci){
+      var col = cols[b.c1 + ci];
+      if (!col) { return; }
+      var s = String(v == null ? '' : v).trim();
+      if (s === '') { delete cible.c[col.id]; }
+      else { cible.c[col.id] = s; ecrites++; }
+      if (cible.g) { delete cible.g[col.id]; }
+    });
+  });
+  f.modif = P.maintenant();
+  P.marquerSale(); P.dessiner();
+  toast(ecrites + ' cellules collées sur ' + mat.length + ' lignes.', true);
+}
+
+/* =====================================================================
+   8. DEMARRAGE
+   ===================================================================== */
+
+function brancherBarre(){
+  function surClic(id, fn){ var b = el(id); if (b) { b.addEventListener('click', fn); } }
+
+  surClic('btnNewSheet', modeles);
+  surClic('btnCol', function(){ nouvelleColonne(null); });
+  surClic('btnUndo', P.annuler);
+  surClic('btnRedo', P.retablir);
+  surClic('btnTrouver', function(){ P.trouverEtablissements(); });
+  surClic('btnImport', fenetreImport);
+
+  surClic('btnEnrich', function(){ var r = this.getBoundingClientRect(); menuEnrichir(r.left, r.bottom + 4); });
+  surClic('btnTransform', function(){ var r = this.getBoundingClientRect(); menuTransformer(r.left, r.bottom + 4); });
+  surClic('btnExport', function(){ var r = this.getBoundingClientRect(); menuExport(r.right - 230, r.bottom + 4); });
+
+  surClic('btnAddRow', function(){
+    var f = P.actif();
+    if (!f) { modeles(); return; }
+    P.instantane();
+    f.rows.push({ id: P.ident('r'), c: {}, g: {} });
+    P.rendu = Math.max(P.rendu, f.rows.length);
+    P.marquerSale(); P.dessiner();
+  });
+
+  surClic('btnWipe', function(){
+    P.confirmer('Tout effacer ?',
+      'Les ' + P.DB.ordre.length + ' feuilles enregistrées dans ce navigateur seront supprimées. Exportez avant si vous voulez les garder. Cette action ne peut pas être annulée.',
+      function(){
+        P.DB = P.neuf();
+        try { localStorage.removeItem(P.CLE); } catch (e) { /* stockage indisponible */ }
+        P.sel = null;
+        P.dessiner(); P.arbre(); P.filiation(); P.infoStockage();
+        var n = el('sheetName'); if (n) { n.value = ''; }
+        toast('Tout a été effacé.', true);
+      });
+  });
+
+  var nom = el('sheetName');
+  if (nom) {
+    nom.addEventListener('change', function(){
+      var f = P.actif();
+      if (!f) { return; }
+      var v = nom.value.trim();
+      if (!v) { nom.value = f.nom; return; }
+      P.instantane(); f.nom = v; P.marquerSale(); P.arbre(); P.filiation();
+    });
+  }
+
+  var s = el('search');
+  if (s) {
+    var tmr = null;
+    s.addEventListener('input', function(){
+      if (tmr) { clearTimeout(tmr); }
+      tmr = setTimeout(function(){
+        P.recherche = s.value.trim();
+        P.sel = null; P.rendu = P.PAGE; P.dessiner();
+      }, 160);
+    });
+  }
+
+  var tog = el('btnSideToggle'), side = el('proSide'), scrim = el('proScrim');
+  if (tog && side) {
+    tog.addEventListener('click', function(){
+      var o = side.classList.toggle('open');
+      tog.setAttribute('aria-expanded', String(o));
+      if (scrim) { scrim.hidden = !o; scrim.classList.toggle('open', o); }
+    });
+  }
+  if (scrim) { scrim.addEventListener('click', P.fermerLateral); }
+}
+
+/* app3.js appelle ces trois-la : privees a ce module, elles lui seraient
+   invisibles et l'import XLSX comme l'export PDF echoueraient en silence. */
+P.importerTableau = importerTableau;
+P.telecharger = telecharger;
+P.nomFichier = nomFichier;
+
+function demarrer(){
+  P.DB = P.charger();
+  brancherBarre();
+  brancherGrille();
+  brancherClavier();
+
+  if (P.DB.actif && P.DB.sheets[P.DB.actif]) { P.ouvrir(P.DB.actif); }
+  else if (P.DB.ordre.length) { P.ouvrir(P.DB.ordre[0]); }
+  else { P.dessiner(); P.arbre(); P.filiation(); }
+
+  P.infoStockage();
+  P.majHistBtns();
+
+  window.addEventListener('beforeunload', function(){ P.sauver(); });
+}
+
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', demarrer); }
+else { demarrer(); }
+
+})();
+
+/* =====================================================================
+   Fiches de prospection — import XLSX, export PDF, transformations
+   avancees et relance d'une transformation.
+   Consomme window.PROSPECT et l'etend.
+   ===================================================================== */
+(function(){
+'use strict';
+
+var P = window.PROSPECT;
+var el = P.el, ech = P.ech, toast = P.toast;
+
+function sansAccent(s){
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+/* =====================================================================
+   1. LECTURE D'UN FICHIER XLSX
+   ===================================================================== */
+
+/* Le repertoire central est la seule source fiable des tailles : un en-tete
+   local peut les laisser a zero quand le fichier porte un descripteur. */
+function entreesZip(buf){
+  var dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+  var fin = -1;
+  for (var i = buf.length - 22; i >= 0 && i > buf.length - 66000; i--) {
+    if (dv.getUint32(i, true) === 0x06054b50) { fin = i; break; }
+  }
+  if (fin < 0) { throw new Error('Ce fichier ne ressemble pas à un classeur XLSX.'); }
+  var nb = dv.getUint16(fin + 10, true);
+  var p = dv.getUint32(fin + 16, true);
+  var out = [];
+  for (var k = 0; k < nb; k++) {
+    if (p + 46 > buf.length || dv.getUint32(p, true) !== 0x02014b50) { break; }
+    var methode = dv.getUint16(p + 10, true);
+    var compresse = dv.getUint32(p + 20, true);
+    var nl = dv.getUint16(p + 28, true);
+    var xl = dv.getUint16(p + 30, true);
+    var cl = dv.getUint16(p + 32, true);
+    var local = dv.getUint32(p + 42, true);
+    var nom = new TextDecoder().decode(buf.slice(p + 46, p + 46 + nl));
+    var nlLocal = dv.getUint16(local + 26, true);
+    var xlLocal = dv.getUint16(local + 28, true);
+    var debut = local + 30 + nlLocal + xlLocal;
+    out.push({ nom: nom, methode: methode, data: buf.slice(debut, debut + compresse) });
+    p += 46 + nl + xl + cl;
+  }
+  return out;
+}
+
+async function dezipper(buf){
+  var parts = {};
+  var entrees = entreesZip(buf);
+  for (var i = 0; i < entrees.length; i++) {
+    var e = entrees[i];
+    if (!/\.(xml|rels)$/i.test(e.nom)) { continue; }
+    if (e.methode === 0) {
+      parts[e.nom] = new TextDecoder('utf-8').decode(e.data);
+    } else if (e.methode === 8) {
+      if (typeof DecompressionStream === 'undefined') {
+        throw new Error('Ce navigateur ne sait pas décompresser le fichier. Exportez en CSV depuis Excel.');
+      }
+      var flux = new Blob([e.data]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+      parts[e.nom] = new TextDecoder('utf-8').decode(new Uint8Array(await new Response(flux).arrayBuffer()));
+    }
+  }
+  return parts;
+}
+
+function doc(txt){
+  var d = new DOMParser().parseFromString(txt, 'application/xml');
+  if (d.querySelector('parsererror')) { throw new Error('Le contenu du classeur est illisible.'); }
+  return d;
+}
+
+/* Un style porte une date si son format est un format de date connu
+   d'Excel, ou un format maison qui contient un jour, un mois ou une annee. */
+function stylesDeDate(parts){
+  var out = {};
+  if (!parts['xl/styles.xml']) { return out; }
+  var d = doc(parts['xl/styles.xml']);
+  var maison = {};
+  Array.prototype.forEach.call(d.getElementsByTagName('numFmt'), function(n){
+    maison[n.getAttribute('numFmtId')] = n.getAttribute('formatCode') || '';
+  });
+  var xfs = d.getElementsByTagName('cellXfs')[0];
+  if (!xfs) { return out; }
+  Array.prototype.forEach.call(xfs.getElementsByTagName('xf'), function(xf, i){
+    var id = parseInt(xf.getAttribute('numFmtId') || '0', 10);
+    var integre = (id >= 14 && id <= 22) || (id >= 45 && id <= 47);
+    var code = maison[String(id)] || '';
+    if (integre || /[dmy]/i.test(code)) { out[i] = true; }
+  });
+  return out;
+}
+
+function serieVersISO(n){
+  var j = Math.floor(n);
+  if (j < 1 || j > 2958465) { return null; }
+  var d = new Date(Date.UTC(1899, 11, 30) + j * 86400000);
+  return d.getUTCFullYear() + '-' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + d.getUTCDate()).slice(-2);
+}
+
+function indiceColonne(ref){
+  var m = /^([A-Z]+)/.exec(String(ref || '').toUpperCase());
+  if (!m) { return 0; }
+  var n = 0;
+  for (var i = 0; i < m[1].length; i++) { n = n * 26 + (m[1].charCodeAt(i) - 64); }
+  return n - 1;
+}
+
+async function lireClasseur(fichier){
+  var parts = await dezipper(new Uint8Array(await fichier.arrayBuffer()));
+
+  /* La premiere feuille du classeur est celle que l'utilisateur voit en
+     ouvrant le fichier : c'est celle qu'il s'attend a importer. */
+  var cible = 'xl/worksheets/sheet1.xml';
+  if (parts['xl/workbook.xml'] && parts['xl/_rels/workbook.xml.rels']) {
+    var wb = doc(parts['xl/workbook.xml']);
+    var premiere = wb.getElementsByTagName('sheet')[0];
+    if (premiere) {
+      var rid = premiere.getAttribute('r:id') || premiere.getAttributeNS(
+        'http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id');
+      var rels = doc(parts['xl/_rels/workbook.xml.rels']);
+      Array.prototype.forEach.call(rels.getElementsByTagName('Relationship'), function(r){
+        if (r.getAttribute('Id') === rid) {
+          cible = 'xl/' + r.getAttribute('Target').replace(/^\//, '').replace(/^xl\//, '');
+        }
+      });
+    }
+  }
+  if (!parts[cible]) {
+    var dispo = Object.keys(parts).filter(function(k){ return /^xl\/worksheets\/.*\.xml$/.test(k); });
+    if (!dispo.length) { throw new Error('Aucune feuille de calcul trouvée dans ce fichier.'); }
+    cible = dispo[0];
+  }
+
+  var chaines = [];
+  if (parts['xl/sharedStrings.xml']) {
+    var ss = doc(parts['xl/sharedStrings.xml']);
+    Array.prototype.forEach.call(ss.getElementsByTagName('si'), function(si){
+      var t = '';
+      Array.prototype.forEach.call(si.getElementsByTagName('t'), function(x){ t += x.textContent; });
+      chaines.push(t);
+    });
+  }
+
+  var dates = stylesDeDate(parts);
+  var fe = doc(parts[cible]);
+  var matrice = [];
+
+  Array.prototype.forEach.call(fe.getElementsByTagName('row'), function(row){
+    var ligne = [];
+    Array.prototype.forEach.call(row.getElementsByTagName('c'), function(c){
+      var j = indiceColonne(c.getAttribute('r'));
+      var t = c.getAttribute('t');
+      var s = parseInt(c.getAttribute('s') || '-1', 10);
+      var v = '';
+      if (t === 'inlineStr') {
+        var is = c.getElementsByTagName('is')[0];
+        if (is) { Array.prototype.forEach.call(is.getElementsByTagName('t'), function(x){ v += x.textContent; }); }
+      } else {
+        var vn = c.getElementsByTagName('v')[0];
+        var brut = vn ? vn.textContent : '';
+        if (t === 's') { v = chaines[parseInt(brut, 10)] || ''; }
+        else if (brut !== '' && dates[s] && !isNaN(parseFloat(brut))) { v = serieVersISO(parseFloat(brut)) || brut; }
+        else { v = brut; }
+      }
+      ligne[j] = v;
+    });
+    if (ligne.length) { matrice.push(ligne); }
+  });
+
+  for (var i = 0; i < matrice.length; i++) {
+    for (var j = 0; j < matrice[i].length; j++) { if (matrice[i][j] == null) { matrice[i][j] = ''; } }
+  }
+  return matrice.filter(function(l){ return l.some(function(c){ return String(c).trim() !== ''; }); });
+}
+
+P.importerXLSX = function(fichier, avecEntetes){
+  toast('Lecture du classeur…');
+  lireClasseur(fichier).then(function(matrice){
+    if (!matrice.length) { toast('Le classeur ne contient aucune donnée.'); return; }
+    P.importerTableau(matrice, fichier.name.replace(/\.[^.]+$/, ''), avecEntetes);
+  }, function(e){
+    toast(String(e && e.message ? e.message : e));
+  });
+};
+
+/* =====================================================================
+   2. EXPORT PDF
+   ===================================================================== */
+
+/* Les polices de base d'un PDF utilisent WinAnsi : les accents francais y
+   sont, le reste est translittere plutot que rendu par un carre vide. */
+function winAnsi(s){
+  var t = String(s == null ? '' : s)
+    .replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
+    .replace(/[–—]/g, '-').replace(/…/g, '...')
+    .replace(/€/g, '\x80').replace(/ /g, ' ');
+  var out = '';
+  for (var i = 0; i < t.length; i++) {
+    var c = t.charCodeAt(i);
+    if (c === 10 || c === 13 || c === 9) { out += ' '; }
+    else if (c < 256) { out += t.charAt(i); }
+    else { out += (sansAccent(t.charAt(i)).charAt(0) || '?'); }
+  }
+  return out;
+}
+
+function echappePdf(s){ return s.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)'); }
+
+/* Largeur approchee d'Helvetica : suffisante pour tronquer sans deborder. */
+function largeurTexte(s, taille){
+  var l = 0;
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charAt(i);
+    l += /[ijltfI.,:;'`|!\[\]()]/.test(c) ? 0.30 : /[mwMW@]/.test(c) ? 0.85 : /[A-Z0-9]/.test(c) ? 0.63 : 0.52;
+  }
+  return l * taille;
+}
+
+function tronquer(s, largeurMax, taille){
+  if (largeurTexte(s, taille) <= largeurMax) { return s; }
+  var t = s;
+  while (t.length > 1 && largeurTexte(t + '...', taille) > largeurMax) { t = t.slice(0, -1); }
+  return t + '...';
+}
+
+P.exporterPDF = function(){
+  var f = P.actif();
+  if (!f) { toast('Ouvrez une feuille d’abord.'); return; }
+  var cols = f.cols.filter(function(c){ return !c.cache; });
+  var lignes = P.vue();
+  if (!cols.length) { toast('Aucune colonne visible à exporter.'); return; }
+
+  var L = 842, H = 595, M = 28;            /* A4 paysage, en points */
+  var utile = L - M * 2;
+  var tTitre = 13, tEntete = 7.5, tCell = 7.5;
+  var hLigne = 15, hEntete = 18;
+
+  var total = cols.reduce(function(a, c){ return a + c.largeur; }, 0) || 1;
+  var largeurs = cols.map(function(c){ return Math.max(42, c.largeur / total * utile); });
+  var somme = largeurs.reduce(function(a, b){ return a + b; }, 0);
+  largeurs = largeurs.map(function(w){ return w / somme * utile; });
+
+  var hautTable = H - M - 34;
+  var basTable = M + 18;
+  var parPage = Math.max(1, Math.floor((hautTable - hEntete - basTable) / hLigne));
+  var nbPages = Math.max(1, Math.ceil(lignes.length / parPage));
+
+  var d = new Date();
+  var dateFr = ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear();
+
+  function page(indice){
+    var s = [];
+    var bloc = lignes.slice(indice * parPage, indice * parPage + parPage);
+
+    s.push('BT /F2 ' + tTitre + ' Tf 0.09 0.09 0.11 rg 1 0 0 1 ' + M + ' ' + (H - M - 4) + ' Tm (' +
+      echappePdf(winAnsi(f.nom)) + ') Tj ET');
+    s.push('BT /F1 8 Tf 0.45 0.45 0.47 rg 1 0 0 1 ' + M + ' ' + (H - M - 18) + ' Tm (' +
+      echappePdf(winAnsi(lignes.length + (lignes.length > 1 ? ' lignes' : ' ligne') +
+        '  ·  ' + dateFr + '  ·  Studio Singulier')) + ') Tj ET');
+
+    var y = hautTable - hEntete;
+    s.push('0.941 0.290 0.149 rg ' + M + ' ' + y + ' ' + utile + ' ' + hEntete + ' re f');
+    var x = M;
+    cols.forEach(function(c, i){
+      s.push('BT /F2 ' + tEntete + ' Tf 1 1 1 rg 1 0 0 1 ' + (x + 4) + ' ' + (y + 6) + ' Tm (' +
+        echappePdf(tronquer(winAnsi(c.nom).toUpperCase(), largeurs[i] - 8, tEntete)) + ') Tj ET');
+      x += largeurs[i];
+    });
+
+    bloc.forEach(function(l, ri){
+      var yl = y - (ri + 1) * hLigne;
+      if (ri % 2 === 1) { s.push('0.965 0.961 0.953 rg ' + M + ' ' + yl + ' ' + utile + ' ' + hLigne + ' re f'); }
+      var xx = M;
+      cols.forEach(function(c, i){
+        var v = l.c[c.id];
+        if (v != null && String(v) !== '') {
+          s.push('BT /F1 ' + tCell + ' Tf 0.11 0.11 0.13 rg 1 0 0 1 ' + (xx + 4) + ' ' + (yl + 5) + ' Tm (' +
+            echappePdf(tronquer(winAnsi(v), largeurs[i] - 8, tCell)) + ') Tj ET');
+        }
+        xx += largeurs[i];
+      });
+      s.push('0.85 0.85 0.85 RG 0.4 w ' + M + ' ' + yl + ' m ' + (M + utile) + ' ' + yl + ' l S');
+    });
+
+    var xg = M;
+    var basBloc = y - bloc.length * hLigne;
+    for (var i2 = 0; i2 <= cols.length; i2++) {
+      s.push('0.85 0.85 0.85 RG 0.4 w ' + xg + ' ' + (y + hEntete) + ' m ' + xg + ' ' + basBloc + ' l S');
+      if (i2 < cols.length) { xg += largeurs[i2]; }
+    }
+
+    s.push('BT /F1 7.5 Tf 0.45 0.45 0.47 rg 1 0 0 1 ' + M + ' ' + (M - 2) + ' Tm (' +
+      echappePdf(winAnsi('Page ' + (indice + 1) + ' sur ' + nbPages)) + ') Tj ET');
+    s.push('BT /F1 7.5 Tf 0.45 0.45 0.47 rg 1 0 0 1 ' + (L - M - 110) + ' ' + (M - 2) + ' Tm (' +
+      echappePdf(winAnsi('apexwebstudio.studio')) + ') Tj ET');
+
+    return s.join('\n');
+  }
+
+  var objets = [];
+  objets[1] = '<</Type/Catalog/Pages 2 0 R>>';
+  objets[3] = '<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>';
+  objets[4] = '<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>';
+
+  var kids = [], n = 5;
+  for (var i = 0; i < nbPages; i++) {
+    var flux = page(i);
+    var idPage = n++, idFlux = n++;
+    objets[idPage] = '<</Type/Page/Parent 2 0 R/MediaBox[0 0 ' + L + ' ' + H + ']' +
+      '/Resources<</Font<</F1 3 0 R/F2 4 0 R>>>>/Contents ' + idFlux + ' 0 R>>';
+    objets[idFlux] = '<</Length ' + flux.length + '>>\nstream\n' + flux + '\nendstream';
+    kids.push(idPage + ' 0 R');
+  }
+  objets[2] = '<</Type/Pages/Kids[' + kids.join(' ') + ']/Count ' + nbPages + '>>';
+
+  var sortie = '%PDF-1.4\n';
+  var decalages = [];
+  for (var k = 1; k < n; k++) {
+    decalages[k] = sortie.length;
+    sortie += k + ' 0 obj\n' + objets[k] + '\nendobj\n';
+  }
+  var xref = sortie.length;
+  sortie += 'xref\n0 ' + n + '\n0000000000 65535 f \n';
+  for (var k2 = 1; k2 < n; k2++) { sortie += ('0000000000' + decalages[k2]).slice(-10) + ' 00000 n \n'; }
+  sortie += 'trailer\n<</Size ' + n + '/Root 1 0 R>>\nstartxref\n' + xref + '\n%%EOF';
+
+  /* Un caractere vaut un octet : les decalages de la table xref restent
+     justes, ce qui ne serait pas le cas avec un encodage UTF-8. */
+  var octets = new Uint8Array(sortie.length);
+  for (var b = 0; b < sortie.length; b++) { octets[b] = sortie.charCodeAt(b) & 0xFF; }
+
+  P.telecharger(P.nomFichier('pdf'), octets, 'application/pdf');
+  toast(lignes.length + ' lignes exportées en PDF, ' + nbPages + ' page' + (nbPages > 1 ? 's' : '') + '.', true);
+};
+
+/* =====================================================================
+   3. RECETTES — une transformation rejouable
+   ===================================================================== */
+
+function cloneCols(cols){ return P.copieProfonde(cols); }
+function cloneLigne(l){ return { id: P.ident('r'), c: P.copieProfonde(l.c), g: P.copieProfonde(l.g || {}) }; }
+
+/* Rendre une transformation rejouable impose qu'elle soit une fonction pure
+   de la feuille mere : (mere, recette) donne toujours le meme resultat. */
+P.appliquerRecette = function(mere, r){
+  if (!r) { return null; }
+
+  if (r.type === 'dedup') {
+    var vus = {}, out = [];
+    mere.rows.forEach(function(l){
+      var v = sansAccent(String(l.c[r.colId] || '').trim().toLowerCase());
+      if (!v) { out.push(cloneLigne(l)); return; }
+      if (vus[v]) { return; }
+      vus[v] = true; out.push(cloneLigne(l));
+    });
+    return { cols: cloneCols(mere.cols), rows: out };
+  }
+
+  if (r.type === 'eclater') {
+    var out2 = [];
+    mere.rows.forEach(function(l){
+      var v = String(l.c[r.colId] || '');
+      if (v.indexOf(r.sep) === -1) { out2.push(cloneLigne(l)); return; }
+      v.split(r.sep).map(function(x){ return x.trim(); }).filter(function(x){ return x; })
+        .forEach(function(p){ var nl = cloneLigne(l); nl.c[r.colId] = p; out2.push(nl); });
+    });
+    return { cols: cloneCols(mere.cols), rows: out2 };
+  }
+
+  if (r.type === 'copie') {
+    return { cols: cloneCols(mere.cols), rows: mere.rows.map(cloneLigne) };
+  }
+
+  if (r.type === 'filtreValeur') {
+    return {
+      cols: cloneCols(mere.cols),
+      rows: mere.rows.filter(function(l){
+        return (String(l.c[r.colId] || '').trim() || '(vide)') === r.valeur;
+      }).map(cloneLigne)
+    };
+  }
+
+  if (r.type === 'recap') {
+    var compte = {}, ordre = [];
+    mere.rows.forEach(function(l){
+      var v = String(l.c[r.colId] || '').trim() || '(vide)';
+      if (compte[v] == null) { compte[v] = 0; ordre.push(v); }
+      compte[v]++;
+    });
+    ordre.sort(function(a, b){ return compte[b] - compte[a]; });
+    var colV = { id: P.ident('c'), nom: r.nomCol, type: 'texte', largeur: 230, cache: false, options: null };
+    var colN = { id: P.ident('c'), nom: 'Nombre de lignes', type: 'nombre', largeur: 150, cache: false, options: null };
+    var colP = { id: P.ident('c'), nom: 'Part', type: 'texte', largeur: 100, cache: false, options: null };
+    var tot = mere.rows.length || 1;
+    return {
+      cols: [colV, colN, colP],
+      rows: ordre.map(function(v){
+        var o = { id: P.ident('r'), c: {}, g: {} };
+        o.c[colV.id] = v;
+        o.c[colN.id] = String(compte[v]);
+        o.c[colP.id] = Math.round(compte[v] / tot * 100) + ' %';
+        return o;
+      })
+    };
+  }
+
+  if (r.type === 'fusion') {
+    var source = P.DB.sheets[r.sourceId];
+    if (!source) { return null; }
+    var index = {};
+    source.rows.forEach(function(l){
+      var k = sansAccent(String(l.c[r.cleSource] || '').trim().toLowerCase());
+      /* Premiere occurrence seulement : c'est une jointure, pas un produit. */
+      if (k && index[k] == null) { index[k] = l; }
+    });
+    var cols3 = cloneCols(mere.cols);
+    var ajouts = r.colonnes.map(function(cid){
+      var cs = source.cols.filter(function(c){ return c.id === cid; })[0];
+      if (!cs) { return null; }
+      var nc = { id: P.ident('c'), nom: cs.nom + ' (' + source.nom + ')', type: cs.type,
+                 largeur: cs.largeur, cache: false, options: cs.options ? cs.options.slice() : null };
+      cols3.push(nc);
+      return { de: cid, vers: nc.id };
+    }).filter(function(x){ return x; });
+
+    var trouves = 0;
+    var rows3 = mere.rows.map(function(l){
+      var nl2 = cloneLigne(l);
+      var k2 = sansAccent(String(l.c[r.cleLocale] || '').trim().toLowerCase());
+      var m = k2 ? index[k2] : null;
+      if (m) {
+        trouves++;
+        ajouts.forEach(function(a){ if (m.c[a.de] != null) { nl2.c[a.vers] = m.c[a.de]; } });
+      }
+      return nl2;
+    });
+    return { cols: cols3, rows: rows3,
+      note: trouves + ' ligne' + (trouves > 1 ? 's' : '') + ' enrichie' + (trouves > 1 ? 's' : '') +
+            ' sur ' + mere.rows.length };
+  }
+
+  return null;
+};
+
+function creerEnfant(mere, nom, via, recette, resultat){
+  if (!resultat) { toast('Transformation impossible.'); return null; }
+  var f2 = P.creerFeuille(nom, [], 0, mere.id, via);
+  f2.cols = resultat.cols;
+  f2.rows = resultat.rows;
+  f2.recette = recette;
+  P.marquerSale();
+  P.ouvrir(f2.id);
+  toast(f2.rows.length + ' ligne' + (f2.rows.length > 1 ? 's' : '') + ' dans la nouvelle feuille' +
+    (resultat.note ? ' · ' + resultat.note : '') + '.', true);
+  return f2;
+}
+P.creerEnfant = creerEnfant;
+
+P.relancer = function(){
+  var f = P.actif();
+  if (!f || !f.recette || !f.parent) { return; }
+  var mere = P.DB.sheets[f.parent];
+  if (!mere) { toast('La feuille d’origine n’existe plus.'); return; }
+  P.confirmer('Relancer la transformation ?',
+    'Les lignes de cette feuille seront recalculées depuis « ' + mere.nom + ' » dans son état actuel. Les modifications faites à la main ici seront perdues. Ctrl+Z permet de revenir en arrière.',
+    function(){
+      var r = P.appliquerRecette(mere, f.recette);
+      if (!r) { toast('Cette transformation ne peut pas être rejouée.'); return; }
+      P.instantane();
+      f.cols = r.cols;
+      f.rows = r.rows;
+      P.sel = null;
+      P.marquerSale(); P.dessiner(); P.arbre(); P.filiation();
+      toast('Transformation relancée : ' + f.rows.length + ' ligne' + (f.rows.length > 1 ? 's' : '') +
+        (r.note ? ' · ' + r.note : '') + '.', true);
+    });
+};
+
+/* =====================================================================
+   4. TRANSFORMATIONS AVANCEES
+   ===================================================================== */
+
+P.recapitulatif = function(){
+  var f = P.actif();
+  P.ouvrirModale('<h2>Récapitulatif par colonne</h2>' +
+    '<p class="sub">Compte les lignes par valeur et crée une feuille de synthèse : combien de prospects par statut, par ville, par commercial.</p>' +
+    '<div class="frow"><label for="fCol">Regrouper par</label><select id="fCol">' +
+    f.cols.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Créer la synthèse</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var cid = el('fCol').value;
+        var col = f.cols.filter(function(c){ return c.id === cid; })[0];
+        P.fermerModale();
+        var recette = { type: 'recap', colId: cid, nomCol: col.nom };
+        creerEnfant(f, f.nom + ' — par ' + col.nom, 'récapitulatif par ' + col.nom,
+          recette, P.appliquerRecette(f, recette));
+      });
+    });
+};
+
+P.fusionner = function(){
+  var f = P.actif();
+  var autres = P.DB.ordre.filter(function(id){ return id !== f.id; });
+  if (!autres.length) { toast('Il faut une deuxième feuille pour fusionner.'); return; }
+
+  P.ouvrirModale('<h2>Enrichir depuis une autre feuille</h2>' +
+    '<p class="sub">Rapproche deux feuilles sur une colonne commune et recopie les informations manquantes. Une seule correspondance par ligne : la première trouvée.</p>' +
+    '<div class="frow"><label for="fSrc">Feuille source</label><select id="fSrc">' +
+    autres.map(function(id){ return '<option value="' + id + '">' + ech(P.DB.sheets[id].nom) +
+      ' (' + P.DB.sheets[id].rows.length + ' lignes)</option>'; }).join('') + '</select></div>' +
+    '<div class="frow"><label for="fCleL">Colonne commune, ici</label><select id="fCleL">' +
+    f.cols.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select></div>' +
+    '<div class="frow"><label for="fCleS">Colonne commune, dans la source</label><select id="fCleS"></select></div>' +
+    '<div class="frow"><label>Colonnes à recopier</label><div id="zCols"></div></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Fusionner</button></div>', function(m){
+      var src = el('fSrc');
+      function peupler(){
+        var s = P.DB.sheets[src.value];
+        el('fCleS').innerHTML = s.cols.map(function(c){
+          return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('');
+        el('zCols').innerHTML = s.cols.map(function(c){
+          return '<label style="display:flex;gap:8px;align-items:center;margin:5px 0;font-size:13.5px;color:var(--fg)">' +
+            '<input type="checkbox" style="width:auto" data-c="' + c.id + '" checked> ' + ech(c.nom) + '</label>';
+        }).join('');
+      }
+      src.addEventListener('change', peupler); peupler();
+
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var cleS = el('fCleS').value;
+        var choisies = [];
+        el('zCols').querySelectorAll('input[data-c]').forEach(function(cb){
+          if (cb.checked && cb.getAttribute('data-c') !== cleS) { choisies.push(cb.getAttribute('data-c')); }
+        });
+        if (!choisies.length) { toast('Choisissez au moins une colonne à recopier.'); return; }
+        var source = P.DB.sheets[src.value];
+        var recette = { type: 'fusion', sourceId: src.value, cleLocale: el('fCleL').value,
+                        cleSource: cleS, colonnes: choisies };
+        P.fermerModale();
+        creerEnfant(f, f.nom + ' — enrichi', 'enrichi depuis ' + source.nom,
+          recette, P.appliquerRecette(f, recette));
+      });
+    });
+};
+
+P.scinder = function(){
+  var f = P.actif();
+  P.ouvrirModale('<h2>Scinder en plusieurs feuilles</h2>' +
+    '<p class="sub">Une feuille par valeur trouvée : un fichier par commercial, par ville ou par statut, tous rattachés à celle-ci.</p>' +
+    '<div class="frow"><label for="fCol">Scinder selon</label><select id="fCol">' +
+    f.cols.map(function(c){ return '<option value="' + c.id + '">' + ech(c.nom) + '</option>'; }).join('') +
+    '</select><div class="hint">Au-delà de 20 valeurs distinctes, l’opération est refusée : ce serait 20 feuilles illisibles.</div></div>' +
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Scinder</button></div>', function(m){
+      m.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      m.querySelector('[data-x="oui"]').addEventListener('click', function(){
+        var cid = el('fCol').value;
+        var col = f.cols.filter(function(c){ return c.id === cid; })[0];
+        var groupes = {}, ordre = [];
+        f.rows.forEach(function(l){
+          var v = String(l.c[cid] || '').trim() || '(vide)';
+          if (!groupes[v]) { groupes[v] = []; ordre.push(v); }
+          groupes[v].push(l);
+        });
+        if (ordre.length > 20) { toast(ordre.length + ' valeurs distinctes : trop pour scinder.'); return; }
+        if (ordre.length < 2) { toast('Une seule valeur dans cette colonne, rien à scinder.'); return; }
+        P.fermerModale();
+        var premier = null;
+        ordre.forEach(function(v){
+          var f2 = P.creerFeuille(f.nom + ' — ' + v, [], 0, f.id, col.nom + ' = ' + v);
+          f2.cols = cloneCols(f.cols);
+          f2.rows = groupes[v].map(cloneLigne);
+          f2.recette = { type: 'filtreValeur', colId: cid, valeur: v };
+          if (!premier) { premier = f2; }
+        });
+        P.marquerSale();
+        P.ouvrir(premier.id);
+        toast(ordre.length + ' feuilles créées depuis « ' + col.nom + ' ».', true);
+      });
+    });
+};
+
+})();
+
+/* =====================================================================
+   Fiches de prospection — trouver des etablissements sur une zone.
+
+   Source : OpenStreetMap, interroge par Overpass. Pourquoi pas Google Maps :
+   son API exige une cle facturee cote serveur, et son scraping est interdit
+   par ses conditions. OpenStreetMap est ouvert en CORS, gratuit, sans cle,
+   et sa licence ODbL n'impose que l'attribution, affichee dans la fenetre.
+
+   Ce que cela envoie dehors : le metier et la zone tapes par le visiteur.
+   Rien de la feuille, rien d'identifiant.
+   ===================================================================== */
+(function(){
+'use strict';
+
+var P = window.PROSPECT;
+var el = P.el, ech = P.ech, toast = P.toast;
+
+var NOMINATIM = 'https://nominatim.openstreetmap.org/search';
+/* Deux miroirs : le serveur public principal refuse regulierement du monde
+   aux heures chargees, et un 429 doit basculer plutot qu'echouer. */
+var OVERPASS = ['https://overpass-api.de/api/interpreter',
+                'https://overpass.kumi.systems/api/interpreter'];
+
+/* Les metiers, avec leurs etiquettes OpenStreetMap. Un metier peut en couvrir
+   plusieurs : un « restaurant » au sens commercial est restaurant, cafe ou
+   fast-food dans la base. */
+var METIERS = [
+  { cle:'pharmacie', nom:'Pharmacie', tags:[['amenity','pharmacy']] },
+  { cle:'restaurant', nom:'Restaurant, café, fast-food', tags:[['amenity','restaurant'],['amenity','cafe'],['amenity','fast_food']] },
+  { cle:'coiffure', nom:'Salon de coiffure et esthétique', tags:[['shop','hairdresser'],['shop','beauty']] },
+  { cle:'hotel', nom:'Hôtel, riad, maison d’hôtes', tags:[['tourism','hotel'],['tourism','guest_house'],['tourism','hostel'],['tourism','apartment']] },
+  { cle:'medical', nom:'Cabinet médical, dentaire, clinique', tags:[['amenity','doctors'],['amenity','dentist'],['amenity','clinic']] },
+  { cle:'garage', nom:'Garage et centre auto', tags:[['shop','car_repair'],['shop','car'],['shop','tyres']] },
+  { cle:'boulangerie', nom:'Boulangerie et pâtisserie', tags:[['shop','bakery'],['shop','pastry'],['shop','confectionery']] },
+  { cle:'vetements', nom:'Prêt-à-porter et chaussures', tags:[['shop','clothes'],['shop','shoes'],['shop','boutique']] },
+  { cle:'epicerie', nom:'Épicerie et supérette', tags:[['shop','convenience'],['shop','supermarket'],['shop','greengrocer']] },
+  { cle:'immobilier', nom:'Agence immobilière', tags:[['office','estate_agent']] },
+  { cle:'ecole', nom:'École, collège, lycée', tags:[['amenity','school'],['amenity','college']] },
+  { cle:'formation', nom:'Centre de formation, langues, auto-école', tags:[['amenity','language_school'],['amenity','driving_school'],['amenity','training']] },
+  { cle:'creche', nom:'Crèche et garderie', tags:[['amenity','kindergarten'],['amenity','childcare']] },
+  { cle:'sport', nom:'Salle de sport et club', tags:[['leisure','fitness_centre'],['leisure','sports_centre']] },
+  { cle:'opticien', nom:'Opticien', tags:[['shop','optician']] },
+  { cle:'veterinaire', nom:'Vétérinaire', tags:[['amenity','veterinary']] },
+  { cle:'avocat', nom:'Avocat, notaire, comptable', tags:[['office','lawyer'],['office','notary'],['office','accountant']] },
+  { cle:'assurance', nom:'Assurance et courtage', tags:[['office','insurance']] },
+  { cle:'voyage', nom:'Agence de voyage', tags:[['shop','travel_agency'],['office','travel_agent']] },
+  { cle:'btp', nom:'Artisan du bâtiment', tags:[['craft','builder'],['craft','electrician'],['craft','plumber'],['craft','carpenter'],['craft','painter'],['craft','hvac']] },
+  { cle:'bet', nom:'Bureau d’études et architecte', tags:[['office','engineer'],['office','architect']] },
+  { cle:'imprimerie', nom:'Imprimerie et reprographie', tags:[['shop','copyshop'],['craft','printer'],['shop','printing']] },
+  { cle:'mobile', nom:'Téléphonie et informatique', tags:[['shop','mobile_phone'],['shop','computer'],['shop','electronics']] },
+  { cle:'meuble', nom:'Meuble et décoration', tags:[['shop','furniture'],['shop','interior_decoration'],['shop','houseware']] },
+  { cle:'quincaillerie', nom:'Quincaillerie et matériaux', tags:[['shop','hardware'],['shop','doityourself'],['shop','trade']] },
+  { cle:'banque', nom:'Banque et transfert d’argent', tags:[['amenity','bank'],['amenity','bureau_de_change']] },
+  { cle:'logistique', nom:'Transport et logistique', tags:[['office','logistics'],['shop','moving_company']] },
+  { cle:'station', nom:'Station-service', tags:[['amenity','fuel']] }
+];
+
+var RAYONS = [['1000','1 km'], ['2000','2 km'], ['5000','5 km'], ['10000','10 km'], ['25000','25 km'], ['50000','50 km']];
+var LIMITES = [['100','100'], ['250','250'], ['500','500'], ['1000','1000']];
+
+/* ------------------------------------------------------------------ */
+
+function echapperOverpass(s){ return String(s).replace(/["\\]/g, ''); }
+
+function construireRequete(tags, filtre, limite, prefixe){
+  var corps = '';
+  tags.forEach(function(t){
+    var sel = '["' + echapperOverpass(t[0]) + '"="' + echapperOverpass(t[1]) + '"]';
+    corps += 'node' + sel + filtre + ';way' + sel + filtre + ';';
+  });
+  /* Les reglages ouvrent le script, la declaration de zone suit : l'ordre
+     inverse fait repondre 400. */
+  return '[out:json][timeout:60];' + (prefixe || '') + '(' + corps + ');out center ' + limite + ';';
+}
+
+async function geocoder(texte){
+  var u = NOMINATIM + '?q=' + encodeURIComponent(texte) + '&format=jsonv2&limit=1';
+  var r = await fetch(u, { headers: { Accept: 'application/json' } });
+  if (!r.ok) { throw new Error('Le service de recherche de lieux n’a pas répondu (' + r.status + ').'); }
+  var j = await r.json();
+  if (!j.length) { throw new Error('Lieu introuvable : « ' + texte + ' ». Essayez « Casablanca, Maroc » ou « Maroc ».'); }
+  return j[0];
+}
+
+/* Nominatim rend soit une emprise administrative, soit un simple point. Une
+   emprise donne une zone exacte ; un point oblige a se rabattre sur un rayon,
+   ce qui doit etre dit a l'utilisateur plutot que devine en silence. */
+function zoneDepuisLieu(lieu, rayonSecours){
+  var id = parseInt(lieu.osm_id, 10);
+  if (lieu.osm_type === 'relation') {
+    return { prefixe: 'area(' + (3600000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true };
+  }
+  if (lieu.osm_type === 'way') {
+    return { prefixe: 'area(' + (2400000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true };
+  }
+  return { prefixe: '', exacte: false,
+    filtre: '(around:' + rayonSecours + ',' + lieu.lat + ',' + lieu.lon + ')' };
+}
+
+async function interroger(requete){
+  var derniere = null;
+  for (var i = 0; i < OVERPASS.length; i++) {
+    try {
+      var r = await fetch(OVERPASS[i], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'data=' + encodeURIComponent(requete)
+      });
+      if (r.status === 429 || r.status === 504) { derniere = new Error('Les serveurs de cartographie sont saturés. Réessayez dans une minute, ou réduisez la zone.'); continue; }
+      if (!r.ok) { derniere = new Error('Le serveur de cartographie a répondu ' + r.status + '.'); continue; }
+      return await r.json();
+    } catch (e) { derniere = e; }
+  }
+  throw derniere || new Error('Aucun serveur de cartographie n’a répondu.');
+}
+
+/* ------------------------------------------------------------------ */
+
+function libelleTag(t){
+  var cles = ['amenity', 'shop', 'tourism', 'office', 'craft', 'leisure'];
+  for (var i = 0; i < cles.length; i++) {
+    if (t[cles[i]]) { return String(t[cles[i]]).replace(/_/g, ' '); }
+  }
+  return '';
+}
+
+function versLigne(e){
+  var t = e.tags || {};
+  var nom = t.name || t['name:fr'] || t['name:ar'] || '';
+  if (!nom) { return null; }
+  var rue = [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' ');
+  var site = t.website || t['contact:website'] || t['contact:facebook'] || '';
+  return {
+    nom: nom,
+    categorie: libelleTag(t),
+    tel: t.phone || t['contact:phone'] || t['contact:mobile'] || '',
+    email: t.email || t['contact:email'] || '',
+    site: site,
+    adresse: rue,
+    ville: t['addr:city'] || '',
+    horaires: t.opening_hours || '',
+    fiche: 'https://www.openstreetmap.org/' + e.type + '/' + e.id
+  };
+}
+
+/* Au Maroc, la base donne surtout des noms et des adresses : sur un releve
+   de 202 pharmacies de Casablanca, 2 portaient un telephone. Chaque ligne
+   recoit donc un lien de recherche pour aller relever le numero a la source,
+   ce qui vaut mieux qu'une colonne vide. */
+function lienRecherche(x, zone){
+  var q = [x.nom, x.adresse, x.ville || zone, 'téléphone'].filter(Boolean).join(' ');
+  return 'https://www.google.com/search?q=' + encodeURIComponent(q);
+}
+
+function creerFeuilleResultats(lignes, titre, via, zone){
+  var defs = [
+    ['Nom', 'texte', 210], ['Catégorie', 'texte', 150], ['Téléphone', 'tel', 150],
+    ['Email', 'email', 200], ['Site web', 'url', 190], ['Adresse', 'texte', 200],
+    ['Ville', 'texte', 130], ['Horaires', 'texte', 170], ['Chercher le contact', 'url', 190],
+    ['Fiche OpenStreetMap', 'url', 190],
+    ['Statut', 'liste', 160, P.STATUTS], ['Prochaine relance', 'date', 140], ['Notes', 'long', 220]
+  ];
+  var f = P.creerFeuille(titre, defs.map(function(d){
+    return { nom: d[0], type: d[1], largeur: d[2], options: d[3] || null };
+  }), 0, null, via);
+  var ids = f.cols.map(function(c){ return c.id; });
+  f.rows = lignes.map(function(x){
+    var r = { id: P.ident('r'), c: {}, g: {} };
+    r.c[ids[0]] = x.nom; r.c[ids[1]] = x.categorie; r.c[ids[2]] = x.tel;
+    r.c[ids[3]] = x.email; r.c[ids[4]] = x.site; r.c[ids[5]] = x.adresse;
+    r.c[ids[6]] = x.ville; r.c[ids[7]] = x.horaires;
+    r.c[ids[8]] = lienRecherche(x, zone); r.c[ids[9]] = x.fiche;
+    return r;
+  });
+  P.marquerSale();
+  P.ouvrir(f.id);
+  return f;
+}
+
+/* ------------------------------------------------------------------ */
+
+P.trouverEtablissements = function(){
+  var options = function(liste){
+    return liste.map(function(x){ return '<option value="' + x[0] + '">' + x[1] + '</option>'; }).join('');
+  };
+
+  P.ouvrirModale(
+    '<h2>Trouver des établissements</h2>' +
+    '<p class="sub">Interroge OpenStreetMap, la base cartographique libre. Seuls le métier et la zone que vous tapez partent vers ses serveurs : rien de votre feuille, rien qui vous identifie.</p>' +
+    '<p class="sub" style="margin-top:-6px">Ce qui revient à coup sûr : le nom, la position, souvent l’adresse. Le téléphone et le site, beaucoup plus rarement — la base est tenue par des bénévoles, et au Maroc ces champs sont peu remplis. Chaque ligne reçoit donc un lien de recherche pour relever le contact manquant.</p>' +
+
+    '<div class="frow"><label for="fMetier">Métier recherché</label><select id="fMetier">' +
+    METIERS.map(function(m){ return '<option value="' + m.cle + '">' + ech(m.nom) + '</option>'; }).join('') +
+    '</select></div>' +
+
+    '<div class="frow"><label>Où chercher</label><div class="segm" id="fModes">' +
+    '<button type="button" data-mode="zone" class="on">Une ville, une région, un pays</button>' +
+    '<button type="button" data-mode="ici">Autour de moi</button>' +
+    '<button type="button" data-mode="adresse">Autour d’une adresse</button>' +
+    '</div></div>' +
+
+    '<div data-z="zone"><div class="frow"><label for="fZone">Lieu</label>' +
+    '<input id="fZone" type="text" value="Casablanca, Maroc" placeholder="Casablanca, Maroc">' +
+    '<div class="hint">Une ville, une préfecture, une région ou un pays entier. Si le lieu n’a pas de contour dans la base, la recherche se rabat sur un rayon autour de son centre et vous le dit.</div></div></div>' +
+
+    '<div data-z="ici" hidden><div class="frow"><label for="fRayonIci">Rayon autour de ma position</label>' +
+    '<select id="fRayonIci">' + options(RAYONS) + '</select>' +
+    '<div class="hint">Votre navigateur demandera l’autorisation. La position sert à cadrer la recherche et n’est enregistrée nulle part.</div></div></div>' +
+
+    '<div data-z="adresse" hidden><div class="frow"><label for="fAdresse">Adresse ou quartier</label>' +
+    '<input id="fAdresse" type="text" placeholder="Maarif, Casablanca"></div>' +
+    '<div class="frow"><label for="fRayonAdr">Rayon</label><select id="fRayonAdr">' + options(RAYONS) + '</select></div></div>' +
+
+    '<div class="frow"><label for="fLimite">Nombre maximum de résultats</label>' +
+    '<select id="fLimite">' + options(LIMITES) + '</select></div>' +
+
+    '<div id="fEtat" class="hint" style="margin-bottom:0"></div>' +
+    '<p class="hint" style="margin-bottom:0">Données cartographiques &copy; les contributeurs d’OpenStreetMap, sous licence ODbL. Ces fiches sont tenues par des bénévoles : un téléphone ou un site peut manquer, une adresse peut avoir vieilli. Vérifiez avant d’appeler.</p>' +
+
+    '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
+    '<button class="tbtn primary" data-x="oui">Chercher</button></div>',
+
+    function(mo){
+      var mode = 'zone';
+      mo.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      mo.querySelectorAll('#fModes [data-mode]').forEach(function(b){
+        b.addEventListener('click', function(){
+          mode = b.getAttribute('data-mode');
+          mo.querySelectorAll('#fModes [data-mode]').forEach(function(o){ o.classList.toggle('on', o === b); });
+          mo.querySelectorAll('[data-z]').forEach(function(z){ z.hidden = z.getAttribute('data-z') !== mode; });
+        });
+      });
+
+      var bouton = mo.querySelector('[data-x="oui"]');
+      bouton.addEventListener('click', function(){
+        var metier = METIERS.filter(function(m){ return m.cle === el('fMetier').value; })[0];
+        var limite = el('fLimite').value;
+        var etat = el('fEtat');
+        var dire = function(t){ etat.textContent = t; };
+
+        bouton.disabled = true;
+        bouton.textContent = 'Recherche…';
+        var fin = function(){ bouton.disabled = false; bouton.textContent = 'Chercher'; };
+        var echec = function(e){ dire(String(e && e.message ? e.message : e)); fin(); };
+
+        var lancer = function(zone, nomZone){
+          dire('Interrogation de la base cartographique… de quelques secondes à une minute sur une grande zone.');
+          var req = construireRequete(metier.tags, zone.filtre, limite, zone.prefixe);
+          interroger(req).then(function(j){
+            var brut = (j && j.elements) || [];
+            var lignes = brut.map(versLigne).filter(Boolean);
+            /* Un meme etablissement existe parfois en point et en contour :
+               on deduplique sur le nom et l'adresse, pas sur l'identifiant. */
+            var vus = {}, nets = [];
+            lignes.forEach(function(x){
+              var k = (x.nom + '|' + x.adresse).toLowerCase();
+              if (vus[k]) { return; }
+              vus[k] = true; nets.push(x);
+            });
+            if (!nets.length) {
+              dire('Aucun établissement nommé pour « ' + metier.nom + ' » sur cette zone. ' +
+                   (brut.length ? brut.length + ' point(s) trouvé(s), mais sans nom renseigné. ' : '') +
+                   'Essayez une zone plus large ou un métier voisin.');
+              fin(); return;
+            }
+            var sansSite = nets.filter(function(x){ return !x.site; }).length;
+            var avecTel = nets.filter(function(x){ return x.tel; }).length;
+            P.fermerModale();
+            creerFeuilleResultats(nets, metier.nom + ' — ' + nomZone, 'extrait d’OpenStreetMap', nomZone);
+            toast(nets.length + ' établissement' + (nets.length > 1 ? 's' : '') + ' · ' +
+              avecTel + ' avec téléphone · ' + sansSite + ' sans site web dans la base', true);
+          }, echec);
+        };
+
+        if (mode === 'ici') {
+          if (!navigator.geolocation) { echec(new Error('Ce navigateur ne donne pas la position.')); return; }
+          dire('Autorisez la géolocalisation dans la fenêtre du navigateur…');
+          navigator.geolocation.getCurrentPosition(function(pos){
+            var r = el('fRayonIci').value;
+            lancer({ prefixe: '',
+              filtre: '(around:' + r + ',' + pos.coords.latitude.toFixed(5) + ',' + pos.coords.longitude.toFixed(5) + ')' },
+              'autour de moi');
+          }, function(){
+            echec(new Error('Position refusée ou indisponible. Utilisez « autour d’une adresse ».'));
+          }, { timeout: 15000, maximumAge: 300000 });
+          return;
+        }
+
+        var texte = (mode === 'adresse' ? el('fAdresse').value : el('fZone').value).trim();
+        if (!texte) { echec(new Error('Indiquez un lieu.')); return; }
+        dire('Localisation de « ' + texte + ' »…');
+        geocoder(texte).then(function(lieu){
+          if (mode === 'adresse') {
+            lancer({ prefixe: '',
+              filtre: '(around:' + el('fRayonAdr').value + ',' + lieu.lat + ',' + lieu.lon + ')' }, texte);
+            return;
+          }
+          var zone = zoneDepuisLieu(lieu, 15000);
+          if (!zone.exacte) {
+            dire('Ce lieu n’a pas de contour dans la base : recherche dans un rayon de 15 km autour de son centre.');
+          }
+          lancer(zone, texte);
+        }, echec);
+      });
+    });
+};
+
+P.METIERS_OSM = METIERS;
+
+})();
+</script>
+</body>
+</html>

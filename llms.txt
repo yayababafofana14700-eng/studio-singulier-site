@@ -10,7 +10,7 @@ Zone desservie : Casablanca et le reste du Maroc.
 
 ## Outils gratuits
 
-Les quatre outils s'executent entierement dans le navigateur du visiteur.
+Les cinq outils s'executent entierement dans le navigateur du visiteur.
 Aucun fichier, aucun texte et aucune donnee saisie n'est transmis a un serveur :
 le traitement est local, verifiable en coupant la connexion apres chargement.
 
@@ -18,6 +18,7 @@ le traitement est local, verifiable en coupant la connexion apres chargement.
 - [Generateur de QR code](https://www.apexwebstudio.studio/outil-qr-code.html) : lien, demande d'avis Google, reseau wifi, numero WhatsApp, fiche de contact vCard. Export PNG et SVG. Encodeur ecrit sans bibliotheque tierce, conforme a la norme ISO/IEC 18004.
 - [Calculateur de TVA](https://www.apexwebstudio.studio/outil-tva.html) : hors taxe vers toutes taxes comprises et inversement. Taux marocains 20, 14, 10 et 7 %. Taux francais 20, 10, 5,5 et 2,1 %. Taux libre possible. L'outil applique le taux choisi, il ne determine pas lequel s'applique a une activite.
 - [Generateur de pages legales](https://www.apexwebstudio.studio/outil-mentions-legales.html) : mentions legales, politique de confidentialite et texte de bandeau cookies, au choix selon la loi marocaine 09-08 et la declaration CNDP, ou selon le RGPD. Les documents produits sont des modeles, pas un avis juridique.
+- [Generateur de fiches de prospection commerciale](https://www.apexwebstudio.studio/outil-fiches-prospection.html) : met en place un fichier de prospection dans le navigateur, sans inscription et sans serveur : les donnees restent dans le navigateur du visiteur. Vingt-deux modeles, dont douze partent du metier demarche — salon de coiffure, restaurant, cabinet medical, bureau d'etudes, batiment, commerce, hotellerie, formation, pharmacie, agence immobiliere, garage, transport — et dix de la methode de prospection. Tableur complet : colonnes typees, tri, filtres, annuler et retablir, feuilles derivees qui gardent le lien vers leur origine et se relancent quand la feuille mere change, fusion entre deux feuilles, recapitulatif par colonne. Import de classeurs .xlsx et de CSV, export Excel mis en forme, CSV et PDF paysage pagine. Une recherche d'etablissements interroge OpenStreetMap par metier et par zone : une ville, une region, un pays, ou un rayon autour de la position du visiteur. Elle rend le nom, la position et souvent l'adresse ; le telephone et le site sont rarement renseignes dans cette base au Maroc, et chaque ligne recoit un lien de recherche pour relever le contact manquant. Aucune coordonnee n'est inventee.
 
 ## Services
 
