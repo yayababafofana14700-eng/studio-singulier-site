@@ -38,3 +38,6 @@ desktop.ini
 
 # Outillage de construction (esbuild)
 node_modules/
+
+# fichiers assembles par scripts/carrousel.mjs, reconstruits a la demande
+archive/*.build.html
