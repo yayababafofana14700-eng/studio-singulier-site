@@ -2149,6 +2149,30 @@ function xml(s){
     .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
 }
 
+/* Un seul juge pour toutes les sorties : si XLSX et PDF decidaient chacun
+   de leur cote, une colonne cliquable dans l'un ne le serait pas dans l'autre.
+   Le type de la colonne prime ; sinon la valeur est reconnue a sa forme, ce
+   qui rattrape les colonnes creees a la main et les feuilles importees. */
+function lienDe(valeur, type){
+  var v = String(valeur == null ? '' : valeur).trim();
+  if (!v) { return ''; }
+  if (type === 'email') { return /@/.test(v) ? 'mailto:' + v : ''; }
+  if (type === 'tel') {
+    var num = v.replace(/[^0-9+]/g, '');
+    return num.length >= 6 ? 'tel:' + num : '';
+  }
+  if (type === 'url') {
+    if (/^https?:\/\//i.test(v)) { return v; }
+    if (/^(www\.|[a-z0-9-]+\.[a-z]{2,})/i.test(v)) { return 'https://' + v; }
+    return '';
+  }
+  /* Colonne non typee : on ne devine que sur des formes sures. */
+  if (/^https?:\/\//i.test(v)) { return v; }
+  if (/^www\.[^\s]+$/i.test(v)) { return 'https://' + v; }
+  if (/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)) { return 'mailto:' + v; }
+  return '';
+}
+
 function lettreCol(n){
   var s = '';
   n = n + 1;
@@ -2171,9 +2195,11 @@ function exporterXLSX(){
 
   var nbLignes = lignes.length + 1;
   var colFin = lettreCol(cols.length - 1);
+  var liens = [];
 
   var sx = ['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" ' +
+    'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
     '<dimension ref="A1:' + colFin + nbLignes + '"/>' +
     '<sheetViews><sheetView tabSelected="1" workbookViewId="0">' +
     '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/>' +
@@ -2206,7 +2232,9 @@ function exporterXLSX(){
         var n = parseFloat(String(v).replace(/\s/g, '').replace(',', '.'));
         if (!isNaN(n)) { sx.push('<c r="' + ref + '" s="3"><v>' + n + '</v></c>'); return; }
       }
-      var style = (c.type === 'long') ? '4' : '0';
+      var url = lienDe(v, c.type);
+      var style = url ? '5' : (c.type === 'long') ? '4' : '0';
+      if (url) { liens.push({ ref: ref, url: url }); }
       sx.push('<c r="' + ref + '" s="' + style + '" t="inlineStr"><is><t xml:space="preserve">' + xml(v) + '</t></is></c>');
     });
     sx.push('</row>');
@@ -2225,14 +2253,26 @@ function exporterXLSX(){
       '<formula1>"' + xml(liste) + '"</formula1></dataValidation>');
   });
   if (dv.length) { sx.push('<dataValidations count="' + dv.length + '">' + dv.join('') + '</dataValidations>'); }
+
+  /* L'ordre impose par le schema place <hyperlinks> apres <dataValidations> :
+     place ailleurs, Excel declare le fichier illisible et propose de le
+     reparer. Chaque lien pointe une relation du fichier .rels voisin. */
+  if (liens.length) {
+    sx.push('<hyperlinks>');
+    liens.forEach(function(x, i){
+      sx.push('<hyperlink ref="' + x.ref + '" r:id="rHl' + (i + 1) + '"/>');
+    });
+    sx.push('</hyperlinks>');
+  }
   sx.push('</worksheet>');
 
   var styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
     '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
     '<numFmts count="1"><numFmt numFmtId="164" formatCode="dd/mm/yyyy"/></numFmts>' +
-    '<fonts count="2">' +
+    '<fonts count="3">' +
     '<font><sz val="11"/><name val="Calibri"/></font>' +
     '<font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font>' +
+    '<font><u/><sz val="11"/><color rgb="FF0563C1"/><name val="Calibri"/></font>' +
     '</fonts>' +
     '<fills count="3"><fill><patternFill patternType="none"/></fill>' +
     '<fill><patternFill patternType="gray125"/></fill>' +
@@ -2240,12 +2280,13 @@ function exporterXLSX(){
     '<borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border>' +
     '<border><left/><right/><top/><bottom style="thin"><color rgb="FFBFBFBF"/></bottom><diagonal/></border></borders>' +
     '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
-    '<cellXfs count="5">' +
+    '<cellXfs count="6">' +
     '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>' +
     '<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment vertical="center"/></xf>' +
     '<xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/>' +
     '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/>' +
     '<xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf>' +
+    '<xf numFmtId="0" fontId="2" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1"/>' +
     '</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
 
   var onglet = sansAccent(f.nom).replace(/[\\\/\?\*\[\]:]/g, '').slice(0, 28) || 'Prospection';
@@ -2276,6 +2317,20 @@ function exporterXLSX(){
     { nom: 'xl/worksheets/sheet1.xml', contenu: sx.join('') }
   ];
 
+  /* TargetMode="External" est ce qui distingue un lien web d'un renvoi
+     interne au classeur. Sans lui, Excel cherche une feuille de ce nom. */
+  if (liens.length) {
+    fichiers.push({ nom: 'xl/worksheets/_rels/sheet1.xml.rels',
+      contenu: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+        liens.map(function(x, i){
+          return '<Relationship Id="rHl' + (i + 1) + '" ' +
+            'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" ' +
+            'Target="' + xml(x.url) + '" TargetMode="External"/>';
+        }).join('') +
+        '</Relationships>' });
+  }
+
   telecharger(nomFichier('xlsx'), zip(fichiers),
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   toast(lignes.length + ' lignes exportées en Excel, en-têtes et filtres compris.', true);
@@ -2285,9 +2340,9 @@ function menuExport(x, y){
   if (!P.actif()) { toast('Ouvrez une feuille d’abord.'); return; }
   P.ouvrirMenu(
     '<div class="mtitle">Exporter ce qui est affiché</div>' +
-    '<button data-x="xlsx">Excel (.xlsx) mis en forme</button>' +
-    '<button data-x="csv">CSV pour Excel</button>' +
-    '<button data-x="pdf">PDF prêt à imprimer</button>' +
+    '<button data-x="xlsx">Excel (.xlsx) mis en forme, liens cliquables</button>' +
+    '<button data-x="csv">CSV pour Excel, texte brut</button>' +
+    '<button data-x="pdf">PDF prêt à imprimer, liens cliquables</button>' +
     '<hr><button data-x="json">Sauvegarde complète (.json)</button>',
     x, y, function(m){
       m.querySelector('[data-x="xlsx"]').addEventListener('click', function(){ P.fermerMenu(); exporterXLSX(); });
@@ -2901,8 +2956,13 @@ P.exporterPDF = function(){
   var d = new Date();
   var dateFr = ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear();
 
+  /* page() rend deux choses : le flux de dessin, et la liste des
+     rectangles cliquables. Dans un PDF, le texte et la zone sensible sont
+     deux objets separes : dessiner un lien en bleu ne le rend pas cliquable,
+     il faut une annotation posee aux memes coordonnees. */
   function page(indice){
     var s = [];
+    var annots = [];
     var bloc = lignes.slice(indice * parPage, indice * parPage + parPage);
 
     s.push('BT /F2 ' + tTitre + ' Tf 0.09 0.09 0.11 rg 1 0 0 1 ' + M + ' ' + (H - M - 4) + ' Tm (' +
@@ -2927,8 +2987,18 @@ P.exporterPDF = function(){
       cols.forEach(function(c, i){
         var v = l.c[c.id];
         if (v != null && String(v) !== '') {
-          s.push('BT /F1 ' + tCell + ' Tf 0.11 0.11 0.13 rg 1 0 0 1 ' + (xx + 4) + ' ' + (yl + 5) + ' Tm (' +
-            echappePdf(tronquer(winAnsi(v), largeurs[i] - 8, tCell)) + ') Tj ET');
+          var txt = tronquer(winAnsi(v), largeurs[i] - 8, tCell);
+          var url = lienDe(v, c.type);
+          s.push('BT /F1 ' + tCell + ' Tf ' + (url ? '0.02 0.39 0.76' : '0.11 0.11 0.13') +
+            ' rg 1 0 0 1 ' + (xx + 4) + ' ' + (yl + 5) + ' Tm (' + echappePdf(txt) + ') Tj ET');
+          if (url) {
+            /* La zone sensible epouse le texte reellement dessine, pas la
+               cellule : un clic a cote d'une valeur courte n'ouvre rien. */
+            var lt = largeurTexte(txt, tCell);
+            s.push('0.02 0.39 0.76 RG 0.4 w ' + (xx + 4) + ' ' + (yl + 3.4) + ' m ' +
+              (xx + 4 + lt) + ' ' + (yl + 3.4) + ' l S');
+            annots.push({ url: url, r: [xx + 4, yl + 2.6, xx + 4 + lt, yl + 4 + tCell] });
+          }
         }
         xx += largeurs[i];
       });
@@ -2947,7 +3017,7 @@ P.exporterPDF = function(){
     s.push('BT /F1 7.5 Tf 0.45 0.45 0.47 rg 1 0 0 1 ' + (L - M - 110) + ' ' + (M - 2) + ' Tm (' +
       echappePdf(winAnsi('apexwebstudio.studio')) + ') Tj ET');
 
-    return s.join('\n');
+    return { flux: s.join('\n'), annots: annots };
   }
 
   var objets = [];
@@ -2955,12 +3025,24 @@ P.exporterPDF = function(){
   objets[3] = '<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>';
   objets[4] = '<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>';
 
-  var kids = [], n = 5;
+  var kids = [], n = 5, nbLiens = 0;
   for (var i = 0; i < nbPages; i++) {
-    var flux = page(i);
+    var rendu = page(i);
+    var flux = rendu.flux;
     var idPage = n++, idFlux = n++;
+    /* Les numeros d'annotation sont reserves ici : la page doit pouvoir les
+       citer avant que les objets eux-memes soient ecrits. */
+    var premier = n;
+    var refs = rendu.annots.map(function(){ return (n++) + ' 0 R'; });
+    rendu.annots.forEach(function(a, j){
+      objets[premier + j] = '<</Type/Annot/Subtype/Link/Rect[' +
+        a.r.map(function(x){ return x.toFixed(2); }).join(' ') + ']' +
+        '/Border[0 0 0]/F 4/A<</S/URI/URI(' + echappePdf(winAnsi(a.url)) + ')>>>>';
+    });
+    nbLiens += refs.length;
     objets[idPage] = '<</Type/Page/Parent 2 0 R/MediaBox[0 0 ' + L + ' ' + H + ']' +
-      '/Resources<</Font<</F1 3 0 R/F2 4 0 R>>>>/Contents ' + idFlux + ' 0 R>>';
+      '/Resources<</Font<</F1 3 0 R/F2 4 0 R>>>>/Contents ' + idFlux + ' 0 R' +
+      (refs.length ? '/Annots[' + refs.join(' ') + ']' : '') + '>>';
     objets[idFlux] = '<</Length ' + flux.length + '>>\nstream\n' + flux + '\nendstream';
     kids.push(idPage + ' 0 R');
   }
@@ -2983,7 +3065,8 @@ P.exporterPDF = function(){
   for (var b = 0; b < sortie.length; b++) { octets[b] = sortie.charCodeAt(b) & 0xFF; }
 
   P.telecharger(P.nomFichier('pdf'), octets, 'application/pdf');
-  toast(lignes.length + ' lignes exportées en PDF, ' + nbPages + ' page' + (nbPages > 1 ? 's' : '') + '.', true);
+  toast(lignes.length + ' lignes exportées en PDF, ' + nbPages + ' page' + (nbPages > 1 ? 's' : '') +
+    (nbLiens ? ', ' + nbLiens + ' lien' + (nbLiens > 1 ? 's' : '') + ' cliquable' + (nbLiens > 1 ? 's' : '') : '') + '.', true);
 };
 
 /* =====================================================================
