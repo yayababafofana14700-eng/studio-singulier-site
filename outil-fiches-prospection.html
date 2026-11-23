@@ -3287,7 +3287,7 @@ var METIERS = [
   { cle:'assurance', nom:'Assurance et courtage', tags:[['office','insurance']] },
   { cle:'voyage', nom:'Agence de voyage', tags:[['shop','travel_agency'],['office','travel_agent']] },
   { cle:'btp', nom:'Artisan du bâtiment', tags:[['craft','builder'],['craft','electrician'],['craft','plumber'],['craft','carpenter'],['craft','painter'],['craft','hvac']] },
-  { cle:'bet', nom:'Bureau d’études et architecte', tags:[['office','engineer'],['office','architect']] },
+  { cle:'bet', nom:'Bureau d’études et architecte', tags:[['office','engineer'],['office','architect'],['office','consulting'],['office','surveyor'],['office','research']] },
   { cle:'imprimerie', nom:'Imprimerie et reprographie', tags:[['shop','copyshop'],['craft','printer'],['shop','printing']] },
   { cle:'mobile', nom:'Téléphonie et informatique', tags:[['shop','mobile_phone'],['shop','computer'],['shop','electronics']] },
   { cle:'meuble', nom:'Meuble et décoration', tags:[['shop','furniture'],['shop','interior_decoration'],['shop','houseware']] },
@@ -3308,7 +3308,10 @@ function construireRequete(tags, filtre, limite, prefixe){
   var corps = '';
   tags.forEach(function(t){
     var sel = '["' + echapperOverpass(t[0]) + '"="' + echapperOverpass(t[1]) + '"]';
-    corps += 'node' + sel + filtre + ';way' + sel + filtre + ';';
+    /* Les relations comptent : un bureau occupant un batiment cartographie en
+       multipolygone n'est ni un node ni un way. Elles coutent un peu de temps
+       de requete, d'ou le repli sur le second miroir quand le premier rend 429. */
+    corps += 'node' + sel + filtre + ';way' + sel + filtre + ';relation' + sel + filtre + ';';
   });
   /* Les reglages ouvrent le script, la declaration de zone suit : l'ordre
      inverse fait repondre 400. */
