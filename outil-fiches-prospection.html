@@ -3263,6 +3263,16 @@ var NOMINATIM = 'https://nominatim.openstreetmap.org/search';
 var OVERPASS = ['https://overpass-api.de/api/interpreter',
                 'https://overpass.kumi.systems/api/interpreter'];
 
+/* Seconde source : un extrait du Maroc tire d'Overture Maps, pose en fichiers
+   statiques sur ce site, un par metier. Overture agrege Meta, Microsoft,
+   Foursquare et d'autres ; au Maroc il porte un telephone sur 77 % des fiches,
+   la ou OpenStreetMap en porte sur 1 %. L'extrait etant servi par ce domaine,
+   rien ne part vers un tiers et aucune cle n'est necessaire : c'est ce qui
+   permet de remplacer Google Maps sans serveur et sans facture.
+   Les fichiers sont reconstruits par scripts/extraire-overture.py. */
+var OVERTURE = { chemin: 'donnees/overture/', release: '2026-11-18.0' };
+var cacheOverture = {};
+
 /* Les metiers, avec leurs etiquettes OpenStreetMap. Un metier peut en couvrir
    plusieurs : un « restaurant » au sens commercial est restaurant, cafe ou
    fast-food dans la base. */
@@ -3332,14 +3342,76 @@ async function geocoder(texte){
    ce qui doit etre dit a l'utilisateur plutot que devine en silence. */
 function zoneDepuisLieu(lieu, rayonSecours){
   var id = parseInt(lieu.osm_id, 10);
+  var bb = lieu.boundingbox;
+  /* Overpass raisonne en identifiants de zone, l'extrait Overture en
+     coordonnees : la meme zone doit donc porter les deux ecritures. */
+  var geo = (bb && bb.length === 4)
+    ? { sud: +bb[0], nord: +bb[1], ouest: +bb[2], est: +bb[3] }
+    : { centre: [+lieu.lat, +lieu.lon], rayon: rayonSecours };
   if (lieu.osm_type === 'relation') {
-    return { prefixe: 'area(' + (3600000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true };
+    return { prefixe: 'area(' + (3600000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true, geo: geo };
   }
   if (lieu.osm_type === 'way') {
-    return { prefixe: 'area(' + (2400000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true };
+    return { prefixe: 'area(' + (2400000000 + id) + ')->.z;', filtre: '(area.z)', exacte: true, geo: geo };
   }
-  return { prefixe: '', exacte: false,
+  return { prefixe: '', exacte: false, geo: { centre: [+lieu.lat, +lieu.lon], rayon: rayonSecours },
     filtre: '(around:' + rayonSecours + ',' + lieu.lat + ',' + lieu.lon + ')' };
+}
+
+/* ------------------------------------------------------------------ */
+/* L'extrait Overture : telecharge une fois par metier, filtre ici      */
+
+function distanceM(aLat, aLon, bLat, bLon){
+  var R = 6371000, r = Math.PI / 180;
+  var dLat = (bLat - aLat) * r, dLon = (bLon - aLon) * r;
+  var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(aLat * r) * Math.cos(bLat * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(x)));
+}
+
+function dansZone(lat, lon, geo){
+  if (!geo) { return true; }
+  if (geo.centre) { return distanceM(geo.centre[0], geo.centre[1], lat, lon) <= geo.rayon; }
+  return lat >= geo.sud && lat <= geo.nord && lon >= geo.ouest && lon <= geo.est;
+}
+
+async function chargerOverture(cle){
+  if (cacheOverture[cle]) { return cacheOverture[cle]; }
+  var r = await fetch(OVERTURE.chemin + encodeURIComponent(cle) + '.json', { headers: { Accept: 'application/json' } });
+  if (!r.ok) { throw new Error('L’extrait Overture pour ce métier n’a pas pu être chargé (' + r.status + ').'); }
+  var j = await r.json();
+  if (!j || !j.lieux) { throw new Error('L’extrait Overture est illisible.'); }
+  cacheOverture[cle] = j;
+  return j;
+}
+
+/* Les lignes de l'extrait sont des tableaux, pas des objets : a 148 815
+   lieux, repeter huit noms de champ par ligne pesait plus que les donnees. */
+function ligneOverture(t){
+  return {
+    nom: t[0] || '',
+    categorie: String(t[1] || '').replace(/_/g, ' '),
+    tel: t[2] || '',
+    email: '',
+    site: t[3] || '',
+    adresse: t[4] || '',
+    ville: t[5] || '',
+    horaires: '',
+    source: 'Overture',
+    fiche: ''
+  };
+}
+
+async function chercherOverture(cle, geo, limite){
+  var j = await chargerOverture(cle);
+  var sortie = [];
+  for (var i = 0; i < j.lieux.length && sortie.length < limite; i++) {
+    var t = j.lieux[i];
+    if (!t[0]) { continue; }
+    if (!dansZone(t[6], t[7], geo)) { continue; }
+    sortie.push(ligneOverture(t));
+  }
+  return sortie;
 }
 
 async function interroger(requete){
@@ -3384,6 +3456,7 @@ function versLigne(e){
     adresse: rue,
     ville: t['addr:city'] || '',
     horaires: t.opening_hours || '',
+    source: 'OpenStreetMap',
     fiche: 'https://www.openstreetmap.org/' + e.type + '/' + e.id
   };
 }
@@ -3402,7 +3475,7 @@ function creerFeuilleResultats(lignes, titre, via, zone){
     ['Nom', 'texte', 210], ['Catégorie', 'texte', 150], ['Téléphone', 'tel', 150],
     ['Email', 'email', 200], ['Site web', 'url', 190], ['Adresse', 'texte', 200],
     ['Ville', 'texte', 130], ['Horaires', 'texte', 170], ['Chercher le contact', 'url', 190],
-    ['Fiche OpenStreetMap', 'url', 190],
+    ['Source', 'texte', 110], ['Fiche cartographique', 'url', 190],
     ['Statut', 'liste', 160, P.STATUTS], ['Prochaine relance', 'date', 140], ['Notes', 'long', 220]
   ];
   var f = P.creerFeuille(titre, defs.map(function(d){
@@ -3414,7 +3487,9 @@ function creerFeuilleResultats(lignes, titre, via, zone){
     r.c[ids[0]] = x.nom; r.c[ids[1]] = x.categorie; r.c[ids[2]] = x.tel;
     r.c[ids[3]] = x.email; r.c[ids[4]] = x.site; r.c[ids[5]] = x.adresse;
     r.c[ids[6]] = x.ville; r.c[ids[7]] = x.horaires;
-    r.c[ids[8]] = lienRecherche(x, zone); r.c[ids[9]] = x.fiche;
+    r.c[ids[8]] = lienRecherche(x, zone);
+    r.c[ids[9]] = x.source || 'OpenStreetMap';
+    r.c[ids[10]] = x.fiche || '';
     return r;
   });
   P.marquerSale();
@@ -3431,8 +3506,16 @@ P.trouverEtablissements = function(){
 
   P.ouvrirModale(
     '<h2>Trouver des établissements</h2>' +
-    '<p class="sub">Interroge OpenStreetMap, la base cartographique libre. Seuls le métier et la zone que vous tapez partent vers ses serveurs : rien de votre feuille, rien qui vous identifie.</p>' +
-    '<p class="sub" style="margin-top:-6px">Ce qui revient à coup sûr : le nom, la position, souvent l’adresse. Le téléphone et le site, beaucoup plus rarement — la base est tenue par des bénévoles, et au Maroc ces champs sont peu remplis. Chaque ligne reçoit donc un lien de recherche pour relever le contact manquant.</p>' +
+    '<p class="sub">Deux bases cartographiques, au choix. Rien de votre feuille ne part, et rien qui vous identifie.</p>' +
+
+    '<div class="frow"><label>Base interrogée</label><div class="segm" id="fSources">' +
+    '<button type="button" data-src="deux" class="on">Les deux</button>' +
+    '<button type="button" data-src="overture">Overture</button>' +
+    '<button type="button" data-src="osm">OpenStreetMap</button>' +
+    '</div>' +
+    '<div class="hint"><b>Overture</b> : un extrait du Maroc posé sur ce site, 148 815 établissements dont 77 % avec un téléphone. Rien ne sort de ce domaine. ' +
+    '<b>OpenStreetMap</b> : interrogé en direct, à jour à la minute, mais au Maroc le téléphone y est rare (sur un relevé de 202 pharmacies de Casablanca, 2 en portaient un). ' +
+    'Les deux ensemble donnent la couverture la plus large ; les doublons sont retirés sur le nom et l’adresse.</div></div>' +
 
     '<div class="frow"><label for="fMetier">Métier recherché</label><select id="fMetier">' +
     METIERS.map(function(m){ return '<option value="' + m.cle + '">' + ech(m.nom) + '</option>'; }).join('') +
@@ -3460,14 +3543,23 @@ P.trouverEtablissements = function(){
     '<select id="fLimite">' + options(LIMITES) + '</select></div>' +
 
     '<div id="fEtat" class="hint" style="margin-bottom:0"></div>' +
-    '<p class="hint" style="margin-bottom:0">Données cartographiques &copy; les contributeurs d’OpenStreetMap, sous licence ODbL. Ces fiches sont tenues par des bénévoles : un téléphone ou un site peut manquer, une adresse peut avoir vieilli. Vérifiez avant d’appeler.</p>' +
+    '<p class="hint" style="margin-bottom:0">Données cartographiques &copy; les contributeurs d’OpenStreetMap, sous licence ODbL. ' +
+    'Extrait Overture Maps (release ' + OVERTURE.release + '), sous licences CDLA Permissive 2.0 et Apache 2.0 ; ' +
+    'données Foursquare &copy; 2024 Foursquare Labs, Inc. ' +
+    'Aucune de ces bases n’est vérifiée une par une : un numéro peut avoir changé, un établissement peut avoir fermé. Vérifiez avant d’appeler.</p>' +
 
     '<div class="mactions"><button class="tbtn" data-x="non">Annuler</button>' +
     '<button class="tbtn primary" data-x="oui">Chercher</button></div>',
 
     function(mo){
-      var mode = 'zone';
+      var mode = 'zone', source = 'deux';
       mo.querySelector('[data-x="non"]').addEventListener('click', P.fermerModale);
+      mo.querySelectorAll('#fSources [data-src]').forEach(function(b){
+        b.addEventListener('click', function(){
+          source = b.getAttribute('data-src');
+          mo.querySelectorAll('#fSources [data-src]').forEach(function(o){ o.classList.toggle('on', o === b); });
+        });
+      });
       mo.querySelectorAll('#fModes [data-mode]').forEach(function(b){
         b.addEventListener('click', function(){
           mode = b.getAttribute('data-mode');
@@ -3489,31 +3581,54 @@ P.trouverEtablissements = function(){
         var echec = function(e){ dire(String(e && e.message ? e.message : e)); fin(); };
 
         var lancer = function(zone, nomZone){
-          dire('Interrogation de la base cartographique… de quelques secondes à une minute sur une grande zone.');
-          var req = construireRequete(metier.tags, zone.filtre, limite, zone.prefixe);
-          interroger(req).then(function(j){
-            var brut = (j && j.elements) || [];
-            var lignes = brut.map(versLigne).filter(Boolean);
-            /* Un meme etablissement existe parfois en point et en contour :
-               on deduplique sur le nom et l'adresse, pas sur l'identifiant. */
+          var plafond = parseInt(limite, 10) || 250;
+          var ratees = [];
+          /* Une source en panne ne doit pas emporter l'autre : chaque branche
+             rattrape son erreur et rend un tableau vide, le bilan dit laquelle
+             a manque. */
+          var vide = function(e){ ratees.push(e && e.message ? e.message : String(e)); return []; };
+
+          var tOvert = (source === 'osm') ? Promise.resolve([])
+            : chercherOverture(metier.cle, zone.geo, plafond).catch(vide);
+
+          var tOsm = (source === 'overture') ? Promise.resolve([])
+            : interroger(construireRequete(metier.tags, zone.filtre, limite, zone.prefixe))
+                .then(function(j){ return ((j && j.elements) || []).map(versLigne).filter(Boolean); })
+                .catch(vide);
+
+          dire(source === 'osm' ? 'Interrogation d’OpenStreetMap… jusqu’à une minute sur une grande zone.'
+             : source === 'overture' ? 'Lecture de l’extrait Overture…'
+             : 'Lecture de l’extrait Overture et interrogation d’OpenStreetMap…');
+
+          Promise.all([tOvert, tOsm]).then(function(res){
+            /* Overture d'abord : ses fiches portent plus souvent un telephone,
+               et le dedoublonnage garde la premiere vue. Un meme etablissement
+               existe aussi en point et en contour dans OSM. */
+            var lignes = res[0].concat(res[1]);
             var vus = {}, nets = [];
             lignes.forEach(function(x){
-              var k = (x.nom + '|' + x.adresse).toLowerCase();
+              var k = (x.nom + '|' + x.adresse).toLowerCase().replace(/\s+/g, ' ').trim();
               if (vus[k]) { return; }
               vus[k] = true; nets.push(x);
             });
+            if (nets.length > plafond) { nets = nets.slice(0, plafond); }
+
             if (!nets.length) {
-              dire('Aucun établissement nommé pour « ' + metier.nom + ' » sur cette zone. ' +
-                   (brut.length ? brut.length + ' point(s) trouvé(s), mais sans nom renseigné. ' : '') +
-                   'Essayez une zone plus large ou un métier voisin.');
+              dire('Aucun établissement pour « ' + metier.nom + ' » sur cette zone. ' +
+                   (ratees.length ? ratees.join(' ') + ' ' : '') +
+                   'Essayez une zone plus large, un métier voisin, ou l’autre base.');
               fin(); return;
             }
-            var sansSite = nets.filter(function(x){ return !x.site; }).length;
             var avecTel = nets.filter(function(x){ return x.tel; }).length;
+            var dOvert = nets.filter(function(x){ return x.source === 'Overture'; }).length;
             P.fermerModale();
-            creerFeuilleResultats(nets, metier.nom + ' — ' + nomZone, 'extrait d’OpenStreetMap', nomZone);
+            var via = source === 'osm' ? 'extrait d’OpenStreetMap'
+                    : source === 'overture' ? 'extrait d’Overture Maps'
+                    : 'extrait d’Overture Maps et d’OpenStreetMap';
+            creerFeuilleResultats(nets, metier.nom + ' — ' + nomZone, via, nomZone);
             toast(nets.length + ' établissement' + (nets.length > 1 ? 's' : '') + ' · ' +
-              avecTel + ' avec téléphone · ' + sansSite + ' sans site web dans la base', true);
+              avecTel + ' avec téléphone · ' + dOvert + ' d’Overture, ' + (nets.length - dOvert) + ' d’OpenStreetMap' +
+              (ratees.length ? ' · une source n’a pas répondu' : ''), true);
           }, echec);
         };
 
@@ -3523,6 +3638,7 @@ P.trouverEtablissements = function(){
           navigator.geolocation.getCurrentPosition(function(pos){
             var r = el('fRayonIci').value;
             lancer({ prefixe: '',
+              geo: { centre: [pos.coords.latitude, pos.coords.longitude], rayon: +r },
               filtre: '(around:' + r + ',' + pos.coords.latitude.toFixed(5) + ',' + pos.coords.longitude.toFixed(5) + ')' },
               'autour de moi');
           }, function(){
@@ -3537,6 +3653,7 @@ P.trouverEtablissements = function(){
         geocoder(texte).then(function(lieu){
           if (mode === 'adresse') {
             lancer({ prefixe: '',
+              geo: { centre: [+lieu.lat, +lieu.lon], rayon: +el('fRayonAdr').value },
               filtre: '(around:' + el('fRayonAdr').value + ',' + lieu.lat + ',' + lieu.lon + ')' }, texte);
             return;
           }
