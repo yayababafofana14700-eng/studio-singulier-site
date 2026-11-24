@@ -1,0 +1,16 @@
+# Studio Singulier — apexwebstudio.studio
+# Vous avez trouvé une faille sur ce site ? Écrivez, c'est lu.
+
+Contact: mailto:studiosingulier2026@gmail.com
+Expires: 2027-11-24T00:00:00.000Z
+Preferred-Languages: fr, en, ar
+Canonical: https://www.apexwebstudio.studio/.well-known/security.txt
+
+# Le site est entièrement statique : pas de base de données, pas de compte,
+# pas de code serveur. Les outils tournent dans le navigateur du visiteur et
+# n'envoient rien. Un rapport portant sur une fuite de données côté serveur
+# n'aura donc probablement pas d'objet ici.
+#
+# Ce qui nous intéresse : injection de script dans les outils, contournement
+# d'en-tête, détournement de sous-domaine, et tout ce qui permet de faire
+# passer un contenu pour le nôtre.
